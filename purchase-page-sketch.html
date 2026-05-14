@@ -1,0 +1,412 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+.nt{background:#fff;color:#111;font-family:'Inter',sans-serif;font-size:15px;line-height:1.7;padding-bottom:100px}
+.nt-nav{display:flex;justify-content:space-between;align-items:center;padding:24px 40px;border-bottom:0.5px solid #e4e4e4}
+.nt-logo img{height:26px;display:block}
+.nt-section{padding:68px 40px;position:relative}
+.nt-section::after{content:'';display:block;position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent 0%,#ddd 20%,#ddd 80%,transparent 100%)}
+.nt-section:last-of-type::after{display:none}
+.nt-section-tinted{background:#f9f9f8}
+.nt-eyebrow{font-size:10px;letter-spacing:0.18em;color:#aaa;text-transform:uppercase;margin-bottom:20px;font-weight:400}
+.nt-h1{font-size:32px;font-weight:300;letter-spacing:-0.02em;line-height:1.18;color:#111;margin-bottom:18px}
+.nt-h2{font-size:18px;font-weight:400;color:#111;margin-bottom:10px;letter-spacing:-0.01em}
+.nt-body{font-size:14px;color:#555;line-height:1.75;font-weight:400}
+.nt-body-sm{font-size:13px;color:#777;line-height:1.7}
+.nt-rule{border:none;border-top:0.5px solid #ebebeb;margin:36px 0}
+.nt-trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;margin-top:40px}
+.nt-trio-divider{width:24px;height:0.5px;background:#ccc;margin-bottom:16px}
+.nt-trio-label{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#aaa;margin-bottom:8px}
+.nt-trio-title{font-size:14px;font-weight:500;color:#111;margin-bottom:6px}
+.nt-trio-body{font-size:13px;color:#777;line-height:1.65}
+.nt-meta-row{display:flex;gap:0;margin-top:40px;padding-top:32px;border-top:0.5px solid #ebebeb}
+.nt-meta-cell{flex:1;padding-right:28px;margin-right:28px;border-right:0.5px solid #ebebeb}
+.nt-meta-cell:last-child{border-right:none;margin-right:0;padding-right:0}
+.nt-meta-label{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#bbb;margin-bottom:5px}
+.nt-meta-value{font-size:14px;color:#333}
+.nt-model-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:#e4e4e4;margin-top:28px}
+.nt-model{background:#fff;padding:32px 28px;cursor:pointer;transition:background 0.15s}
+.nt-model:hover{background:#fafafa}
+.nt-model.selected{background:#f6f6f5}
+.nt-model-eyebrow{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#bbb;margin-bottom:12px}
+.nt-model-name{font-size:19px;font-weight:300;color:#111;letter-spacing:-0.02em;margin-bottom:18px}
+.nt-model-price{font-size:26px;font-weight:300;color:#111;letter-spacing:-0.02em}
+.nt-model-vat{font-size:11px;color:#bbb;margin-top:3px;margin-bottom:18px}
+.nt-model-desc{font-size:13px;color:#777;line-height:1.65;margin-bottom:22px}
+.nt-model-indicator{display:flex;align-items:center;gap:8px;font-size:12px;color:#bbb}
+.nt-model-indicator.on{color:#111}
+.nt-radio{width:11px;height:11px;border-radius:50%;border:1px solid #ccc;flex-shrink:0;display:inline-block;transition:all 0.15s}
+.nt-radio.on{background:#111;border-color:#111}
+.nt-wood-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:#e4e4e4;margin-top:20px}
+.nt-wood{background:#fff;padding:16px 20px;cursor:pointer;transition:background 0.15s}
+.nt-wood:hover{background:#fafafa}
+.nt-wood.selected{background:#f6f6f5}
+.nt-wood-name{font-size:13px;font-weight:500;color:#111;margin-bottom:3px}
+.nt-wood-note{font-size:11px;color:#bbb}
+.nt-steps{margin-top:28px}
+.nt-step{display:grid;grid-template-columns:36px 1fr;padding:22px 0;border-top:0.5px solid #ebebeb}
+.nt-step:last-child{border-bottom:0.5px solid #ebebeb}
+.nt-step-num{font-size:11px;color:#ccc;padding-top:2px;letter-spacing:0.06em}
+.nt-step-title{font-size:14px;font-weight:500;color:#111;margin-bottom:5px}
+.nt-step-body{font-size:13px;color:#777;line-height:1.7}
+.nt-step-tag{display:inline-block;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:#aaa;border:0.5px solid #ddd;padding:3px 9px;margin-top:10px}
+.nt-stock-block{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:28px;padding:32px;border:0.5px solid #e4e4e4;background:#fff}
+.nt-stock-num{font-size:44px;font-weight:300;color:#111;letter-spacing:-0.04em;line-height:1}
+.nt-stock-label{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#bbb;margin-top:4px;margin-bottom:16px}
+.nt-notify-row{display:flex;gap:8px;margin-top:14px;align-items:stretch}
+.nt-input{border:1px solid #ddd !important;background:#fff !important;color:#111 !important;font-size:13px;padding:9px 13px;outline:none;font-family:'Inter',sans-serif;-webkit-appearance:none;appearance:none;border-radius:0;box-shadow:none !important;width:100%}
+.nt-input:focus{border-color:#999 !important}
+.nt-input::placeholder{color:#bbb !important}
+.nt-btn-sm{border:1px solid #ccc;background:#fff;color:#555;font-size:12px;letter-spacing:0.04em;padding:9px 16px;cursor:pointer;font-family:'Inter',sans-serif;white-space:nowrap;transition:all 0.15s;border-radius:0}
+.nt-btn-sm:hover{border-color:#888;color:#111}
+.nt-form{margin-top:24px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.nt-field{display:flex;flex-direction:column;gap:7px}
+.nt-field.full{grid-column:1/-1}
+.nt-label-sm{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#aaa}
+.nt-partner-block{margin-top:28px;padding-top:24px;border-top:0.5px solid #ebebeb}
+.nt-partner-row{display:flex;gap:8px;align-items:flex-end;margin-top:8px}
+.nt-code-msg{font-size:12px;color:#777;padding-top:10px}
+.nt-summary-box{border:0.5px solid #e4e4e4;margin-top:28px;background:#fff}
+.nt-sum-row{display:flex;justify-content:space-between;align-items:baseline;padding:13px 24px;border-bottom:0.5px solid #f2f2f2;font-size:13px}
+.nt-sum-row:last-child{border-bottom:none;padding:18px 24px}
+.nt-sum-label{color:#999}
+.nt-sum-value{color:#111}
+.nt-sum-total-label{font-size:14px;color:#111;font-weight:500}
+.nt-sum-total{font-size:22px;font-weight:300;color:#111;letter-spacing:-0.02em}
+.nt-btn-primary{width:100%;background:#111;color:#fff;border:none;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;padding:17px 24px;cursor:pointer;font-family:'Inter',sans-serif;margin-top:14px;transition:opacity 0.15s;border-radius:0}
+.nt-btn-primary:hover{opacity:0.8}
+.nt-fine{font-size:11px;color:#bbb;text-align:center;margin-top:12px;line-height:1.65}
+.nt-faq-item{border-top:0.5px solid #ebebeb}
+.nt-faq-q{font-size:13px;color:#444;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:17px 0;font-weight:400;gap:16px}
+.nt-faq-q:hover{color:#111}
+.nt-faq-icon{font-size:13px;color:#ccc;flex-shrink:0;transition:transform 0.2s}
+.nt-faq-icon.open{transform:rotate(180deg)}
+.nt-faq-a{font-size:13px;color:#777;line-height:1.75;padding-bottom:18px;display:none}
+.nt-faq-a.open{display:block}
+.nt-discount-val{color:#2d7a3a}
+</style>
+
+<div class="nt">
+
+<nav class="nt-nav">
+  <div class="nt-logo">
+    <img src="https://static.wixstatic.com/media/9f31ec_5fe7df9db1c04a58a1e08e384d8d0dc9~mv2.png/v1/fill/w_372,h_84,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Asset%203.png" alt="NEOTONE">
+  </div>
+</nav>
+
+<section class="nt-section">
+  <div class="nt-eyebrow">Ordering direct</div>
+  <div class="nt-h1">Exceptional craftsmanship,<br>straight from the source.</div>
+  <p class="nt-body" style="max-width:520px">Every instrument ordered through Neotone is hand-built in our Budapest workshop and shipped directly to you. Ordering directly from Neotone means a closer relationship with the makers, an extended warranty, and a fully customized instrument.</p>
+  <div class="nt-rule"></div>
+  <div class="nt-trio">
+    <div>
+      <div class="nt-trio-divider"></div>
+      <div class="nt-trio-label">Warranty</div>
+      <div class="nt-trio-title">6-year coverage</div>
+      <div class="nt-trio-body">Full repair coverage for 3 years including shipping, then 3 additional years of service beyond what retail partners can offer.</div>
+    </div>
+    <div>
+      <div class="nt-trio-divider"></div>
+      <div class="nt-trio-label">Configuration</div>
+      <div class="nt-trio-title">Built to order</div>
+      <div class="nt-trio-body">Choose from a variety of beautiful premium woods, handpicked by our builders. Each instrument is configured to your specification.</div>
+    </div>
+    <div>
+      <div class="nt-trio-divider"></div>
+      <div class="nt-trio-label">Support</div>
+      <div class="nt-trio-title">Direct from the makers</div>
+      <div class="nt-trio-body">Questions answered by the people who built your instrument. Full access to our worldwide Neotone Ambassador network.</div>
+    </div>
+  </div>
+  <div class="nt-meta-row">
+    <div class="nt-meta-cell">
+      <div class="nt-meta-label">Money-back guarantee</div>
+      <div class="nt-meta-value">Full refund up to 2 weeks after receipt</div>
+    </div>
+    <div class="nt-meta-cell">
+      <div class="nt-meta-label">Current lead time</div>
+      <div class="nt-meta-value">60 days from order to delivery</div>
+    </div>
+    <div class="nt-meta-cell">
+      <div class="nt-meta-label">Ships from</div>
+      <div class="nt-meta-value">Budapest, Hungary · worldwide shipping included</div>
+    </div>
+  </div>
+</section>
+
+<section class="nt-section nt-section-tinted">
+  <div class="nt-eyebrow">Step 1</div>
+  <div class="nt-h2">Choose your model</div>
+  <p class="nt-body-sm">Both models are handcrafted to the same standard. The Mutant offers expanded playing possibilities for more experienced players.</p>
+  <div class="nt-model-grid">
+    <div class="nt-model" id="m1" onclick="selectModel(1)">
+      <div class="nt-model-eyebrow">Standard</div>
+      <div class="nt-model-name">Neotone One</div>
+      <div class="nt-model-price">€1,990</div>
+      <div class="nt-model-vat">+ VAT where applicable · worldwide shipping included</div>
+      <div class="nt-model-desc">Studio and stage ready. Updated hardware and refined software, developed from our acclaimed beta model into its final form. Includes semi-hard case, charger, and 6-year warranty.</div>
+      <div class="nt-model-indicator" id="mi1"><span class="nt-radio" id="mr1"></span>&ensp;Select</div>
+    </div>
+    <div class="nt-model selected" id="m2" onclick="selectModel(2)">
+      <div class="nt-model-eyebrow">Expanded</div>
+      <div class="nt-model-name">Neotone One Mutant</div>
+      <div class="nt-model-price">€3,150</div>
+      <div class="nt-model-vat">+ VAT where applicable · worldwide shipping included</div>
+      <div class="nt-model-desc">Each tonefield has a separate mutant area for additional notes, expanding the range of handpan scales and MIDI possibilities. Features an LCD screen for scale navigation. Includes semi-hard case, charger, and 6-year warranty.</div>
+      <div class="nt-model-indicator on" id="mi2"><span class="nt-radio on" id="mr2"></span>&ensp;Selected</div>
+    </div>
+  </div>
+</section>
+
+<section class="nt-section">
+  <div class="nt-eyebrow">Step 2</div>
+  <div class="nt-h2">Choose your material</div>
+  <p class="nt-body-sm">The body of your instrument is crafted from natural wood. Standard ash and oak are included in the price. Choose from a selection of premium woods, handpicked by our builders, at additional cost.</p>
+  <div class="nt-wood-grid">
+    <div class="nt-wood selected" onclick="selectWood(this,'Ash')">
+      <div class="nt-wood-name">Ash</div>
+      <div class="nt-wood-note">Standard — included</div>
+    </div>
+    <div class="nt-wood" onclick="selectWood(this,'Oak')">
+      <div class="nt-wood-name">Oak</div>
+      <div class="nt-wood-note">Standard — included</div>
+    </div>
+    <div class="nt-wood" onclick="selectWood(this,'Premium')">
+      <div class="nt-wood-name">Premium woods</div>
+      <div class="nt-wood-note">View selection + pricing →</div>
+    </div>
+  </div>
+</section>
+
+<section class="nt-section nt-section-tinted">
+  <div class="nt-eyebrow">Step 3</div>
+  <div class="nt-h2">How it works</div>
+  <p class="nt-body-sm">Each instrument is made individually in our Budapest workshop. Here is exactly what happens after you place your order.</p>
+  <div class="nt-steps">
+    <div class="nt-step">
+      <div class="nt-step-num">01</div>
+      <div>
+        <div class="nt-step-title">A serial number is assigned</div>
+        <div class="nt-step-body">At the moment of purchase, the instrument enters the Neotone production sequence and receives its permanent serial number. This is its unique identity in the Neotone ecosystem — a record of exactly when and where in our history this particular object came into being.</div>
+        <span class="nt-step-tag">Immediately at purchase</span>
+      </div>
+    </div>
+    <div class="nt-step">
+      <div class="nt-step-num">02</div>
+      <div>
+        <div class="nt-step-title">Production begins</div>
+        <div class="nt-step-body">Material selection, body construction, sensor installation, calibration, and quality check — each carried out by hand in Budapest. You will receive updates as your instrument moves through each stage of production.</div>
+        <span class="nt-step-tag">Approx. 60 days</span>
+      </div>
+    </div>
+    <div class="nt-step">
+      <div class="nt-step-num">03</div>
+      <div>
+        <div class="nt-step-title">Shipped in its case</div>
+        <div class="nt-step-body">Your instrument is packed carefully in its semi-hard case and dispatched from Budapest. You will receive a tracking number as soon as it is collected by the courier.</div>
+      </div>
+    </div>
+    <div class="nt-step">
+      <div class="nt-step-num">04</div>
+      <div>
+        <div class="nt-step-title">Two-week return window</div>
+        <div class="nt-step-body">If the instrument does not meet your expectations, return it within 2 weeks of receipt for a full refund, no questions asked. Your purchase is fully refundable at any point before the instrument reaches you.</div>
+        <span class="nt-step-tag">Full money-back guarantee</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="nt-section">
+  <div class="nt-eyebrow">Available now</div>
+  <div class="nt-h2">Instruments in stock</div>
+  <p class="nt-body-sm" style="max-width:560px">We occasionally hold a small selection of instruments in stock, available for immediate dispatch. Stock instruments carry the same 6-year warranty and full Neotone support as a custom order — the only difference is that configuration options are not available.</p>
+  <div class="nt-stock-block">
+    <div>
+      <div class="nt-stock-num">0</div>
+      <div class="nt-stock-label">Currently available</div>
+      <p class="nt-body-sm">No instruments are in stock at the moment. Enter your email below and we will notify you as soon as one becomes available.</p>
+      <div class="nt-notify-row">
+        <input class="nt-input" id="notify-email" type="email" placeholder="your@email.com" style="max-width:200px">
+        <button class="nt-btn-sm" onclick="notifyMe()">Notify me</button>
+      </div>
+      <div id="notify-confirm" style="font-size:12px;color:#999;margin-top:10px;display:none">We will be in touch when stock is available.</div>
+    </div>
+    <div>
+      <div class="nt-trio-divider"></div>
+      <div class="nt-trio-label">Stock vs custom order</div>
+      <div class="nt-trio-body" style="margin-top:6px">A custom order is built to your specification and takes approximately 60 days. A stock instrument ships immediately, as configured. Both are hand-built in Budapest to exactly the same standard.</div>
+    </div>
+  </div>
+</section>
+
+<section class="nt-section nt-section-tinted">
+  <div class="nt-eyebrow">Step 4</div>
+  <div class="nt-h2">Your details</div>
+  <p class="nt-body-sm">We collect only the contact information we need. Billing details and payment are handled securely at the next step.</p>
+  <div class="nt-form">
+    <div class="nt-field">
+      <div class="nt-label-sm">First name</div>
+      <input class="nt-input" type="text" autocomplete="given-name">
+    </div>
+    <div class="nt-field">
+      <div class="nt-label-sm">Last name</div>
+      <input class="nt-input" type="text" autocomplete="family-name">
+    </div>
+    <div class="nt-field full">
+      <div class="nt-label-sm">Email</div>
+      <input class="nt-input" type="email" autocomplete="email">
+    </div>
+    <div class="nt-field full">
+      <div class="nt-label-sm">Phone</div>
+      <input class="nt-input" type="tel" autocomplete="tel">
+    </div>
+    <div class="nt-field full">
+      <div class="nt-label-sm">Country</div>
+      <input class="nt-input" type="text" autocomplete="country-name">
+    </div>
+  </div>
+  <div class="nt-partner-block">
+    <div class="nt-label-sm">Partner code <span style="color:#ccc;text-transform:none;letter-spacing:0;font-size:11px;font-weight:400">(optional)</span></div>
+    <div class="nt-partner-row">
+      <input class="nt-input" id="partner-code" type="text" placeholder="Enter your Neotone Ambassador code" style="max-width:280px">
+      <button class="nt-btn-sm" onclick="applyCode()">Apply</button>
+    </div>
+    <div class="nt-code-msg" id="code-msg"></div>
+  </div>
+</section>
+
+<section class="nt-section" style="padding-bottom:80px">
+  <div class="nt-eyebrow">Step 5</div>
+  <div class="nt-h2">Complete your order</div>
+  <div class="nt-summary-box">
+    <div class="nt-sum-row">
+      <span class="nt-sum-label">Model</span>
+      <span class="nt-sum-value" id="sum-model">Neotone One Mutant</span>
+    </div>
+    <div class="nt-sum-row">
+      <span class="nt-sum-label">Material</span>
+      <span class="nt-sum-value" id="sum-wood">Ash</span>
+    </div>
+    <div class="nt-sum-row">
+      <span class="nt-sum-label">Shipping</span>
+      <span class="nt-sum-value">Worldwide — included</span>
+    </div>
+    <div class="nt-sum-row" id="discount-row" style="display:none">
+      <span class="nt-sum-label">Ambassador discount</span>
+      <span class="nt-sum-value nt-discount-val" id="sum-discount"></span>
+    </div>
+    <div class="nt-sum-row">
+      <span class="nt-sum-label">VAT</span>
+      <span class="nt-sum-value">Calculated at checkout</span>
+    </div>
+    <div class="nt-sum-row">
+      <span class="nt-sum-total-label">Total</span>
+      <span class="nt-sum-total" id="sum-total">€3,150</span>
+    </div>
+  </div>
+  <button class="nt-btn-primary">Proceed to payment</button>
+  <p class="nt-fine">Payment processed securely via Stripe.<br>EU customers with a valid VAT number may enter it at checkout to purchase exempt. Outside the EU, import duties may apply and are the responsibility of the buyer.<br>Your purchase is fully refundable until 2 weeks after receipt.</p>
+
+  <div style="margin-top:60px">
+    <div class="nt-eyebrow" style="margin-bottom:4px">Common questions</div>
+    <div>
+      <div class="nt-faq-item">
+        <div class="nt-faq-q" onclick="faq(0)">What is a Neotone Ambassador code?<i class="ti ti-chevron-down nt-faq-icon" id="fi0" aria-hidden="true"></i></div>
+        <div class="nt-faq-a" id="fa0">If a Neotone Ambassador referred you, enter their partner code here. It applies a discount to your order and records the referral. You can find an ambassador's code in their content, or by asking them directly.</div>
+      </div>
+      <div class="nt-faq-item">
+        <div class="nt-faq-q" onclick="faq(1)">How does VAT work?<i class="ti ti-chevron-down nt-faq-icon" id="fi1" aria-hidden="true"></i></div>
+        <div class="nt-faq-a" id="fa1">EU customers pay VAT at the rate of their country, calculated at checkout. EU businesses with a valid VAT number are exempt and may enter their number at the point of payment. Outside the EU, no VAT is charged by us — however, import duties and customs fees are the buyer's responsibility and vary by country.</div>
+      </div>
+      <div class="nt-faq-item">
+        <div class="nt-faq-q" onclick="faq(2)">Can I return the instrument?<i class="ti ti-chevron-down nt-faq-icon" id="fi2" aria-hidden="true"></i></div>
+        <div class="nt-faq-a" id="fa2">Yes. Your purchase is fully refundable at any point before you receive the instrument. After receipt, you have a 2-week window to return it in its original condition for a full refund — no questions asked.</div>
+      </div>
+      <div class="nt-faq-item">
+        <div class="nt-faq-q" onclick="faq(3)">What does the 6-year warranty cover?<i class="ti ti-chevron-down nt-faq-icon" id="fi3" aria-hidden="true"></i></div>
+        <div class="nt-faq-a" id="fa3">For the first 3 years, we cover all repair costs and return shipping. For years 4 to 6, repair work remains fully covered — you are responsible only for shipping the instrument to us. This extended warranty is available exclusively when ordering directly from Neotone. Retail partners offer a standard 3-year warranty only.</div>
+      </div>
+      <div class="nt-faq-item">
+        <div class="nt-faq-q" onclick="faq(4)">Why is there a lead time?<i class="ti ti-chevron-down nt-faq-icon" id="fi4" aria-hidden="true"></i></div>
+        <div class="nt-faq-a" id="fa4">Each instrument is built individually by hand in our Budapest workshop. The current lead time of 60 days reflects both the care involved in production and the demand for the instrument. Your place in the production sequence is secured the moment your order is placed.</div>
+      </div>
+      <div class="nt-faq-item" style="border-bottom:0.5px solid #ebebeb">
+        <div class="nt-faq-q" onclick="faq(5)">What is the serial number?<i class="ti ti-chevron-down nt-faq-icon" id="fi5" aria-hidden="true"></i></div>
+        <div class="nt-faq-a" id="fa5">The serial number is the instrument's unique identity in the Neotone ecosystem. It is assigned at the moment of purchase and reflects the instrument's position in our production sequence — a permanent record of when and where in our history this particular object was made.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer style="padding:28px 40px;border-top:0.5px solid #e4e4e4;display:flex;justify-content:space-between;align-items:center">
+  <img src="https://static.wixstatic.com/media/9f31ec_5fe7df9db1c04a58a1e08e384d8d0dc9~mv2.png/v1/fill/w_372,h_84,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Asset%203.png" alt="NEOTONE" style="height:18px;opacity:0.3">
+  <div style="display:flex;gap:24px">
+    <a href="#" style="font-size:11px;color:#bbb;text-decoration:none;letter-spacing:0.06em">Terms &amp; conditions</a>
+    <a href="#" style="font-size:11px;color:#bbb;text-decoration:none;letter-spacing:0.06em">Privacy policy</a>
+  </div>
+</footer>
+</div>
+
+<script>
+var prices={1:1990,2:3150};
+var sel={model:2,wood:'Ash',disc:0};
+
+function selectModel(n){
+  sel.model=n;
+  [1,2].forEach(function(i){
+    var on=i===n;
+    document.getElementById('m'+i).classList.toggle('selected',on);
+    document.getElementById('mi'+i).classList.toggle('on',on);
+    var ind=document.getElementById('mi'+i);
+    ind.childNodes[1].textContent=on?'\u2002Selected':'\u2002Select';
+    document.getElementById('mr'+i).classList.toggle('on',on);
+  });
+  updateSummary();
+}
+
+function selectWood(el,name){
+  document.querySelectorAll('.nt-wood').forEach(function(w){w.classList.remove('selected')});
+  el.classList.add('selected');
+  sel.wood=name;
+  updateSummary();
+}
+
+function updateSummary(){
+  var base=prices[sel.model];
+  var disc=Math.round(base*sel.disc/100);
+  var total=base-disc;
+  document.getElementById('sum-model').textContent=sel.model===1?'Neotone One':'Neotone One Mutant';
+  document.getElementById('sum-wood').textContent=sel.wood==='Premium'?'Premium (to be confirmed)':sel.wood;
+  document.getElementById('sum-total').textContent='€'+total.toLocaleString('de-DE');
+  var dr=document.getElementById('discount-row');
+  if(disc>0){
+    dr.style.display='flex';
+    document.getElementById('sum-discount').textContent='−€'+disc.toLocaleString('de-DE')+' ('+sel.disc+'%)';
+  } else {
+    dr.style.display='none';
+  }
+}
+
+function applyCode(){
+  var code=document.getElementById('partner-code').value.trim().toUpperCase();
+  var msg=document.getElementById('code-msg');
+  if(code==='DANNY10'){sel.disc=10;msg.textContent='10% applied — referred by Danny Cudd.';msg.style.color='#2d7a3a';}
+  else if(code.length>1){sel.disc=0;msg.textContent='Code not recognised.';msg.style.color='#b0392b';}
+  else{sel.disc=0;msg.textContent='';}
+  updateSummary();
+}
+
+function notifyMe(){
+  var e=document.getElementById('notify-email').value;
+  if(e.includes('@')){document.getElementById('notify-confirm').style.display='block';}
+}
+
+function faq(n){
+  document.getElementById('fa'+n).classList.toggle('open');
+  document.getElementById('fi'+n).classList.toggle('open');
+}
+
+updateSummary();
+</script>
