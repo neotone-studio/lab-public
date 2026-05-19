@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Mono:wght@300;400&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#1a1814;
+  --ground:#F7F4EF;
+  --dark:#131108;
+  --darker:#0a0805;
+  --muted:rgba(26,24,20,0.5);
+  --faint:rgba(26,24,20,0.25);
+  --rule:rgba(26,24,20,0.1);
+  --light-rule:rgba(26,24,20,0.08);
+  --paper:#F7F4EF;
+  --cream:#EDE9E2;
+  --ink-light:rgba(247,244,239,0.6);
+  --ink-faint:rgba(247,244,239,0.25);
+  --ink-pale:rgba(247,244,239,0.12);
+  --green:#7ab648;
+}
+html{scroll-behavior:smooth}
+body{background:var(--ground);color:var(--ink);font-family:'Cormorant Garamond',Georgia,serif;width:100%;overflow-x:hidden}
+
+/* NAV */
+.nav{display:flex;justify-content:space-between;align-items:center;padding:16px 44px;border-bottom:0.5px solid var(--rule);background:var(--ground);position:sticky;top:0;z-index:100}
+.nav-brand{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink);text-decoration:none}
+.nav-links{display:flex;gap:22px;list-style:none;align-items:center}
+.nav-links a{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.15s}
+.nav-links a:hover{color:var(--ink)}
+.nav-links .nav-buy a{color:var(--ink);border:0.5px solid rgba(26,24,20,0.35);padding:6px 14px}
+
+/* HERO */
+.hero{position:relative;width:100%;background:var(--darker);overflow:hidden;height:580px}
+.hero-img{width:100%;height:100%;object-fit:cover;object-position:center 20%;opacity:0.82;display:block;transition:opacity 0.6s}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,6,3,0.88) 0%,rgba(8,6,3,0.2) 45%,transparent 100%)}
+.hero-text{position:absolute;bottom:0;left:0;right:0;padding:0 44px 52px;display:flex;justify-content:space-between;align-items:flex-end}
+.hero-left{}
+.hero-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(247,244,239,0.3);margin-bottom:12px;display:block}
+.hero-name{font-size:56px;font-weight:300;line-height:1.0;color:#F7F4EF;letter-spacing:-0.02em;margin-bottom:10px}
+.hero-sub{font-size:17px;font-weight:300;font-style:italic;color:rgba(247,244,239,0.5);line-height:1.5}
+.hero-right{text-align:right}
+.hero-serial{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;color:rgba(247,244,239,0.2);line-height:1.8}
+
+/* SPECS STRIP */
+.specs{display:grid;grid-template-columns:repeat(5,1fr);border-bottom:0.5px solid var(--rule)}
+.spec{padding:20px 24px;border-right:0.5px solid var(--rule)}
+.spec:last-child{border-right:none}
+.spec-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--faint);margin-bottom:5px;display:block}
+.spec-val{font-size:15px;font-weight:300;color:var(--ink);line-height:1.3}
+
+/* EDITORIAL */
+.editorial{max-width:600px;margin:0 auto;padding:64px 44px 52px}
+.editorial p{font-size:18px;font-weight:300;line-height:1.75;color:var(--ink)}
+.editorial p+p{margin-top:1em}
+.editorial em{font-style:italic}
+.pull{font-size:22px;font-weight:300;font-style:italic;line-height:1.45;color:var(--muted);border-left:1px solid rgba(26,24,20,0.18);padding-left:1.25rem;margin:2rem 0}
+
+/* STOCK / ORDER FORK */
+.fork{border-top:0.5px solid var(--rule);border-bottom:0.5px solid var(--rule)}
+.fork-tabs{display:grid;grid-template-columns:1fr 1fr}
+.fork-tab{padding:20px 44px;cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s;background:var(--ground)}
+.fork-tab:first-child{border-right:0.5px solid var(--rule)}
+.fork-tab.active{border-bottom-color:var(--ink)}
+.fork-tab-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--faint);margin-bottom:5px;display:block;transition:color 0.2s}
+.fork-tab.active .fork-tab-label{color:var(--ink)}
+.fork-tab-desc{font-size:15px;font-weight:300;font-style:italic;color:var(--muted);line-height:1.4;transition:color 0.2s}
+.fork-tab.active .fork-tab-desc{color:var(--ink)}
+
+/* STOCK PANEL */
+.stock-panel{display:none;padding:44px;background:var(--ground)}
+.stock-panel.active{display:block}
+.stock-empty{text-align:center;padding:48px 0}
+.stock-empty-head{font-size:22px;font-weight:300;font-style:italic;color:var(--muted);margin-bottom:12px}
+.stock-empty-body{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.06em;color:var(--faint);line-height:1.8}
+.stock-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--rule)}
+.stock-card{background:var(--ground);cursor:pointer;transition:background 0.2s}
+.stock-card:hover{background:var(--cream)}
+.stock-card.selected{background:var(--cream);outline:1px solid var(--ink)}
+.stock-img{width:100%;height:180px;object-fit:cover;object-position:center;display:block;filter:saturate(0.8)}
+.stock-img-placeholder{width:100%;height:180px;display:block}
+.stock-body{padding:20px}
+.stock-serial{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;color:var(--faint);margin-bottom:6px;display:block}
+.stock-wood{font-size:18px;font-weight:300;color:var(--ink);margin-bottom:3px}
+.stock-price{font-family:'DM Mono',monospace;font-size:13px;color:var(--muted);margin-bottom:12px;display:block}
+.stock-note{font-size:13px;font-style:italic;color:var(--muted);line-height:1.5}
+.stock-select{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--faint);margin-top:10px;display:block}
+.stock-card.selected .stock-select{color:var(--ink)}
+
+/* CONFIG PANEL */
+.config-panel{display:none;background:var(--ground)}
+.config-panel.active{display:block}
+
+/* INSTRUMENT VISUAL */
+.instrument-visual{position:relative;width:100%;height:400px;background:var(--darker);overflow:hidden;transition:background 0.5s}
+.instrument-visual img{width:100%;height:100%;object-fit:contain;object-position:center;padding:32px;transition:opacity 0.4s;display:block}
+.visual-caption{position:absolute;bottom:20px;left:44px;right:44px;display:flex;justify-content:space-between;align-items:flex-end}
+.visual-wood-name{font-size:28px;font-weight:300;font-style:italic;color:rgba(247,244,239,0.7);transition:opacity 0.3s}
+.visual-wood-note{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(247,244,239,0.25)}
+
+/* CONFIG FORM */
+.config-form{padding:44px}
+.config-section{margin-bottom:40px;padding-bottom:40px;border-bottom:0.5px solid var(--rule)}
+.config-section:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.config-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--faint);margin-bottom:18px;display:block}
+
+.model-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule)}
+.model-opt{background:var(--ground);padding:24px;cursor:pointer;transition:background 0.15s;border:1px solid transparent}
+.model-opt:hover{background:var(--cream)}
+.model-opt.selected{background:var(--cream);border-color:var(--ink)}
+.model-name{font-size:19px;font-weight:300;color:var(--ink);margin-bottom:4px}
+.model-price{font-family:'DM Mono',monospace;font-size:13px;color:var(--muted);margin-bottom:8px;display:block}
+.model-desc{font-size:13px;font-weight:300;font-style:italic;color:var(--muted);line-height:1.6}
+.model-indicator{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--faint);margin-top:12px;display:block}
+.model-opt.selected .model-indicator{color:var(--ink)}
+
+.wood-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule)}
+.wood-opt{background:var(--ground);padding:0;cursor:pointer;transition:background 0.15s;border:1px solid transparent;overflow:hidden}
+.wood-opt:hover{background:var(--cream)}
+.wood-opt.selected{border-color:var(--ink)}
+.wood-swatch{height:48px;display:block;transition:opacity 0.2s}
+.wood-body{padding:14px 16px}
+.wood-name{font-size:16px;font-weight:300;color:var(--ink);margin-bottom:2px}
+.wood-note{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--faint)}
+.wood-opt.disabled{opacity:0.3;cursor:default;pointer-events:none}
+
+.field-group{margin-bottom:12px}
+.field-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--faint);margin-bottom:6px;display:block}
+.field-input{width:100%;background:transparent;border:0.5px solid rgba(26,24,20,0.2);padding:11px 14px;font-family:'DM Mono',monospace;font-size:12px;color:var(--ink);letter-spacing:0.04em;outline:none;transition:border-color 0.15s;-webkit-appearance:none}
+.field-input:focus{border-color:var(--ink)}
+.field-input::placeholder{color:var(--faint)}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+.referral-wrap{display:flex;gap:0}
+.referral-input{flex:1;background:transparent;border:0.5px solid rgba(26,24,20,0.2);border-right:none;padding:11px 14px;font-family:'DM Mono',monospace;font-size:12px;color:var(--ink);letter-spacing:0.04em;outline:none}
+.referral-input::placeholder{color:var(--faint)}
+.referral-btn{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink);background:transparent;border:0.5px solid rgba(26,24,20,0.2);padding:11px 18px;cursor:pointer;white-space:nowrap;transition:all 0.15s}
+.referral-btn:hover{background:var(--ink);color:var(--ground)}
+.referral-msg{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.04em;color:var(--faint);margin-top:8px}
+.referral-msg.ok{color:var(--green)}
+.referral-msg.err{color:#c0392b}
+.referral-note{font-size:14px;font-style:italic;font-weight:300;color:var(--muted);margin-top:6px}
+
+/* ORDER SUMMARY */
+.summary{background:var(--darker);padding:28px 32px;margin-top:8px}
+.sum-row{display:flex;justify-content:space-between;align-items:baseline;padding:9px 0;border-bottom:0.5px solid rgba(247,244,239,0.05)}
+.sum-row:last-of-type{border-bottom:none;padding-top:18px;margin-top:6px}
+.sum-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;color:rgba(247,244,239,0.25)}
+.sum-val{font-family:'DM Mono',monospace;font-size:11px;color:rgba(247,244,239,0.5)}
+.sum-total-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;color:rgba(247,244,239,0.4)}
+.sum-total-val{font-size:32px;font-weight:300;color:#F7F4EF;letter-spacing:-0.01em}
+.sum-discount{color:var(--green)}
+
+.proceed-btn{width:100%;background:var(--ink);color:var(--ground);border:none;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;padding:20px 24px;cursor:pointer;margin-top:16px;transition:opacity 0.15s}
+.proceed-btn:hover{opacity:0.85}
+.fine-print{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.04em;color:var(--faint);text-align:center;margin-top:12px;line-height:1.9}
+
+/* WHAT HAPPENS NEXT */
+.next-section{background:var(--dark);padding:64px 44px;border-top:0.5px solid rgba(247,244,239,0.06)}
+.next-heading{font-size:28px;font-weight:300;font-style:italic;color:#F7F4EF;margin-bottom:48px;max-width:400px;line-height:1.3}
+.next-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(247,244,239,0.06)}
+.next-step{background:var(--dark);padding:28px 24px}
+.step-num{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;color:rgba(247,244,239,0.2);margin-bottom:14px;display:block}
+.step-title{font-size:17px;font-weight:300;color:#F7F4EF;margin-bottom:8px;line-height:1.3}
+.step-body{font-size:13px;font-weight:300;line-height:1.7;color:rgba(247,244,239,0.4);font-family:'DM Mono',monospace;letter-spacing:0.02em}
+
+/* CHANGE MIND */
+.change-mind{padding:32px 44px;border-top:0.5px solid rgba(247,244,239,0.06);display:grid;grid-template-columns:200px 1fr;gap:32px;align-items:baseline}
+.change-q{font-size:17px;font-weight:300;font-style:italic;color:rgba(247,244,239,0.5)}
+.change-a{font-size:15px;font-weight:300;line-height:1.7;color:rgba(247,244,239,0.35);font-family:'DM Mono',monospace;letter-spacing:0.02em}
+
+/* PLAY ONE */
+.play-section{padding:64px 44px;border-top:0.5px solid var(--rule)}
+.play-heading{font-size:32px;font-weight:300;font-style:italic;color:var(--ink);margin-bottom:8px}
+.play-sub{font-size:16px;font-weight:300;color:var(--muted);margin-bottom:40px;max-width:480px;line-height:1.65}
+.play-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule)}
+.play-card{background:var(--ground);padding:28px 28px}
+.play-card.dark{background:var(--dark)}
+.play-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--faint);margin-bottom:8px;display:block}
+.play-card.dark .play-eyebrow{color:rgba(247,244,239,0.2)}
+.play-name{font-size:19px;font-weight:300;color:var(--ink);margin-bottom:4px}
+.play-card.dark .play-name{color:#F7F4EF}
+.play-loc{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;color:var(--faint);margin-bottom:12px;display:block}
+.play-card.dark .play-loc{color:rgba(247,244,239,0.2)}
+.play-desc{font-size:14px;font-weight:300;font-style:italic;line-height:1.65;color:var(--muted);margin-bottom:18px}
+.play-card.dark .play-desc{color:rgba(247,244,239,0.4)}
+.play-link{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink);text-decoration:none;border-bottom:0.5px solid rgba(26,24,20,0.3);padding-bottom:2px}
+.play-card.dark .play-link{color:rgba(247,244,239,0.6);border-bottom-color:rgba(247,244,239,0.2)}
+.play-note{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.06em;color:var(--faint);margin-top:28px;line-height:1.8}
+.play-note a{color:var(--muted);text-decoration:none;border-bottom:0.5px solid var(--rule)}
+
+/* ARTISTS */
+.artists-section{padding:64px 44px;border-top:0.5px solid var(--rule);background:var(--cream)}
+.artists-top{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:36px}
+.artists-heading{font-size:28px;font-weight:300;font-style:italic;color:var(--ink);margin-bottom:6px}
+.artists-sub{font-size:15px;font-weight:300;color:var(--muted);max-width:360px;line-height:1.6}
+.filter-bar{display:flex;gap:2px;flex-wrap:wrap}
+.filter-btn{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);background:transparent;border:0.5px solid rgba(26,24,20,0.15);padding:6px 12px;cursor:pointer;transition:all 0.15s}
+.filter-btn:hover{color:var(--ink);border-color:rgba(26,24,20,0.4)}
+.filter-btn.active{color:var(--ground);background:var(--ink);border-color:var(--ink)}
+.artists-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(26,24,20,0.08)}
+.artist-card{background:var(--cream);overflow:hidden;cursor:pointer;transition:background 0.2s}
+.artist-card:hover{background:var(--ground)}
+.artist-card.hidden{display:none}
+.artist-img-ph{height:200px;display:block}
+.artist-body{padding:20px 22px 22px}
+.artist-name{font-size:19px;font-weight:300;color:var(--ink);margin-bottom:3px;line-height:1.2}
+.artist-country{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--faint);margin-bottom:10px;display:block}
+.artist-practice{font-size:13px;font-weight:300;font-style:italic;line-height:1.65;color:var(--muted);margin-bottom:14px}
+.artist-footer{display:flex;justify-content:space-between;align-items:center}
+.artist-tag{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:var(--faint);border:0.5px solid rgba(26,24,20,0.1);padding:3px 8px}
+.artist-contact{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;border-bottom:0.5px solid var(--rule);padding-bottom:1px;opacity:0;transition:opacity 0.2s}
+.artist-card:hover .artist-contact{opacity:1}
+.artists-more{margin-top:28px;text-align:center}
+.artists-more a{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;border-bottom:0.5px solid var(--rule);padding-bottom:2px}
+.no-results{padding:48px;text-align:center;font-size:17px;font-style:italic;color:var(--muted);display:none;background:var(--cream)}
+.no-results.visible{display:block}
+
+/* TONEFIELD */
+.tonefield-section{padding:64px 44px;border-top:0.5px solid var(--rule)}
+.tf-heading{font-size:28px;font-weight:300;font-style:italic;color:var(--ink);margin-bottom:6px}
+.tf-meta{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--faint);margin-bottom:36px;display:block}
+.tf-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--rule)}
+.tf-card{background:var(--ground);padding:28px}
+.tf-card-kicker{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--faint);margin-bottom:10px;display:block}
+.tf-card-title{font-size:19px;font-weight:300;font-style:italic;line-height:1.35;color:var(--ink);margin-bottom:10px}
+.tf-card-desc{font-size:13px;font-weight:300;line-height:1.7;color:var(--muted);margin-bottom:18px;font-family:'DM Mono',monospace;letter-spacing:0.02em}
+.tf-card-link{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;border-bottom:0.5px solid var(--rule);padding-bottom:1px}
+
+/* QUESTIONS */
+.faq-section{padding:64px 44px;border-top:0.5px solid var(--rule);background:var(--ground)}
+.faq-heading{font-size:22px;font-weight:300;font-style:italic;color:var(--ink);margin-bottom:32px}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 64px}
+.faq-item{border-top:0.5px solid var(--rule)}
+.faq-q{font-size:16px;font-weight:300;color:var(--ink);cursor:pointer;display:flex;justify-content:space-between;align-items:baseline;padding:16px 0;line-height:1.4;gap:16px}
+.faq-q:hover{color:var(--muted)}
+.faq-icon{font-family:'DM Mono',monospace;font-size:14px;color:var(--faint);flex-shrink:0;transition:transform 0.2s}
+.faq-a{font-size:14px;font-weight:300;line-height:1.75;color:var(--muted);padding-bottom:18px;display:none;font-family:'DM Mono',monospace;letter-spacing:0.02em}
+.faq-a.open{display:block}
+
+/* JOURNAL STRIP */
+.journal-strip{border-top:0.5px solid var(--rule);padding:28px 44px;display:flex;align-items:center;justify-content:space-between;background:var(--ground)}
+.journal-title{font-family:'DM Mono',monospace;font-size:15px;letter-spacing:0.14em;color:var(--ink);margin-bottom:3px}
+.journal-meta{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;color:var(--faint);text-transform:uppercase}
+.journal-right{display:flex}
+.journal-input{background:transparent;border:0.5px solid rgba(26,24,20,0.18);border-right:none;padding:10px 14px;font-family:'DM Mono',monospace;font-size:11px;color:var(--ink);letter-spacing:0.04em;width:200px;outline:none}
+.journal-input::placeholder{color:var(--faint)}
+.journal-btn{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ground);background:var(--ink);border:0.5px solid var(--ink);padding:10px 18px;cursor:pointer;white-space:nowrap}
+
+/* FOOTER */
+footer{padding:18px 44px;display:flex;justify-content:space-between;align-items:center;border-top:0.5px solid var(--rule)}
+.footer-links{display:flex;gap:20px;list-style:none}
+.footer-links a{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.footer-loc{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.08em;color:rgba(26,24,20,0.18);text-transform:uppercase}
+
+/* WOOD SWATCHES */
+.sw-mahogany{background:linear-gradient(90deg,#6b3a1f,#8b4a26,#5c3018,#7a4220)}
+.sw-ash{background:linear-gradient(90deg,#b8a888,#c8b898,#a89878,#b8aa88)}
+.sw-walnut{background:linear-gradient(90deg,#3d2810,#4a3218,#2d1e0a,#3a2814)}
+.sw-wenge{background:linear-gradient(90deg,#1a1208,#231808,#150e05,#1d1408)}
+.sw-ebony{background:linear-gradient(90deg,#0d0a06,#150e08,#0a0806,#100c07)}
+.sw-premium{background:linear-gradient(90deg,#8B6914,#a07820,#7a5a10,#96701a)}
+
+.img-mah{background:linear-gradient(160deg,#5c3018 0%,#8b4a26 35%,#3d2010 65%,#6b3a1f 100%)}
+.img-ash{background:linear-gradient(160deg,#a89878 0%,#c8b898 40%,#8a8060 70%,#b0a080 100%)}
+.img-wal{background:linear-gradient(160deg,#2d1e0a 0%,#4a3218 40%,#1e1408 65%,#3a2814 100%)}
+.img-wen{background:linear-gradient(160deg,#150e05 0%,#231808 45%,#0d0905 70%,#1a1208 100%)}
+.img-ebo{background:linear-gradient(160deg,#0a0806 0%,#150e08 45%,#080604 70%,#0d0a07 100%)}
+.img-pre{background:linear-gradient(160deg,#7a5a10 0%,#a07820 45%,#604808 70%,#8b6914 100%)}
+</style>
+
+<body>
+
+<nav class="nav">
+  <a href="#" class="nav-brand">Neotone</a>
+  <ul class="nav-links">
+    <li><a href="#">Instruments</a></li>
+    <li><a href="#">Alchemy</a></li>
+    <li><a href="#">Community</a></li>
+    <li><a href="#">Tonefield</a></li>
+    <li><a href="#">Atelier</a></li>
+    <li class="nav-buy"><a href="#order">Buy</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <img class="hero-img" src="/mnt/user-data/uploads/neotone-mahagony-01.png" alt="Neotone One — mahogany" id="hero-img" />
+  <div class="hero-overlay"></div>
+  <div class="hero-text">
+    <div class="hero-left">
+      <span class="hero-eyebrow">Instruments · Neotone One</span>
+      <p class="hero-name">Neotone One</p>
+      <p class="hero-sub">Handcrafted in Budapest. Built to order.</p>
+    </div>
+    <div class="hero-right">
+      <p class="hero-serial">Budapest Workshop<br>Est. 2021</p>
+    </div>
+  </div>
+</div>
+
+<!-- SPECS -->
+<div class="specs">
+  <div class="spec"><span class="spec-label">Tonefields</span><p class="spec-val">9 + 1 Ding</p></div>
+  <div class="spec"><span class="spec-label">Body</span><p class="spec-val">Solid hardwood</p></div>
+  <div class="spec"><span class="spec-label">Lead time</span><p class="spec-val">~60 days</p></div>
+  <div class="spec"><span class="spec-label">Warranty</span><p class="spec-val">6 years direct</p></div>
+  <div class="spec"><span class="spec-label">Shipping</span><p class="spec-val">Worldwide, included</p></div>
+</div>
+
+<!-- EDITORIAL -->
+<div class="editorial">
+  <p>The Neotone One is a handcrafted electronic instrument built in the workshop in Budapest. Its nine sensor pads — arranged around a central Ding in the geometry of the Hang — read pressure, velocity, and placement with a fidelity that acoustic surfaces cannot approach. The body is solid hardwood, chosen for grain and weight rather than resonance. Each instrument is built to order and carries its own serial number: a permanent record of its place in the workshop's history.</p>
+  <div class="pull">The wood does something that no specification can quite capture — it changes the relationship between player and instrument at the level of feeling.</div>
+  <p>Every Neotone One ordered directly from the workshop includes a six-year warranty, full configuration of wood species, and an ongoing relationship with the people who made it. The Scale Wizard comes preloaded with twenty-two scales — each a different harmonic world. More can be added through Alchemy, the instrument's configuration environment.</p>
+</div>
+
+<!-- FORK -->
+<div class="fork" id="order">
+  <div class="fork-tabs">
+    <div class="fork-tab" id="tab-stock" onclick="switchFork('stock')">
+      <span class="fork-tab-label">From stock</span>
+      <p class="fork-tab-desc">An instrument already built, ready to ship within the week.</p>
+    </div>
+    <div class="fork-tab active" id="tab-build" onclick="switchFork('build')">
+      <span class="fork-tab-label">Built to order</span>
+      <p class="fork-tab-desc">Specify your instrument. Built for you in approximately 60 days.</p>
+    </div>
+  </div>
+
+  <!-- STOCK PANEL -->
+  <div class="stock-panel" id="panel-stock">
+    <div class="stock-empty">
+      <p class="stock-empty-head">No stock instruments available at this time.</p>
+      <p class="stock-empty-body">New stock is listed here as instruments become available.<br>Built to order is always open.</p>
+    </div>
+  </div>
+
+  <!-- CONFIG PANEL -->
+  <div class="config-panel active" id="panel-build">
+
+    <div class="instrument-visual" id="inst-visual">
+      <img src="/mnt/user-data/uploads/neotone-mahagony-01.png" alt="Neotone One" id="visual-img" />
+      <div class="visual-caption">
+        <p class="visual-wood-name" id="visual-wood-name">Mahogany</p>
+        <p class="visual-wood-note" id="visual-wood-note">Standard</p>
+      </div>
+    </div>
+
+    <div class="config-form">
+
+      <div class="config-section">
+        <span class="config-label">Model</span>
+        <div class="model-grid">
+          <div class="model-opt" id="mod-1" onclick="selectModel(1)">
+            <p class="model-name">Neotone One</p>
+            <span class="model-price">€1,990</span>
+            <p class="model-desc">Nine tonefields, standard wood selection, full Scale Wizard access.</p>
+            <span class="model-indicator" id="mind-1">Select</span>
+          </div>
+          <div class="model-opt selected" id="mod-2" onclick="selectModel(2)">
+            <p class="model-name">Neotone One Mutant</p>
+            <span class="model-price">€3,150</span>
+            <p class="model-desc">Nine tonefields, premium and standard woods, expanded sensor mapping, extended warranty.</p>
+            <span class="model-indicator" id="mind-2">Selected</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="config-section">
+        <span class="config-label">Wood</span>
+        <div class="wood-grid" id="wood-grid">
+          <div class="wood-opt selected" onclick="selectWood(this,'Mahogany','Standard','img-mah')" data-model="both">
+            <span class="wood-swatch sw-mahogany"></span>
+            <div class="wood-body"><p class="wood-name">Mahogany</p><p class="wood-note">Standard</p></div>
+          </div>
+          <div class="wood-opt" onclick="selectWood(this,'Ash','Standard','img-ash')" data-model="both">
+            <span class="wood-swatch sw-ash"></span>
+            <div class="wood-body"><p class="wood-name">Ash</p><p class="wood-note">Standard</p></div>
+          </div>
+          <div class="wood-opt" onclick="selectWood(this,'Walnut','Standard','img-wal')" data-model="both">
+            <span class="wood-swatch sw-walnut"></span>
+            <div class="wood-body"><p class="wood-name">Walnut</p><p class="wood-note">Standard</p></div>
+          </div>
+          <div class="wood-opt" onclick="selectWood(this,'Wengé','Mutant only','img-wen')" data-model="mutant" id="w-wenge">
+            <span class="wood-swatch sw-wenge"></span>
+            <div class="wood-body"><p class="wood-name">Wengé</p><p class="wood-note">Mutant only</p></div>
+          </div>
+          <div class="wood-opt" onclick="selectWood(this,'Ebony','Mutant only','img-ebo')" data-model="mutant" id="w-ebony">
+            <span class="wood-swatch sw-ebony"></span>
+            <div class="wood-body"><p class="wood-name">Ebony</p><p class="wood-note">Mutant only</p></div>
+          </div>
+          <div class="wood-opt" onclick="selectWood(this,'Premium','Selected by workshop','img-pre')" data-model="mutant" id="w-premium">
+            <span class="wood-swatch sw-premium"></span>
+            <div class="wood-body"><p class="wood-name">Premium</p><p class="wood-note">Workshop selection</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="config-section">
+        <span class="config-label">Your details</span>
+        <div class="field-row" style="margin-bottom:12px">
+          <div class="field-group"><span class="field-label">First name</span><input class="field-input" type="text" placeholder="—" /></div>
+          <div class="field-group"><span class="field-label">Last name</span><input class="field-input" type="text" placeholder="—" /></div>
+        </div>
+        <div class="field-group" style="margin-bottom:12px"><span class="field-label">Email</span><input class="field-input" type="email" placeholder="—" /></div>
+        <div class="field-group"><span class="field-label">Country</span><input class="field-input" type="text" placeholder="—" /></div>
+      </div>
+
+      <div class="config-section">
+        <span class="config-label">Artist referral</span>
+        <div class="referral-wrap">
+          <input class="referral-input" type="text" id="referral-code" placeholder="Artist code — optional" />
+          <button class="referral-btn" onclick="applyCode()">Apply</button>
+        </div>
+        <p class="referral-msg" id="referral-msg"></p>
+        <p class="referral-note">If a Neotone Artist referred you, their code applies a 5% discount to your order.</p>
+      </div>
+
+      <div class="summary">
+        <div class="sum-row"><span class="sum-label">Model</span><span class="sum-val" id="s-model">Neotone One Mutant</span></div>
+        <div class="sum-row"><span class="sum-label">Wood</span><span class="sum-val" id="s-wood">Mahogany</span></div>
+        <div class="sum-row"><span class="sum-label">Lead time</span><span class="sum-val">~60 days from order</span></div>
+        <div class="sum-row"><span class="sum-label">Shipping</span><span class="sum-val">Worldwide — included</span></div>
+        <div class="sum-row" id="s-disc-row" style="display:none"><span class="sum-label">Artist discount</span><span class="sum-val sum-discount" id="s-disc"></span></div>
+        <div class="sum-row"><span class="sum-label">VAT</span><span class="sum-val">Calculated at checkout</span></div>
+        <div class="sum-row"><span class="sum-total-label">Total</span><span class="sum-total-val" id="s-total">€3,150</span></div>
+      </div>
+
+      <button class="proceed-btn">Proceed to payment →</button>
+      <p class="fine-print">Payment via Stripe · EU VAT at checkout · Fully refundable</p>
+
+    </div>
+  </div>
+</div>
+
+<!-- WHAT HAPPENS NEXT -->
+<div class="next-section">
+  <p class="next-heading">What happens after you order.</p>
+  <div class="next-steps">
+    <div class="next-step">
+      <span class="step-num">01</span>
+      <p class="step-title">Confirmation</p>
+      <p class="step-body">You receive an order confirmation and your serial number by email within the hour. Your place in the production sequence is secured.</p>
+    </div>
+    <div class="next-step">
+      <span class="step-num">02</span>
+      <p class="step-title">Workshop contact</p>
+      <p class="step-body">Within two working days, someone from the workshop writes to you directly. Questions, preferences, any detail that needs confirming.</p>
+    </div>
+    <div class="next-step">
+      <span class="step-num">03</span>
+      <p class="step-title">Production</p>
+      <p class="step-body">Your instrument enters the build sequence. You will receive a progress update at the midpoint — approximately 30 days in.</p>
+    </div>
+    <div class="next-step">
+      <span class="step-num">04</span>
+      <p class="step-title">Delivery</p>
+      <p class="step-body">Shipped worldwide, insured and tracked, included in the price. Delivery in approximately 60 days from order, sometimes sooner.</p>
+    </div>
+  </div>
+  <div class="change-mind">
+    <p class="change-q">Can I change my mind?</p>
+    <p class="change-a">Yes — at any point. Before your instrument is built, during production, or within two weeks of delivery. Cancel or return for a full refund, no explanation required.</p>
+  </div>
+</div>
+
+<!-- PLAY ONE -->
+<div class="play-section">
+  <p class="play-heading">Play one first.</p>
+  <p class="play-sub">The instrument is not something that explains itself on a page. If you want to hold one before ordering, there are two ways.</p>
+  <div class="play-grid">
+    <div class="play-card dark">
+      <span class="play-eyebrow">Primary · always open</span>
+      <p class="play-name">Neotone Workshop</p>
+      <span class="play-loc">Budapest, Hungary</span>
+      <p class="play-desc">Every instrument in production, available to play. Sessions are by appointment and unhurried. Write to arrange a time — bring an afternoon.</p>
+      <a href="#" class="play-link">Write to us</a>
+    </div>
+    <div class="play-card">
+      <span class="play-eyebrow">Artist sessions</span>
+      <p class="play-name">Around the world</p>
+      <span class="play-loc">Europe · Americas · Asia</span>
+      <p class="play-desc">A number of Neotone Artists host sessions in their own spaces — studios, home workshops, unconventional rooms. Find one near you and reach out directly.</p>
+      <a href="#" class="play-link">Find an Artist →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ARTISTS -->
+<div class="artists-section">
+  <div class="artists-top">
+    <div>
+      <span class="section-kicker" style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--faint);margin-bottom:0.8rem;display:block">Artists</span>
+      <p class="artists-heading">The instrument<br>in the world.</p>
+      <p class="artists-sub">People playing the Neotone One seriously. Reach out directly — they are players, not representatives.</p>
+    </div>
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterArtists('all',this)">All</button>
+      <button class="filter-btn" onclick="filterArtists('europe',this)">Europe</button>
+      <button class="filter-btn" onclick="filterArtists('americas',this)">Americas</button>
+      <button class="filter-btn" onclick="filterArtists('asia',this)">Asia</button>
+      <button class="filter-btn" onclick="filterArtists('sessions',this)">Sessions</button>
+    </div>
+  </div>
+  <div class="artists-grid" id="artists-grid">
+    <div class="artist-card" data-region="europe" data-sessions="true">
+      <div class="artist-img-ph img-mah"></div>
+      <div class="artist-body">
+        <p class="artist-name">Lena Voss</p>
+        <span class="artist-country">Germany</span>
+        <p class="artist-practice">Electroacoustic composition. Works with extended gesture and slow harmonic fields in studio and performance.</p>
+        <div class="artist-footer"><span class="artist-tag">Sessions available</span><a href="#" class="artist-contact">Contact →</a></div>
+      </div>
+    </div>
+    <div class="artist-card" data-region="americas" data-sessions="false">
+      <div class="artist-img-ph img-wal"></div>
+      <div class="artist-body">
+        <p class="artist-name">Rafael Montes</p>
+        <span class="artist-country">Colombia</span>
+        <p class="artist-practice">Ritual music and field recording. Plays in tunings outside conventional Western scales — his recordings are worth finding.</p>
+        <div class="artist-footer"><span class="artist-tag" style="opacity:0">—</span><a href="#" class="artist-contact">Contact →</a></div>
+      </div>
+    </div>
+    <div class="artist-card" data-region="asia" data-sessions="true">
+      <div class="artist-img-ph img-ash"></div>
+      <div class="artist-body">
+        <p class="artist-name">Yuki Tanaka</p>
+        <span class="artist-country">Japan</span>
+        <p class="artist-practice">Minimalist solo work performed in temples and unconventional spaces. Tokyo studio open monthly by appointment.</p>
+        <div class="artist-footer"><span class="artist-tag">Sessions available</span><a href="#" class="artist-contact">Contact →</a></div>
+      </div>
+    </div>
+    <div class="artist-card" data-region="europe" data-sessions="true">
+      <div class="artist-img-ph img-wen"></div>
+      <div class="artist-body">
+        <p class="artist-name">Sofía Arán</p>
+        <span class="artist-country">Spain</span>
+        <p class="artist-practice">Sound design for film and installation. Works across multiple Neotone configurations simultaneously in her Barcelona studio.</p>
+        <div class="artist-footer"><span class="artist-tag">Sessions available</span><a href="#" class="artist-contact">Contact →</a></div>
+      </div>
+    </div>
+    <div class="artist-card" data-region="americas" data-sessions="false">
+      <div class="artist-img-ph img-pre"></div>
+      <div class="artist-body">
+        <p class="artist-name">James Okafor</p>
+        <span class="artist-country">United States</span>
+        <p class="artist-practice">Meditation and somatic practice. Explores the relationship between sustained gesture and altered states of attention.</p>
+        <div class="artist-footer"><span class="artist-tag" style="opacity:0">—</span><a href="#" class="artist-contact">Contact →</a></div>
+      </div>
+    </div>
+    <div class="artist-card" data-region="europe" data-sessions="false">
+      <div class="artist-img-ph img-ebo"></div>
+      <div class="artist-body">
+        <p class="artist-name">Elias Born</p>
+        <span class="artist-country">Switzerland</span>
+        <p class="artist-practice">Improvisation and cross-cultural collaboration. Has performed with musicians from twenty countries using the Neotone as common language.</p>
+        <div class="artist-footer"><span class="artist-tag" style="opacity:0">—</span><a href="#" class="artist-contact">Contact →</a></div>
+      </div>
+    </div>
+  </div>
+  <div class="no-results" id="no-results">No Artists listed in this region yet.</div>
+  <div class="artists-more"><a href="#">View all Artists →</a></div>
+</div>
+
+<!-- TONEFIELD -->
+<div class="tonefield-section">
+  <p class="tf-heading">From Tonefield</p>
+  <span class="tf-meta">The Neotone Journal · Selected reading on the Neotone One</span>
+  <div class="tf-grid">
+    <div class="tf-card">
+      <span class="tf-card-kicker">Lutherie · Issue 1</span>
+      <p class="tf-card-title">Why the body is wood — and what that actually does</p>
+      <p class="tf-card-desc">On the decision to house an electronic instrument in organic material, and what that changes at the level of feeling.</p>
+      <a href="#" class="tf-card-link">Read →</a>
+    </div>
+    <div class="tf-card">
+      <span class="tf-card-kicker">Alchemy · Issue 2</span>
+      <p class="tf-card-title">The Scale Wizard: what it is and what it opens</p>
+      <p class="tf-card-desc">A close reading of how the Scale Wizard constructs harmonic fields — and what it means to choose a scale rather than a key.</p>
+      <a href="#" class="tf-card-link">Read →</a>
+    </div>
+    <div class="tf-card">
+      <span class="tf-card-kicker">Gesture · Issue 2</span>
+      <p class="tf-card-title">Learning to play something that has no teachers yet</p>
+      <p class="tf-card-desc">On developing technique for an instrument young enough that no orthodoxy exists — and why that is a strange kind of freedom.</p>
+      <a href="#" class="tf-card-link">Read →</a>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="faq-section">
+  <p class="faq-heading">Questions.</p>
+  <div class="faq-grid">
+    <div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(0)">Can I change my mind? <span class="faq-icon" id="fi0">+</span></div>
+        <div class="faq-a" id="fa0">Yes — at any point between placing your order and two weeks after your instrument arrives. Cancel during production or return after delivery for a full refund, no explanation required. The instrument is built for you; we want you to be certain.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(1)">What does the warranty cover? <span class="faq-icon" id="fi1">+</span></div>
+        <div class="faq-a" id="fa1">Six years direct from the workshop. The first three cover all defects including shipping both ways. The final three cover repair at cost of labour only. Ordering direct is the only way to access this warranty — retail orders carry a shorter coverage period.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(2)">How does an Artist referral code work? <span class="faq-icon" id="fi2">+</span></div>
+        <div class="faq-a" id="fa2">If a Neotone Artist referred you, entering their code at checkout applies a 5% discount to your order. The Artist receives 5% in return. You can find an Artist's code in their content, or by asking them directly.</div>
+      </div>
+    </div>
+    <div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(3)">How does VAT work? <span class="faq-icon" id="fi3">+</span></div>
+        <div class="faq-a" id="fa3">EU customers pay VAT at the rate of their country, calculated at checkout. EU businesses with a valid VAT number may enter it at payment to purchase exempt. Outside the EU, no VAT is charged — import duties vary by country and are the buyer's responsibility.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(4)">Why does it take 60 days? <span class="faq-icon" id="fi4">+</span></div>
+        <div class="faq-a" id="fa4">Each instrument is built individually by hand in Budapest. The 60-day lead time reflects both the care involved and the current demand for the instrument. You will receive a progress update at the midpoint.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(5)">Why order direct rather than from a retailer? <span class="faq-icon" id="fi5">+</span></div>
+        <div class="faq-a" id="fa5">Ordering direct gives you the full six-year warranty, a direct relationship with the workshop, and access to stock instruments when available. Retail partners are a useful point of contact in some regions but cannot offer the same terms.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- JOURNAL -->
+<div class="journal-strip">
+  <div>
+    <p class="journal-title">TONEFIELD</p>
+    <p class="journal-meta">Neotone · Issue 1 · Spring 2026</p>
+  </div>
+  <div class="journal-right">
+    <input class="journal-input" type="email" placeholder="your@email.com" />
+    <button class="journal-btn">Receive Tonefield</button>
+  </div>
+</div>
+
+<footer>
+  <ul class="footer-links">
+    <li><a href="#">Instruments</a></li>
+    <li><a href="#">Alchemy</a></li>
+    <li><a href="#">Community</a></li>
+    <li><a href="#">Tonefield</a></li>
+    <li><a href="#">Atelier</a></li>
+  </ul>
+  <span class="footer-loc">Budapest · Workshop</span>
+</footer>
+
+</body>
+
+<script>
+var state={model:2,wood:'Mahogany',woodNote:'Standard',woodClass:'img-mah',disc:0,discAmt:0};
+var prices={1:1990,2:3150};
+
+function switchFork(which){
+  ['stock','build'].forEach(function(w){
+    document.getElementById('tab-'+w).classList.toggle('active',w===which);
+    document.getElementById('panel-'+w).classList.toggle('active',w===which);
+  });
+}
+
+function selectModel(n){
+  [1,2].forEach(function(i){
+    var on=i===n;
+    document.getElementById('mod-'+i).classList.toggle('selected',on);
+    document.getElementById('mind-'+i).textContent=on?'Selected':'Select';
+  });
+  state.model=n;
+  var isMutant=n===2;
+  document.querySelectorAll('.wood-opt[data-model="mutant"]').forEach(function(w){
+    w.classList.toggle('disabled',!isMutant);
+  });
+  if(!isMutant){
+    var mutantSelected=document.querySelector('.wood-opt.selected[data-model="mutant"]');
+    if(mutantSelected){
+      mutantSelected.classList.remove('selected');
+      selectWoodDirect(document.querySelector('.wood-opt[data-model="both"]'),'Mahogany','Standard','img-mah');
+    }
+  }
+  updateSummary();
+}
+
+function selectWood(el,name,note,cls){
+  document.querySelectorAll('.wood-opt').forEach(function(w){w.classList.remove('selected')});
+  el.classList.add('selected');
+  state.wood=name;state.woodNote=note;state.woodClass=cls;
+  document.getElementById('visual-wood-name').textContent=name;
+  document.getElementById('visual-wood-note').textContent=note;
+  var visual=document.getElementById('inst-visual');
+  visual.querySelector('img').style.opacity='0.3';
+  setTimeout(function(){
+    var img=visual.querySelector('img');
+    img.style.opacity='1';
+  },300);
+  updateSummary();
+}
+
+function selectWoodDirect(el,name,note,cls){
+  selectWood(el,name,note,cls);
+}
+
+function applyCode(){
+  var code=document.getElementById('referral-code').value.trim().toUpperCase();
+  var msg=document.getElementById('referral-msg');
+  if(code==='DANNY10'||code==='LENA'||code==='SOFIA'){
+    state.disc=5;
+    var names={DANNY10:'Danny Cudd',LENA:'Lena Voss',SOFIA:'Sofía Arán'};
+    msg.textContent='5% applied — referred by '+names[code]+'.';
+    msg.className='referral-msg ok';
+  } else if(code.length>1){
+    state.disc=0;
+    msg.textContent='Code not recognised.';
+    msg.className='referral-msg err';
+  } else {
+    state.disc=0;
+    msg.textContent='';
+    msg.className='referral-msg';
+  }
+  updateSummary();
+}
+
+function updateSummary(){
+  var base=prices[state.model];
+  var disc=Math.round(base*state.disc/100);
+  state.discAmt=disc;
+  var total=base-disc;
+  document.getElementById('s-model').textContent=state.model===1?'Neotone One':'Neotone One Mutant';
+  document.getElementById('s-wood').textContent=state.wood;
+  document.getElementById('s-total').textContent='€'+total.toLocaleString('de-DE');
+  var dr=document.getElementById('s-disc-row');
+  if(disc>0){
+    dr.style.display='flex';
+    document.getElementById('s-disc').textContent='−€'+disc.toLocaleString('de-DE');
+  } else {
+    dr.style.display='none';
+  }
+}
+
+function filterArtists(region,btn){
+  document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active')});
+  btn.classList.add('active');
+  var cards=document.querySelectorAll('.artist-card');
+  var any=false;
+  cards.forEach(function(c){
+    var show=region==='all'?true:region==='sessions'?c.dataset.sessions==='true':c.dataset.region===region;
+    c.classList.toggle('hidden',!show);
+    if(show)any=true;
+  });
+  document.getElementById('no-results').classList.toggle('visible',!any);
+}
+
+function toggleFaq(n){
+  var a=document.getElementById('fa'+n);
+  var i=document.getElementById('fi'+n);
+  var open=a.classList.toggle('open');
+  i.textContent=open?'−':'+';
+}
+
+updateSummary();
+</script>
+</html>
