@@ -289,8 +289,7 @@ footer{padding:18px 44px;display:flex;justify-content:space-between;align-items:
 
 <!-- HERO -->
 <div class="hero">
-  <img class="hero-img" src="/mnt/user-data/uploads/neotone-mahagony-01.png" alt="Neotone One,mahogany" id="hero-img" />
-  <div class="hero-overlay"></div>
+  <img class="hero-img" src="/lab-public/media/mutant.png" alt="Neotone One" id="hero-img" />  <div class="hero-overlay"></div>
   <div class="hero-text">
     <div class="hero-left">
       <span class="hero-eyebrow">Instruments</span>
@@ -343,7 +342,7 @@ footer{padding:18px 44px;display:flex;justify-content:space-between;align-items:
   <div class="config-panel active" id="panel-build">
 
     <div class="instrument-visual" id="inst-visual">
-      <img src="/mnt/user-data/uploads/neotone-mahagony-01.png" alt="Neotone One" id="visual-img" />
+      <img src="/lab-public/media/finish/neotone-ash-01.png" id="visual-img-1" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:opacity 0.4s" />
       <div class="visual-caption">
         <p class="visual-wood-name" id="visual-wood-name">Ash</p>
         <p class="visual-wood-note" id="visual-wood-note">Standard</p>
@@ -685,6 +684,14 @@ function selectModel(n){
   updateSummary();
 }
 
+var woodImages={
+  'Ash':'neotone-ash-01.png',
+  'Oak':'neotone-oak-01.png',
+  'Mahogany':'neotone-mahagony-01.png',
+  'Cherry':'neotone-cherry-01.png',
+  'Walnut':'neotone-walnut-01.png'
+};
+
 function selectWood(el,name,note,cls){
   document.querySelectorAll('.wood-opt').forEach(function(w){w.classList.remove('selected')});
   el.classList.add('selected');
@@ -692,11 +699,11 @@ function selectWood(el,name,note,cls){
   state.woodExtra=parseInt(el.dataset.extra||'0');
   document.getElementById('visual-wood-name').textContent=name;
   document.getElementById('visual-wood-note').textContent=note;
-  var visual=document.getElementById('inst-visual');
-  visual.querySelector('img').style.opacity='0.3';
+  var i1=document.getElementById('visual-img-1');
+  i1.style.opacity='0.3';
   setTimeout(function(){
-    var img=visual.querySelector('img');
-    img.style.opacity='1';
+    i1.src='/lab-public/media/finish/'+woodImages[name];
+    i1.style.opacity='1';
   },300);
   updateSummary();
 }
