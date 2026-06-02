@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neotone Wireframe - Landing</title>
+  <style>
+    :root {
+      --ink: #111;
+      --line: #d9d9d9;
+      --muted: #4f4f4f;
+      --max: 1180px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #fff;
+      color: var(--ink);
+    }
+    .top {
+      border-bottom: 1px solid var(--line);
+      padding: 14px 0;
+    }
+    .top-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .wordmark img {
+      display: block;
+      height: 18px;
+      width: auto;
+    }
+    .menu {
+      display: flex;
+      gap: 24px;
+      width: 60%;
+      justify-content: space-between;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      text-transform: none;
+      letter-spacing: 0.02em;
+      font-size: 11px;
+    }
+    .menu a { color: #333; text-decoration: none; }
+    .menu a:hover, .menu a.active { color: #000; }
+
+    .page {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 24px;
+    }
+    .block {
+      border: 1px solid var(--line);
+      padding: 16px;
+      margin-bottom: 14px;
+      background: #fff;
+    }
+    .label {
+      margin: 0 0 8px;
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .desc {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.45;
+      max-width: 78ch;
+    }
+    .feature-1 {
+      min-height: 390px;
+      display: grid;
+      grid-template-columns: 1.9fr 1fr;
+      gap: 18px;
+    }
+    .inset-image {
+      border: 1px solid var(--line);
+      min-height: 260px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .inset-image img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border: 1px solid var(--line);
+    }
+    .three-col {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .feature-2-block { min-height: 390px; }
+    .feature-3-block { min-height: 340px; }
+    .tonefield-signup { min-height: 115px; }
+    .footer-block { min-height: 72px; }
+
+    @media (max-width: 900px) {
+      .feature-1, .three-col { grid-template-columns: 1fr; }
+      .menu {
+        width: auto;
+        justify-content: flex-start;
+        gap: 18px;
+        font-size: 10px;
+        letter-spacing: 0.02em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="top-inner">
+      <a class="wordmark" href="index.html">
+        <img src="../media/wordmark-clean.png" alt="Neotone" />
+      </a>
+      <ul class="menu">
+        <li><a href="one.html">One</a></li>
+        <li><a href="#">Treangle</a></li>
+        <li><a href="#">NeOS</a></li>
+        <li><a href="#">Artists</a></li>
+        <li><a href="#">Tonefield</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="block feature-1">
+      <div>
+        <h1 class="label">Feature 1: Framing and Neotone One</h1>
+        <p class="desc">Frames the Neotone world via the flagship instrument.</p>
+      </div>
+      <aside class="inset-image">
+        <h2 class="label">Product Image</h2>
+        <img src="../media/GPT-sculpture-1.png" alt="Sculpture-style product image" />
+        <p class="desc">Inset sculpture-style image inside the article area.</p>
+      </aside>
+    </section>
+
+    <section class="block">
+      <h2 class="label">Tonefield Articles: Neotone One / Acoustic World</h2>
+      <p class="desc">Related links focused on the One and acoustic culture.</p>
+      <div class="three-col" style="margin-top: 12px;">
+        <article class="block" style="margin:0; min-height:92px;">
+          <h3 class="label">Tonefield Link 1</h3>
+          <p class="desc">Neotone One and acoustic practice.</p>
+        </article>
+        <article class="block" style="margin:0; min-height:92px;">
+          <h3 class="label">Tonefield Link 2</h3>
+          <p class="desc">Material and gesture in the acoustic world.</p>
+        </article>
+        <article class="block" style="margin:0; min-height:92px;">
+          <h3 class="label">Tonefield Link 3</h3>
+          <p class="desc">Craft-first listening and instrument culture.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="block feature-2-block">
+      <h2 class="label">Feature 2: Electronic Culture Article</h2>
+      <p class="desc">Introduces the electronic world through Treangle and NeOS together.</p>
+    </section>
+
+    <section class="block">
+      <h2 class="label">Tonefield Articles: Electronics</h2>
+      <p class="desc">Related links focused on electronic practice and system thinking.</p>
+      <div class="three-col" style="margin-top: 12px;">
+        <article class="block" style="margin:0; min-height:92px;">
+          <h3 class="label">Tonefield Link 1</h3>
+          <p class="desc">Electronic technique and expression.</p>
+        </article>
+        <article class="block" style="margin:0; min-height:92px;">
+          <h3 class="label">Tonefield Link 2</h3>
+          <p class="desc">Treangle and modular direction.</p>
+        </article>
+        <article class="block" style="margin:0; min-height:92px;">
+          <h3 class="label">Tonefield Link 3</h3>
+          <p class="desc">NeOS as instrument intelligence.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="block feature-3-block">
+      <h2 class="label">Feature 3: Neotone Artists</h2>
+      <p class="desc">Community feature that maps practitioner presence and gives a visible participation path.</p>
+    </section>
+
+    <section class="block">
+      <h2 class="label">Tonefield Articles: Artists</h2>
+      <p class="desc">Related links focused on artists, practice, and public culture.</p>
+      <div class="three-col" style="margin-top: 12px;">
+        <article class="block" style="margin:0; min-height:92px;">
+          <h3 class="label">Tonefield Link 1</h3>
+          <p class="desc">Artist pathways and ownership to practice.</p>
+        </article>
+        <article class="block" style="margin:0; min-height:92px;">
+          <h3 class="label">Tonefield Link 2</h3>
+          <p class="desc">Regional scenes and session formats.</p>
+        </article>
+        <article class="block" style="margin:0; min-height:92px;">
+          <h3 class="label">Tonefield Link 3</h3>
+          <p class="desc">How artists extend the Neotone world.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="block tonefield-signup">
+      <h2 class="label">Receive Tonefield</h2>
+      <p class="desc">Single email capture block for ongoing editorial connection.</p>
+    </section>
+
+    <footer class="block footer-block">
+      <h2 class="label">Bottom Menu</h2>
+      <p class="desc">Minimal footer navigation and utility area.</p>
+    </footer>
+  </main>
+</body>
+</html>
