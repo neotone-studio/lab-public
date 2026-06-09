@@ -1,0 +1,209 @@
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  .page { background: #1a1612; color: #e8e0d4; font-family: 'Georgia', serif; }
+  .section { padding: 3rem 2rem; }
+  .label { font-family: 'Arial', sans-serif; font-size: 11px; letter-spacing: 0.18em; color: #9a8a76; text-transform: uppercase; margin-bottom: 0.5rem; }
+  .heading { font-size: 26px; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; color: #e8e0d4; margin-bottom: 0.75rem; line-height: 1.2; }
+  .subtext { font-family: 'Arial', sans-serif; font-size: 13px; color: #9a8a76; line-height: 1.7; max-width: 560px; }
+  .divider { width: 40px; height: 1px; background: #9a8a7644; margin: 1.5rem 0; }
+
+  .artists-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #2e2820; margin-top: 2rem; }
+  .artist-card { background: #1a1612; padding: 1.25rem; display: flex; flex-direction: column; gap: 0.4rem; }
+  .artist-avatar { width: 52px; height: 52px; border-radius: 50%; background: #2e2820; border: 1px solid #3e3228; display: flex; align-items: center; justify-content: center; font-family: 'Arial', sans-serif; font-size: 13px; color: #9a8a76; letter-spacing: 0.05em; flex-shrink: 0; margin-bottom: 0.25rem; }
+  .artist-name { font-family: 'Arial', sans-serif; font-size: 13px; font-weight: 600; color: #e8e0d4; letter-spacing: 0.05em; }
+  .artist-location { font-family: 'Arial', sans-serif; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #c8a96e; margin-bottom: 0.1rem; }
+  .artist-desc { font-family: 'Arial', sans-serif; font-size: 11.5px; color: #9a8a76; line-height: 1.5; }
+  .artist-links { display: flex; gap: 10px; margin-top: 0.35rem; }
+  .artist-link { font-family: 'Arial', sans-serif; font-size: 11px; color: #c8a96e; text-decoration: none; letter-spacing: 0.05em; border-bottom: 1px solid #c8a96e44; }
+  .badge { display: inline-block; font-family: 'Arial', sans-serif; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #c8a96e; border: 1px solid #c8a96e55; padding: 2px 7px; border-radius: 2px; margin-top: 0.35rem; align-self: flex-start; }
+
+  .show-more { width: 100%; background: none; border: none; border-top: 1px solid #2e2820; color: #9a8a76; font-family: 'Arial', sans-serif; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.85rem; margin-top: 1px; cursor: pointer; }
+  .show-more:hover { color: #e8e0d4; }
+  .hidden-cards { display: none; }
+  .hidden-cards.open { display: contents; }
+
+  .discount-strip { background: #2e2820; border: 1px solid #3e3228; border-radius: 2px; padding: 1rem 1.25rem; margin-top: 2rem; display: flex; align-items: flex-start; gap: 1rem; }
+  .discount-icon { font-size: 18px; color: #c8a96e; flex-shrink: 0; margin-top: 2px; }
+  .discount-text { font-family: 'Arial', sans-serif; font-size: 12px; color: #9a8a76; line-height: 1.6; }
+  .discount-text strong { color: #e8e0d4; font-weight: 600; }
+
+  .workshop-section { background: #12100d; border-top: 1px solid #2e2820; padding: 2.5rem 2rem; display: flex; gap: 2rem; align-items: flex-start; }
+  .workshop-left { flex: 1; }
+  .workshop-right { width: 230px; flex-shrink: 0; background: #1a1612; border: 1px solid #2e2820; border-radius: 2px; padding: 1.25rem; }
+  .workshop-detail { font-family: 'Arial', sans-serif; font-size: 11.5px; color: #9a8a76; line-height: 1.6; display: flex; align-items: flex-start; gap: 8px; margin-bottom: 0.85rem; }
+  .workshop-detail i { color: #c8a96e; font-size: 14px; margin-top: 2px; flex-shrink: 0; }
+  .workshop-note { font-family: 'Arial', sans-serif; font-size: 11px; color: #9a8a7688; line-height: 1.6; border-top: 1px solid #2e2820; padding-top: 0.75rem; margin-top: 0.25rem; }
+  .contact-link { display: inline-block; font-family: 'Arial', sans-serif; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #c8a96e; border-bottom: 1px solid #c8a96e55; text-decoration: none; margin-top: 1rem; }
+</style>
+
+<div class="page">
+
+  <div class="section" style="background:#1a1612;">
+    <div class="label">Artist network</div>
+    <div class="heading">Talk with<br>NEOTONE Artists</div>
+    <div class="subtext">NEOTONE artists are based around the world and available to talk. Ask questions, hear how they use the instrument, and find someone in your country who speaks your language. Some offer in-person sessions if you'd like to try one yourself. When you're ready to order, ask your artist for a referral code and receive a discount on your purchase.</div>
+
+    <div class="divider"></div>
+
+    <div class="artists-grid" id="artistGrid">
+
+      <div class="artist-card">
+        <div class="artist-avatar">IJ</div>
+        <div class="artist-name">Ivan Judas</div>
+        <div class="artist-location">Serbia</div>
+        <div class="artist-desc">Composer and performer blending handpan with electronic production.</div>
+        <div class="artist-links">
+          <a class="artist-link" href="#">Instagram</a>
+          <a class="artist-link" href="#">YouTube</a>
+        </div>
+      </div>
+
+      <div class="artist-card">
+        <div class="artist-avatar">SV</div>
+        <div class="artist-name">Sjaak Van Dam</div>
+        <div class="artist-location">Netherlands</div>
+        <div class="artist-desc">Multi-instrumentalist integrating NEOTONE into live world-music sets.</div>
+        <div class="artist-links">
+          <a class="artist-link" href="#">Instagram</a>
+        </div>
+        <div class="badge">In-person sessions</div>
+      </div>
+
+      <div class="artist-card">
+        <div class="artist-avatar">GN</div>
+        <div class="artist-name">Golsa Nazari</div>
+        <div class="artist-location">Germany</div>
+        <div class="artist-desc">Meditative handpan artist performing across Europe and the Middle East.</div>
+        <div class="artist-links">
+          <a class="artist-link" href="#">Instagram</a>
+          <a class="artist-link" href="#">Website</a>
+        </div>
+      </div>
+
+      <div class="hidden-cards" id="moreCards">
+
+        <div class="artist-card">
+          <div class="artist-avatar">LF</div>
+          <div class="artist-name">Lucas Fanchon</div>
+          <div class="artist-location">France</div>
+          <div class="artist-desc">Parisian musician using NEOTONE alongside modular synthesis.</div>
+          <div class="artist-links">
+            <a class="artist-link" href="#">Instagram</a>
+          </div>
+        </div>
+
+        <div class="artist-card">
+          <div class="artist-avatar">ML</div>
+          <div class="artist-name">Mar Loi</div>
+          <div class="artist-location">Spain</div>
+          <div class="artist-desc">Ambient and cinematic composer touring internationally with the instrument.</div>
+          <div class="artist-links">
+            <a class="artist-link" href="#">YouTube</a>
+            <a class="artist-link" href="#">Website</a>
+          </div>
+          <div class="badge">In-person sessions</div>
+        </div>
+
+        <div class="artist-card">
+          <div class="artist-avatar">DC</div>
+          <div class="artist-name">Danny Cudd</div>
+          <div class="artist-location">United States</div>
+          <div class="artist-desc">Acclaimed handpan artist with a global following and millions of YouTube views.</div>
+          <div class="artist-links">
+            <a class="artist-link" href="#">YouTube</a>
+            <a class="artist-link" href="#">Website</a>
+          </div>
+          <div class="badge">In-person sessions</div>
+        </div>
+
+        <div class="artist-card">
+          <div class="artist-avatar">MG</div>
+          <div class="artist-name">Madame Gandhi</div>
+          <div class="artist-location">United States</div>
+          <div class="artist-desc">Activist musician and drummer incorporating NEOTONE into electronic live sets.</div>
+          <div class="artist-links">
+            <a class="artist-link" href="#">Instagram</a>
+            <a class="artist-link" href="#">Website</a>
+          </div>
+        </div>
+
+        <div class="artist-card">
+          <div class="artist-avatar">AL</div>
+          <div class="artist-name">Alem</div>
+          <div class="artist-location">France</div>
+          <div class="artist-desc">Internationally recognised handpan virtuoso and educator.</div>
+          <div class="artist-links">
+            <a class="artist-link" href="#">YouTube</a>
+          </div>
+          <div class="badge">In-person sessions</div>
+        </div>
+
+        <div class="artist-card">
+          <div class="artist-avatar">YM</div>
+          <div class="artist-name">Yin Ming</div>
+          <div class="artist-location">China</div>
+          <div class="artist-desc">Cross-genre performer bridging traditional Chinese music and handpan.</div>
+          <div class="artist-links">
+            <a class="artist-link" href="#">Instagram</a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <button class="show-more" id="showMoreBtn" onclick="
+      var cards = document.getElementById('moreCards');
+      var btn = document.getElementById('showMoreBtn');
+      if (cards.classList.contains('open')) {
+        cards.classList.remove('open');
+        btn.textContent = 'Show more artists ↓';
+      } else {
+        cards.classList.add('open');
+        btn.textContent = 'Show fewer ↑';
+      }
+    ">Show more artists ↓</button>
+
+    <div class="discount-strip">
+      <i class="ti ti-tag discount-icon" aria-hidden="true"></i>
+      <div class="discount-text">
+        <strong>A discount when you order.</strong> Once you've connected with an artist, ask them for a referral code. It takes a percentage off the purchase price of your NEOTONE instrument.
+      </div>
+    </div>
+  </div>
+
+  <div class="workshop-section">
+    <div class="workshop-left">
+      <div class="label">Go deeper</div>
+      <div class="heading" style="font-size:20px;">Visit us in Budapest</div>
+      <div class="divider"></div>
+      <div class="subtext" style="max-width: 420px;">Come to the source. Visit our Budapest workshop to play the instrument, speak with the people who build it, and tour the production facility to see how each NEOTONE is made. Sessions are by appointment before ordering your instrument.</div>
+      <a class="contact-link" href="#">Get in touch via the contact form below ↓</a>
+    </div>
+    <div class="workshop-right">
+      <div class="workshop-detail">
+        <i class="ti ti-map-pin" aria-hidden="true"></i>
+        <span>Soundventure Workshop, Budapest, Hungary</span>
+      </div>
+      <div class="workshop-detail">
+        <i class="ti ti-clock" aria-hidden="true"></i>
+        <span>By appointment</span>
+      </div>
+      <div class="workshop-detail">
+        <i class="ti ti-music" aria-hidden="true"></i>
+        <span>Play the instrument</span>
+      </div>
+      <div class="workshop-detail">
+        <i class="ti ti-users" aria-hidden="true"></i>
+        <span>Meet the team</span>
+      </div>
+      <div class="workshop-detail">
+        <i class="ti ti-tool" aria-hidden="true"></i>
+        <span>Tour the production facility</span>
+      </div>
+      <div class="workshop-note">To arrange a visit, use the contact form at the bottom of the page and mention you'd like a workshop session.</div>
+    </div>
+  </div>
+
+</div>
