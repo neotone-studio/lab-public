@@ -89,6 +89,28 @@
     .medium { min-height: 140px; }
     .small { min-height: 96px; }
 
+    /* Product tier positioning */
+    .tier-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin-top: 12px;
+      border: 1px solid var(--line);
+    }
+    .tier-cell {
+      padding: 14px;
+      border-right: 1px solid var(--line);
+      font-size: 13px;
+    }
+    .tier-cell:last-child { border-right: 0; }
+    .tier-cell.current {
+      background: #f4f4f4;
+      border-top: 3px solid #111;
+    }
+    .tier-name { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+    .tier-note { color: var(--muted); font-size: 12px; margin-top: 6px; }
+
+    /* Order fork */
     .tabs { display: flex; gap: 0; border: 1px solid var(--line); margin-bottom: 10px; }
     .tab {
       flex: 1;
@@ -151,6 +173,42 @@
       margin-top: 6px;
       font-size: 13px;
     }
+
+    /* Save config + Talk to human */
+    .save-config-block {
+      border: 1px solid var(--line);
+      padding: 12px;
+      margin-top: 10px;
+      background: #fafafa;
+    }
+    .talk-block {
+      border: 1px dashed #aaa;
+      padding: 14px;
+      margin-top: 10px;
+      background: #fff;
+    }
+    .talk-block .label { font-size: 14px; }
+
+    /* Stock panel notify */
+    .notify-block {
+      border: 1px solid var(--line);
+      padding: 12px;
+      margin-top: 12px;
+      background: #fafafa;
+    }
+
+    /* B-stock */
+    .bstock-badge {
+      display: inline-block;
+      border: 1px solid #aaa;
+      padding: 2px 7px;
+      font-size: 11px;
+      color: #555;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
+    /* FAQ */
     .faq-q {
       width: 100%;
       border: 1px solid var(--line);
@@ -171,8 +229,58 @@
     }
     .faq-a.open { display: block; }
 
+    /* Artist expandable blocks */
+    .artist-card {
+      border: 1px solid var(--line);
+      padding: 12px;
+      margin: 0;
+      background: #fff;
+    }
+    .artist-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .artist-expand-btn {
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 4px 10px;
+      font-size: 11px;
+      cursor: pointer;
+      flex-shrink: 0;
+      margin-left: 8px;
+    }
+    .artist-detail {
+      margin-top: 10px;
+      border-top: 1px solid var(--line);
+      padding-top: 10px;
+      display: none;
+    }
+    .artist-detail.open { display: block; }
+    .artist-links { margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap; }
+    .artist-link-btn {
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 5px 9px;
+      font-size: 11px;
+      cursor: pointer;
+      color: #333;
+      text-decoration: none;
+    }
+    .session-status {
+      display: inline-block;
+      font-size: 11px;
+      padding: 2px 7px;
+      border: 1px solid var(--line);
+      margin-top: 6px;
+    }
+    .session-status.available { border-color: #333; color: #111; }
+    .session-status.unavailable { color: #aaa; }
+
     @media (max-width: 980px) {
-      .hero, .split-2, .split-3, .split-4 { grid-template-columns: 1fr; }
+      .hero, .split-2, .split-3, .split-4, .tier-row { grid-template-columns: 1fr; }
+      .tier-cell { border-right: 0; border-bottom: 1px solid var(--line); }
+      .tier-cell:last-child { border-bottom: 0; }
       .order-layout { grid-template-columns: 1fr; }
       .selection-preview { position: static; }
       .menu {
@@ -202,6 +310,8 @@
   </header>
 
   <main class="page">
+
+    <!-- Hero -->
     <section class="block hero">
       <div>
         <h1 class="label">Hero: Product Encounter</h1>
@@ -213,16 +323,42 @@
       </div>
     </section>
 
+    <!-- At a Glance -->
     <section class="block glance">
       <h2 class="label">At a Glance</h2>
       <p class="desc">Features and specs at a glance to build excitement and emphasize that this is a concrete instrument object.</p>
     </section>
 
+    <!-- Editorial -->
     <section class="block medium">
       <h2 class="label">Editorial Framing</h2>
       <p class="desc">Short article-style text that explains what the instrument is, why material choice matters, and why this path differs from a normal product listing.</p>
     </section>
 
+    <!-- Product tier positioning -->
+    <section class="block">
+      <h2 class="label">Where One Sits in the Range</h2>
+      <p class="desc">Contextual tier positioning — helps orient the buyer to the full product line without leaving this page.</p>
+      <div class="tier-row">
+        <div class="tier-cell">
+          <div class="tier-name">Treangle Configuration</div>
+          <p class="desc" style="font-size:12px;">Entry tier. Electronic instrument with full NeOS integration.</p>
+          <p class="tier-note">→ Treangle page</p>
+        </div>
+        <div class="tier-cell">
+          <div class="tier-name">Treangle with Cor Configuration</div>
+          <p class="desc" style="font-size:12px;">Mid tier. Extended range and tonal depth.</p>
+          <p class="tier-note">→ Treangle page</p>
+        </div>
+        <div class="tier-cell current">
+          <div class="tier-name">One ← You are here</div>
+          <p class="desc" style="font-size:12px;">Flagship acoustic instrument. Handbuilt, material-first, built to order or from stock.</p>
+          <p class="tier-note">Currently viewing</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Order Fork -->
     <section class="block">
       <h2 class="label">Order Fork (Functional)</h2>
       <p class="desc">Switch between stock and built-to-order purchase pathways.</p>
@@ -233,43 +369,81 @@
       <div class="order-layout">
         <aside class="selection-preview">
           <h3 class="label">Exact Instrument Preview</h3>
-          <p class="desc">Persistent secondary image tied to stock/build selections throughout ordering.</p>
+          <p class="desc">Persistent image tied to selections throughout ordering.</p>
           <img id="selection-image" src="../media/finish/neotone-ash-01.png" alt="Selected instrument preview" />
           <p class="desc" id="selection-caption" style="margin-top:8px;">Built to Order · Ash finish</p>
         </aside>
 
         <div>
+          <!-- STOCK PANEL -->
           <div id="panel-stock" class="panel hidden">
-            <h3 class="label">Stock Panel</h3>
-            <p class="desc">Choose a specific in-stock instrument; preview updates to selected stock unit.</p>
+            <h3 class="label">From Stock</h3>
+            <p class="desc">Choose a specific in-stock instrument. Each listing shows actual photographs of that physical instrument. B-stock items include a condition note and adjusted price.</p>
+
             <div class="opt-row">
-              <button class="opt" id="stock-a" onclick="selectStock('Stock #A','../media/finish/neotone-walnut-01.png')">Stock #A</button>
-              <button class="opt" id="stock-b" onclick="selectStock('Stock #B','../media/finish/neotone-cherry-01.png')">Stock #B</button>
+              <button class="opt" id="stock-a" onclick="selectStock('Stock #A','../media/finish/neotone-walnut-01.png', false)">
+                Stock #A · Walnut · EUR 3,800
+              </button>
+              <button class="opt" id="stock-b" onclick="selectStock('Stock #B','../media/finish/neotone-cherry-01.png', false)">
+                Stock #B · Cherry · EUR 3,980
+              </button>
+              <button class="opt" id="stock-c" onclick="selectStock('Stock #C (B-stock)','../media/finish/neotone-oak-01.png', true)">
+                Stock #C · Oak <span class="bstock-badge">B-stock</span> · EUR 3,100
+              </button>
+            </div>
+            <p class="desc" id="bstock-note" style="margin-top:10px; display:none;">B-stock: minor cosmetic marking on upper rim. Fully functional, same warranty applies.</p>
+
+            <!-- Stock: buyer details + referral -->
+            <div id="stock-buyer-section" class="hidden" style="margin-top:14px;">
+              <div class="split-2">
+                <article class="block small" style="margin:0;">
+                  <h4 class="label">Buyer Details</h4>
+                  <input class="field" placeholder="First and last name" />
+                  <input class="field" placeholder="Email" />
+                  <input class="field" placeholder="Country" />
+                </article>
+                <article class="block small" style="margin:0;">
+                  <h4 class="label">Artist Referral</h4>
+                  <p class="desc" style="font-size:12px;">Referral codes apply to full-price stock instruments only, not B-stock.</p>
+                  <input id="stock-refcode" class="field" placeholder="Referral code (optional)" />
+                  <button class="opt" style="margin-top:8px;" onclick="applyStockCode()">Apply code</button>
+                  <p id="stock-refmsg" class="desc" style="margin-top:8px;">No code applied.</p>
+                </article>
+              </div>
+              <section class="summary-block">
+                <h4 class="label">Order Summary</h4>
+                <p class="desc" id="stock-sum-item">Instrument: —</p>
+                <p class="desc" id="stock-sum-disc">Referral discount: 0%</p>
+                <p class="summary-total" id="stock-sum-total"><strong>Total: —</strong></p>
+                <button class="opt" style="margin-top:10px;">Proceed to payment</button>
+              </section>
+            </div>
+
+            <!-- Notify me when stock arrives / replenishes -->
+            <div class="notify-block" style="margin-top:14px;">
+              <h4 class="label" style="font-size:14px;">Notify me when new stock becomes available</h4>
+              <p class="desc">We'll email you when a new instrument is listed. No account required.</p>
+              <input class="field" style="max-width:320px; margin-top:8px;" placeholder="Email address" />
+              <button class="opt" style="margin-top:8px;">Notify me</button>
             </div>
           </div>
-          <div id="panel-build" class="panel">
-            <h3 class="label">Build Panel</h3>
-            <p class="desc">Configuration and checkout path with model, wood, buyer details, referral code, and live order summary.</p>
 
-            <div class="split-2" style="margin-top:12px;">
-              <article class="block small" style="margin:0;">
-                <h4 class="label">Model Selection</h4>
-                <div class="opt-row">
-                  <button class="opt" id="model-one" onclick="selectModel('One',1990)">One</button>
-                  <button class="opt active" id="model-mutant" onclick="selectModel('One Mutant',3150)">One Mutant</button>
-                </div>
-              </article>
-              <article class="block small" style="margin:0;">
-                <h4 class="label">Wood / Finish Selection</h4>
-                <div class="opt-row">
-                  <button class="opt active" id="wood-ash" onclick="selectWood('Ash',0,'../media/finish/neotone-ash-01.png')">Ash</button>
-                  <button class="opt" id="wood-oak" onclick="selectWood('Oak',0,'../media/finish/neotone-oak-01.png')">Oak</button>
-                  <button class="opt" id="wood-mahogany" onclick="selectWood('Mahogany',90,'../media/finish/neotone-mahagony-01.png')">Mahogany</button>
-                  <button class="opt" id="wood-cherry" onclick="selectWood('Cherry',90,'../media/finish/neotone-cherry-01.png')">Cherry</button>
-                  <button class="opt" id="wood-walnut" onclick="selectWood('Walnut',190,'../media/finish/neotone-walnut-01.png')">Walnut</button>
-                </div>
-              </article>
-            </div>
+          <!-- BUILD PANEL -->
+          <div id="panel-build" class="panel">
+            <h3 class="label">Built to Order</h3>
+            <p class="desc">Configure your instrument. Choose wood, enter your details, and optionally apply a referral code before proceeding to payment.</p>
+
+            <!-- Wood / Finish -->
+            <article class="block small" style="margin:12px 0 0;">
+              <h4 class="label">Wood / Finish</h4>
+              <div class="opt-row">
+                <button class="opt active" id="wood-ash" onclick="selectWood('Ash',0,'../media/finish/neotone-ash-01.png')">Ash</button>
+                <button class="opt" id="wood-oak" onclick="selectWood('Oak',0,'../media/finish/neotone-oak-01.png')">Oak</button>
+                <button class="opt" id="wood-mahogany" onclick="selectWood('Mahogany',90,'../media/finish/neotone-mahagony-01.png')">Mahogany</button>
+                <button class="opt" id="wood-cherry" onclick="selectWood('Cherry',90,'../media/finish/neotone-cherry-01.png')">Cherry</button>
+                <button class="opt" id="wood-walnut" onclick="selectWood('Walnut',190,'../media/finish/neotone-walnut-01.png')">Walnut</button>
+              </div>
+            </article>
 
             <div class="split-2" style="margin-top:12px;">
               <article class="block small" style="margin:0;">
@@ -286,9 +460,30 @@
               </article>
             </div>
 
+            <!-- Save configuration -->
+            <div class="save-config-block">
+              <h4 class="label" style="font-size:14px;">Save this configuration</h4>
+              <p class="desc">Enter your email and we'll generate a unique link to your current configuration. No account, no commitment — return whenever you're ready.</p>
+              <div style="display:flex; gap:8px; margin-top:8px; flex-wrap:wrap;">
+                <input class="field" style="max-width:280px; margin:0;" placeholder="Email address" />
+                <button class="opt" style="margin:0;">Save configuration</button>
+              </div>
+              <p class="desc" style="margin-top:6px; font-size:12px;">Saved link example: neotone.com/configure/abc123</p>
+            </div>
+
+            <!-- Talk to a human -->
+            <div class="talk-block">
+              <h4 class="label">Questions? Talk to a human.</h4>
+              <p class="desc">Have a specific question about your configuration, lead time, or anything else? Send a message and someone from the workshop will reply.</p>
+              <input class="field" style="margin-top:8px;" placeholder="Your name" />
+              <input class="field" placeholder="Email" />
+              <textarea class="field" rows="3" placeholder="Your question or message" style="resize:vertical;"></textarea>
+              <button class="opt" style="margin-top:8px;">Send message</button>
+            </div>
+
             <section class="summary-block">
               <h4 class="label">Order Summary</h4>
-              <p class="desc" id="sum-model">Model: One Mutant</p>
+              <p class="desc" id="sum-model">Instrument: One</p>
               <p class="desc" id="sum-wood">Wood: Ash</p>
               <p class="desc" id="sum-disc">Referral discount: 0%</p>
               <p class="summary-total" id="sum-total"><strong>Total: EUR 3,150</strong></p>
@@ -299,16 +494,19 @@
       </div>
     </section>
 
+    <!-- What Happens Next -->
     <section class="block small">
       <h2 class="label">What Happens Next</h2>
-      <p class="desc">Sets expectations for confirmation, workshop contact, production updates, and delivery.</p>
+      <p class="desc">Sets expectations for confirmation, workshop contact, production updates, and delivery. Links to post-purchase landing experience.</p>
     </section>
 
+    <!-- Cancellation -->
     <section class="block small">
       <h2 class="label">Cancellation</h2>
       <p class="desc">Clear policy block reducing risk by explaining cancellation and return windows.</p>
     </section>
 
+    <!-- Play One -->
     <section class="split-2">
       <article class="block medium">
         <h2 class="label">Play One: Workshop</h2>
@@ -320,36 +518,80 @@
       </article>
     </section>
 
+    <!-- Artists Grid -->
     <section class="block large">
       <h2 class="label">Artists Grid + Filters (Functional)</h2>
-      <p class="desc">Filter by region or session availability. Each artist block contains name, country, short description, session status, and expandable links/context.</p>
-      <p class="desc" style="margin-top:8px;">Recommendation: avoid standalone artist pages; use shared expandable artist components across this page and the Artists page, with links to external profiles, contact options, and related Tonefield pieces.</p>
+      <p class="desc">Filter by region or session availability. Each artist block is an expandable component — no separate artist pages. Expanding reveals bio, media links, contact options, and session availability.</p>
       <div class="opt-row">
         <button class="opt active" onclick="filterArtists('all', this)">All</button>
         <button class="opt" onclick="filterArtists('europe', this)">Europe</button>
         <button class="opt" onclick="filterArtists('americas', this)">Americas</button>
         <button class="opt" onclick="filterArtists('asia', this)">Asia</button>
-        <button class="opt" onclick="filterArtists('sessions', this)">Sessions</button>
+        <button class="opt" onclick="filterArtists('sessions', this)">Sessions available</button>
       </div>
       <div id="artists" class="split-3" style="margin-top:12px;">
-        <article class="block small artist" data-region="europe" data-sessions="true" style="margin:0;">
-          <h3 class="label">Lena Voss · Germany</h3>
-          <p class="desc">Electroacoustic composition and live gesture practice.</p>
-          <p class="desc">Sessions: Yes</p>
-        </article>
-        <article class="block small artist" data-region="americas" data-sessions="false" style="margin:0;">
-          <h3 class="label">Rafael Montes · Colombia</h3>
-          <p class="desc">Ritual performance and scale-driven improvisation.</p>
-          <p class="desc">Sessions: No</p>
-        </article>
-        <article class="block small artist" data-region="asia" data-sessions="true" style="margin:0;">
-          <h3 class="label">Yuki Tanaka · Japan</h3>
-          <p class="desc">Minimalist solo work and spatial listening sessions.</p>
-          <p class="desc">Sessions: Yes</p>
-        </article>
+
+        <div class="artist-card artist" data-region="europe" data-sessions="true">
+          <div class="artist-header">
+            <div>
+              <h3 class="label" style="font-size:14px; margin-bottom:2px;">Lena Voss · Germany</h3>
+              <p class="desc" style="font-size:12px;">Electroacoustic composition and live gesture practice.</p>
+              <span class="session-status available">Sessions available</span>
+            </div>
+            <button class="artist-expand-btn" onclick="toggleArtist('artist-lena')">Expand</button>
+          </div>
+          <div id="artist-lena" class="artist-detail">
+            <p class="desc" style="font-size:13px;">Lena works between acoustic improvisation and electronic processing. Based in Berlin, she teaches instrument practice and runs monthly open sessions.</p>
+            <div class="artist-links">
+              <a class="artist-link-btn" href="#">Website</a>
+              <a class="artist-link-btn" href="#">Instagram</a>
+              <a class="artist-link-btn" href="#">Soundcloud</a>
+              <a class="artist-link-btn" href="#">Contact for sessions</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="artist-card artist" data-region="americas" data-sessions="false">
+          <div class="artist-header">
+            <div>
+              <h3 class="label" style="font-size:14px; margin-bottom:2px;">Rafael Montes · Colombia</h3>
+              <p class="desc" style="font-size:12px;">Ritual performance and scale-driven improvisation.</p>
+              <span class="session-status unavailable">No sessions currently</span>
+            </div>
+            <button class="artist-expand-btn" onclick="toggleArtist('artist-rafael')">Expand</button>
+          </div>
+          <div id="artist-rafael" class="artist-detail">
+            <p class="desc" style="font-size:13px;">Rafael's practice integrates tuning systems from Andean tradition with contemporary gesture. His recordings are available via Bandcamp.</p>
+            <div class="artist-links">
+              <a class="artist-link-btn" href="#">Bandcamp</a>
+              <a class="artist-link-btn" href="#">Instagram</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="artist-card artist" data-region="asia" data-sessions="true">
+          <div class="artist-header">
+            <div>
+              <h3 class="label" style="font-size:14px; margin-bottom:2px;">Yuki Tanaka · Japan</h3>
+              <p class="desc" style="font-size:12px;">Minimalist solo work and spatial listening sessions.</p>
+              <span class="session-status available">Sessions available</span>
+            </div>
+            <button class="artist-expand-btn" onclick="toggleArtist('artist-yuki')">Expand</button>
+          </div>
+          <div id="artist-yuki" class="artist-detail">
+            <p class="desc" style="font-size:13px;">Yuki focuses on sustained tones and room acoustics. Based in Kyoto, she hosts small-group listening and instrument sessions by arrangement.</p>
+            <div class="artist-links">
+              <a class="artist-link-btn" href="#">Website</a>
+              <a class="artist-link-btn" href="#">YouTube</a>
+              <a class="artist-link-btn" href="#">Contact for sessions</a>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
+    <!-- Tonefield Strip -->
     <section class="block">
       <h2 class="label">Tonefield Strip: Neotone One</h2>
       <p class="desc">Shared component block with related One-focused content links.</p>
@@ -360,21 +602,28 @@
       </div>
     </section>
 
+    <!-- FAQ -->
     <section class="block large">
       <h2 class="label">Questions.</h2>
       <button class="faq-q" onclick="toggleFaq(0)">Can I change my mind?</button>
       <div id="faq-0" class="faq-a">Yes. Cancellation and return windows are clearly available in this flow.</div>
       <button class="faq-q" onclick="toggleFaq(1)">What does the warranty cover?</button>
       <div id="faq-1" class="faq-a">Warranty coverage details are provided before payment commitment.</div>
-      <button class="faq-q" onclick="toggleFaq(2)">How does referral discount work?</button>
-      <div id="faq-2" class="faq-a">Referral code applies buyer discount and supports artist commission logic.</div>
+      <button class="faq-q" onclick="toggleFaq(2)">How does the referral discount work?</button>
+      <div id="faq-2" class="faq-a">Referral codes apply to full-price stock and built-to-order instruments only. B-stock and discounted items are excluded. Enter the code before proceeding to payment.</div>
+      <button class="faq-q" onclick="toggleFaq(3)">Can I save my configuration and come back later?</button>
+      <div id="faq-3" class="faq-a">Yes. Enter your email in the Save configuration field and we'll generate a unique URL tied to your current wood selection. No account required.</div>
+      <button class="faq-q" onclick="toggleFaq(4)">How do I know when new stock is available?</button>
+      <div id="faq-4" class="faq-a">Sign up for stock notifications on the From Stock tab. You'll receive an email when a new instrument is listed. You can unsubscribe at any time.</div>
     </section>
 
+    <!-- Receive Tonefield -->
     <section class="block small">
       <h2 class="label">Receive Tonefield</h2>
       <p class="desc">Shared email-capture component used across pages.</p>
     </section>
 
+    <!-- Footer -->
     <section class="block small">
       <h2 class="label">Bottom Menu</h2>
       <p class="desc">Shared footer navigation component used across pages.</p>
@@ -383,15 +632,17 @@
 
   <script>
     var state = {
-      model: "One Mutant",
-      modelPrice: 3150,
       wood: "Ash",
       woodExtra: 0,
       discount: 0,
       orderMode: "build",
       stockSelection: "",
+      stockPrice: 0,
+      stockIsBstock: false,
       previewImage: "../media/finish/neotone-ash-01.png"
     };
+
+    var BASE_PRICE = 3150;
 
     function switchFork(which) {
       state.orderMode = which;
@@ -400,14 +651,6 @@
       document.getElementById("panel-stock").classList.toggle("hidden", which !== "stock");
       document.getElementById("panel-build").classList.toggle("hidden", which !== "build");
       updateSelectionPreview();
-    }
-
-    function selectModel(name, price) {
-      state.model = name;
-      state.modelPrice = price;
-      document.getElementById("model-one").classList.toggle("active", name === "One");
-      document.getElementById("model-mutant").classList.toggle("active", name === "One Mutant");
-      updateSummary();
     }
 
     function selectWood(name, extra, imagePath) {
@@ -419,18 +662,29 @@
       });
       document.getElementById("wood-" + name.toLowerCase()).classList.add("active");
       updateSelectionPreview();
-      updateSummary();
+      updateBuildSummary();
     }
 
-    function selectStock(stockName, imagePath) {
+    function selectStock(stockName, imagePath, isBstock) {
       state.stockSelection = stockName;
       state.previewImage = imagePath;
-      ["stock-a", "stock-b"].forEach(function (id) {
+      state.stockIsBstock = isBstock;
+
+      // Parse price from button text
+      var prices = { "Stock #A": 3800, "Stock #B": 3980, "Stock #C (B-stock)": 3100 };
+      state.stockPrice = prices[stockName] || 0;
+
+      ["stock-a", "stock-b", "stock-c"].forEach(function (id) {
         document.getElementById(id).classList.remove("active");
       });
-      if (stockName === "Stock #A") { document.getElementById("stock-a").classList.add("active"); }
-      if (stockName === "Stock #B") { document.getElementById("stock-b").classList.add("active"); }
+      var idMap = { "Stock #A": "stock-a", "Stock #B": "stock-b", "Stock #C (B-stock)": "stock-c" };
+      if (idMap[stockName]) document.getElementById(idMap[stockName]).classList.add("active");
+
+      document.getElementById("bstock-note").style.display = isBstock ? "block" : "none";
+      document.getElementById("stock-buyer-section").classList.remove("hidden");
+
       updateSelectionPreview();
+      updateStockSummary();
     }
 
     function updateSelectionPreview() {
@@ -438,7 +692,9 @@
       var caption = document.getElementById("selection-caption");
       image.src = state.previewImage;
       if (state.orderMode === "stock") {
-        caption.textContent = state.stockSelection ? "From Stock · " + state.stockSelection : "From Stock · Select an instrument";
+        caption.textContent = state.stockSelection
+          ? "From Stock · " + state.stockSelection
+          : "From Stock · Select an instrument above";
       } else {
         caption.textContent = "Built to Order · " + state.wood + " finish";
       }
@@ -446,27 +702,60 @@
 
     function applyCode() {
       var code = document.getElementById("refcode").value.trim().toUpperCase();
-      if (code === "DANNY10" || code === "LENA" || code === "SOFIA") {
+      var valid = ["DANNY10", "LENA", "SOFIA"];
+      if (valid.indexOf(code) !== -1) {
         state.discount = 5;
         document.getElementById("refmsg").textContent = "Valid code. 5% discount applied.";
       } else if (code.length > 0) {
         state.discount = 0;
-        document.getElementById("refmsg").textContent = "Code not recognized.";
+        document.getElementById("refmsg").textContent = "Code not recognised.";
       } else {
         state.discount = 0;
         document.getElementById("refmsg").textContent = "No code applied.";
       }
-      updateSummary();
+      updateBuildSummary();
     }
 
-    function updateSummary() {
-      var base = state.modelPrice + state.woodExtra;
+    function applyStockCode() {
+      var code = document.getElementById("stock-refcode").value.trim().toUpperCase();
+      var valid = ["DANNY10", "LENA", "SOFIA"];
+      var isBstock = state.stockIsBstock;
+      if (isBstock) {
+        document.getElementById("stock-refmsg").textContent = "Referral codes do not apply to B-stock items.";
+        state.discount = 0;
+      } else if (valid.indexOf(code) !== -1) {
+        state.discount = 5;
+        document.getElementById("stock-refmsg").textContent = "Valid code. 5% discount applied.";
+      } else if (code.length > 0) {
+        state.discount = 0;
+        document.getElementById("stock-refmsg").textContent = "Code not recognised.";
+      } else {
+        state.discount = 0;
+        document.getElementById("stock-refmsg").textContent = "No code applied.";
+      }
+      updateStockSummary();
+    }
+
+    function updateBuildSummary() {
+      var base = BASE_PRICE + state.woodExtra;
       var discountValue = Math.round(base * state.discount / 100);
       var total = base - discountValue;
-      document.getElementById("sum-model").textContent = "Model: " + state.model;
+      document.getElementById("sum-model").textContent = "Instrument: One";
       document.getElementById("sum-wood").textContent = "Wood: " + state.wood;
       document.getElementById("sum-disc").textContent = "Referral discount: " + state.discount + "%";
       document.getElementById("sum-total").innerHTML = "<strong>Total: EUR " + total.toLocaleString("en-US") + "</strong>";
+    }
+
+    function updateStockSummary() {
+      if (!state.stockSelection) return;
+      var base = state.stockPrice;
+      var discountValue = state.stockIsBstock ? 0 : Math.round(base * state.discount / 100);
+      var total = base - discountValue;
+      document.getElementById("stock-sum-item").textContent = "Instrument: " + state.stockSelection;
+      document.getElementById("stock-sum-disc").textContent = state.stockIsBstock
+        ? "Referral discount: not applicable (B-stock)"
+        : "Referral discount: " + state.discount + "%";
+      document.getElementById("stock-sum-total").innerHTML = "<strong>Total: EUR " + total.toLocaleString("en-US") + "</strong>";
     }
 
     function filterArtists(filter, button) {
@@ -477,18 +766,24 @@
         card.style.display = show ? "block" : "none";
       });
       document.querySelectorAll(".opt-row .opt").forEach(function (b) {
-        if (b.textContent === "All" || b.textContent === "Europe" || b.textContent === "Americas" || b.textContent === "Asia" || b.textContent === "Sessions") {
-          b.classList.remove("active");
-        }
+        b.classList.remove("active");
       });
       button.classList.add("active");
+    }
+
+    function toggleArtist(id) {
+      var detail = document.getElementById(id);
+      var isOpen = detail.classList.contains("open");
+      detail.classList.toggle("open", !isOpen);
+      var btn = detail.parentElement.querySelector(".artist-expand-btn");
+      btn.textContent = isOpen ? "Expand" : "Collapse";
     }
 
     function toggleFaq(i) {
       document.getElementById("faq-" + i).classList.toggle("open");
     }
 
-    updateSummary();
+    updateBuildSummary();
     updateSelectionPreview();
   </script>
 </body>
