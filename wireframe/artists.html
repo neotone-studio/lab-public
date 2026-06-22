@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neotone Wireframe - Artists</title>
+  <style>
+    :root {
+      --ink: #111;
+      --line: #d9d9d9;
+      --muted: #4f4f4f;
+      --max: 1180px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #fff;
+      color: var(--ink);
+    }
+    .top {
+      border-bottom: 1px solid var(--line);
+      padding: 14px 0;
+    }
+    .top-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .wordmark img {
+      display: block;
+      height: 18px;
+      width: auto;
+    }
+    .menu {
+      display: flex;
+      gap: 24px;
+      width: 60%;
+      justify-content: space-between;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      letter-spacing: 0.02em;
+      font-size: 11px;
+    }
+    .menu a { color: #333; text-decoration: none; }
+    .menu a:hover, .menu a.active { color: #000; }
+    .page {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      min-height: calc(100vh - 120px);
+    }
+    .block {
+      border: 1px solid var(--line);
+      padding: 16px;
+      margin-bottom: 14px;
+      background: #fff;
+    }
+    .label {
+      margin: 0 0 8px;
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .desc {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.45;
+      max-width: 78ch;
+    }
+    .placeholder {
+      flex: 1;
+      border: 1px solid var(--line);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 480px;
+      color: var(--muted);
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .footer-block { min-height: 72px; }
+    @media (max-width: 900px) {
+      .menu { width: auto; gap: 18px; font-size: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="top">
+    <div class="top-inner">
+      <a class="wordmark" href="index.html">
+        <img src="../media/wordmark-clean.png" alt="Neotone" />
+      </a>
+      <ul class="menu">
+        <li><a href="one.html">One</a></li>
+        <li><a href="treangle.html">Treangle</a></li>
+        <li><a href="neos.html">NeOS</a></li>
+        <li><a href="artists.html" class="active">Artists</a></li>
+        <li><a href="tonefield.html">Tonefield</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="placeholder">Artists</div>
+    <footer class="block footer-block">
+      <h2 class="label">Bottom Menu</h2>
+      <p class="desc">Full site navigation and utility links. Mirrors top nav destinations with room for additional detail: terms, privacy policy, contact, workshop address.</p>
+    </footer>
+  </main>
+
+</body>
+</html>
