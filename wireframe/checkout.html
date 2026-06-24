@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neotone — Checkout</title>
+  <style>
+    :root { --ink: #111; --line: #d9d9d9; --muted: #4f4f4f; --green: #2a7a2a; --max: 1180px; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Arial, Helvetica, sans-serif; background: #fff; color: var(--ink); }
+    a { color: inherit; text-decoration: none; }
+    .sans { font-family: Arial, Helvetica, sans-serif; }
+
+    /* ---- Top Nav ---- */
+    .top-nav { border-bottom: 1px solid var(--line); padding: 14px 0; }
+    .top-nav-inner {
+      max-width: var(--max); margin: 0 auto; padding: 0 24px;
+      display: flex; align-items: center; gap: 20px;
+    }
+    .wordmark img { display: block; height: 18px; width: auto; }
+    .nav-links {
+      display: grid; grid-template-columns: repeat(6, 1fr); width: 60%;
+      list-style: none; margin: 0 0 0 auto; padding: 0;
+      font-size: 11px; letter-spacing: 0.02em;
+    }
+    .nav-links li { display: flex; align-items: center; justify-content: center; }
+    .nav-links a { color: #333; }
+    .nav-links a:hover { color: #000; }
+    .nav-links .sel-item { border-left: 1px solid var(--line); }
+
+    /* ---- Page ---- */
+    .page { max-width: var(--max); margin: 0 auto; padding: 24px; display: flex; flex-direction: column; min-height: calc(100vh - 60px); }
+    .block { border: 1px solid var(--line); padding: 16px; margin-bottom: 14px; background: #fff; }
+    .block-label { margin: 0 0 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+    .block-desc { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.5; }
+    .field {
+      width: 100%; border: 1px solid var(--line); padding: 8px; margin-top: 8px;
+      font-size: 13px; font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /* ---- Checkout grid ---- */
+    .checkout-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
+
+    /* ---- Destination country ---- */
+    .checkout-country-select {
+      width: 100%; border: 1px solid var(--line); padding: 8px; margin-top: 8px;
+      font-size: 13px; font-family: Arial, Helvetica, sans-serif; background: #fff; cursor: pointer;
+    }
+
+    /* ---- Order summary ---- */
+    .checkout-item {
+      border: 1px solid var(--line); padding: 12px; margin-bottom: 8px;
+      display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;
+    }
+    .checkout-item-info { flex: 1; }
+    .checkout-item-name { margin: 0 0 3px; font-size: 13px; font-weight: 400; font-family: Georgia, serif; }
+    .checkout-item-detail { margin: 0 0 6px; font-size: 11px; color: var(--muted); }
+    .checkout-item-line { margin: 0 0 2px; font-size: 11px; color: var(--muted); }
+    .checkout-item-price { margin: 4px 0 0; font-size: 12px; }
+    .checkout-total {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 12px; margin-top: 4px; border-top: 1px solid var(--line); font-size: 12px;
+    }
+    .checkout-empty { color: var(--muted); font-size: 13px; margin: 0 0 12px; }
+    .back-link { font-size: 12px; color: var(--muted); font-style: italic; }
+    .back-link:hover { text-decoration: underline; color: var(--ink); }
+
+    /* ---- Payment CTA ---- */
+    .cta-btn {
+      display: block; width: 100%; padding: 12px; background: var(--ink); color: #fff;
+      border: none; font-size: 13px; font-family: Arial, Helvetica, sans-serif;
+      font-weight: 600; letter-spacing: 0.04em; cursor: pointer; margin-top: 14px;
+    }
+    .cta-btn:disabled { background: var(--line); color: var(--muted); cursor: default; }
+
+    /* ---- Footer ---- */
+    footer.block { margin-top: auto; }
+    .bottom-menu-label { margin: 0 0 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+    .bottom-menu-desc { margin: 0; font-size: 11px; color: var(--muted); }
+
+    /* ---- Selection Panel ---- */
+    .sel-count { color: var(--muted); }
+    .sel-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.12); z-index: 100; display: none; }
+    .sel-overlay.open { display: block; }
+    .sel-panel { position: fixed; top: 0; right: 0; height: 100vh; width: 360px; background: #fff; border-left: 1px solid var(--line); z-index: 101; transform: translateX(100%); transition: transform 0.18s ease; display: flex; flex-direction: column; }
+    .sel-panel.open { transform: translateX(0); }
+    .sel-header { padding: 16px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
+    .sel-heading { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; font-family: Arial, Helvetica, sans-serif; margin: 0; }
+    .sel-close { background: none; border: none; cursor: pointer; font-size: 11px; color: var(--muted); font-family: Arial, Helvetica, sans-serif; padding: 0; }
+    .sel-close:hover { color: var(--ink); }
+    .sel-body { flex: 1; overflow-y: auto; padding: 16px; }
+    .sel-empty { color: var(--muted); font-size: 13px; font-family: Arial, Helvetica, sans-serif; margin: 0; }
+    .sel-body .sel-item { border: 1px solid var(--line); padding: 12px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+    .sel-item-info { flex: 1; }
+    .sel-item-name { margin: 0 0 3px; font-size: 13px; font-weight: 400; font-family: Georgia, serif; }
+    .sel-item-detail { margin: 0 0 5px; font-size: 11px; color: var(--muted); font-family: Arial, Helvetica, sans-serif; }
+    .sel-item-price { margin: 0; font-size: 12px; font-family: Arial, Helvetica, sans-serif; }
+    .sel-remove { background: none; border: none; cursor: pointer; padding: 0; font-size: 11px; color: var(--muted); font-family: Arial, Helvetica, sans-serif; white-space: nowrap; }
+    .sel-remove:hover { text-decoration: underline; color: var(--ink); }
+    .sel-footer { padding: 16px; border-top: 1px solid var(--line); }
+    .sel-cta { display: block; width: 100%; padding: 10px; background: var(--line); color: var(--muted); border: none; font-size: 12px; font-family: Arial, Helvetica, sans-serif; font-weight: 600; letter-spacing: 0.04em; cursor: default; }
+    .sel-total { display: flex; justify-content: space-between; align-items: center; padding-bottom: 12px; margin-bottom: 12px; border-bottom: 1px solid var(--line); font-size: 12px; font-family: Arial, Helvetica, sans-serif; }
+
+    @media (max-width: 900px) {
+      .checkout-grid { grid-template-columns: 1fr; }
+      .nav-links { font-size: 10px; }
+      .sel-panel { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="top-nav sans">
+  <div class="top-nav-inner">
+    <a class="wordmark" href="index.html"><img src="../media/wordmark-clean.png" alt="Neotone" /></a>
+    <ul class="nav-links">
+      <li><a href="one.html">One</a></li>
+      <li><a href="treangle.html">Treangle</a></li>
+      <li><a href="neos.html">NeOS</a></li>
+      <li><a href="artists.html">Artists</a></li>
+      <li><a href="tonefield.html">Tonefield</a></li>
+      <li class="sel-item"><a href="#" onclick="openSelectionPanel(); return false;">Selection<span class="sel-count" id="sel-count"></span></a></li>
+    </ul>
+  </div>
+</header>
+
+<main class="page">
+
+  <div class="checkout-grid">
+
+    <!-- Left: Order Summary -->
+    <div>
+      <div class="block">
+        <p class="block-label">Your Selection</p>
+        <div id="checkout-items" style="margin-top: 10px;"></div>
+        <div class="checkout-total" id="checkout-total" style="display: none;">
+          <span>Total</span><span id="checkout-total-amount"></span>
+        </div>
+        <p id="checkout-empty" class="checkout-empty" style="display: none; margin-top: 10px;">
+          Your selection is empty. <a class="back-link" href="one.html">Browse instruments &rarr;</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- Right: Destination Country + Delivery + Payment -->
+    <div>
+      <div class="block">
+        <p class="block-label">Destination Country</p>
+        <select class="checkout-country-select" id="checkout-country" onchange="changeCheckoutCountry(this.value)">
+          <option value="HU">Hungary</option>
+          <option value="DE">Germany</option>
+          <option value="FR">France</option>
+          <option value="US">United States</option>
+        </select>
+        <p class="block-desc" style="margin-top: 8px; font-size: 11px;">VAT is calculated based on destination country, regardless of billing country.</p>
+      </div>
+
+      <div class="block" style="margin-top: 0;">
+        <p class="block-label">Delivery Details</p>
+        <input class="field" placeholder="First and last name" />
+        <input class="field" placeholder="Email address" />
+        <input class="field" placeholder="Street address" />
+        <input class="field" placeholder="City" />
+        <input class="field" placeholder="Postal code" />
+      </div>
+
+      <div class="block" style="margin-top: 0;">
+        <p class="block-label">Payment</p>
+        <p class="block-desc" style="margin-top: 4px;">You will be redirected to our payment processor to complete your purchase securely.</p>
+        <button class="cta-btn" id="checkout-cta" onclick="handleCheckout()">Complete purchase</button>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="block">
+    <p class="bottom-menu-label">Bottom Menu</p>
+    <p class="bottom-menu-desc">One, Treangle, NeOS, Artists, Tonefield / Terms, Privacy Policy, Contact, Workshop Address</p>
+  </footer>
+
+</main>
+
+<!-- Selection Panel (review only — you're already at checkout) -->
+<div class="sel-overlay" id="sel-overlay" onclick="closeSelectionPanel()"></div>
+<div class="sel-panel" id="sel-panel">
+  <div class="sel-header">
+    <p class="sel-heading">Selection</p>
+    <button class="sel-close" onclick="closeSelectionPanel()">Close</button>
+  </div>
+  <div class="sel-body" id="sel-body">
+    <p class="sel-empty">Your selection is empty.</p>
+  </div>
+  <div class="sel-footer">
+    <div class="sel-total" id="sel-total" style="display: none;">
+      <span>Total</span><span id="sel-total-amount"></span>
+    </div>
+    <button class="sel-cta" disabled>You are at checkout</button>
+  </div>
+</div>
+
+<script>
+  var VAT_RATES = { HU: 0.27, DE: 0.19, FR: 0.20, US: null };
+  var VAT_NAMES = { HU: "Hungary", DE: "Germany", FR: "France", US: "United States" };
+
+  function getSelItems() {
+    try { return JSON.parse(localStorage.getItem('neotone_sel') || '[]'); } catch(e) { return []; }
+  }
+  function saveSelItems(items) {
+    try { localStorage.setItem('neotone_sel', JSON.stringify(items)); } catch(e) {}
+  }
+
+  // Detect initial country from first item that has one, fallback to HU
+  var checkoutCountry = (function() {
+    var items = getSelItems();
+    for (var i = 0; i < items.length; i++) { if (items[i].vatCountry) return items[i].vatCountry; }
+    return 'HU';
+  })();
+
+  function calcItemTotal(item, country) {
+    if (!item.rawBase) {
+      var n = parseFloat((item.price || '').replace('EUR ', '').replace(/,/g, ''));
+      return { discountPct: 0, vatText: '—', total: isNaN(n) ? 0 : n, totalStr: item.price || '—' };
+    }
+    var disc = item.discountPct || 0;
+    var subtotal = Math.round(item.rawBase * (1 - disc / 100));
+    var rate = VAT_RATES[country];
+    if (rate === null) {
+      return { discountPct: disc, vatText: 'No VAT (import duties may apply)', total: subtotal, totalStr: 'EUR ' + subtotal.toLocaleString('en-US') };
+    }
+    var vatAmount = Math.round(subtotal * rate);
+    var total = subtotal + vatAmount;
+    return {
+      discountPct: disc,
+      vatText: Math.round(rate * 100) + '% (' + VAT_NAMES[country] + '): EUR ' + vatAmount.toLocaleString('en-US'),
+      total: total,
+      totalStr: 'EUR ' + total.toLocaleString('en-US')
+    };
+  }
+
+  function changeCheckoutCountry(val) {
+    checkoutCountry = val;
+    renderCheckout();
+  }
+
+  function removeFromSelection(id) {
+    var items = getSelItems().filter(function(i) { return i.id !== id; });
+    saveSelItems(items);
+    renderSelection();
+    renderCheckout();
+  }
+
+  function renderCheckout() {
+    var items = getSelItems();
+    var container = document.getElementById('checkout-items');
+    var totalDiv = document.getElementById('checkout-total');
+    var totalAmt = document.getElementById('checkout-total-amount');
+    var emptyEl = document.getElementById('checkout-empty');
+    var cta = document.getElementById('checkout-cta');
+    if (items.length === 0) {
+      container.innerHTML = '';
+      if (totalDiv) totalDiv.style.display = 'none';
+      if (emptyEl) emptyEl.style.display = 'block';
+      if (cta) cta.disabled = true;
+    } else {
+      container.innerHTML = items.map(function(item) {
+        var calc = calcItemTotal(item, checkoutCountry);
+        return '<div class="checkout-item">' +
+          '<div class="checkout-item-info">' +
+            '<p class="checkout-item-name">' + item.name + '</p>' +
+            '<p class="checkout-item-detail">' + item.detail + '</p>' +
+            '<p class="checkout-item-line">Discount: ' + calc.discountPct + '%</p>' +
+            '<p class="checkout-item-line">VAT: ' + calc.vatText + '</p>' +
+            '<p class="checkout-item-price">' + calc.totalStr + '</p>' +
+          '</div>' +
+          '<button class="sel-remove" onclick="removeFromSelection(' + item.id + ')">Remove</button>' +
+        '</div>';
+      }).join('');
+      if (emptyEl) emptyEl.style.display = 'none';
+      var grandTotal = 0;
+      items.forEach(function(item) { grandTotal += calcItemTotal(item, checkoutCountry).total; });
+      if (totalDiv && totalAmt) {
+        totalAmt.textContent = 'EUR ' + grandTotal.toLocaleString('en-US');
+        totalDiv.style.display = 'flex';
+      }
+      if (cta) cta.disabled = false;
+    }
+  }
+
+  function renderSelection() {
+    var items = getSelItems();
+    var body = document.getElementById('sel-body');
+    var count = document.getElementById('sel-count');
+    var totalDiv = document.getElementById('sel-total');
+    var totalAmt = document.getElementById('sel-total-amount');
+    if (items.length === 0) {
+      if (body) body.innerHTML = '<p class="sel-empty">Your selection is empty.</p>';
+      if (count) { count.textContent = ''; count.style.display = 'none'; }
+      if (totalDiv) totalDiv.style.display = 'none';
+    } else {
+      if (body) body.innerHTML = items.map(function(item) {
+        return '<div class="sel-item"><div class="sel-item-info"><p class="sel-item-name">' + item.name + '</p><p class="sel-item-detail">' + item.detail + '</p><p class="sel-item-price">' + item.price + '</p></div><button class="sel-remove" onclick="removeFromSelection(' + item.id + ')">Remove</button></div>';
+      }).join('');
+      if (count) { count.textContent = ' (' + items.length + ')'; count.style.display = 'inline'; }
+      if (totalDiv && totalAmt) {
+        var grandTotal = 0;
+        items.forEach(function(item) { grandTotal += calcItemTotal(item, checkoutCountry).total; });
+        totalAmt.textContent = 'EUR ' + grandTotal.toLocaleString('en-US');
+        totalDiv.style.display = 'flex';
+      }
+    }
+  }
+
+  function openSelectionPanel() {
+    renderSelection();
+    document.getElementById('sel-overlay').classList.add('open');
+    document.getElementById('sel-panel').classList.add('open');
+  }
+  function closeSelectionPanel() {
+    document.getElementById('sel-overlay').classList.remove('open');
+    document.getElementById('sel-panel').classList.remove('open');
+  }
+  function handleCheckout() {
+    alert(
+      "Function: Payment processor handoff\n\n" +
+      "Submitting this form passes the buyer's delivery details and all selection line items to the payment processor. " +
+      "The buyer completes payment on the processor's hosted page and is returned to a confirmation page on completion."
+    );
+  }
+
+  // Set country dropdown to match detected country
+  document.getElementById('checkout-country').value = checkoutCountry;
+  renderSelection();
+  renderCheckout();
+</script>
+
+</body>
+</html>

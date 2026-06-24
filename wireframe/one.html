@@ -46,7 +46,7 @@
     .hero-subtitle { margin: 0; font-size: 15px; font-style: italic; font-weight: 400; color: var(--muted); }
 
     /* ---- Page ---- */
-    .page { max-width: var(--max); margin: 0 auto; padding: 0 24px 24px; }
+    .page { max-width: var(--max); margin: 0 auto; padding: 0 24px 24px; display: flex; flex-direction: column; min-height: calc(100vh - 60px); }
     .block { border: 1px solid var(--line); padding: 16px; margin-bottom: 14px; }
     .block-label {
       margin: 0 0 6px; font-size: 11px; font-weight: 700;
@@ -143,6 +143,24 @@
 
     /* Buyer / referral */
     .buyer-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 14px; margin-bottom: 14px; }
+
+    /* Summary two-column layout */
+    .summary-layout { display: grid; grid-template-columns: 1fr auto; grid-template-areas: "pre controls" "post controls"; gap: 0 24px; margin-top: 8px; align-items: start; }
+    .sum-pre { grid-area: pre; }
+    .sum-controls { grid-area: controls; border-left: 1px solid var(--line); padding-left: 16px; }
+    .sum-post { grid-area: post; }
+    .ctrl-row { display: flex; flex-direction: column; gap: 3px; margin-bottom: 10px; }
+    .ctrl-row:last-child { margin-bottom: 0; }
+    .ctrl-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); font-family: Arial, Helvetica, sans-serif; }
+    .ctrl-row select { width: 168px; border: 1px solid var(--line); padding: 5px 8px; font-size: 12px; font-family: Arial, Helvetica, sans-serif; background: #fff; cursor: pointer; }
+    .ctrl-input-row { display: flex; gap: 4px; width: 168px; }
+    .ctrl-input-row input { flex: 1; min-width: 0; border: 1px solid var(--line); padding: 5px 8px; font-size: 12px; font-family: Arial, Helvetica, sans-serif; }
+
+    /* Save selection */
+    .sel-save-row { display: flex; gap: 6px; margin-bottom: 10px; }
+    .sel-save-row input[type="email"] { flex: 1; border: 1px solid var(--line); padding: 6px 8px; font-size: 11px; font-family: Arial, Helvetica, sans-serif; }
+    .sel-save-btn { border: 1px solid var(--line); background: #fff; padding: 6px 10px; font-size: 11px; font-family: Arial, Helvetica, sans-serif; cursor: pointer; white-space: nowrap; }
+    .sel-save-label { font-size: 10px; color: var(--muted); font-family: Arial, Helvetica, sans-serif; margin: 0 0 5px; }
 
     /* Form */
     .opt {
@@ -347,6 +365,8 @@
       font-size: 12px; font-family: Arial, Helvetica, sans-serif;
     }
 
+    footer.block { margin-top: auto; }
+
     @media (max-width: 980px) {
       .specs-strip, .steps-strip, .split-2, .three-col, .artists-grid, .material-grid { grid-template-columns: 1fr; }
       .stock-grid { grid-template-columns: 1fr 1fr; }
@@ -356,6 +376,8 @@
       .nav-links { font-size: 10px; }
       .hero-title { font-size: 36px; }
       .sel-panel { width: 100%; }
+      .summary-layout { grid-template-columns: 1fr; grid-template-areas: "pre" "controls" "post"; }
+      .sum-controls { border-left: none; padding-left: 0; border-top: 1px solid var(--line); padding-top: 10px; margin-top: 6px; }
     }
   </style>
 </head>
@@ -477,41 +499,40 @@
           </div>
         </div>
 
-        <div class="buyer-grid">
-          <article class="block" style="margin:0;">
-            <p class="block-label">Buyer Details</p>
-            <input class="field" placeholder="First and last name" />
-            <input class="field" placeholder="Email" />
-            <input class="field" placeholder="Country" />
-          </article>
-          <article class="block" style="margin:0;">
-            <p class="block-label">Artist Referral</p>
-            <p class="block-desc" style="margin-top:4px;">Referral code from an artist in the network.</p>
-            <input id="refcode" class="field" placeholder="Referral code (optional)" />
-            <button class="opt" style="margin-top:8px;" onclick="applyCode()">Apply code</button>
-            <p id="refmsg" class="block-desc" style="margin-top:8px;">No code applied.</p>
-          </article>
-        </div>
-
         <div class="summary-block sans">
-          <p class="block-label">Order Summary</p>
-          <p class="block-desc" id="sum-model" style="margin-top:6px;">Instrument: One</p>
-          <p class="block-desc" id="sum-wood">Wood: Mahogany</p>
-          <p class="block-desc" id="sum-disc">Referral discount: 0%</p>
-          <p class="summary-total" id="sum-total"><strong>Total: EUR 3,240</strong></p>
-          <button class="opt" style="margin-top:12px;" onclick="addBuildToSelection()">Add to Selection</button>
+          <p class="block-label">Your Neotone One</p>
+          <div class="summary-layout">
+            <div class="sum-pre">
+              <p class="block-desc" id="sum-wood" style="margin-top:4px;">Wood: Mahogany</p>
+              <p class="block-desc" id="sum-base" style="margin-top:4px;">Base price: EUR 3,240</p>
+              <p class="block-desc" id="sum-disc" style="margin-top:4px;">Referral discount: 0%</p>
+            </div>
+            <div class="sum-controls">
+              <div class="ctrl-row">
+                <label class="ctrl-label" for="vat-country-build">Destination Country</label>
+                <select id="vat-country-build" onchange="changeVATCountry(this.value)">
+                  <option value="HU">Hungary</option>
+                  <option value="DE">Germany</option>
+                  <option value="FR">France</option>
+                  <option value="US">United States</option>
+                </select>
+              </div>
+              <div class="ctrl-row">
+                <label class="ctrl-label" for="refcode">Artist Referral Code</label>
+                <div class="ctrl-input-row">
+                  <input id="refcode" placeholder="Optional" />
+                  <button class="opt" onclick="applyCode()">Apply</button>
+                </div>
+                <p id="refmsg" class="block-desc" style="font-size:11px; margin-top:3px;">No code applied.</p>
+              </div>
+            </div>
+            <div class="sum-post">
+              <p class="block-desc" id="sum-vat" style="margin-top:4px;">27% VAT (Hungary): EUR 875</p>
+              <p class="summary-total" id="sum-total" style="margin-top:4px;"><strong>Total: EUR 4,115</strong></p>
+            </div>
+          </div>
+          <button class="opt" style="margin-top:14px;" onclick="addBuildToSelection()">Add to Selection</button>
           <span class="summary-bookend-note">End of purchase flow. Sections below are supplementary.</span>
-        </div>
-
-        <div class="save-config-block sans">
-          <p class="block-label">Save this configuration</p>
-          <p class="block-desc" style="margin-top:4px;">Enter your email and we'll generate a unique link to your current configuration.</p>
-          <form class="email-row" onsubmit="handleSaveConfig(event)">
-            <input type="email" placeholder="Email address" required />
-            <button class="subscribe-btn" type="submit">Save configuration</button>
-            <span class="subscribe-confirm">Configuration saved</span>
-          </form>
-          <p id="config-saved-link" class="block-desc" style="display:none; margin-top:6px; font-size:11px; font-style:italic;">Saved link: neotone.com/configure/abc123</p>
         </div>
 
         <div class="talk-block sans">
@@ -569,28 +590,39 @@
           <button class="wf-toggle" onclick="toggleStockEmpty()">Preview: show stock instruments &uarr;</button>
         </div>
 
-        <div class="buyer-grid" style="margin-top: 8px;">
-          <article class="block" style="margin:0;">
-            <p class="block-label">Buyer Details</p>
-            <input class="field" placeholder="First and last name" />
-            <input class="field" placeholder="Email" />
-            <input class="field" placeholder="Country" />
-          </article>
-          <article class="block" style="margin:0;">
-            <p class="block-label">Artist Referral</p>
-            <p class="block-desc" style="margin-top:4px;">Not applicable to B-stock instruments.</p>
-            <input id="stock-refcode" class="field" placeholder="Referral code (optional)" />
-            <button class="opt" style="margin-top:8px;" onclick="applyStockCode()">Apply code</button>
-            <p id="stock-refmsg" class="block-desc" style="margin-top:8px;">No code applied.</p>
-          </article>
-        </div>
-
         <div class="summary-block sans">
-          <p class="block-label">Order Summary</p>
-          <p class="block-desc" id="stock-sum-item" style="margin-top:6px;">Instrument: select one above</p>
-          <p class="block-desc" id="stock-sum-disc">Referral discount: 0%</p>
-          <p class="summary-total" id="stock-sum-total"><strong>Total: --</strong></p>
-          <button class="opt" style="margin-top:12px;" onclick="addStockToSelection()">Add to Selection</button>
+          <p class="block-label">Your Neotone One</p>
+          <div class="summary-layout">
+            <div class="sum-pre">
+              <p class="block-desc" id="stock-sum-item" style="margin-top:4px;">Select an instrument above</p>
+              <p class="block-desc" id="stock-sum-base" style="margin-top:4px;">Base price: —</p>
+              <p class="block-desc" id="stock-sum-disc" style="margin-top:4px;">Referral discount: 0%</p>
+            </div>
+            <div class="sum-controls">
+              <div class="ctrl-row">
+                <label class="ctrl-label" for="vat-country-stock">Destination Country</label>
+                <select id="vat-country-stock" onchange="changeVATCountry(this.value)">
+                  <option value="HU">Hungary</option>
+                  <option value="DE">Germany</option>
+                  <option value="FR">France</option>
+                  <option value="US">United States</option>
+                </select>
+              </div>
+              <div class="ctrl-row">
+                <label class="ctrl-label" for="stock-refcode">Artist Referral Code</label>
+                <div class="ctrl-input-row">
+                  <input id="stock-refcode" placeholder="Optional" />
+                  <button class="opt" onclick="applyStockCode()">Apply</button>
+                </div>
+                <p id="stock-refmsg" class="block-desc" style="font-size:11px; margin-top:3px;">No code applied.</p>
+              </div>
+            </div>
+            <div class="sum-post">
+              <p class="block-desc" id="stock-sum-vat" style="margin-top:4px;"></p>
+              <p class="summary-total" id="stock-sum-total" style="margin-top:4px;"><strong>Total: —</strong></p>
+            </div>
+          </div>
+          <button class="opt" style="margin-top:14px;" onclick="addStockToSelection()">Add to Selection</button>
           <span class="summary-bookend-note">End of purchase flow. Sections below are supplementary.</span>
         </div>
 
@@ -894,6 +926,29 @@
   };
   var BASE_PRICE = 3150;
   var stockEmptyVisible = false;
+  var VAT_RATES = { HU: 0.27, DE: 0.19, FR: 0.20, US: null };
+  var VAT_NAMES = { HU: "Hungary", DE: "Germany", FR: "France", US: "United States" };
+  var vatCountry = "HU";
+
+  function changeVATCountry(val) {
+    vatCountry = val;
+    var d1 = document.getElementById("vat-country-build");
+    var d2 = document.getElementById("vat-country-stock");
+    if (d1) d1.value = val;
+    if (d2) d2.value = val;
+    updateBuildSummary();
+    updateStockSummary();
+  }
+
+  function vatLine(subtotal) {
+    var rate = VAT_RATES[vatCountry];
+    if (rate === null) return { text: "No VAT (import duties may apply)", total: subtotal };
+    var amount = Math.round(subtotal * rate);
+    return {
+      text: Math.round(rate * 100) + "% VAT (" + VAT_NAMES[vatCountry] + "): EUR " + amount.toLocaleString("en-US"),
+      total: subtotal + amount
+    };
+  }
 
   function switchFork(which) {
     state.orderMode = which;
@@ -956,21 +1011,27 @@
   }
 
   function updateBuildSummary() {
-    var base = BASE_PRICE + state.woodExtra;
-    var total = base - Math.round(base * state.discount / 100);
-    document.getElementById("sum-model").textContent = "Instrument: One";
+    var rawBase = BASE_PRICE + state.woodExtra;
+    var subtotal = rawBase - Math.round(rawBase * state.discount / 100);
+    var vat = vatLine(subtotal);
     document.getElementById("sum-wood").textContent = "Wood: " + state.wood;
+    document.getElementById("sum-base").textContent = "Base price: EUR " + rawBase.toLocaleString("en-US");
     document.getElementById("sum-disc").textContent = "Referral discount: " + state.discount + "%";
-    document.getElementById("sum-total").innerHTML = "<strong>Total: EUR " + total.toLocaleString("en-US") + "</strong>";
+    document.getElementById("sum-vat").textContent = vat.text;
+    document.getElementById("sum-total").innerHTML = "<strong>Total: EUR " + vat.total.toLocaleString("en-US") + "</strong>";
   }
 
   function updateStockSummary() {
     if (!state.stockSelection) return;
-    var total = state.stockIsBstock ? state.stockPrice : state.stockPrice - Math.round(state.stockPrice * state.discount / 100);
+    var rawBase = state.stockPrice;
+    var subtotal = state.stockIsBstock ? rawBase : rawBase - Math.round(rawBase * state.discount / 100);
+    var vat = vatLine(subtotal);
     document.getElementById("stock-sum-item").textContent = "Instrument: " + state.stockSelection;
+    document.getElementById("stock-sum-base").textContent = "Base price: EUR " + rawBase.toLocaleString("en-US");
     document.getElementById("stock-sum-disc").textContent = state.stockIsBstock
       ? "Referral discount: not applicable (B-stock)" : "Referral discount: " + state.discount + "%";
-    document.getElementById("stock-sum-total").innerHTML = "<strong>Total: EUR " + total.toLocaleString("en-US") + "</strong>";
+    document.getElementById("stock-sum-vat").textContent = vat.text;
+    document.getElementById("stock-sum-total").innerHTML = "<strong>Total: EUR " + vat.total.toLocaleString("en-US") + "</strong>";
   }
 
   function toggleStockEmpty() {
@@ -1012,16 +1073,15 @@
 
   function toggleFaq(i) { document.getElementById("faq-"+i).classList.toggle("open"); }
 
-  function handleSaveConfig(e) {
+  function handleSaveSelection(e) {
     e.preventDefault();
     alert(
-      "Function: Configuration saved\n\n" +
-      "Submitting this form generates a unique URL tied to the current wood selection and sends it to the provided email address. The email address is added to the general mailing list."
+      "Function: Selection saved\n\n" +
+      "Submitting this form generates a unique URL representing the current selection (all items, quantities, and configurations) and emails it to the address provided. No account is created."
     );
     var form = e.target;
-    form.querySelector(".subscribe-btn").style.display = "none";
-    form.querySelector(".subscribe-confirm").style.display = "inline";
-    document.getElementById('config-saved-link').style.display = 'block';
+    form.querySelector('.sel-save-btn').style.display = 'none';
+    form.querySelector('.subscribe-confirm').style.display = 'inline';
   }
 
   function handleNotify(e) {
@@ -1043,9 +1103,11 @@
   function saveSelItems(items) {
     try { localStorage.setItem('neotone_sel', JSON.stringify(items)); } catch(e) {}
   }
-  function addToSelection(name, detail, price) {
+  function addToSelection(name, detail, price, extras) {
     var items = getSelItems();
-    items.push({ id: Date.now(), name: name, detail: detail, price: price });
+    var item = { id: Date.now(), name: name, detail: detail, price: price };
+    if (extras) { item.rawBase = extras.rawBase; item.discountPct = extras.discountPct; item.vatCountry = extras.vatCountry; }
+    items.push(item);
     saveSelItems(items);
     renderSelection();
     openSelectionPanel();
@@ -1062,11 +1124,13 @@
     var cta = document.getElementById('sel-cta');
     var totalDiv = document.getElementById('sel-total');
     var totalAmt = document.getElementById('sel-total-amount');
+    var saveSection = document.getElementById('sel-save-section');
     if (items.length === 0) {
       if (body) body.innerHTML = '<p class="sel-empty">Your selection is empty.</p>';
       count.textContent = ''; count.style.display = 'none';
       if (cta) cta.disabled = true;
       if (totalDiv) totalDiv.style.display = 'none';
+      if (saveSection) saveSection.style.display = 'none';
     } else {
       if (body) body.innerHTML = items.map(function(item) {
         return '<div class="sel-item">' +
@@ -1081,6 +1145,7 @@
       count.textContent = ' (' + items.length + ')';
       count.style.display = 'inline';
       if (cta) cta.disabled = false;
+      if (saveSection) saveSection.style.display = 'block';
       if (totalDiv && totalAmt) {
         var sum = 0; var hasEnquiry = false;
         items.forEach(function(item) {
@@ -1104,8 +1169,11 @@
   renderSelection();
 
   function addBuildToSelection() {
-    var total = Math.round((BASE_PRICE + state.woodExtra) * (1 - state.discount / 100));
-    addToSelection('Neotone One', 'Built to Order · ' + state.wood, 'EUR ' + total.toLocaleString());
+    var rawBase = BASE_PRICE + state.woodExtra;
+    var subtotal = Math.round(rawBase * (1 - state.discount / 100));
+    var vat = vatLine(subtotal);
+    addToSelection('Neotone One', 'Built to Order · ' + state.wood, 'EUR ' + vat.total.toLocaleString("en-US"),
+      { rawBase: rawBase, discountPct: state.discount, vatCountry: vatCountry });
   }
 
   function addStockToSelection() {
@@ -1113,10 +1181,11 @@
       alert('No instrument selected. Please choose an instrument from the list above.');
       return;
     }
-    var total = state.stockIsBstock
-      ? state.stockPrice
-      : Math.round(state.stockPrice * (1 - state.discount / 100));
-    addToSelection('Neotone One', 'From Stock · ' + state.stockSelection, 'EUR ' + total.toLocaleString());
+    var rawBase = state.stockPrice;
+    var subtotal = state.stockIsBstock ? rawBase : Math.round(rawBase * (1 - state.discount / 100));
+    var vat = vatLine(subtotal);
+    addToSelection('Neotone One', 'From Stock · ' + state.stockSelection, 'EUR ' + vat.total.toLocaleString("en-US"),
+      { rawBase: rawBase, discountPct: state.stockIsBstock ? 0 : state.discount, vatCountry: vatCountry });
   }
 
   function handleSubscribe(e) {
@@ -1150,8 +1219,16 @@
     <div class="sel-total" id="sel-total" style="display: none;">
       <span>Total</span><span id="sel-total-amount"></span>
     </div>
+    <div id="sel-save-section" style="display: none; margin-bottom: 10px;">
+      <p class="sel-save-label">Save this selection</p>
+      <form class="sel-save-row" onsubmit="handleSaveSelection(event)">
+        <input type="email" placeholder="Your email address" required />
+        <button class="sel-save-btn" type="submit">Save</button>
+        <span class="subscribe-confirm" style="display:none; font-size:11px;">Saved!</span>
+      </form>
+    </div>
     <button class="sel-cta" id="sel-cta" disabled
-      onclick="alert('Function: Payment flow\n\nAll items in the selection are passed as line items to the payment processor. The buyer completes payment for each item in a single checkout.')">Proceed to Payment</button>
+      onclick="window.location.href='checkout.html'">Proceed to Payment</button>
   </div>
 </div>
 

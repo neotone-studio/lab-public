@@ -12,7 +12,8 @@ Component reference for the Neotone site. Covers shared behavior, JS state, and 
 | Bottom Menu | all |
 | Feature Block | home ×3 |
 | Tonefield Stack | home ×3, One |
-| Email Capture | home (Receive Tonefield); One (Receive Tonefield, Stock Notification, Save Configuration) |
+| Email Capture | home (Receive Tonefield); One (Receive Tonefield, Stock Notification) |
+| Save Selection | all (in selection panel footer, visible when items present) |
 | Hero Block | One |
 | Specs Strip | One |
 | Editorial Block | One |
@@ -23,6 +24,7 @@ Component reference for the Neotone site. Covers shared behavior, JS state, and 
 | Play One | One |
 | Artists Grid | One (preview 6/9); Artists page (full, future) |
 | Questions | One |
+| Checkout | checkout.html |
 
 ---
 
@@ -32,7 +34,7 @@ Site-wide shared component. Duplicated per page in the wireframe; treat as a sin
 
 Active state: `.active` on the current page's nav `<a>`.
 
-All six items (One, Treangle, NeOS, Artists, Tonefield, Selection) are in a single `<ul>` with `justify-content: space-between; flex: 1`, filling the space after the wordmark. Selection is the sixth `<li class="sel-item">`, visually separated from Tonefield by a `border-left`.
+All six items (One, Treangle, NeOS, Artists, Tonefield, Selection) are in a single `<ul class="nav-links">` using `display: grid; grid-template-columns: repeat(6, 1fr); width: 60%`, filling the space after the wordmark. Selection is the sixth `<li class="sel-item">`, visually separated from Tonefield by a `border-left: 1px solid var(--line)`. No padding-left on `.sel-item` — the border sits at the grid column boundary without pushing the text off-center.
 
 ---
 
@@ -84,15 +86,13 @@ Submit behavior (all instances):
 |---|---|---|---|---|---|
 | Receive Tonefield | Receive Tonefield | Neotone's quarterly music, culture, and thought publication. | Subscribe | Subscribed! | Automatic welcome email with past article links |
 | Stock Notification | Notify me when new stock becomes available | We'll email you when a new instrument is listed. No account required. | Notify me | You're on the list | Email sent when new stock instrument is listed |
-| Save Configuration | Save this configuration | Enter your email and we'll generate a unique link to your current configuration. | Save configuration | Configuration saved | Unique URL generated and emailed; no account created |
-
-Save Configuration shows a sample link (`neotone.com/configure/abc123`) below the form, but only after the form is submitted — not on load.
+Save Configuration has been removed. It is replaced by "Save this selection" in the selection panel footer (see Selection section).
 
 ---
 
 ## Selection
 
-**Pages:** all (panel present everywhere; items can only be added from One, Treangle, Tonefield)
+**Pages:** all (panel present everywhere; items can only be added from One, Treangle, Tonefield; "Save this selection" appears in panel footer when items are present)
 
 A right-side drawer (360px wide, full viewport height) that accumulates items across the site before the buyer proceeds to payment. Called "Selection" throughout -- not "cart" or "basket".
 
@@ -105,6 +105,10 @@ A right-side drawer (360px wide, full viewport height) that accumulates items ac
 // shown with content " (n)" when items are present.
 ```
 
+#### Editing a Selection Item
+
+There is no in-place edit. To change a configuration, the buyer removes the item from the selection and adds it again from the product page. This is intentional: each item's price is baked in at add time (with VAT and discount already applied), so editing in-place would require re-running the full pricing flow from within the panel.
+
 #### Panel Structure
 
 - **Header** -- "SELECTION" label + Close button
@@ -113,9 +117,9 @@ A right-side drawer (360px wide, full viewport height) that accumulates items ac
 
 Clicking the overlay backdrop closes the panel. Clicking Close closes it.
 
-#### Selection Item
+#### Selection Item (panel)
 
-Each item shows: product name (serif), configuration detail (muted sans), price. Remove button on the right.
+Each item shows: product name (serif), configuration detail (muted sans), price. Remove button on the right. Price shown here is the stored value — see Checkout for the expanded breakdown.
 
 #### JS
 
@@ -123,11 +127,18 @@ Each item shows: product name (serif), configuration detail (muted sans), price.
 // Persistence: all pages read/write localStorage key 'neotone_sel'
 // Items survive page navigation. Panel on any page shows the full cross-page state.
 
+// Item schema: { id, name, detail, price, rawBase, discountPct, vatCountry }
+// rawBase: pre-discount, pre-VAT EUR amount (used by checkout for recalculation)
+// discountPct: referral discount applied at add time (0 for non-One items)
+// vatCountry: country code used when item was added ("HU"|"DE"|"FR"|"US")
+// price: stored display string, baked in at add time
+
 getSelItems()         // reads and parses localStorage
 saveSelItems(items)   // serializes and writes localStorage
 
-addToSelection(name, detail, price)
+addToSelection(name, detail, price, extras)
 // Appends item (id: Date.now()), saves, calls renderSelection(), opens panel
+// extras: optional { rawBase, discountPct, vatCountry }
 
 removeFromSelection(id)
 // Filters by id, saves, calls renderSelection()
@@ -136,11 +147,19 @@ renderSelection()
 // Reads localStorage, rebuilds #sel-body innerHTML
 // Updates #sel-count visibility and text
 // Enables/disables #sel-cta
+// Shows/hides #sel-save-section (visible when items present)
 // Called on every page load to restore count badge
 
 openSelectionPanel() / closeSelectionPanel()
 // Toggles .open on #sel-overlay and #sel-panel
+
+handleSaveSelection(event)
+// Fires alert() describing selection URL generation and email delivery
 ```
+
+#### Save This Selection
+
+Compact email form in the selection panel footer, visible only when items are present. Sits between the Total line and "Proceed to Payment". Fires `handleSaveSelection()` on submit. Label: "Save this selection". Confirmation: "Saved!". Moved here from the One page Built to Order panel — saving the full cross-page selection is more meaningful than saving a single product configuration.
 
 #### Add to Selection -- per page
 
@@ -158,7 +177,7 @@ Index, NeOS, and Artists pages have no add functions — they only display and r
 
 #### Proceed to Payment
 
-Fires `alert()` describing the payment flow function. No real payment integration in wireframe.
+Navigates to `checkout.html`. Disabled when selection is empty.
 
 ---
 
@@ -225,7 +244,7 @@ switchFork("build" | "stock")
 
 #### Built to Order Panel (`#panel-build`)
 
-Sequence: panel intro → material grid → buyer details + referral → order summary → save configuration → questions form.
+Sequence: panel intro → material grid → "Your Neotone One" summary → save configuration → questions form.
 
 ```javascript
 selectWood(name, extra)
@@ -236,18 +255,41 @@ applyCode()
 // Valid codes: ["DANNY10","LENA","SOFIA"] → 5% discount
 // Sets state.discount, updates #refmsg, calls updateBuildSummary()
 
+changeVATCountry(val)
+// Sets vatCountry, syncs both destination dropdowns, calls updateBuildSummary() + updateStockSummary()
+
+vatLine(subtotal)
+// Returns { text, total } where text is the VAT display string and total includes VAT
+// USA: text = "No EU VAT — import duties may apply", total unchanged
+
 updateBuildSummary()
-// total = (BASE_PRICE + woodExtra) × (1 - discount/100)
-// Updates #sum-model, #sum-wood, #sum-disc, #sum-total
+// subtotal = (BASE_PRICE + woodExtra) × (1 - discount/100)
+// vat = vatLine(subtotal)
+// Updates #sum-wood, #sum-disc, #sum-vat, #sum-total
 ```
 
-Buyer Details + Artist Referral: `grid-template-columns: 3fr 2fr`.
+"Your Neotone One" summary block (`#f2f2f2` background) uses a two-column layout:
 
-Order Summary (`#f2f2f2` background) marks the end of the purchase flow. Save Configuration and Questions follow as supplementary.
+**Left column** (`.sum-pre` → `.sum-post`):
+- Wood line (`#sum-wood`)
+- Base price (`#sum-base`) — BASE_PRICE + woodExtra, before discount
+- Referral discount line (`#sum-disc`)
+- VAT line (`#sum-vat`)
+- Total (`#sum-total`, includes VAT)
+
+**Right column** (`.sum-controls`), separated by a left border:
+- Destination Country (`#vat-country-build`) — Hungary 27%, Germany 19%, France 20%, United States (no EU VAT → "No VAT (import duties may apply)")
+- Artist Referral Code — compact input `#refcode` + Apply button, same width as dropdown; feedback in `#refmsg`
+
+On mobile (`≤980px`), the two-column layout collapses: controls column appears between Referral discount and VAT, so the buyer sets destination and code before seeing the VAT and total lines.
+
+Add to Selection button below the layout.
+
+Buyer Details have moved to `checkout.html`. Questions follow as supplementary. Save Configuration has moved to the selection panel as "Save this selection".
 
 #### From Stock Panel (`#panel-stock`)
 
-Sequence: panel intro → stock grid → no-stock toggle → buyer details + referral → order summary → stock notification → questions form.
+Sequence: panel intro → stock grid → no-stock toggle → "Your Neotone One" summary → stock notification → questions form.
 
 ```javascript
 selectStock(serialName, isBstock)
@@ -258,9 +300,13 @@ applyStockCode()
 // Same as applyCode() but if state.stockIsBstock: ignores code, sets discount to 0
 
 updateStockSummary()
-// B-stock: no discount. Otherwise: stockPrice × (1 - discount/100)
-// Updates #stock-sum-item, #stock-sum-disc, #stock-sum-total
+// Returns early if no stock selection
+// subtotal: B-stock gets no discount; otherwise stockPrice × (1 - discount/100)
+// vat = vatLine(subtotal)
+// Updates #stock-sum-item, #stock-sum-disc, #stock-sum-vat, #stock-sum-total
 ```
+
+"Your Neotone One" summary block mirrors the build panel layout. Destination dropdown (`#vat-country-stock`) is synced to the same `vatCountry` state as the build panel via `changeVATCountry()`.
 
 Current stock:
 
@@ -402,5 +448,64 @@ All wireframe popups use `alert()`.
 |---|---|
 | Receive Tonefield submit | Welcome email sent; includes past article links |
 | Stock Notification submit | Address added to stock list; email sent when new instrument listed |
-| Save Configuration submit | Unique config URL generated and emailed; no account created |
+| Save selection submit (selection panel) | Unique selection URL generated and emailed; no account created |
 | "Write to us" click | Email client opened; pre-addressed to workshop, subject "Visit enquiry" |
+| Checkout: Complete purchase | Delivery details + selection line items passed to payment processor; buyer completes payment on hosted page and returns to confirmation |
+
+---
+
+## Checkout Page
+
+**File:** `checkout.html`
+
+Two-column layout (responsive: stacks on mobile):
+
+Two-column layout (responsive: stacks on mobile):
+
+**Left — Your Selection**
+Expanded item display (richer than the selection panel). Each item shows:
+- Product name (Georgia serif)
+- Configuration detail
+- Discount: X%
+- VAT: X% (Country): EUR X — or "No VAT (import duties may apply)" for US
+- Total (calculated live from `rawBase`, `discountPct`, and `checkoutCountry`)
+
+Total line below items. Empty state shows a link back to browse.
+
+**Right — Destination Country + Delivery Details + Payment**
+- **Destination Country** block (separate, above Delivery Details): full-width dropdown (`#checkout-country`), same country options as One page. Note: "VAT is calculated based on destination country, regardless of billing country." Changing this dropdown recalculates all item prices instantly.
+- **Delivery Details** block: name, email, street, city, postal code. (Country is in the Destination block above.)
+- **Payment** block: descriptive text + "Complete purchase" CTA (fires alert in wireframe). Disabled when selection is empty.
+
+"Complete purchase" is disabled when selection is empty.
+
+**Selection panel on checkout.html:** Present for reviewing/removing items. "Proceed to Payment" button replaced with a static "You are at checkout" label (disabled) — no recursive navigation. No "Save this selection" form (buyer is already at the end of the flow).
+
+**JS functions specific to checkout:**
+```javascript
+var checkoutCountry  // detected from first item's vatCountry, fallback 'HU'
+
+calcItemTotal(item, country)
+// Computes { discountPct, vatText, total, totalStr } from item.rawBase and country
+// Falls back to stored price for items without rawBase
+
+changeCheckoutCountry(val)
+// Sets checkoutCountry, calls renderCheckout()
+
+renderCheckout()
+// Reads localStorage, builds #checkout-items HTML with expanded per-item breakdown
+// Sums totals via calcItemTotal(), updates #checkout-total
+// Enables/disables #checkout-cta
+
+removeFromSelection(id)
+// Same as other pages — filters and saves, calls renderSelection() and renderCheckout()
+
+handleCheckout()
+// Fires alert() describing payment processor handoff
+```
+
+**VAT recalculation:** Checkout recalculates VAT live using `rawBase` and `discountPct` stored in each item. Changing the Destination Country dropdown updates all displayed prices. The stored `price` field (baked in at add time) is not used for checkout display — only for the selection panel sidebar.
+
+#### Bottom Menu
+
+Sits at the bottom of the viewport on all pages. Implemented via `body { display: flex; flex-direction: column; min-height: 100vh }` + `main { flex: 1 }` + `footer.block { margin-top: auto }`. On pages with little content the footer pins to the viewport bottom; on long pages it falls naturally after the content.

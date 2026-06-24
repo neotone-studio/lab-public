@@ -29,16 +29,21 @@
     .nav-links .sel-item { border-left: 1px solid var(--line); }
 
     /* ---- Page ---- */
-    .page { max-width: var(--max); margin: 0 auto; padding: 24px; display: flex; flex-direction: column; min-height: calc(100vh - 120px); }
+    .page { max-width: var(--max); margin: 0 auto; padding: 24px; display: flex; flex-direction: column; min-height: calc(100vh - 60px); }
     .block { border: 1px solid var(--line); padding: 16px; margin-bottom: 14px; background: #fff; }
     .placeholder {
       flex: 1; border: 1px solid var(--line); margin-bottom: 14px;
       display: flex; align-items: center; justify-content: center;
       min-height: 480px; color: var(--muted); font-size: 18px; font-weight: 600; letter-spacing: 0.04em;
     }
-    .footer-block { min-height: 72px; }
     .bottom-menu-label { margin: 0 0 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
     .bottom-menu-desc { margin: 0; font-size: 11px; color: var(--muted); }
+    footer.block { margin-top: auto; }
+    .sel-save-row { display: flex; gap: 6px; margin-bottom: 10px; }
+    .sel-save-row input[type="email"] { flex: 1; border: 1px solid var(--line); padding: 6px 8px; font-size: 11px; font-family: Arial, Helvetica, sans-serif; }
+    .sel-save-btn { border: 1px solid var(--line); background: #fff; padding: 6px 10px; font-size: 11px; font-family: Arial, Helvetica, sans-serif; cursor: pointer; white-space: nowrap; }
+    .sel-save-label { font-size: 10px; color: var(--muted); font-family: Arial, Helvetica, sans-serif; margin: 0 0 5px; }
+    .subscribe-confirm { display: none; font-size: 11px; font-style: italic; color: #2a7a2a; font-family: Arial, Helvetica, sans-serif; }
 
     /* ---- Selection Panel ---- */
     .sel-count { color: var(--muted); }
@@ -85,7 +90,7 @@
 
 <main class="page">
   <div class="placeholder">NeOS</div>
-  <footer class="block footer-block">
+  <footer class="block">
     <p class="bottom-menu-label">Bottom Menu</p>
     <p class="bottom-menu-desc">One, Treangle, NeOS, Artists, Tonefield / Terms, Privacy Policy, Contact, Workshop Address</p>
   </footer>
@@ -104,8 +109,16 @@
     <div class="sel-total" id="sel-total" style="display: none;">
       <span>Total</span><span id="sel-total-amount"></span>
     </div>
+    <div id="sel-save-section" style="display: none; margin-bottom: 10px;">
+      <p class="sel-save-label">Save this selection</p>
+      <form class="sel-save-row" onsubmit="handleSaveSelection(event)">
+        <input type="email" placeholder="Your email address" required />
+        <button class="sel-save-btn" type="submit">Save</button>
+        <span class="subscribe-confirm">Saved!</span>
+      </form>
+    </div>
     <button class="sel-cta" id="sel-cta" disabled
-      onclick="alert('Function: Payment flow\n\nAll items in the selection are passed as line items to the payment processor.')">Proceed to Payment</button>
+      onclick="window.location.href='checkout.html'">Proceed to Payment</button>
   </div>
 </div>
 
@@ -128,17 +141,20 @@
     var cta = document.getElementById('sel-cta');
     var totalDiv = document.getElementById('sel-total');
     var totalAmt = document.getElementById('sel-total-amount');
+    var saveSection = document.getElementById('sel-save-section');
     if (items.length === 0) {
       if (body) body.innerHTML = '<p class="sel-empty">Your selection is empty.</p>';
       if (count) { count.textContent = ''; count.style.display = 'none'; }
       if (cta) cta.disabled = true;
       if (totalDiv) totalDiv.style.display = 'none';
+      if (saveSection) saveSection.style.display = 'none';
     } else {
       if (body) body.innerHTML = items.map(function(item) {
         return '<div class="sel-item"><div class="sel-item-info"><p class="sel-item-name">' + item.name + '</p><p class="sel-item-detail">' + item.detail + '</p><p class="sel-item-price">' + item.price + '</p></div><button class="sel-remove" onclick="removeFromSelection(' + item.id + ')">Remove</button></div>';
       }).join('');
       if (count) { count.textContent = ' (' + items.length + ')'; count.style.display = 'inline'; }
       if (cta) cta.disabled = false;
+      if (saveSection) saveSection.style.display = 'block';
       if (totalDiv && totalAmt) {
         var sum = 0; var hasEnquiry = false;
         items.forEach(function(item) {
@@ -149,6 +165,13 @@
         totalDiv.style.display = 'flex';
       }
     }
+  }
+  function handleSaveSelection(e) {
+    e.preventDefault();
+    alert("Function: Selection saved\n\nSubmitting this form generates a unique URL representing the current selection and emails it to the address provided. No account is created.");
+    var form = e.target;
+    form.querySelector('.sel-save-btn').style.display = 'none';
+    form.querySelector('.subscribe-confirm').style.display = 'inline';
   }
   function openSelectionPanel() {
     renderSelection();
