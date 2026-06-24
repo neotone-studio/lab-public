@@ -28,13 +28,19 @@ Component reference for the Neotone site. Covers shared behavior, JS state, and 
 
 ## Top Nav
 
+Site-wide shared component. Duplicated per page in the wireframe; treat as a single component in production.
+
 Active state: `.active` on the current page's nav `<a>`.
+
+All six items (One, Treangle, NeOS, Artists, Tonefield, Selection) are in a single `<ul>` with `justify-content: space-between; flex: 1`, filling the space after the wordmark. Selection is the sixth `<li class="sel-item">`, visually separated from Tonefield by a `border-left`.
 
 ---
 
 ## Bottom Menu
 
-Mirrors Top Nav. Adds: terms, privacy policy, contact, workshop address.
+Site-wide shared component. Duplicated per page in the wireframe; treat as a single component in production.
+
+Content: One, Treangle, NeOS, Artists, Tonefield / Terms, Privacy Policy, Contact, Workshop Address
 
 ---
 
@@ -78,9 +84,81 @@ Submit behavior (all instances):
 |---|---|---|---|---|---|
 | Receive Tonefield | Receive Tonefield | Neotone's quarterly music, culture, and thought publication. | Subscribe | Subscribed! | Automatic welcome email with past article links |
 | Stock Notification | Notify me when new stock becomes available | We'll email you when a new instrument is listed. No account required. | Notify me | You're on the list | Email sent when new stock instrument is listed |
-| Save Configuration | Save this configuration | Enter your email and we'll generate a unique link to your current configuration. No account, no commitment. | Save configuration | Configuration saved | Unique URL generated and emailed; no account created |
+| Save Configuration | Save this configuration | Enter your email and we'll generate a unique link to your current configuration. | Save configuration | Configuration saved | Unique URL generated and emailed; no account created |
 
-Save Configuration also shows a sample link below the form: `neotone.com/configure/abc123`.
+Save Configuration shows a sample link (`neotone.com/configure/abc123`) below the form, but only after the form is submitted — not on load.
+
+---
+
+## Selection
+
+**Pages:** all (panel present everywhere; items can only be added from One, Treangle, Tonefield)
+
+A right-side drawer (360px wide, full viewport height) that accumulates items across the site before the buyer proceeds to payment. Called "Selection" throughout -- not "cart" or "basket".
+
+#### Nav Entry Point
+
+"Selection" text link at the far right of the top nav on every page, outside the `<ul>` nav list. When items are present, a count appears inline: `Selection (2)`. Count element: `<span id="sel-count">`.
+
+```javascript
+// Count is hidden (display:none) when selection is empty,
+// shown with content " (n)" when items are present.
+```
+
+#### Panel Structure
+
+- **Header** -- "SELECTION" label + Close button
+- **Body** (`#sel-body`) -- scrollable item list, or empty state text when empty
+- **Footer** -- Total line (`#sel-total`, hidden when empty; shows "Total EUR X,XXX"), then "Proceed to Payment" button (`#sel-cta`, disabled when selection is empty)
+
+Clicking the overlay backdrop closes the panel. Clicking Close closes it.
+
+#### Selection Item
+
+Each item shows: product name (serif), configuration detail (muted sans), price. Remove button on the right.
+
+#### JS
+
+```javascript
+// Persistence: all pages read/write localStorage key 'neotone_sel'
+// Items survive page navigation. Panel on any page shows the full cross-page state.
+
+getSelItems()         // reads and parses localStorage
+saveSelItems(items)   // serializes and writes localStorage
+
+addToSelection(name, detail, price)
+// Appends item (id: Date.now()), saves, calls renderSelection(), opens panel
+
+removeFromSelection(id)
+// Filters by id, saves, calls renderSelection()
+
+renderSelection()
+// Reads localStorage, rebuilds #sel-body innerHTML
+// Updates #sel-count visibility and text
+// Enables/disables #sel-cta
+// Called on every page load to restore count badge
+
+openSelectionPanel() / closeSelectionPanel()
+// Toggles .open on #sel-overlay and #sel-panel
+```
+
+#### Add to Selection -- per page
+
+| Page | Function | Item name | Detail | Price |
+|---|---|---|---|---|
+| One (build) | `addBuildToSelection()` | Neotone One | `"Built to Order · {wood}"` | Calculated from state |
+| One (stock) | `addStockToSelection()` | Neotone One | `"From Stock · {serialName}"` | Calculated from state; B-stock gets no discount |
+| Treangle | `addTreangleToSelection()` | Treangle | Tonefield module | EUR 150 |
+| Treangle | `addCorToSelection()` | Cor | Sound module | EUR 300 |
+| Tonefield | `addMerchToSelection()` | Tonefield merch | Publications, prints, and objects | EUR 12 |
+
+`addStockToSelection()` guards against no selection: fires `alert()` if `state.stockSelection` is empty.
+
+Index, NeOS, and Artists pages have no add functions — they only display and remove items from the shared selection.
+
+#### Proceed to Payment
+
+Fires `alert()` describing the payment flow function. No real payment integration in wireframe.
 
 ---
 
@@ -221,7 +299,9 @@ Three cards. Selected state: `.selected`. Click calls `selectStock(serialName, i
 
 ### What Happens Next
 
-Four-column step strip. No JS. Steps: Confirmation → Workshop Contact → Build → Delivery. Cancellation terms should appear near step 1 in production.
+Four-column step strip. No JS. Steps: Confirmation → Workshop Contact → Build → Delivery.
+
+Below the strip: "Can I change my mind?" with answer copy ("Yes, at any point. Before your instrument is built, during production, or within two weeks of delivery. Cancel or return for a full refund, no explanation required."), separated by a top border.
 
 ---
 
