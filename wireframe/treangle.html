@@ -12,7 +12,9 @@
     .sans { font-family: Arial, Helvetica, sans-serif; }
 
     /* ---- Top Nav ---- */
-    .top-nav { border-bottom: 1px solid var(--line); padding: 14px 0; }
+    .top-nav { border-bottom: 1px solid var(--line); padding: 14px 0; position: relative; }
+    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; margin-left: auto; flex-shrink: 0; }
+    .hamburger-line { display: block; width: 22px; height: 2px; background: var(--ink); margin: 5px 0; }
     .top-nav-inner {
       max-width: var(--max); margin: 0 auto; padding: 0 24px;
       display: flex; align-items: center; gap: 20px;
@@ -77,6 +79,14 @@
     .subscribe-confirm { display: none; font-size: 11px; font-style: italic; color: #2a7a2a; font-family: Arial, Helvetica, sans-serif; }
 
     @media (max-width: 900px) { .nav-links { font-size: 10px; } .sel-panel { width: 100%; } }
+    @media (max-width: 768px) {
+      .hamburger { display: flex; flex-direction: column; justify-content: center; }
+      .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; width: 100%; background: #fff; border-bottom: 1px solid var(--line); z-index: 200; margin: 0; padding: 0; grid-template-columns: 1fr; }
+      .nav-links.open { display: flex; flex-direction: column; }
+      .nav-links li { justify-content: flex-start; border-bottom: 1px solid var(--line); }
+      .nav-links li a { display: block; padding: 13px 24px; font-size: 13px; letter-spacing: 0; width: 100%; }
+      .nav-links .sel-item { border-left: none; }
+    }
   </style>
 </head>
 <body>
@@ -92,6 +102,11 @@
       <li><a href="tonefield.html">Tonefield</a></li>
       <li class="sel-item"><a href="#" onclick="openSelectionPanel(); return false;">Selection<span class="sel-count" id="sel-count"></span></a></li>
     </ul>
+    <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
   </div>
 </header>
 
@@ -197,7 +212,11 @@
       }
     }
   }
+  function toggleMobileMenu() {
+    document.querySelector('.nav-links').classList.toggle('open');
+  }
   function openSelectionPanel() {
+    document.querySelector('.nav-links').classList.remove('open');
     renderSelection();
     document.getElementById('sel-overlay').classList.add('open');
     document.getElementById('sel-panel').classList.add('open');
