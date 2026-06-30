@@ -116,7 +116,7 @@
   <div class="block" style="padding: 20px 24px;">
     <p class="block-label">Merch</p>
     <p class="block-desc">Publications, prints, and objects from the Neotone world.</p>
-    <p class="product-price">EUR 12</p>
+    <p class="product-price" data-raw="12">EUR 12</p>
     <button class="action-btn" onclick="addMerchToSelection()">Add merch to Selection</button>
   </div>
 
@@ -228,7 +228,20 @@
     form.querySelector('.sel-save-btn').style.display = 'none';
     form.querySelector('.subscribe-confirm').style.display = 'inline';
   }
-  function addMerchToSelection() { addToSelection('Tonefield merch', 'Publications, prints, and objects', 'EUR 12', { rawBase: 12, discountPct: 0 }); }
+  var VAT_RATES = { HU: 0.27, DE: 0.19, FR: 0.20, US: null };
+  var vatCountry = localStorage.getItem('neotone_country') || 'HU';
+  function formatWithVat(rawBase) {
+    var rate = VAT_RATES[vatCountry];
+    var total = rate ? Math.round(rawBase * (1 + rate)) : rawBase;
+    return 'EUR ' + total.toLocaleString('en-US');
+  }
+  function updatePrices() {
+    document.querySelectorAll('[data-raw]').forEach(function(el) {
+      el.textContent = formatWithVat(parseFloat(el.getAttribute('data-raw')));
+    });
+  }
+  function addMerchToSelection() { addToSelection('Tonefield merch', 'Publications, prints, and objects', formatWithVat(12), { rawBase: 12, discountPct: 0 }); }
+  updatePrices();
   renderSelection();
 </script>
 

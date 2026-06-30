@@ -224,27 +224,23 @@
     try { localStorage.setItem('neotone_sel', JSON.stringify(items)); } catch(e) {}
   }
 
-  // Detect initial country from first item that has one, fallback to HU
-  var checkoutCountry = (function() {
-    var items = getSelItems();
-    for (var i = 0; i < items.length; i++) { if (items[i].vatCountry) return items[i].vatCountry; }
-    return 'HU';
-  })();
+  var checkoutCountry = localStorage.getItem('neotone_country') || 'HU';
 
   function calcItemTotal(item, country) {
     if (!item.rawBase) {
       var n = parseFloat((item.price || '').replace('EUR ', '').replace(/,/g, ''));
-      return { discountPct: 0, vatText: '—', total: isNaN(n) ? 0 : n, totalStr: item.price || '—' };
+      return { baseStr: item.price || '—', discountPct: 0, vatText: null, total: isNaN(n) ? 0 : n, totalStr: item.price || '—' };
     }
     var disc = item.discountPct || 0;
     var subtotal = Math.round(item.rawBase * (1 - disc / 100));
     var rate = VAT_RATES[country];
     if (rate === null) {
-      return { discountPct: disc, vatText: 'No VAT (import duties may apply)', total: subtotal, totalStr: 'EUR ' + subtotal.toLocaleString('en-US') };
+      return { baseStr: 'EUR ' + item.rawBase.toLocaleString('en-US'), discountPct: disc, vatText: 'No VAT (import duties may apply)', total: subtotal, totalStr: 'EUR ' + subtotal.toLocaleString('en-US') };
     }
     var vatAmount = Math.round(subtotal * rate);
     var total = subtotal + vatAmount;
     return {
+      baseStr: 'EUR ' + item.rawBase.toLocaleString('en-US'),
       discountPct: disc,
       vatText: Math.round(rate * 100) + '% (' + VAT_NAMES[country] + '): EUR ' + vatAmount.toLocaleString('en-US'),
       total: total,
@@ -254,6 +250,7 @@
 
   function changeCheckoutCountry(val) {
     checkoutCountry = val;
+    localStorage.setItem('neotone_country', val);
     renderCheckout();
   }
 
@@ -279,12 +276,14 @@
     } else {
       container.innerHTML = items.map(function(item) {
         var calc = calcItemTotal(item, checkoutCountry);
+        var lines = '<p class="checkout-item-line">Base: ' + calc.baseStr + '</p>';
+        if (item.discountEligible) { var discAmt = Math.round(item.rawBase * calc.discountPct / 100); lines += '<p class="checkout-item-line">Discount (' + calc.discountPct + '%): ' + (discAmt > 0 ? '&minus;' : '') + 'EUR ' + discAmt.toLocaleString('en-US') + '</p>'; }
+        if (calc.vatText) lines += '<p class="checkout-item-line">VAT: ' + calc.vatText + '</p>';
         return '<div class="checkout-item">' +
           '<div class="checkout-item-info">' +
             '<p class="checkout-item-name">' + item.name + '</p>' +
             '<p class="checkout-item-detail">' + item.detail + '</p>' +
-            '<p class="checkout-item-line">Discount: ' + calc.discountPct + '%</p>' +
-            '<p class="checkout-item-line">VAT: ' + calc.vatText + '</p>' +
+            lines +
             '<p class="checkout-item-price">' + calc.totalStr + '</p>' +
           '</div>' +
           '<button class="sel-remove" onclick="removeFromSelection(' + item.id + ')">Remove</button>' +
@@ -346,7 +345,6 @@
     );
   }
 
-  // Set country dropdown to match detected country
   document.getElementById('checkout-country').value = checkoutCountry;
   renderSelection();
   renderCheckout();

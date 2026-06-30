@@ -116,14 +116,14 @@
   <div class="block" style="padding: 20px 24px;">
     <p class="block-label">Treangle</p>
     <p class="block-desc">Electronic extension for the Neotone One. Tonefield module.</p>
-    <p class="product-price">EUR 150</p>
+    <p class="product-price" data-raw="150">EUR 150</p>
     <button class="action-btn" onclick="addTreangleToSelection()">Add Treangle to Selection</button>
   </div>
 
   <div class="block" style="padding: 20px 24px;">
     <p class="block-label">Cor</p>
     <p class="block-desc">Sound module.</p>
-    <p class="product-price">EUR 300</p>
+    <p class="product-price" data-raw="300">EUR 300</p>
     <button class="action-btn" onclick="addCorToSelection()">Add Cor to Selection</button>
   </div>
 
@@ -235,8 +235,21 @@
     form.querySelector('.sel-save-btn').style.display = 'none';
     form.querySelector('.subscribe-confirm').style.display = 'inline';
   }
-  function addTreangleToSelection() { addToSelection('Treangle', 'Tonefield module', 'EUR 150', { rawBase: 150, discountPct: 0 }); }
-  function addCorToSelection() { addToSelection('Cor', 'Sound module', 'EUR 300', { rawBase: 300, discountPct: 0 }); }
+  var VAT_RATES = { HU: 0.27, DE: 0.19, FR: 0.20, US: null };
+  var vatCountry = localStorage.getItem('neotone_country') || 'HU';
+  function formatWithVat(rawBase) {
+    var rate = VAT_RATES[vatCountry];
+    var total = rate ? Math.round(rawBase * (1 + rate)) : rawBase;
+    return 'EUR ' + total.toLocaleString('en-US');
+  }
+  function updatePrices() {
+    document.querySelectorAll('[data-raw]').forEach(function(el) {
+      el.textContent = formatWithVat(parseFloat(el.getAttribute('data-raw')));
+    });
+  }
+  function addTreangleToSelection() { addToSelection('Treangle', 'Tonefield module', formatWithVat(150), { rawBase: 150, discountPct: 0 }); }
+  function addCorToSelection() { addToSelection('Cor', 'Sound module', formatWithVat(300), { rawBase: 300, discountPct: 0 }); }
+  updatePrices();
   renderSelection();
 </script>
 
