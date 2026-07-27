@@ -80,6 +80,7 @@
     const COLORS        = ['#D9521F', '#396DC1', '#FFF4D3', '#270636', '#B5B5B5', '#FFE6FF'];
     const BASE_SCALE    = 0.58;
     const TRANSITION_PX = 90;
+    const SLIDE_PX      = 120;
 
     const inactiveScale = ACTIVE !== 0 ? BASE_SCALE : 1;
 
@@ -95,6 +96,7 @@
     const navLinks = document.querySelectorAll('.nav-link');
     const navItems = Array.from(navLinks).map(a => a.querySelector('img'));
     const NAV_H    = nav.offsetHeight;
+    let slideDistance = null;
 
     articles.forEach((el, i) => {
       el.dataset.color = COLORS[(i + COLOR_OFFSET) % COLORS.length];
@@ -132,10 +134,18 @@
 
     function updateNav() {
       const p     = Math.min(Math.max(window.scrollY / TRANSITION_PX, 0), 1);
+      const q     = Math.min(Math.max((window.scrollY - TRANSITION_PX) / SLIDE_PX, 0), 1);
       const scale = 1 - p * (1 - BASE_SCALE);
+
+      if (q > 0 && slideDistance === null) {
+        const cx  = a => { const r = a.getBoundingClientRect(); return r.left + r.width / 2; };
+        slideDistance = ACTIVE === 0 ? 0 : cx(navLinks[0]) - cx(navLinks[ACTIVE]);
+      }
+
+      const tx = slideDistance !== null ? slideDistance * q : 0;
       navItems.forEach((item, i) => {
         if (i === ACTIVE) {
-          item.style.transform = `scale(${scale})`;
+          item.style.transform = `translateX(${tx}px) scale(${scale})`;
         } else {
           item.style.transform = `translateY(${-80 * p}px) scale(${inactiveScale})`;
           item.style.opacity   = 1 - p;
