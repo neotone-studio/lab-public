@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Neotone</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body { transition: background-color 0.6s ease; }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 100px;
+      overflow: hidden;
+    }
+
+    nav a { display: block; text-decoration: none; cursor: pointer; }
+
+    nav img {
+      height: 52px;
+      width: auto;
+      display: block;
+      will-change: transform, opacity;
+    }
+
+    .article {
+      width: 100%;
+      height: 115vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .article-label {
+      font-family: sans-serif;
+      font-size: 96px;
+      font-weight: 700;
+      color: rgba(0,0,0,0.15);
+    }
+
+    .article-title {
+      font-family: sans-serif;
+      font-size: 20px;
+      font-weight: 400;
+      color: rgba(0,0,0,0.4);
+      letter-spacing: 0.01em;
+    }
+  </style>
+</head>
+<body style="background: #D9521F">
+
+  <nav>
+    <a href="index.html" class="nav-link"><img src="../../media/svg_wordmarks/neotone.svg" alt="Neotone"></a>
+    <a href="one.html"   class="nav-link"><img src="../../media/svg_wordmarks/one.svg"          alt="One"></a>
+    <a href="anima.html" class="nav-link"><img src="../../media/svg_wordmarks/anima.svg"        alt="Anima"></a>
+    <a href="neos.html"  class="nav-link"><img src="../../media/svg_wordmarks/neOS.svg"         alt="neOS"></a>
+  </nav>
+
+  <div class="article">
+    <div class="article-label">Article 1</div>
+    <div class="article-title">Neotone's Kripta Debut</div>
+  </div>
+  <div class="article">
+    <div class="article-label">Article 2</div>
+    <div class="article-title">ChatGPT talks about Neotone</div>
+  </div>
+  <div class="article">
+    <div class="article-label">Article 3</div>
+    <div class="article-title">I quit my piano lessons and got a Neotone</div>
+  </div>
+  <div class="article"><div class="article-label">Article 4</div></div>
+  <div class="article"><div class="article-label">Article 5</div></div>
+  <div class="article"><div class="article-label">Article 6</div></div>
+
+  <script>
+    const ACTIVE        = 0;
+    const COLOR_OFFSET  = 0;
+    const TRANSITION_MS = 600;
+
+    const COLORS        = ['#D9521F', '#396DC1', '#FFF4D3', '#270636', '#B5B5B5', '#FFE6FF'];
+    const BASE_SCALE    = 0.58;
+    const TRANSITION_PX = 90;
+    const SLIDE_PX      = 120;
+
+    const inactiveScale = ACTIVE !== 0 ? BASE_SCALE : 1;
+
+    const PAGE_COLORS = {
+      'index.html': COLORS[0],
+      'one.html':   COLORS[1],
+      'anima.html': COLORS[2],
+      'neos.html':  COLORS[5],
+    };
+
+    const articles = document.querySelectorAll('.article');
+    const nav      = document.querySelector('nav');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const navItems = Array.from(navLinks).map(a => a.querySelector('img'));
+    const NAV_H    = nav.offsetHeight;
+    let slideDistance = null;
+
+    articles.forEach((el, i) => {
+      el.dataset.color = COLORS[(i + COLOR_OFFSET) % COLORS.length];
+    });
+
+    navLinks[ACTIVE].addEventListener('click', e => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    navLinks.forEach((link, i) => {
+      if (i === ACTIVE) return;
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const href = link.getAttribute('href');
+        const dest = PAGE_COLORS[href];
+        if (dest) {
+          sessionStorage.setItem('prevActive',    String(ACTIVE));
+          sessionStorage.setItem('prevIsLanding', ACTIVE === 0 ? '1' : '0');
+          document.body.style.backgroundColor = dest;
+          setTimeout(() => { window.location.href = href; }, TRANSITION_MS);
+        } else {
+          window.location.href = href;
+        }
+      });
+    });
+
+    function updateColor() {
+      let current = COLORS[COLOR_OFFSET % COLORS.length];
+      articles.forEach(article => {
+        if (article.offsetTop <= window.scrollY + NAV_H) current = article.dataset.color;
+      });
+      document.body.style.backgroundColor = current;
+    }
+
+    function updateNav() {
+      const p     = Math.min(Math.max(window.scrollY / TRANSITION_PX, 0), 1);
+      const q     = Math.min(Math.max((window.scrollY - TRANSITION_PX) / SLIDE_PX, 0), 1);
+      const scale = 1 - p * (1 - BASE_SCALE);
+
+      if (q > 0 && slideDistance === null) {
+        const cx  = a => { const r = a.getBoundingClientRect(); return r.left + r.width / 2; };
+        slideDistance = ACTIVE === 0 ? 0 : cx(navLinks[0]) - cx(navLinks[ACTIVE]);
+      }
+
+      const tx = slideDistance !== null ? slideDistance * q : 0;
+      navItems.forEach((item, i) => {
+        if (i === ACTIVE) {
+          item.style.transform = `translateX(${tx}px) scale(${scale})`;
+        } else {
+          item.style.transform = `translateY(${-80 * p}px) scale(${inactiveScale})`;
+          item.style.opacity   = 1 - p;
+        }
+      });
+    }
+
+    function onScroll() { updateColor(); updateNav(); }
+
+    updateColor();
+
+    const prevActive    = parseInt(sessionStorage.getItem('prevActive') ?? '-1', 10);
+    const prevIsLanding = sessionStorage.getItem('prevIsLanding') === '1';
+    sessionStorage.removeItem('prevActive');
+    sessionStorage.removeItem('prevIsLanding');
+
+    if (ACTIVE === 0 && prevActive < 0) {
+      updateNav();
+    } else {
+      navItems.forEach((item, i) => {
+        item.style.transform = (prevIsLanding || i === prevActive) ? 'scale(1)' : `scale(${BASE_SCALE})`;
+      });
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        const targetScale = ACTIVE === 0 ? 1 : BASE_SCALE;
+        navItems.forEach((item, i) => {
+          const start = (prevIsLanding || i === prevActive) ? 1 : BASE_SCALE;
+          const end   = (i === ACTIVE) ? 1 : targetScale;
+          if (start !== end) item.style.transition = `transform ${TRANSITION_MS}ms ease`;
+          item.style.transform = `scale(${end})`;
+        });
+        setTimeout(() => {
+          navItems.forEach(item => { item.style.transition = ''; });
+        }, TRANSITION_MS + 100);
+      }));
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+  </script>
+
+</body>
+</html>
