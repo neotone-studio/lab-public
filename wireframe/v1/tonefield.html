@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Neotone Wireframe - Artists</title>
+  <title>Neotone Wireframe - Tonefield</title>
   <style>
     :root { --ink: #111; --line: #d9d9d9; --muted: #4f4f4f; --max: 1180px; }
     * { box-sizing: border-box; }
@@ -36,16 +36,18 @@
     .placeholder {
       flex: 1; border: 1px solid var(--line); margin-bottom: 14px;
       display: flex; align-items: center; justify-content: center;
-      min-height: 480px; color: var(--muted); font-size: 18px; font-weight: 600; letter-spacing: 0.04em;
+      min-height: 400px; color: var(--muted); font-size: 18px; font-weight: 600; letter-spacing: 0.04em;
+    }
+    .block-label { margin: 0 0 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+    .block-desc { margin: 0; font-size: 13px; color: var(--muted); }
+    .product-price { margin: 6px 0 0; font-size: 13px; }
+    .action-btn {
+      margin-top: 14px; padding: 8px 18px; background: var(--ink); color: #fff;
+      border: none; font-size: 12px; font-weight: 600; letter-spacing: 0.04em; cursor: pointer;
     }
     .bottom-menu-label { margin: 0 0 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
     .bottom-menu-desc { margin: 0; font-size: 11px; color: var(--muted); }
     footer.block { margin-top: auto; }
-    .sel-save-row { display: flex; gap: 6px; margin-bottom: 10px; }
-    .sel-save-row input[type="email"] { flex: 1; border: 1px solid var(--line); padding: 6px 8px; font-size: 11px; font-family: Arial, Helvetica, sans-serif; }
-    .sel-save-btn { border: 1px solid var(--line); background: #fff; padding: 6px 10px; font-size: 11px; font-family: Arial, Helvetica, sans-serif; cursor: pointer; white-space: nowrap; }
-    .sel-save-label { font-size: 10px; color: var(--muted); font-family: Arial, Helvetica, sans-serif; margin: 0 0 5px; }
-    .subscribe-confirm { display: none; font-size: 11px; font-style: italic; color: #2a7a2a; font-family: Arial, Helvetica, sans-serif; }
 
     /* ---- Selection Panel ---- */
     .sel-count { color: var(--muted); }
@@ -70,6 +72,11 @@
     .sel-cta { display: block; width: 100%; padding: 10px; background: var(--ink); color: #fff; border: none; font-size: 12px; font-family: Arial, Helvetica, sans-serif; font-weight: 600; letter-spacing: 0.04em; cursor: pointer; }
     .sel-cta:disabled { background: var(--line); color: var(--muted); cursor: default; }
     .sel-total { display: flex; justify-content: space-between; align-items: center; padding-bottom: 12px; margin-bottom: 12px; border-bottom: 1px solid var(--line); font-size: 12px; font-family: Arial, Helvetica, sans-serif; }
+    .sel-save-row { display: flex; gap: 6px; margin-bottom: 10px; }
+    .sel-save-row input[type="email"] { flex: 1; border: 1px solid var(--line); padding: 6px 8px; font-size: 11px; font-family: Arial, Helvetica, sans-serif; }
+    .sel-save-btn { border: 1px solid var(--line); background: #fff; padding: 6px 10px; font-size: 11px; font-family: Arial, Helvetica, sans-serif; cursor: pointer; white-space: nowrap; }
+    .sel-save-label { font-size: 10px; color: var(--muted); font-family: Arial, Helvetica, sans-serif; margin: 0 0 5px; }
+    .subscribe-confirm { display: none; font-size: 11px; font-style: italic; color: #2a7a2a; font-family: Arial, Helvetica, sans-serif; }
 
     @media (max-width: 900px) { .nav-links { font-size: 10px; } .sel-panel { width: 100%; } }
     @media (max-width: 768px) {
@@ -86,13 +93,13 @@
 
 <header class="top-nav sans">
   <div class="top-nav-inner">
-    <a class="wordmark" href="index.html"><img src="../media/wordmark-clean.png" alt="Neotone" /></a>
+    <a class="wordmark" href="index.html"><img src="../../media/wordmark-clean.png" alt="Neotone" /></a>
     <ul class="nav-links">
       <li><a href="one.html">One</a></li>
       <li><a href="treangle.html">Treangle</a></li>
       <li><a href="neos.html">NeOS</a></li>
-      <li><a href="artists.html" class="active">Artists</a></li>
-      <li><a href="tonefield.html">Tonefield</a></li>
+      <li><a href="artists.html">Artists</a></li>
+      <li><a href="tonefield.html" class="active">Tonefield</a></li>
       <li class="sel-item"><a href="#" onclick="openSelectionPanel(); return false;">Selection<span class="sel-count" id="sel-count"></span></a></li>
     </ul>
     <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
@@ -104,7 +111,15 @@
 </header>
 
 <main class="page">
-  <div class="placeholder">Artists</div>
+  <div class="placeholder">Tonefield</div>
+
+  <div class="block" style="padding: 20px 24px;">
+    <p class="block-label">Merch</p>
+    <p class="block-desc">Publications, prints, and objects from the Neotone world.</p>
+    <p class="product-price" data-raw="12">EUR 12</p>
+    <button class="action-btn" onclick="addMerchToSelection()">Add merch to Selection</button>
+  </div>
+
   <footer class="block">
     <p class="bottom-menu-label">Bottom Menu</p>
     <p class="bottom-menu-desc">One, Treangle, NeOS, Artists, Tonefield / Terms, Privacy Policy, Contact, Workshop Address</p>
@@ -144,6 +159,15 @@
   function saveSelItems(items) {
     try { localStorage.setItem('neotone_sel', JSON.stringify(items)); } catch(e) {}
   }
+  function addToSelection(name, detail, price, extras) {
+    var items = getSelItems();
+    var item = { id: Date.now(), name: name, detail: detail, price: price };
+    if (extras) { item.rawBase = extras.rawBase; item.discountPct = extras.discountPct; }
+    items.push(item);
+    saveSelItems(items);
+    renderSelection();
+    openSelectionPanel();
+  }
   function removeFromSelection(id) {
     var items = getSelItems().filter(function(i) { return i.id !== id; });
     saveSelItems(items);
@@ -181,13 +205,6 @@
       }
     }
   }
-  function handleSaveSelection(e) {
-    e.preventDefault();
-    alert("Function: Selection saved\n\nSubmitting this form generates a unique URL representing the current selection and emails it to the address provided. No account is created.");
-    var form = e.target;
-    form.querySelector('.sel-save-btn').style.display = 'none';
-    form.querySelector('.subscribe-confirm').style.display = 'inline';
-  }
   function toggleMobileMenu() {
     document.querySelector('.nav-links').classList.toggle('open');
   }
@@ -201,6 +218,30 @@
     document.getElementById('sel-overlay').classList.remove('open');
     document.getElementById('sel-panel').classList.remove('open');
   }
+  function handleSaveSelection(e) {
+    e.preventDefault();
+    alert(
+      "Function: Selection saved\n\n" +
+      "Submitting this form generates a unique URL representing the current selection and emails it to the address provided. No account is created."
+    );
+    var form = e.target;
+    form.querySelector('.sel-save-btn').style.display = 'none';
+    form.querySelector('.subscribe-confirm').style.display = 'inline';
+  }
+  var VAT_RATES = { HU: 0.27, DE: 0.19, FR: 0.20, US: null };
+  var vatCountry = localStorage.getItem('neotone_country') || 'HU';
+  function formatWithVat(rawBase) {
+    var rate = VAT_RATES[vatCountry];
+    var total = rate ? Math.round(rawBase * (1 + rate)) : rawBase;
+    return 'EUR ' + total.toLocaleString('en-US');
+  }
+  function updatePrices() {
+    document.querySelectorAll('[data-raw]').forEach(function(el) {
+      el.textContent = formatWithVat(parseFloat(el.getAttribute('data-raw')));
+    });
+  }
+  function addMerchToSelection() { addToSelection('Tonefield merch', 'Publications, prints, and objects', formatWithVat(12), { rawBase: 12, discountPct: 0 }); }
+  updatePrices();
   renderSelection();
 </script>
 
