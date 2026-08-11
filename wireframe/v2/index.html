@@ -5,21 +5,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Neotone</title>
   <style>
+    :root { --ink: #111; --line: #d9d9d9; --muted: #4f4f4f; --green: #2a7a2a; --max: 1180px; }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    body { background: #f3f0df; }
+    body { background: #fff; }
 
     nav {
       position: sticky;
       top: 0;
       z-index: 10;
+      height: 100px;
+      overflow: hidden;
+      /* Opaque, or content scrolls through and collides with the wordmark.
+         Must track the body background. */
+      background: #fff;
+    }
+
+    /* Mirrors .page exactly, so the marks align to the same left and right
+       boundaries as the bordered content blocks beneath them. */
+    .nav-inner {
+      position: relative;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 48px;
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 48px;
-      height: 100px;
-      overflow: hidden;
     }
+
+    /* Default mode: One is absolutely centred on the page. That takes it out of
+       the flex flow, so space-between pins Neotone and neOS to the two
+       boundaries. Future mode leaves all four marks in flow. */
+    .nav-inner.centre-one .nav-link[data-page="one"] {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    /* Each mark scales about the edge it is aligned to, so its anchored edge
+       stays put at any scale — and therefore sits in the same place whether the
+       mark is the active one on its own page or reduced on another. Neotone is
+       left-aligned, neOS right-aligned, One centred (the default origin).
+       The active mark is overridden to a left origin in JS, because it collapses
+       to the left boundary. */
+    .nav-link[data-page="neotone"] img { transform-origin: left center; }
+    .nav-link[data-page="neos"]    img { transform-origin: right center; }
 
     nav a { display: block; text-decoration: none; cursor: pointer; }
 
@@ -59,10 +91,12 @@
 <body>
 
   <nav>
-    <a href="index.html" class="nav-link"><img src="../../media/svg_wordmarks/neotone.svg" alt="Neotone"></a>
-    <a href="one.html"   class="nav-link"><img src="../../media/svg_wordmarks/one.svg"          alt="One"></a>
-    <a href="anima.html" class="nav-link"><img src="../../media/svg_wordmarks/anima.svg"        alt="Anima"></a>
-    <a href="neos.html"  class="nav-link"><img src="../../media/svg_wordmarks/neOS.svg"         alt="neOS"></a>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-link" data-page="neotone"><img src="../../media/svg_wordmarks/neotone.svg" alt="Neotone"></a>
+      <a href="one.html"   class="nav-link" data-page="one"><img src="../../media/svg_wordmarks/one.svg"          alt="One"></a>
+      <a href="anima.html" class="nav-link" data-page="anima"><img src="../../media/svg_wordmarks/anima.svg"        alt="Anima"></a>
+      <a href="neos.html"  class="nav-link" data-page="neos"><img src="../../media/svg_wordmarks/neOS.svg"         alt="neOS"></a>
+    </div>
   </nav>
 
   <div class="article">
@@ -82,17 +116,46 @@
   <div class="article"><div class="article-label">Article 6</div></div>
 
   <script>
-    const ACTIVE        = 0;
-    const TRANSITION_MS = 600;
+    /* ---- Future-products mode ----
+       Anima has not shipped, so it is absent from the nav by default and
+       reinstated with ?future=show. The flag propagates across nav clicks so
+       the whole site can be browsed in its future state, and the URL stays
+       shareable. Visiting anima.html implies the mode, since a page's own
+       mark must be present for the return mechanism to work.
 
+       ACTIVE is derived from the rendered nav rather than hardcoded, because
+       removing Anima shifts every index after it. */
+    const PAGE   = 'neotone';
+    const FUTURE_PARAM = new URLSearchParams(location.search).get('future');
+    const FUTURE = PAGE === 'anima' ||
+      (FUTURE_PARAM !== null && !['hide', '0', 'false'].includes(FUTURE_PARAM));
+
+    const navInner = document.querySelector('.nav-inner');
+
+    if (!FUTURE) {
+      const anima = document.querySelector('.nav-link[data-page="anima"]');
+      if (anima) anima.remove();
+      navInner.classList.add('centre-one');
+    }
+    const navQuery = FUTURE ? '?future=show' : '';
+
+    const TRANSITION_MS = 600;
     const BASE_SCALE    = 0.58;
     const TRANSITION_PX = 90;
     const SLIDE_PX      = 120;
 
-    const inactiveScale = ACTIVE !== 0 ? BASE_SCALE : 1;
-
     const navLinks = document.querySelectorAll('.nav-link');
     const navItems = Array.from(navLinks).map(a => a.querySelector('img'));
+    const ACTIVE   = Math.max(0, [...navLinks].findIndex(a => a.dataset.page === PAGE));
+    const inactiveScale = BASE_SCALE;   // every page reduces its non-active marks
+
+    /* The active mark scales about its LEFT edge, not its centre. Neotone is
+       already sitting on the content-left boundary and never slides, so with a
+       centre origin it would drift right as it shrank and then slide back. With
+       a left origin it simply shrinks in place, and for the marks that do slide
+       the target becomes a plain difference of left edges. */
+    if (navItems[ACTIVE]) navItems[ACTIVE].style.transformOrigin = 'left center';
+
     let slideDistance = null;
 
     navLinks[ACTIVE].addEventListener('click', e => {
@@ -105,8 +168,7 @@
       link.addEventListener('click', e => {
         e.preventDefault();
         sessionStorage.setItem('prevActive',    String(ACTIVE));
-        sessionStorage.setItem('prevIsLanding', ACTIVE === 0 ? '1' : '0');
-        window.location.href = link.getAttribute('href');
+        window.location.href = link.getAttribute('href') + navQuery;
       });
     });
 
@@ -116,8 +178,11 @@
       const scale = 1 - p * (1 - BASE_SCALE);
 
       if (q > 0 && slideDistance === null) {
-        const cx  = a => { const r = a.getBoundingClientRect(); return r.left + r.width / 2; };
-        slideDistance = ACTIVE === 0 ? 0 : cx(navLinks[0]) - cx(navLinks[ACTIVE]);
+        /* Marks scale about their left edge, so landing on the content-left
+           boundary is just the distance between left edges. Neotone resolves to
+           0 here, which is what keeps it anchored. */
+        slideDistance = navLinks[0].getBoundingClientRect().left
+                      - navLinks[ACTIVE].getBoundingClientRect().left;
       }
 
       const tx = slideDistance !== null ? slideDistance * q : 0;
@@ -131,32 +196,31 @@
       });
     }
 
-    const prevActive    = parseInt(sessionStorage.getItem('prevActive') ?? '-1', 10);
-    const prevIsLanding = sessionStorage.getItem('prevIsLanding') === '1';
+    const prevActive = parseInt(sessionStorage.getItem('prevActive') ?? '-1', 10);
     sessionStorage.removeItem('prevActive');
-    sessionStorage.removeItem('prevIsLanding');
 
-    if (ACTIVE === 0 && prevActive < 0) {
-      updateNav();
-    } else {
+    /* Entry animation, identical on every page including the landing page: this
+       page's own mark is full size and every other mark is reduced. Arriving
+       from another page, that page's mark starts full size and shrinks as this
+       one grows, so the marks stay continuous across navigation. */
+    navItems.forEach((item, i) => {
+      item.style.transform = `scale(${i === prevActive ? 1 : BASE_SCALE})`;
+    });
+    requestAnimationFrame(() => requestAnimationFrame(() => {
       navItems.forEach((item, i) => {
-        item.style.transform = (prevIsLanding || i === prevActive) ? 'scale(1)' : `scale(${BASE_SCALE})`;
+        const start = (i === prevActive) ? 1 : BASE_SCALE;
+        const end   = (i === ACTIVE)     ? 1 : BASE_SCALE;
+        if (start !== end) item.style.transition = `transform ${TRANSITION_MS}ms ease`;
+        item.style.transform = `scale(${end})`;
       });
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        const targetScale = ACTIVE === 0 ? 1 : BASE_SCALE;
-        navItems.forEach((item, i) => {
-          const start = (prevIsLanding || i === prevActive) ? 1 : BASE_SCALE;
-          const end   = (i === ACTIVE) ? 1 : targetScale;
-          if (start !== end) item.style.transition = `transform ${TRANSITION_MS}ms ease`;
-          item.style.transform = `scale(${end})`;
-        });
-        setTimeout(() => {
-          navItems.forEach(item => { item.style.transition = ''; });
-        }, TRANSITION_MS + 100);
-      }));
-    }
+      setTimeout(() => {
+        navItems.forEach(item => { item.style.transition = ''; });
+      }, TRANSITION_MS + 100);
+    }));
 
     window.addEventListener('scroll', updateNav, { passive: true });
+    /* Marks move on resize, so the cached slide target must be recomputed. */
+    window.addEventListener('resize', () => { slideDistance = null; updateNav(); });
   </script>
 
 </body>

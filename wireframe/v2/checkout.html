@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Checkout — Neotone</title>
+  <style>
+    :root { --ink: #111; --line: #d9d9d9; --muted: #4f4f4f; --green: #2a7a2a; --max: 1180px; }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body { background: #fff; color: var(--ink); font-family: Arial, Helvetica, sans-serif; }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      height: 100px;
+      overflow: hidden;
+      /* Opaque, or content scrolls through and collides with the wordmark.
+         Must track the body background. */
+      background: #fff;
+    }
+
+    /* Mirrors .page exactly, so the marks align to the same left and right
+       boundaries as the bordered content blocks beneath them. */
+    .nav-inner {
+      position: relative;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 48px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Default mode: One is absolutely centred on the page. That takes it out of
+       the flex flow, so space-between pins Neotone and neOS to the two
+       boundaries. Future mode leaves all four marks in flow. */
+    .nav-inner.centre-one .nav-link[data-page="one"] {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    /* Each mark scales about the edge it is aligned to, so its anchored edge
+       stays put at any scale — and therefore sits in the same place whether the
+       mark is the active one on its own page or reduced on another. Neotone is
+       left-aligned, neOS right-aligned, One centred (the default origin).
+       The active mark is overridden to a left origin in JS, because it collapses
+       to the left boundary. */
+    .nav-link[data-page="neotone"] img { transform-origin: left center; }
+    .nav-link[data-page="neos"]    img { transform-origin: right center; }
+    nav a { display: block; text-decoration: none; cursor: pointer; }
+    nav img { height: 52px; width: auto; display: block; will-change: transform, opacity; }
+
+    /* Checkout has no Selection masthead item — the selection is the page. */
+
+    .page { max-width: var(--max); margin: 0 auto; padding: 0 48px 120px; }
+
+    .block { border: 1px solid var(--line); padding: 16px; margin-bottom: 14px; }
+    .block-label {
+      margin: 0 0 6px; font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--muted);
+    }
+    .block-desc { margin: 0; font-size: 13px; line-height: 1.5; color: var(--muted); }
+    .field {
+      width: 100%; border: 1px solid var(--line); padding: 8px; margin-top: 6px;
+      font-size: 13px; font-family: inherit;
+    }
+
+    .checkout-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
+
+    .checkout-country-select {
+      width: 100%; border: 1px solid var(--line); padding: 8px; margin-top: 8px;
+      font-size: 13px; font-family: inherit; background: #fff; cursor: pointer;
+    }
+
+    .checkout-item {
+      border: 1px solid var(--line); padding: 12px; margin-bottom: 8px;
+      display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;
+    }
+    .checkout-item-info { flex: 1; }
+    .checkout-item-name { margin: 0 0 3px; font-size: 13px; font-weight: 400; font-family: Georgia, serif; }
+    .checkout-item-detail { margin: 0 0 6px; font-size: 11px; color: var(--muted); }
+    .checkout-item-line { margin: 0 0 2px; font-size: 11px; color: var(--muted); }
+    .checkout-item-price { margin: 4px 0 0; font-size: 12px; }
+    .checkout-total {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 12px; margin-top: 4px; border-top: 1px solid var(--line); font-size: 12px;
+    }
+    .checkout-empty { color: var(--muted); font-size: 13px; margin: 0 0 12px; }
+    .back-link { font-size: 12px; color: var(--muted); font-style: italic; }
+    .back-link:hover { text-decoration: underline; color: var(--ink); }
+
+    .sel-remove {
+      background: none; border: none; cursor: pointer; padding: 0;
+      font-size: 11px; color: var(--muted); white-space: nowrap;
+    }
+    .sel-remove:hover { text-decoration: underline; color: var(--ink); }
+
+    .cta-btn {
+      display: block; width: 100%; padding: 12px; background: var(--ink); color: #fff;
+      border: none; font-size: 13px; font-weight: 600; letter-spacing: 0.04em;
+      cursor: pointer; margin-top: 14px;
+    }
+    .cta-btn:disabled { background: var(--line); color: var(--muted); cursor: default; }
+
+    @media (max-width: 980px) {
+      .checkout-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-link" data-page="neotone"><img src="../../media/svg_wordmarks/neotone.svg" alt="Neotone"></a>
+      <a href="one.html"   class="nav-link" data-page="one"><img src="../../media/svg_wordmarks/one.svg"          alt="One"></a>
+      <a href="anima.html" class="nav-link" data-page="anima"><img src="../../media/svg_wordmarks/anima.svg"        alt="Anima"></a>
+      <a href="neos.html"  class="nav-link" data-page="neos"><img src="../../media/svg_wordmarks/neOS.svg"         alt="neOS"></a>
+    </div>
+  </nav>
+
+  <main class="page">
+    <div class="checkout-grid">
+
+      <div>
+        <div class="block">
+          <p class="block-label">Your Selection</p>
+          <div id="checkout-items" style="margin-top: 10px;"></div>
+          <div class="checkout-total" id="checkout-total" style="display: none;">
+            <span>Total</span><span id="checkout-total-amount"></span>
+          </div>
+          <p id="checkout-empty" class="checkout-empty" style="display: none; margin-top: 10px;">
+            Your selection is empty. <a class="back-link" href="one.html">Browse instruments &rarr;</a>
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <div class="block">
+          <p class="block-label">Destination Country</p>
+          <select class="checkout-country-select" id="checkout-country" onchange="changeCheckoutCountry(this.value)">
+            <option value="HU">Hungary</option>
+            <option value="DE">Germany</option>
+            <option value="FR">France</option>
+            <option value="US">United States</option>
+          </select>
+          <p class="block-desc" style="margin-top: 8px; font-size: 11px;">VAT is calculated based on destination country, regardless of billing country.</p>
+        </div>
+
+        <div class="block">
+          <p class="block-label">Delivery Details</p>
+          <input class="field" placeholder="First and last name" />
+          <input class="field" placeholder="Email address" />
+          <input class="field" placeholder="Street address" />
+          <input class="field" placeholder="City" />
+          <input class="field" placeholder="Postal code" />
+        </div>
+
+        <div class="block">
+          <p class="block-label">Payment</p>
+          <p class="block-desc" style="margin-top: 4px;">You will be redirected to our payment processor to complete your purchase securely.</p>
+          <button class="cta-btn" id="checkout-cta" onclick="handleCheckout()">Complete purchase</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    /* ---- Nav ----
+       ACTIVE is One: checkout sits inside the One flow, so the masthead
+       returns to its parent rather than scrolling to top. */
+    /* ---- Future-products mode ----
+       Anima has not shipped, so it is absent from the nav by default and
+       reinstated with ?future=show. The flag propagates across nav clicks so
+       the whole site can be browsed in its future state, and the URL stays
+       shareable. Visiting anima.html implies the mode, since a page's own
+       mark must be present for the return mechanism to work.
+
+       ACTIVE is derived from the rendered nav rather than hardcoded, because
+       removing Anima shifts every index after it. */
+    const PAGE   = 'one';
+    const FUTURE_PARAM = new URLSearchParams(location.search).get('future');
+    const FUTURE = PAGE === 'anima' ||
+      (FUTURE_PARAM !== null && !['hide', '0', 'false'].includes(FUTURE_PARAM));
+
+    const navInner = document.querySelector('.nav-inner');
+
+    if (!FUTURE) {
+      const anima = document.querySelector('.nav-link[data-page="anima"]');
+      if (anima) anima.remove();
+      navInner.classList.add('centre-one');
+    }
+    const navQuery = FUTURE ? '?future=show' : '';
+
+    const TRANSITION_MS = 600;
+    const BASE_SCALE    = 0.58;
+    const TRANSITION_PX = 90;
+    const SLIDE_PX      = 120;
+
+    const navLinks = document.querySelectorAll('.nav-link');
+    const navItems = Array.from(navLinks).map(a => a.querySelector('img'));
+    const ACTIVE   = Math.max(0, [...navLinks].findIndex(a => a.dataset.page === PAGE));
+    const inactiveScale = BASE_SCALE;   // every page reduces its non-active marks
+
+    /* The active mark scales about its LEFT edge, not its centre. Neotone is
+       already sitting on the content-left boundary and never slides, so with a
+       centre origin it would drift right as it shrank and then slide back. With
+       a left origin it simply shrinks in place, and for the marks that do slide
+       the target becomes a plain difference of left edges. */
+    if (navItems[ACTIVE]) navItems[ACTIVE].style.transformOrigin = 'left center';
+
+    let slideDistance = null;
+
+    navLinks.forEach((link, i) => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        sessionStorage.setItem('prevActive',    String(ACTIVE));
+        window.location.href = link.getAttribute('href') + navQuery;
+      });
+    });
+
+    function updateNav() {
+      const p     = Math.min(Math.max(window.scrollY / TRANSITION_PX, 0), 1);
+      const q     = Math.min(Math.max((window.scrollY - TRANSITION_PX) / SLIDE_PX, 0), 1);
+      const scale = 1 - p * (1 - BASE_SCALE);
+
+      if (q > 0 && slideDistance === null) {
+        /* Marks scale about their left edge, so landing on the content-left
+           boundary is just the distance between left edges. Neotone resolves to
+           0 here, which is what keeps it anchored. */
+        slideDistance = navLinks[0].getBoundingClientRect().left
+                      - navLinks[ACTIVE].getBoundingClientRect().left;
+      }
+
+      const tx = slideDistance !== null ? slideDistance * q : 0;
+      navItems.forEach((item, i) => {
+        if (i === ACTIVE) {
+          item.style.transform = `translateX(${tx}px) scale(${scale})`;
+        } else {
+          item.style.transform = `translateY(${-80 * p}px) scale(${inactiveScale})`;
+          item.style.opacity   = 1 - p;
+        }
+      });
+    }
+
+    const prevActive = parseInt(sessionStorage.getItem('prevActive') ?? '-1', 10);
+    sessionStorage.removeItem('prevActive');
+
+    /* Entry animation, identical on every page including the landing page: this
+       page's own mark is full size and every other mark is reduced. Arriving
+       from another page, that page's mark starts full size and shrinks as this
+       one grows, so the marks stay continuous across navigation. */
+    navItems.forEach((item, i) => {
+      item.style.transform = `scale(${i === prevActive ? 1 : BASE_SCALE})`;
+    });
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      navItems.forEach((item, i) => {
+        const start = (i === prevActive) ? 1 : BASE_SCALE;
+        const end   = (i === ACTIVE)     ? 1 : BASE_SCALE;
+        if (start !== end) item.style.transition = `transform ${TRANSITION_MS}ms ease`;
+        item.style.transform = `scale(${end})`;
+      });
+      setTimeout(() => {
+        navItems.forEach(item => { item.style.transition = ''; });
+      }, TRANSITION_MS + 100);
+    }));
+
+    window.addEventListener('scroll', updateNav, { passive: true });
+
+    /* ---- Checkout ---- */
+    const VAT_RATES = { HU: 0.27, DE: 0.19, FR: 0.20, US: null };
+    const VAT_NAMES = { HU: "Hungary", DE: "Germany", FR: "France", US: "United States" };
+
+    let checkoutCountry = localStorage.getItem('neotone_country') || 'HU';
+
+    function getSelItems() {
+      try { return JSON.parse(localStorage.getItem('neotone_sel') || '[]'); } catch(e) { return []; }
+    }
+    function saveSelItems(items) {
+      try { localStorage.setItem('neotone_sel', JSON.stringify(items)); } catch(e) {}
+    }
+
+    function calcItemTotal(item, country) {
+      if (!item.rawBase) {
+        const n = parseFloat((item.price || '').replace('EUR ', '').replace(/,/g, ''));
+        return { baseStr: item.price || '—', discountPct: 0, vatText: null, total: isNaN(n) ? 0 : n, totalStr: item.price || '—' };
+      }
+      const disc     = item.discountPct || 0;
+      const subtotal = Math.round(item.rawBase * (1 - disc / 100));
+      const rate     = VAT_RATES[country];
+      if (rate === null) {
+        return {
+          baseStr: 'EUR ' + item.rawBase.toLocaleString('en-US'),
+          discountPct: disc,
+          vatText: 'No VAT (import duties may apply)',
+          total: subtotal,
+          totalStr: 'EUR ' + subtotal.toLocaleString('en-US')
+        };
+      }
+      const vatAmount = Math.round(subtotal * rate);
+      const total     = subtotal + vatAmount;
+      return {
+        baseStr: 'EUR ' + item.rawBase.toLocaleString('en-US'),
+        discountPct: disc,
+        vatText: Math.round(rate * 100) + '% (' + VAT_NAMES[country] + '): EUR ' + vatAmount.toLocaleString('en-US'),
+        total: total,
+        totalStr: 'EUR ' + total.toLocaleString('en-US')
+      };
+    }
+
+    function changeCheckoutCountry(val) {
+      checkoutCountry = val;
+      localStorage.setItem('neotone_country', val);
+      renderCheckout();
+    }
+
+    function removeFromSelection(id) {
+      saveSelItems(getSelItems().filter(i => i.id !== id));
+      renderCheckout();
+    }
+
+    function renderCheckout() {
+      const items     = getSelItems();
+      const container = document.getElementById('checkout-items');
+      const totalDiv  = document.getElementById('checkout-total');
+      const totalAmt  = document.getElementById('checkout-total-amount');
+      const emptyEl   = document.getElementById('checkout-empty');
+      const cta       = document.getElementById('checkout-cta');
+
+      if (items.length === 0) {
+        container.innerHTML = '';
+        totalDiv.style.display = 'none';
+        emptyEl.style.display = 'block';
+        cta.disabled = true;
+        return;
+      }
+
+      container.innerHTML = items.map(item => {
+        const calc = calcItemTotal(item, checkoutCountry);
+        let lines = '<p class="checkout-item-line">Base: ' + calc.baseStr + '</p>';
+        if (item.discountEligible) {
+          const discAmt = Math.round(item.rawBase * calc.discountPct / 100);
+          lines += '<p class="checkout-item-line">Discount (' + calc.discountPct + '%): ' +
+                   (discAmt > 0 ? '&minus;' : '') + 'EUR ' + discAmt.toLocaleString('en-US') + '</p>';
+        }
+        if (calc.vatText) lines += '<p class="checkout-item-line">VAT: ' + calc.vatText + '</p>';
+        return '<div class="checkout-item">' +
+          '<div class="checkout-item-info">' +
+            '<p class="checkout-item-name">' + item.name + '</p>' +
+            '<p class="checkout-item-detail">' + item.detail + '</p>' +
+            lines +
+            '<p class="checkout-item-price">' + calc.totalStr + '</p>' +
+          '</div>' +
+          '<button class="sel-remove" onclick="removeFromSelection(' + item.id + ')">Remove</button>' +
+        '</div>';
+      }).join('');
+
+      emptyEl.style.display = 'none';
+
+      let grandTotal = 0;
+      items.forEach(item => { grandTotal += calcItemTotal(item, checkoutCountry).total; });
+      totalAmt.textContent = 'EUR ' + grandTotal.toLocaleString('en-US');
+      totalDiv.style.display = 'flex';
+      cta.disabled = false;
+    }
+
+    function handleCheckout() {
+      alert(
+        "Function: Payment processor handoff\n\n" +
+        "Delivery details and the selection line items are passed to the payment processor. " +
+        "The buyer completes payment on a hosted page and returns to a confirmation."
+      );
+    }
+
+    document.querySelector('.back-link').href = 'one.html' + navQuery;
+    document.getElementById('checkout-country').value = checkoutCountry;
+    renderCheckout();
+    /* Marks move on resize, so the cached slide target must be recomputed. */
+    window.addEventListener('resize', () => { slideDistance = null; updateNav(); });
+  </script>
+
+</body>
+</html>
