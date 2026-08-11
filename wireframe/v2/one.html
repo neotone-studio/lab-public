@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>One — Neotone</title>
+  <title>One · Neotone</title>
   <style>
     :root { --ink: #111; --line: #d9d9d9; --muted: #4f4f4f; --green: #2a7a2a; --max: 1180px; }
 
@@ -45,7 +45,7 @@
     }
 
     /* Each mark scales about the edge it is aligned to, so its anchored edge
-       stays put at any scale — and therefore sits in the same place whether the
+       stays put at any scale, and therefore sits in the same place whether the
        mark is the active one on its own page or reduced on another. Neotone is
        left-aligned, neOS right-aligned, One centred (the default origin).
        The active mark is overridden to a left origin in JS, because it collapses
@@ -62,7 +62,7 @@
       will-change: transform, opacity;
     }
 
-    /* Selection — absolutely positioned so it stays out of the space-between
+    /* Selection: absolutely positioned so it stays out of the space-between
        flow and cannot disturb the four wordmarks. Revealed only once the
        inactive marks have fully faded (scrollY > TRANSITION_PX) and the
        selection is non-empty. */
@@ -89,7 +89,7 @@
     /* ---- Page ---- */
     .page { max-width: var(--max); margin: 0 auto; padding: 0 48px 120px; }
 
-    /* Section skeleton — items 1-7 of the One page brief. Placeholders await
+    /* Section skeleton: items 1-7 of the One page brief. Placeholders await
        content; the structure is the deliverable at this stage. */
     .slot {
       border: 1px solid var(--line);
@@ -104,7 +104,7 @@
     .slot-note { font-size: 13px; color: var(--muted); line-height: 1.5; }
 
     /* ================================================================
-       Purchase machinery — ported from v1/one.html.
+       Purchase machinery, ported from v1/one.html.
        See v1/site-structure.md for the component reference.
        ================================================================ */
 
@@ -311,6 +311,52 @@
     .sel-save-btn { border: 1px solid var(--line); background: #fff; padding: 6px 10px; font-size: 11px; font-family: inherit; cursor: pointer; white-space: nowrap; }
     .sel-save-label { font-size: 10px; color: var(--muted); margin: 0 0 5px; }
     .subscribe-confirm { display: none; font-size: 11px; font-style: italic; color: var(--green); }
+
+    /* ---- Footer ----
+       Two quiet bands: sections + search, then utility + place. No column
+       headings, no dividers beyond a single hairline. Wraps rather than
+       needing breakpoints. */
+    .site-footer { background: #000; color: #fff; margin-top: 96px; }
+    .footer-inner { max-width: var(--max); margin: 0 auto; padding: 56px 48px; }
+
+    .footer-top {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      gap: 32px; flex-wrap: wrap;
+    }
+    /* Text, not the wordmarks. The nav owns the marks and works them: they
+       shrink into the masthead and act as the return mechanism. In a utility
+       strip they could only be decoration, and mixing artwork with text gave
+       the footer two type systems. */
+    .footer-sections { display: flex; align-items: baseline; gap: 22px; flex-wrap: wrap; }
+    .footer-sections a {
+      font-size: 13px; color: #fff; text-decoration: none; cursor: pointer;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .footer-sections a:hover { opacity: 0.55; }
+
+    .footer-search { display: flex; align-items: center; width: 260px; max-width: 100%; }
+    .footer-search input {
+      flex: 1; min-width: 0; background: none; color: #fff;
+      border: none; border-bottom: 1px solid rgba(255,255,255,0.28);
+      padding: 6px 0; font-size: 13px; font-family: inherit;
+    }
+    .footer-search input::placeholder { color: rgba(255,255,255,0.35); }
+    .footer-search input:focus { outline: none; border-bottom-color: rgba(255,255,255,0.7); }
+    .footer-search button {
+      background: none; border: none; border-bottom: 1px solid rgba(255,255,255,0.28);
+      color: rgba(255,255,255,0.55); padding: 6px 0 6px 14px;
+      font-size: 14px; font-family: inherit; cursor: pointer;
+    }
+    .footer-search button:hover { color: #fff; }
+
+    .footer-bottom {
+      display: flex; justify-content: space-between; gap: 20px 32px; flex-wrap: wrap;
+      margin-top: 44px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.15);
+    }
+    .footer-utility { display: flex; flex-wrap: wrap; gap: 8px 22px; }
+    .footer-utility a { font-size: 12px; color: rgba(255,255,255,0.55); text-decoration: none; cursor: pointer; font-family: Arial, Helvetica, sans-serif; }
+    .footer-utility a:hover { color: #fff; }
+    .footer-meta { margin: 0; font-size: 12px; color: rgba(255,255,255,0.38); font-family: Arial, Helvetica, sans-serif; }
   </style>
 </head>
 <body>
@@ -333,7 +379,7 @@
 
     <section class="slot">
       <p class="slot-label">2 · Specs strip</p>
-      <p class="slot-note">Material, sound, control, scales, lead time — in that order. Drafted 6/22, close to final.</p>
+      <p class="slot-note">Material, sound, control, scales, lead time, in that order. Drafted 6/22, close to final.</p>
     </section>
 
     <section class="slot">
@@ -501,7 +547,7 @@
             <div class="summary-layout">
               <div class="sum-pre">
                 <p class="block-desc" id="stock-sum-item" style="margin-top:4px;">Select an instrument above</p>
-                <p class="block-desc" id="stock-sum-base" style="margin-top:4px;">Base price: &mdash;</p>
+                <p class="block-desc" id="stock-sum-base" style="margin-top:4px;">Base price: –</p>
                 <p class="block-desc" id="stock-sum-disc" style="margin-top:4px;">Referral discount: 0%</p>
               </div>
               <div class="sum-controls">
@@ -526,7 +572,7 @@
               </div>
               <div class="sum-post">
                 <p class="block-desc" id="stock-sum-vat" style="margin-top:4px;"></p>
-                <p class="summary-total" id="stock-sum-total" style="margin-top:4px;"><strong>Total: &mdash;</strong></p>
+                <p class="summary-total" id="stock-sum-total" style="margin-top:4px;"><strong>Total: –</strong></p>
               </div>
             </div>
             <button class="opt" style="margin-top:14px;" onclick="addStockToSelection()">Add to Selection</button>
@@ -604,6 +650,37 @@
     </div>
   </div>
 
+  <footer class="site-footer">
+    <div class="footer-inner">
+
+      <div class="footer-top">
+        <div class="footer-sections">
+          <a class="footer-section-link" href="index.html" data-page="neotone">Neotone</a>
+          <a class="footer-section-link" href="one.html"   data-page="one">One</a>
+          <a class="footer-section-link" href="anima.html" data-page="anima">Anima</a>
+          <a class="footer-section-link" href="neos.html"  data-page="neos">neOS</a>
+        </div>
+        <form class="footer-search" onsubmit="handleSearch(event)">
+          <input type="search" placeholder="Search" />
+          <button type="submit" aria-label="Search">&rarr;</button>
+        </form>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-utility">
+          <a onclick="utilityLink('About')">About</a>
+          <a onclick="utilityLink('Workshop')">Workshop</a>
+          <a onclick="utilityLink('Contact')">Contact</a>
+          <a onclick="utilityLink('FAQ')">FAQ</a>
+          <a onclick="utilityLink('Terms')">Terms</a>
+          <a onclick="utilityLink('Privacy')">Privacy</a>
+        </div>
+        <p class="footer-meta">Neotone, Budapest</p>
+      </div>
+
+    </div>
+  </footer>
+
   <script>
     /* ---- Future-products mode ----
        Anima has not shipped, so it is absent from the nav by default and
@@ -622,8 +699,8 @@
     const navInner = document.querySelector('.nav-inner');
 
     if (!FUTURE) {
-      const anima = document.querySelector('.nav-link[data-page="anima"]');
-      if (anima) anima.remove();
+      // nav mark and footer entry alike
+      document.querySelectorAll('[data-page="anima"]').forEach(el => el.remove());
       navInner.classList.add('centre-one');
     }
     const navQuery = FUTURE ? '?future=show' : '';
@@ -712,7 +789,7 @@
     window.addEventListener('scroll', updateNav, { passive: true });
 
     /* ================================================================
-       Purchase machinery — ported from v1/one.html.
+       Purchase machinery, ported from v1/one.html.
        ================================================================ */
 
     var state = {
@@ -1062,6 +1139,62 @@
     renderSelection();
     /* Marks move on resize, so the cached slide target must be recomputed. */
     window.addEventListener('resize', () => { slideDistance = null; updateNav(); });
+
+    /* ---- Footer ---- */
+    function handleSearch(e) {
+      e.preventDefault();
+      alert(
+        "Function: Site search\n\n" +
+        "Queries a client-side JSON index of article metadata: title, kicker, date, container, first line. " +
+        "The same index drives load-more in the containers, and is what a Tonefield issue is assembled from."
+      );
+    }
+    function utilityLink(name) {
+      alert(
+        "Destination: " + name + "\n\n" +
+        (name === 'Workshop'
+          ? "An article, not a utility page: the photographed workshop piece with everyone named. It earns a footer permalink because it is evergreen."
+          : "A utility page. Renders identically to an article, but carries the plain Neotone mark since it has no container to return to.")
+      );
+    }
+    /* Footer section links return to the top before switching page. From the
+       footer the masthead is collapsed, so navigating straight away would land
+       on a page whose entry animation starts from a full-size mark, which reads as a jump.
+       Scrolling up first lets the mark expand, and the cross-page animation
+       then continues from the state actually on screen. */
+    function scrollToTopThen(after) {
+      const run = () => { if (after) after(); };
+      if (window.scrollY <= 0) { run(); return; }
+
+      let done = false;
+      const finish = () => {
+        if (done) return;
+        done = true;
+        window.removeEventListener('scroll', onScroll);
+        clearTimeout(safety);
+        setTimeout(run, 140);          // brief hold on the expanded masthead
+      };
+      const onScroll = () => { if (window.scrollY <= 0) finish(); };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      // covers smooth scrolling being disabled, instant, or interrupted
+      const safety = setTimeout(finish, 1200);
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.querySelectorAll('.footer-section-link').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const href = link.getAttribute('href');
+        const here = location.pathname.split('/').pop() || 'index.html';
+        if (href === here) { scrollToTopThen(null); return; }   // already here: just return to top
+        scrollToTopThen(() => {
+          sessionStorage.setItem('prevActive', String(ACTIVE));
+          window.location.href = href + navQuery;
+        });
+      });
+    });
+
   </script>
 
 </body>
