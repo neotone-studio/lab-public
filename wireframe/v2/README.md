@@ -23,7 +23,7 @@ v2 rebuilds around three destinations ordered by reader state, four page species
 | **Article** | An individual piece. Own URL. | All written content |
 | **Container** | Holds articles. | Neotone, neOS |
 | **Section page** | A page of sections. Carries purchase. | One, later Anima |
-| **Utility** | Footer material. | Terms, privacy, contact, FAQ, workshop address |
+| **Utility** | Footer material. | Terms, privacy, contact, manual, workshop address |
 
 Nothing is a fifth thing. A page that is none of these is either an article or it does not exist.
 
@@ -100,9 +100,46 @@ This exception decouples One from the entire article system. One can be built to
 
 ---
 
+### Page openings
+
+**An opening exists to gloss a name the reader cannot yet decode.** It is one centred statement of what the page is for, with the page's own name set larger inside the sentence rather than above it as a heading. A separate headline would only repeat the nav: on One it read "Neotone One" directly beneath the Neotone and One wordmarks. The `<h1>` is the whole sentence with the name in a span, so the document keeps one heading and it is descriptive.
+
+| Page | Opening |
+|---|---|
+| Neotone | none |
+| One | The **Neotone One** is handcrafted in Budapest, built to order |
+| neOS | **neOS** is the window into Neotone's musical intelligence |
+| Anima | The next instrument |
+
+**Neotone has no opening, and that is the rule working rather than an omission.** neOS is a coined word, One is a five-figure purchase, and Anima is a product nobody has heard of, so each needs a line. Neotone is on the masthead and the pieces beneath it say what it is better than a sentence can. The home page opens directly on its lead piece, so the running order is editorial rather than chronological: position one *is* the claim, and what sits there is a decision taken every time something is published.
+
+Three registers failed and should not return: superlatives ("the world's most organic digital instrument"), coinages the reader has not yet earned ("a Linked Resonant Field"), and nameless slogans ("Redefining digital craftsmanship"). Each claims something the reader has not been shown. See `../../2026-08-11_🤖_why-three-destinations.md`, How it reads.
+
+Copy is David's. Terminal periods are dropped: one is a fragment and cannot take one, and display statements read cleaner without. Apostrophes are typographic.
+
+**Arrival and departure.** The opening fades in on load over 760ms after a 140ms delay, so a page transition lands in two beats rather than cutting: the wordmark settles, then the statement arrives. On scroll it holds position while the page moves under it and fades out by 120px, rather than being carried off the top. On Neotone, which has no opening, the feed itself carries the entry fade.
+
+Those are two different opacities on two elements. The entry animation uses `fill: both`, so its final value keeps applying and would override anything set on the same element; it therefore sits on a wrapper while the scroll fade owns the heading. The entry fade is CSS rather than JS, so it cannot leave the heading invisible if scripting fails and does not depend on `requestAnimationFrame`, which throttles in a hidden document. Both respect `prefers-reduced-motion`.
+
+### Container feeds
+
+Blocks size to their content, not the viewport. They were `115vh`, inherited from the mockup where each article filled a screen during the colour-change scroll; without that mechanic the height only pushed the first article to 0.99 of the viewport, where it read as something still to arrive.
+
+| Rule | Effect |
+|---|---|
+| `.feed-item + .feed-item { margin-top: 24vh }` | the next piece is off the bottom edge and must be scrolled to |
+| `.feed { padding-top: 104px }` where there is no opening | the first piece starts where the opening's first line sat |
+| `.feed { padding-bottom: 30vh }` | the last piece ends rather than running into the footer |
+
+Space is applied between pieces only, never before the first, so piece one holds its position on load while the others stay a scroll apart. It is measured in vh so that holds at any screen height.
+
+Feed blocks are whole click targets, per principle 14: no read-more button. The block itself is not an `<a>`, because a preview can carry media and clicking a video has to play it; the title carries the link.
+
+---
+
 ## Current state
 
-Four pages: `index.html` (Neotone), `one.html`, `anima.html`, `neos.html`.
+Five base pages: `index.html` (Neotone), `one.html`, `anima.html`, `neos.html`, `checkout.html`, plus article and utility pages listed under Files.
 
 Each is the same template with a different `ACTIVE` index. What exists is the nav and its scroll animation:
 
@@ -122,9 +159,9 @@ Each is the same template with a different `ACTIVE` index. What exists is the na
 
 The nav carries the same value as an opaque background and must be changed with it. There are two occurrences per page.
 
-Neotone, neOS and Anima each carry three placeholder blocks: articles on the two containers, sections on Anima. They are not yet click targets.
+Neotone and neOS each carry three feed previews, whole-block links to real article pages. Anima carries three placeholder section blocks and is a reminder of a future product rather than a built page.
 
-Three matches the readers actually named in the content list: neOS has *What is Spatial MIDI?* and *How to build a scale* plus one open slot, and Neotone has three. Principle 23 says nothing goes in the wireframe without a reader, and the extra three on each page had none.
+Three matches the readers actually named in the content list. Principle 23 says nothing goes in the wireframe without a reader, and the extra blocks on each page had none.
 
 **Entry state is uniform across every page**, landing page included: the page's own mark is full size and every other mark sits at `BASE_SCALE`. Arriving from another page, that page's mark starts full size and shrinks as this one grows, so the marks stay continuous across navigation.
 
@@ -143,6 +180,26 @@ Built first, because it is the only page with revenue and the only page with no 
 One assumes intent. Someone arrives knowing what they want. The page does not argue for the instrument. Its learn-more stacks are depth for the already committed: reassurance and enrichment, not a case.
 
 Roughly 900 words across eight units, most drafted. Items 1–7 in the principles document.
+
+### Page structure
+
+Seven sections, all real structure at real type scale holding placeholder words. There are no labelled boxes describing what will go where: dropping copy in should not require touching layout.
+
+| # | Section | State |
+|---|---|---|
+| 1 | Opening | One centred statement, name set inline |
+| 2 | Specs strip | Five cells, close to final |
+| 3 | Orientation | One centred measure, ~120 words |
+| 4 | Order fork | Real, ported from v1 |
+| 5 | Read further | Three article cards, new tab |
+| 6 | What happens next | Four steps plus purchase terms |
+| 7 | Play one first | Workshop and artist sessions, as a fork |
+
+Chrome appears only where it carries information. The specs strip and steps strip keep hairline dividers between cells because the dividers separate data, but their outer boxes are gone. Sections are separated by an 88px rhythm rather than borders. Bordered `.slot` boxes with uppercase labels were tried and removed: they described the section instead of being it.
+
+The instrument imagery lives in the order fork's preview, so there is no hero image above it: two grey blocks on one screen would be weight without information. Whether a banner image eventually appears is still an open design-pass question.
+
+**Read further sits after the purchase flow**, not before it. These are depth for the already committed, which is what the summary block's bookend note already says. All three carry `target="_blank"`: their parent is Neotone, so the masthead would otherwise carry someone mid-purchase back to culture.
 
 ### Ports forward from v1 essentially verbatim
 
@@ -198,6 +255,50 @@ Two cleanups follow:
 
 ---
 
+## Article pages
+
+**File:** `neos-note-names.html`, a worked sketch of the species.
+
+Articles have their own URL and render identically to utility pages. The only difference is the mark in the masthead: an article carries its container's mark, a utility page carries the plain Neotone mark, because a utility page has no container to return to.
+
+**The mark is the return.** On an article, `RETURN_TO` names the container and clicking the active mark navigates there rather than scrolling to the top. No breadcrumbs, no back link, per principle 11. The flag propagates, so future mode survives the trip.
+
+**Layout.** Media runs to the content grid at 1084px; head and body stay at a 680px reading measure. Kicker, title, standfirst, media, prose, with quiet sub-heads.
+
+**Format is independent of species.** The video box is a placeholder for a piece that may be prose, video, or prose built around video. That is a production decision, not a structural one, so the template carries media as a first-class element rather than an afterthought.
+
+**Feed blocks are links**, per principle 14: the whole block is the click target, no read-more button.
+
+### Utility pages
+
+**Files:** `manual.html` (contents), `manual-scales.html` (one worked section).
+
+Same template as an article, which is the point: they render identically. The difference is the mark. An article carries its container's mark and returns there. A utility page carries the plain Neotone mark and returns to root, because it has no container.
+
+**The manual is a contents page onto section pages.** Every section has its own address, which is what lets a tooltip inside the software link straight to the part that answers the question in front of the player. Sections are grouped rather than listed flat: the instrument, getting started, the Interface, and troubleshooting.
+
+**A section page shows the three registers.** `manual-scales.html` lays out Basics, Going deeper, and Deeper still. The third register's items carry a small neOS marker and leave for the container, which is the practical layer handing off to the intelligence layer at exactly the point the question turns into a why.
+
+Structure taken from the real manual, version 3.2, fifty pages. Headings within Scales follow the walkthrough script.
+
+### Returning, and going on
+
+Three separate things, often confused with each other.
+
+**Return is the masthead.** Clicking the container's mark goes back. No breadcrumb, no back link at the foot of the piece: the mark is visible the whole way down and a bottom link would be a weaker duplicate.
+
+**Restoration is part of return.** Opening a piece stores the container's scroll position. The article's masthead return sets a flag naming the container, and only that flag triggers a restore, so arriving fresh from the nav still lands at the top. Verified both ways: returning from a piece restores 1400px, arriving from the nav with a stored position lands at 0.
+
+The restore runs immediately rather than inside `requestAnimationFrame`, with the frame after used only as a re-apply. rAF is throttled in a hidden document, which silently defeated the first attempt.
+
+**Propulsion is a third thing**, and it is what a piece needs at the end. `Read next` carries two items chosen for relevance, not recency. A neOS piece can point back down to the manual section it grew out of, which closes the loop between the intelligence layer and the practical one.
+
+### Where articles come from
+
+The manual is the practical layer and neOS the intelligence layer. The manual is written in three registers: basic walkthrough, deeper functionality, and the craft questions underneath. neOS material comes from the first and last of those, never the middle, and only when a piece holds for someone who will never touch the control it describes. See `../../2026-08-11_🤖_why-three-destinations.md`.
+
+---
+
 ## Footer
 
 Full-bleed black bar, white text, contents on the same `.page` grid as everything else (98–1182 at 1280). Present on all five pages, after the content.
@@ -211,7 +312,7 @@ Two bands, no column headings and a single hairline between them:
 
 Everything is text, sans-serif: sections at 13px solid white, utility at 12px and 55% white. Both bands wrap, so no breakpoints are needed.
 
-**The wordmarks are deliberately not reused here.** They were tried and removed. The nav owns the marks and works them: they shrink into the masthead and act as the return mechanism. A footer cannot give them that job, so they became decoration, and at a footer-appropriate size they stopped being legible (neOS rendered 51×14). Mixing artwork with text also gave the footer two type systems. Principle 9 makes the footer utility, and a wordmark is brand rather than utility.
+**The footer uses text, not the wordmarks.** The nav owns the marks and works them: they shrink into the masthead and act as the return mechanism. A footer cannot give them that job. Principle 9 makes the footer utility, and a wordmark is brand rather than utility.
 
 All footer text names its font family explicitly rather than inheriting. The three container pages originally set no `font-family` on `body`, so the footer silently fell back to Times on them while `one.html` and `checkout.html` looked correct.
 
@@ -253,9 +354,8 @@ Split accordingly:
 1. ~~**Scaffold**~~ **Done.** v2 nav on the One page, Selection in the collapsed masthead, section skeleton for items 1–7.
 2. ~~**Port purchase machinery**~~ **Done.** Order fork through checkout. See below.
 3. **Restructure to brief**: banner, specs strip, orientation paragraph, what-happens-next, purchase terms, play-one fork. Cut the discovery blocks. Add the three stack links, `target="_blank"`.
-4. **Then, and not before, the article system**: container blocks as whole click targets, article pages with real URLs, JSON metadata index behind both search and load-more, scroll restoration on return.
-
-Step 4 is second in importance and blocks everything except One. It should start as soon as step 3 is scoped, not after it finishes.
+4. **Article system.** Mostly landed: feed blocks are whole click targets, article and utility pages have real URLs, the masthead returns, and scroll position is restored on return. Outstanding: the JSON metadata index behind search and load-more, which is currently an `alert()` describing the mechanism.
+5. **Content.** Two real pieces exist. Everything the site argues for depends on there being six to ten.
 
 ### What step 2 landed
 
@@ -278,6 +378,8 @@ Flagged rather than assumed.
 2. **Tonefield merch** (`EUR 12`) has no home, since Tonefield is an article now. Drop, or re-home later?
 3. **"Receive Tonefield" email capture** is not in items 1–7. Does it appear on One at all?
 4. **Questions contact form.** v1 has it on One; the principles document puts contact in the footer. Keep both, or footer only?
+7. **FAQ is still linked in the footer** but was ruled out: questions are answered where they arise, which is what makes an FAQ unnecessary rather than merely unfashionable. Remove the link, or keep About as the container for what an FAQ was really for?
+8. **"Built to order" in the One opening echoes lead time** three lines below it in the specs strip. Harmless, but the same fact is stated twice in different precision.
 5. **Reaching other sections on mobile** once the bar holds one mark. See Mobile: deliberately deferred, not overlooked. v1's hamburger does not transfer to a wordmark-only nav.
 6. ~~Subpage direct-load state~~ Resolved. Entry state is now uniform on every page; see Current state.
 
@@ -295,6 +397,11 @@ v2/
   anima.html        Anima, placeholder for future product
   neos.html         neOS, container
   checkout.html     purchase completion; not a nav destination
+
+  neotone-golsa-nazari.html   article, Neotone container
+  neos-note-names.html        article, neOS container
+  manual.html                 utility, contents page
+  manual-scales.html          utility, one worked section
 ```
 
 Assets resolve as `../../media/…` from any v2 page.

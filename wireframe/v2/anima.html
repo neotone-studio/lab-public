@@ -8,6 +8,7 @@
     :root { --ink: #111; --line: #d9d9d9; --muted: #4f4f4f; --green: #2a7a2a; --max: 1180px; }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    a { color: inherit; text-decoration: none; }
 
     body { background: #fff; color: var(--ink); font-family: Arial, Helvetica, sans-serif; }
 
@@ -62,15 +63,30 @@
       will-change: transform, opacity;
     }
 
+    /* Blocks size to their content rather than the viewport. The 115vh height
+       came from the original mockup, where each article filled a screen during
+       the colour-change scroll; without that mechanic it only pushed the first
+       article off the bottom edge, so it read as something still to arrive. */
     .article {
       width: 100%;
-      height: 115vh;
+      padding: 56px 0;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       gap: 16px;
     }
+    /* Gap between articles only, never before the first, so article one keeps
+       its position just below the middle of the viewport on load. Measured in
+       vh so the next article is always off the bottom edge and has to be
+       scrolled to, whatever the screen height. */
+    .article + .article { margin-top: 48vh; }
+    /* Adjacent sibling, not :first-of-type: the opening wrapper is also a div,
+       so it would claim first-of-type and this would silently match nothing. */
+    .opening-wrap + .article { padding-top: 116px; }
+    /* Room before the footer, so the last article ends rather than runs into it.
+       last-of-type is safe here: the footer is a <footer>, so the final div
+       sibling is the last article. */
+    .article:last-of-type { padding-bottom: 32vh; }
 
     .article-label {
       font-family: sans-serif;
@@ -132,6 +148,30 @@
     .footer-utility a { font-size: 12px; color: rgba(255,255,255,0.55); text-decoration: none; cursor: pointer; font-family: Arial, Helvetica, sans-serif; }
     .footer-utility a:hover { color: #fff; }
     .footer-meta { margin: 0; font-size: 12px; color: rgba(255,255,255,0.38); font-family: Arial, Helvetica, sans-serif; }
+
+    /* ---- Page opening ----
+       Every page opens with one centred statement of what it is for, with the
+       section's own name inside that sentence rather than above it as a
+       heading. The nav already names the page, so a headline only repeats it.
+       Same gesture on every page, so the whole site reads as written. */
+    /* Entry fade sits on the wrapper, not the heading. The animation uses
+       fill: both, so its final opacity keeps applying and would override the
+       scroll fade below. Two elements, two opacities, composed by the browser. */
+    .opening-wrap { animation: opening-in 760ms ease 140ms both; }
+    @keyframes opening-in {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    .opening {
+      max-width: 720px; margin-left: auto; margin-right: auto;
+      padding: 104px 0 88px; text-align: center;
+      font-size: 21px; font-weight: 400; line-height: 1.7; color: var(--ink);
+      will-change: opacity, transform;
+    }
+    .opening-name { font-size: 34px; line-height: 1; letter-spacing: -0.01em; white-space: nowrap; }
+    @media (prefers-reduced-motion: reduce) {
+      .opening-wrap { animation: none; }
+    }
   </style>
 </head>
 <body>
@@ -144,6 +184,10 @@
       <a href="neos.html"  class="nav-link" data-page="neos"><img src="../../media/svg_wordmarks/neOS.svg"         alt="neOS"></a>
     </div>
   </nav>
+
+  <div class="opening-wrap">
+    <h1 class="opening">The next instrument</h1>
+    </div>
 
   <div class="article"><div class="article-label">Section 1</div></div>
   <div class="article"><div class="article-label">Section 2</div></div>
@@ -167,10 +211,9 @@
 
       <div class="footer-bottom">
         <div class="footer-utility">
-          <a onclick="utilityLink('About')">About</a>
           <a onclick="utilityLink('Workshop')">Workshop</a>
+          <a href="manual.html">Manual</a>
           <a onclick="utilityLink('Contact')">Contact</a>
-          <a onclick="utilityLink('FAQ')">FAQ</a>
           <a onclick="utilityLink('Terms')">Terms</a>
           <a onclick="utilityLink('Privacy')">Privacy</a>
         </div>
@@ -223,6 +266,20 @@
 
     let slideDistance = null;
 
+    /* The opening holds its position while the page scrolls under it and fades,
+       rather than being carried off the top. The fade is deliberately quicker
+       than the gap beneath the heading, so it is gone before the content below
+       arrives at it and the two never overlap while both are visible. */
+    const opening = document.querySelector('.opening');
+    const OPENING_FADE_PX = 120;
+    const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function updateOpening() {
+      if (!opening) return;
+      const held = Math.min(Math.max(window.scrollY, 0), OPENING_FADE_PX);
+      if (!REDUCED_MOTION) opening.style.transform = `translateY(${held}px)`;
+      opening.style.opacity = String(1 - held / OPENING_FADE_PX);
+    }
+
     navLinks[ACTIVE].addEventListener('click', e => {
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -259,6 +316,8 @@
           item.style.opacity   = 1 - p;
         }
       });
+
+      updateOpening();
     }
 
     const prevActive = parseInt(sessionStorage.getItem('prevActive') ?? '-1', 10);
@@ -301,6 +360,8 @@
         "Destination: " + name + "\n\n" +
         (name === 'Workshop'
           ? "An article, not a utility page: the photographed workshop piece with everyone named. It earns a footer permalink because it is evergreen."
+          : name === 'Manual'
+          ? "The practical layer. Which control, what it does, written in three registers: basic walkthrough, deeper functionality, and the craft questions underneath. Also reached from inside the software, beside the control it explains. The parts that hold on their own surface as neOS pieces."
           : "A utility page. Renders identically to an article, but carries the plain Neotone mark since it has no container to return to.")
       );
     }

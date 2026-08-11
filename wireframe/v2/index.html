@@ -8,6 +8,7 @@
     :root { --ink: #111; --line: #d9d9d9; --muted: #4f4f4f; --green: #2a7a2a; --max: 1180px; }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    a { color: inherit; text-decoration: none; }
 
     body { background: #fff; color: var(--ink); font-family: Arial, Helvetica, sans-serif; }
 
@@ -62,15 +63,30 @@
       will-change: transform, opacity;
     }
 
+    /* Blocks size to their content rather than the viewport. The 115vh height
+       came from the original mockup, where each article filled a screen during
+       the colour-change scroll; without that mechanic it only pushed the first
+       article off the bottom edge, so it read as something still to arrive. */
     .article {
       width: 100%;
-      height: 115vh;
+      padding: 56px 0;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       gap: 16px;
     }
+    /* Gap between articles only, never before the first, so article one keeps
+       its position just below the middle of the viewport on load. Measured in
+       vh so the next article is always off the bottom edge and has to be
+       scrolled to, whatever the screen height. */
+    .article + .article { margin-top: 48vh; }
+    /* Adjacent sibling, not :first-of-type: the opening wrapper is also a div,
+       so it would claim first-of-type and this would silently match nothing. */
+    .opening-wrap + .article { padding-top: 116px; }
+    /* Room before the footer, so the last article ends rather than runs into it.
+       last-of-type is safe here: the footer is a <footer>, so the final div
+       sibling is the last article. */
+    .article:last-of-type { padding-bottom: 32vh; }
 
     .article-label {
       font-family: sans-serif;
@@ -132,6 +148,56 @@
     .footer-utility a { font-size: 12px; color: rgba(255,255,255,0.55); text-decoration: none; cursor: pointer; font-family: Arial, Helvetica, sans-serif; }
     .footer-utility a:hover { color: #fff; }
     .footer-meta { margin: 0; font-size: 12px; color: rgba(255,255,255,0.38); font-family: Arial, Helvetica, sans-serif; }
+
+    /* ---- Page opening ----
+       Every page opens with one centred statement of what it is for, with the
+       section's own name inside that sentence rather than above it as a
+       heading. The nav already names the page, so a headline only repeats it.
+       Same gesture on every page, so the whole site reads as written. */
+    /* Entry fade sits on the wrapper, not the heading. The animation uses
+       fill: both, so its final opacity keeps applying and would override the
+       scroll fade below. Two elements, two opacities, composed by the browser. */
+    .opening-wrap { animation: opening-in 760ms ease 140ms both; }
+    @keyframes opening-in {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    .opening {
+      max-width: 720px; margin-left: auto; margin-right: auto;
+      padding: 104px 0 88px; text-align: center;
+      font-size: 21px; font-weight: 400; line-height: 1.7; color: var(--ink);
+      will-change: opacity, transform;
+    }
+    .opening-name { font-size: 34px; line-height: 1; letter-spacing: -0.01em; white-space: nowrap; }
+    @media (prefers-reduced-motion: reduce) {
+      .opening-wrap { animation: none; }
+    }
+
+    /* ---- Container feed ----
+       Previews, not cards. You read a little in place and may watch something
+       before deciding to open the piece. Because a preview can carry media, the
+       block itself is not a link: clicking a video has to play it. The title is
+       the target, with a quiet continue link at the end. This amends principle
+       14, which assumes a block with nothing interactive inside it. */
+    /* No opening line here: the masthead names Neotone and the pieces say what it is,
+   so the feed itself opens the page and carries the entry fade. */
+    .feed { max-width: var(--max); margin: 0 auto; padding: 104px 48px 30vh;
+            animation: opening-in 760ms ease 140ms both; }
+    @media (prefers-reduced-motion: reduce) { .feed { animation: none; } }
+    .feed-item { max-width: 680px; margin: 0 auto; scroll-margin-top: 140px; }
+    .feed-item + .feed-item { margin-top: 24vh; }
+    .feed-media { width: 100%; aspect-ratio: 16 / 9; background: #ededed; margin-bottom: 24px; }
+    .feed-kicker {
+      display: block; margin-bottom: 12px;
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.14em; color: var(--muted);
+    }
+    .feed-title { margin: 0 0 16px; font-size: 28px; font-weight: 400; line-height: 1.2; letter-spacing: -0.01em; }
+    .feed-title a:hover { color: var(--muted); }
+    .feed-excerpt { margin: 0 0 18px; font-size: 16px; line-height: 1.7; }
+    .feed-more { font-size: 14px; font-style: italic; color: var(--muted); }
+    .feed-more:hover { color: var(--ink); text-decoration: underline; }
+    @media (max-width: 980px) { .feed { padding: 72px 24px 24vh; } .feed-title { font-size: 24px; } }
   </style>
 </head>
 <body>
@@ -145,17 +211,30 @@
     </div>
   </nav>
 
-  <div class="article">
-    <div class="article-label">Article 1</div>
-    <div class="article-title">Neotone's Kripta Debut</div>
-  </div>
-  <div class="article">
-    <div class="article-label">Article 2</div>
-    <div class="article-title">ChatGPT talks about Neotone</div>
-  </div>
-  <div class="article">
-    <div class="article-label">Article 3</div>
-    <div class="article-title">I quit my piano lessons and got a Neotone</div>
+  <div class="feed">
+
+      <article class="feed-item" id="golsa-nazari">
+        <div class="feed-media"></div>
+        <span class="feed-kicker">Artists</span>
+        <h2 class="feed-title"><a href="neotone-golsa-nazari.html">Golsa Nazari</a></h2>
+        <p class="feed-excerpt">A handpan player, composer and teacher from Iran, working between acoustic instruments and the Neotone. What changed for her was less the sound than the interruption: moving between scales used to mean moving between instruments, and an idea rarely survived the trip.</p>
+        <a class="feed-more" href="neotone-golsa-nazari.html">Continue reading &rarr;</a>
+      </article>
+
+      <article class="feed-item" id="hijaz-tetrachord">
+        <div class="feed-media"></div>
+        <span class="feed-kicker">Theory and culture</span>
+        <h2 class="feed-title">The hijaz tetrachord</h2>
+        <p class="feed-excerpt">Four notes, and most of the handpan world reaches for them. Where the interval comes from, who it belongs to, and what borrowing it carefully asks of a player.</p>
+      </article>
+
+      <article class="feed-item" id="made-of-wood">
+        <div class="feed-media"></div>
+        <span class="feed-kicker">Material</span>
+        <h2 class="feed-title">Made of wood</h2>
+        <p class="feed-excerpt">An electronic instrument with a grain. Why the body is hardwood, what that does to the sound, and what happens in the field between the metal and the wood.</p>
+      </article>
+
   </div>
 
   <footer class="site-footer">
@@ -176,10 +255,9 @@
 
       <div class="footer-bottom">
         <div class="footer-utility">
-          <a onclick="utilityLink('About')">About</a>
           <a onclick="utilityLink('Workshop')">Workshop</a>
+          <a href="manual.html">Manual</a>
           <a onclick="utilityLink('Contact')">Contact</a>
-          <a onclick="utilityLink('FAQ')">FAQ</a>
           <a onclick="utilityLink('Terms')">Terms</a>
           <a onclick="utilityLink('Privacy')">Privacy</a>
         </div>
@@ -232,6 +310,20 @@
 
     let slideDistance = null;
 
+    /* The opening holds its position while the page scrolls under it and fades,
+       rather than being carried off the top. The fade is deliberately quicker
+       than the gap beneath the heading, so it is gone before the content below
+       arrives at it and the two never overlap while both are visible. */
+    const opening = document.querySelector('.opening');
+    const OPENING_FADE_PX = 120;
+    const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function updateOpening() {
+      if (!opening) return;
+      const held = Math.min(Math.max(window.scrollY, 0), OPENING_FADE_PX);
+      if (!REDUCED_MOTION) opening.style.transform = `translateY(${held}px)`;
+      opening.style.opacity = String(1 - held / OPENING_FADE_PX);
+    }
+
     navLinks[ACTIVE].addEventListener('click', e => {
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -268,6 +360,8 @@
           item.style.opacity   = 1 - p;
         }
       });
+
+      updateOpening();
     }
 
     const prevActive = parseInt(sessionStorage.getItem('prevActive') ?? '-1', 10);
@@ -310,6 +404,8 @@
         "Destination: " + name + "\n\n" +
         (name === 'Workshop'
           ? "An article, not a utility page: the photographed workshop piece with everyone named. It earns a footer permalink because it is evergreen."
+          : name === 'Manual'
+          ? "The practical layer. Which control, what it does, written in three registers: basic walkthrough, deeper functionality, and the craft questions underneath. Also reached from inside the software, beside the control it explains. The parts that hold on their own surface as neOS pieces."
           : "A utility page. Renders identically to an article, but carries the plain Neotone mark since it has no container to return to.")
       );
     }
@@ -351,6 +447,33 @@
       });
     });
 
+
+    /* ---- Scroll restoration ----
+       Opening a piece stores the container's position. The article's masthead
+       return sets a flag naming this page, and only that flag triggers a
+       restore, so arriving fresh from the nav still lands at the top. */
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    const SCROLL_KEY = 'neotone_scroll_' + PAGE;
+    const RESTORE_KEY = 'neotone_restore';
+
+    document.querySelectorAll('.feed-item a[href]').forEach(a => {
+      const href = a.getAttribute('href');
+      if (!href || href === '#') return;
+      a.addEventListener('click', () => {
+        sessionStorage.setItem(SCROLL_KEY, String(Math.round(window.scrollY)));
+      });
+    });
+
+    if (sessionStorage.getItem(RESTORE_KEY) === PAGE) {
+      const y = parseFloat(sessionStorage.getItem(SCROLL_KEY) || '0');
+      if (y > 0) {
+        // immediately, because this script runs after layout; the frame after is
+        // only a re-apply in case late content shifts the page under us
+        window.scrollTo(0, y);
+        requestAnimationFrame(() => { window.scrollTo(0, y); updateNav(); });
+      }
+      sessionStorage.removeItem(RESTORE_KEY);
+    }
   </script>
 
 </body>

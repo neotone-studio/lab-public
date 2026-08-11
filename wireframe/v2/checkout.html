@@ -8,6 +8,7 @@
     :root { --ink: #111; --line: #d9d9d9; --muted: #4f4f4f; --green: #2a7a2a; --max: 1180px; }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    a { color: inherit; text-decoration: none; }
 
     body { background: #fff; color: var(--ink); font-family: Arial, Helvetica, sans-serif; }
 
@@ -234,10 +235,9 @@
 
       <div class="footer-bottom">
         <div class="footer-utility">
-          <a onclick="utilityLink('About')">About</a>
           <a onclick="utilityLink('Workshop')">Workshop</a>
+          <a href="manual.html">Manual</a>
           <a onclick="utilityLink('Contact')">Contact</a>
-          <a onclick="utilityLink('FAQ')">FAQ</a>
           <a onclick="utilityLink('Terms')">Terms</a>
           <a onclick="utilityLink('Privacy')">Privacy</a>
         </div>
@@ -293,6 +293,20 @@
 
     let slideDistance = null;
 
+    /* The opening holds its position while the page scrolls under it and fades,
+       rather than being carried off the top. The fade is deliberately quicker
+       than the gap beneath the heading, so it is gone before the content below
+       arrives at it and the two never overlap while both are visible. */
+    const opening = document.querySelector('.opening');
+    const OPENING_FADE_PX = 120;
+    const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function updateOpening() {
+      if (!opening) return;
+      const held = Math.min(Math.max(window.scrollY, 0), OPENING_FADE_PX);
+      if (!REDUCED_MOTION) opening.style.transform = `translateY(${held}px)`;
+      opening.style.opacity = String(1 - held / OPENING_FADE_PX);
+    }
+
     navLinks.forEach((link, i) => {
       link.addEventListener('click', e => {
         e.preventDefault();
@@ -323,6 +337,8 @@
           item.style.opacity   = 1 - p;
         }
       });
+
+      updateOpening();
     }
 
     const prevActive = parseInt(sessionStorage.getItem('prevActive') ?? '-1', 10);
@@ -474,6 +490,8 @@
         "Destination: " + name + "\n\n" +
         (name === 'Workshop'
           ? "An article, not a utility page: the photographed workshop piece with everyone named. It earns a footer permalink because it is evergreen."
+          : name === 'Manual'
+          ? "The practical layer. Which control, what it does, written in three registers: basic walkthrough, deeper functionality, and the craft questions underneath. Also reached from inside the software, beside the control it explains. The parts that hold on their own surface as neOS pieces."
           : "A utility page. Renders identically to an article, but carries the plain Neotone mark since it has no container to return to.")
       );
     }

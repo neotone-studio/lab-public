@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>neOS · Neotone</title>
+  <title>Manual · Neotone</title>
   <style>
     :root { --ink: #111; --line: #d9d9d9; --muted: #4f4f4f; --green: #2a7a2a; --max: 1180px; }
 
@@ -173,27 +173,53 @@
       .opening-wrap { animation: none; }
     }
 
-    /* ---- Container feed ----
-       Previews, not cards. You read a little in place and may watch something
-       before deciding to open the piece. Because a preview can carry media, the
-       block itself is not a link: clicking a video has to play it. The title is
-       the target, with a quiet continue link at the end. This amends principle
-       14, which assumes a block with nothing interactive inside it. */
-    .feed { max-width: var(--max); margin: 0 auto; padding: 64px 48px 30vh; }
-    .feed-item { max-width: 680px; margin: 0 auto; scroll-margin-top: 140px; }
-    .feed-item + .feed-item { margin-top: 24vh; }
-    .feed-media { width: 100%; aspect-ratio: 16 / 9; background: #ededed; margin-bottom: 24px; }
-    .feed-kicker {
+    /* ---- Article ----
+       Articles and utility pages render identically. The only difference is the
+       mark in the masthead: an article carries its container's mark, a utility
+       page carries the plain Neotone mark. Media runs to the content grid;
+       reading stays at a measure. */
+    .piece { max-width: var(--max); margin: 0 auto; padding: 0 48px 40px; }
+    .piece-head { max-width: 680px; margin: 0 auto; padding: 96px 0 44px; }
+    .piece-kicker {
+      display: block; margin-bottom: 16px;
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.14em; color: var(--muted);
+    }
+    .piece-title { margin: 0 0 20px; font-size: 40px; font-weight: 400; line-height: 1.15; letter-spacing: -0.01em; }
+    .piece-standfirst { margin: 0; font-size: 18px; line-height: 1.6; color: var(--muted); }
+    .piece-media { margin: 0 0 56px; }
+    .video-box { width: 100%; aspect-ratio: 16 / 9; background: #ededed; }
+    .piece-caption { margin: 12px 0 0; font-size: 12px; line-height: 1.5; color: var(--muted); }
+    .piece-body { max-width: 680px; margin: 0 auto; }
+    .piece-body p { margin: 0 0 1.45em; font-size: 17px; line-height: 1.75; }
+    .piece-body p:last-child { margin-bottom: 0; }
+    .piece-sub {
+      margin: 2.4em 0 1em; font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted);
+    }
+    @media (max-width: 980px) {
+      .piece-title { font-size: 30px; }
+      .piece-head { padding-top: 64px; }
+    }
+
+    /* ---- Contents and section lists (utility pages) ---- */
+    .toc { max-width: 680px; margin: 0 auto; }
+    .toc-group { margin-bottom: 46px; }
+    .toc-group:last-child { margin-bottom: 0; }
+    .toc-label {
       display: block; margin-bottom: 12px;
       font-size: 11px; font-weight: 700; text-transform: uppercase;
       letter-spacing: 0.14em; color: var(--muted);
     }
-    .feed-title { margin: 0 0 16px; font-size: 28px; font-weight: 400; line-height: 1.2; letter-spacing: -0.01em; }
-    .feed-title a:hover { color: var(--muted); }
-    .feed-excerpt { margin: 0 0 18px; font-size: 16px; line-height: 1.7; }
-    .feed-more { font-size: 14px; font-style: italic; color: var(--muted); }
-    .feed-more:hover { color: var(--ink); text-decoration: underline; }
-    @media (max-width: 980px) { .feed { padding: 48px 24px 24vh; } .feed-title { font-size: 24px; } }
+    .toc-note { margin: 0 0 14px; font-size: 13px; line-height: 1.6; color: var(--muted); }
+    .toc-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+    .toc-list li { border-bottom: 1px solid var(--line); }
+    .toc-list a { display: block; padding: 13px 0; font-size: 16px; }
+    .toc-list a:hover { color: var(--muted); }
+    .toc-out {
+      margin-left: 10px; font-size: 10px; text-transform: uppercase;
+      letter-spacing: 0.12em; color: var(--muted);
+    }
   </style>
 </head>
 <body>
@@ -207,35 +233,61 @@
     </div>
   </nav>
 
-  <div class="opening-wrap">
-    <h1 class="opening"><span class="opening-name">neOS</span> is the window into Neotone&rsquo;s musical intelligence</h1>
+  <article class="piece">
+
+    <header class="piece-head">
+      <span class="piece-kicker">Manual</span>
+      <h1 class="piece-title">Neotone One</h1>
+      <p class="piece-standfirst">The practical layer. Every section has its own address, so the instrument and the software can link straight to the part that answers the question in front of you.</p>
+    </header>
+
+    <div class="toc">
+
+      <div class="toc-group">
+        <span class="toc-label">The instrument</span>
+        <ul class="toc-list">
+          <li><a href="#">Turning on and off, and charging</a></li>
+          <li><a href="#">Tonefields and the body</a></li>
+          <li><a href="#">Bottom panel and controls</a></li>
+          <li><a href="#">Included accessories</a></li>
+          <li><a href="#">Technical specifications</a></li>
+        </ul>
+      </div>
+
+      <div class="toc-group">
+        <span class="toc-label">Getting started</span>
+        <ul class="toc-list">
+          <li><a href="#">Quick and useful tips</a></li>
+          <li><a href="#">Selecting a scale on the instrument</a></li>
+          <li><a href="#">Connecting to WiFi</a></li>
+          <li><a href="#">Logging in to the Interface</a></li>
+        </ul>
+      </div>
+
+      <div class="toc-group">
+        <span class="toc-label">The Interface</span>
+        <ul class="toc-list">
+          <li><a href="#">Using the Interface</a></li>
+          <li><a href="#">Hotspot</a></li>
+          <li><a href="manual-scales.html">Scales</a></li>
+          <li><a href="#">Record</a></li>
+          <li><a href="#">Filters</a></li>
+          <li><a href="#">Sound</a></li>
+          <li><a href="#">Control</a></li>
+          <li><a href="#">MIDI</a></li>
+        </ul>
+      </div>
+
+      <div class="toc-group">
+        <span class="toc-label">When something is wrong</span>
+        <ul class="toc-list">
+          <li><a href="#">Troubleshooting</a></li>
+        </ul>
+      </div>
+
     </div>
 
-  <div class="feed">
-
-      <article class="feed-item" id="note-names">
-        <div class="feed-media"></div>
-        <span class="feed-kicker">Scales</span>
-        <h2 class="feed-title"><a href="neos-note-names.html">Why the note names change as you build</a></h2>
-        <p class="feed-excerpt">Build a D Kurd and something quiet happens. You place the note your ear calls an A sharp, and the instrument writes it down as a B flat. Nothing has changed about the pitch. What changed is the name, and the name is the instrument telling you what it thinks you are building.</p>
-        <a class="feed-more" href="neos-note-names.html">Continue reading &rarr;</a>
-      </article>
-
-      <article class="feed-item" id="digital-lutherie">
-        <div class="feed-media"></div>
-        <span class="feed-kicker">Sensing</span>
-        <h2 class="feed-title">Digital lutherie</h2>
-        <p class="feed-excerpt">A sensor that reads position, pressure and gesture produces far more information than a note message can carry. Deciding what survives that translation, and what it costs to lose the rest, is a craft question before it is a technical one.</p>
-      </article>
-
-      <article class="feed-item" id="spatial-midi">
-        <div class="feed-media"></div>
-        <span class="feed-kicker">Sensing</span>
-        <h2 class="feed-title">What is Spatial MIDI?</h2>
-        <p class="feed-excerpt">Standard MIDI describes an event: this note, this hard, now. The instrument senses something continuous and multidimensional. Spatial MIDI is the attempt to carry the second thing through a channel built for the first.</p>
-      </article>
-
-  </div>
+  </article>
 
   <footer class="site-footer">
     <div class="footer-inner">
@@ -277,7 +329,7 @@
 
        ACTIVE is derived from the rendered nav rather than hardcoded, because
        removing Anima shifts every index after it. */
-    const PAGE   = 'neos';
+    const PAGE   = 'neotone';
     const FUTURE_PARAM = new URLSearchParams(location.search).get('future');
     const FUTURE = PAGE === 'anima' ||
       (FUTURE_PARAM !== null && !['hide', '0', 'false'].includes(FUTURE_PARAM));
@@ -324,9 +376,19 @@
       opening.style.opacity = String(1 - held / OPENING_FADE_PX);
     }
 
+    /* Principle 11: the nav is the return mechanism. On an article the active
+       mark is still the container's mark, so clicking it goes back to the
+       container rather than scrolling to the top. No breadcrumbs, no back link. */
+    const RETURN_TO = 'index.html';
+
     navLinks[ACTIVE].addEventListener('click', e => {
       e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (RETURN_TO) {
+        sessionStorage.setItem('prevActive', String(ACTIVE));
+        window.location.href = RETURN_TO + navQuery;
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     });
 
     navLinks.forEach((link, i) => {
@@ -447,33 +509,6 @@
       });
     });
 
-
-    /* ---- Scroll restoration ----
-       Opening a piece stores the container's position. The article's masthead
-       return sets a flag naming this page, and only that flag triggers a
-       restore, so arriving fresh from the nav still lands at the top. */
-    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-    const SCROLL_KEY = 'neotone_scroll_' + PAGE;
-    const RESTORE_KEY = 'neotone_restore';
-
-    document.querySelectorAll('.feed-item a[href]').forEach(a => {
-      const href = a.getAttribute('href');
-      if (!href || href === '#') return;
-      a.addEventListener('click', () => {
-        sessionStorage.setItem(SCROLL_KEY, String(Math.round(window.scrollY)));
-      });
-    });
-
-    if (sessionStorage.getItem(RESTORE_KEY) === PAGE) {
-      const y = parseFloat(sessionStorage.getItem(SCROLL_KEY) || '0');
-      if (y > 0) {
-        // immediately, because this script runs after layout; the frame after is
-        // only a re-apply in case late content shifts the page under us
-        window.scrollTo(0, y);
-        requestAnimationFrame(() => { window.scrollTo(0, y); updateNav(); });
-      }
-      sessionStorage.removeItem(RESTORE_KEY);
-    }
   </script>
 
 </body>

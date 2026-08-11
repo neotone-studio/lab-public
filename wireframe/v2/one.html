@@ -8,6 +8,7 @@
     :root { --ink: #111; --line: #d9d9d9; --muted: #4f4f4f; --green: #2a7a2a; --max: 1180px; }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    a { color: inherit; text-decoration: none; }
 
     body { background: #fff; color: var(--ink); font-family: Arial, Helvetica, sans-serif; }
 
@@ -89,19 +90,81 @@
     /* ---- Page ---- */
     .page { max-width: var(--max); margin: 0 auto; padding: 0 48px 120px; }
 
-    /* Section skeleton: items 1-7 of the One page brief. Placeholders await
-       content; the structure is the deliverable at this stage. */
-    .slot {
-      border: 1px solid var(--line);
-      padding: 20px 24px;
-      margin-bottom: 14px;
-      min-height: 260px;
+    /* ---- Page sections ----
+       Real structure at real type scale, holding placeholder words. Nothing here
+       is a labelled box describing what will go in it: dropping copy in should
+       not require touching layout. Chrome only where it carries information. */
+    .sec { margin-bottom: 88px; }
+    .sec:last-child { margin-bottom: 0; }
+
+
+    /* 2 · Specs strip. Hairlines between cells, no outer box: the dividers carry
+       the information, the box was only decoration. */
+    .specs-strip { display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .spec-cell { padding: 22px 24px 24px 0; border-right: 1px solid var(--line); }
+    .spec-cell:last-child { border-right: none; padding-right: 0; }
+    .spec-cell:not(:first-child) { padding-left: 24px; }
+    .spec-label {
+      display: block; margin-bottom: 7px;
+      font-size: 9px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.14em; color: var(--muted);
     }
-    .slot-label {
+    .spec-value { font-size: 13px; line-height: 1.45; }
+
+    /* 3 · Orientation. One measure of prose, centred, no heading. */
+    .editorial { max-width: 620px; margin-left: auto; margin-right: auto; }
+    .editorial-text { font-size: 17px; line-height: 1.75; margin: 0; }
+
+    /* 5 · Learn more. Depth for the already committed, so it sits after the
+       purchase flow. Whole block is the click target, and these open in a new
+       tab: their parent is Neotone, and the masthead would otherwise carry
+       someone mid-purchase back to culture. */
+    .stack { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .stack-card { display: block; cursor: pointer; }
+    .stack-img { width: 100%; aspect-ratio: 4 / 3; background: #ededed; margin-bottom: 14px; }
+    .stack-kicker {
+      display: block; margin-bottom: 7px;
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.12em; color: var(--muted);
+    }
+    .stack-title { margin: 0; font-size: 16px; line-height: 1.4; font-weight: 400; }
+    .stack-card:hover .stack-title { text-decoration: underline; }
+
+    /* 6 · What happens next, with purchase terms beneath it. */
+    .sec-label {
+      display: block; margin-bottom: 22px;
       font-size: 11px; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.08em; color: var(--muted); margin-bottom: 6px;
+      letter-spacing: 0.14em; color: var(--muted);
     }
-    .slot-note { font-size: 13px; color: var(--muted); line-height: 1.5; }
+    .steps-strip { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); }
+    .step-cell { padding: 22px 24px 26px 0; border-right: 1px solid var(--line); }
+    .step-cell:last-child { border-right: none; padding-right: 0; }
+    .step-cell:not(:first-child) { padding-left: 24px; }
+    .step-number { display: block; margin-bottom: 12px; font-size: 22px; color: var(--muted); }
+    .step-title { margin: 0 0 7px; font-size: 13px; font-weight: 700; }
+    .step-desc { margin: 0; font-size: 12px; line-height: 1.55; color: var(--muted); }
+    .terms { margin-top: 30px; max-width: 620px; }
+    .terms-q { margin: 0 0 8px; font-size: 13px; font-weight: 700; }
+    .terms-a { margin: 0; font-size: 13px; line-height: 1.6; color: var(--muted); }
+
+    /* 7 · Play one first, as a fork. */
+    .paths { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; border-top: 1px solid var(--line); padding-top: 30px; }
+    .path-label {
+      display: block; margin-bottom: 10px;
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.12em; color: var(--muted);
+    }
+    .path-text { margin: 0 0 14px; font-size: 15px; line-height: 1.65; }
+    .path-cta { font-size: 14px; cursor: pointer; }
+    .path-cta:hover { text-decoration: underline; }
+
+    @media (max-width: 980px) {
+      .opening { padding: 72px 0 64px; font-size: 19px; }
+      .opening-name { font-size: 28px; }
+      .specs-strip, .steps-strip, .stack, .paths { grid-template-columns: 1fr; }
+      .spec-cell, .step-cell { border-right: none; border-bottom: 1px solid var(--line); padding-left: 0; }
+      .spec-cell:last-child, .step-cell:last-child { border-bottom: none; }
+    }
 
     /* ================================================================
        Purchase machinery, ported from v1/one.html.
@@ -357,6 +420,30 @@
     .footer-utility a { font-size: 12px; color: rgba(255,255,255,0.55); text-decoration: none; cursor: pointer; font-family: Arial, Helvetica, sans-serif; }
     .footer-utility a:hover { color: #fff; }
     .footer-meta { margin: 0; font-size: 12px; color: rgba(255,255,255,0.38); font-family: Arial, Helvetica, sans-serif; }
+
+    /* ---- Page opening ----
+       Every page opens with one centred statement of what it is for, with the
+       section's own name inside that sentence rather than above it as a
+       heading. The nav already names the page, so a headline only repeats it.
+       Same gesture on every page, so the whole site reads as written. */
+    /* Entry fade sits on the wrapper, not the heading. The animation uses
+       fill: both, so its final opacity keeps applying and would override the
+       scroll fade below. Two elements, two opacities, composed by the browser. */
+    .opening-wrap { animation: opening-in 760ms ease 140ms both; }
+    @keyframes opening-in {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    .opening {
+      max-width: 720px; margin-left: auto; margin-right: auto;
+      padding: 104px 0 88px; text-align: center;
+      font-size: 21px; font-weight: 400; line-height: 1.7; color: var(--ink);
+      will-change: opacity, transform;
+    }
+    .opening-name { font-size: 34px; line-height: 1; letter-spacing: -0.01em; white-space: nowrap; }
+    @media (prefers-reduced-motion: reduce) {
+      .opening-wrap { animation: none; }
+    }
   </style>
 </head>
 <body>
@@ -372,19 +459,39 @@
   </nav>
 
   <main class="page">
-    <section class="slot">
-      <p class="slot-label">1 · Banner</p>
-      <p class="slot-note">Kicker, title, subtitle.</p>
+
+    <!-- 1 · Opening -->
+    <div class="opening-wrap">
+    <h1 class="opening">The <span class="opening-name">Neotone One</span> is handcrafted in Budapest, built to order</h1>
+    </div>
+
+    <!-- 2 · Orientation -->
+    <section class="sec editorial">
+      <p class="editorial-text">Roughly 120 words introducing the instrument concretely: its shape, its material, the serial number it carries. Plain prose in a single measure, no heading. It assumes the reader arrived knowing what a Neotone One is, so it orients rather than persuades.</p>
     </section>
 
-    <section class="slot">
-      <p class="slot-label">2 · Specs strip</p>
-      <p class="slot-note">Material, sound, control, scales, lead time, in that order. Drafted 6/22, close to final.</p>
-    </section>
-
-    <section class="slot">
-      <p class="slot-label">3 · Orientation</p>
-      <p class="slot-note">~120 words. Shape, material, serial number. Assumes the visitor arrived knowing.</p>
+    <!-- 3 · Specs strip -->
+    <section class="sec specs-strip">
+      <div class="spec-cell">
+        <span class="spec-label">Material</span>
+        <span class="spec-value">Hand selected instrument grade hardwood</span>
+      </div>
+      <div class="spec-cell">
+        <span class="spec-label">Sound</span>
+        <span class="spec-value">Cor sound engine, samples from world-class instruments</span>
+      </div>
+      <div class="spec-cell">
+        <span class="spec-label">Control</span>
+        <span class="spec-value">20 tonefields, gesture resolution, fully assignable</span>
+      </div>
+      <div class="spec-cell">
+        <span class="spec-label">Scales</span>
+        <span class="spec-value">Unlimited, including harmonics, crosstalk, and articulation</span>
+      </div>
+      <div class="spec-cell">
+        <span class="spec-label">Lead time</span>
+        <span class="spec-value">~60 days, or stock available immediately</span>
+      </div>
     </section>
 
     <!-- 4 · Order fork -->
@@ -608,19 +715,74 @@
       </div>
     </section>
 
-    <section class="slot">
-      <p class="slot-label">5 · What happens next</p>
-      <p class="slot-note">Four steps, second person, future tense. Confirmation with serial, workshop contact, build, delivery. No deposit, no final payment.</p>
+    <!-- 5 · Learn more. Opens in a new tab: the purchase flow stays intact behind it. -->
+    <section class="sec">
+      <span class="sec-label">Read further</span>
+      <div class="stack">
+        <a class="stack-card" href="#" target="_blank" rel="noopener">
+          <div class="stack-img"></div>
+          <span class="stack-kicker">On the wait</span>
+          <p class="stack-title">On waiting for your instrument</p>
+        </a>
+        <a class="stack-card" href="#" target="_blank" rel="noopener">
+          <div class="stack-img"></div>
+          <span class="stack-kicker">On material</span>
+          <p class="stack-title">Why an electronic instrument is made of wood</p>
+        </a>
+        <a class="stack-card" href="#" target="_blank" rel="noopener">
+          <div class="stack-img"></div>
+          <span class="stack-kicker">On the makers</span>
+          <p class="stack-title">The workshop, with everyone in it</p>
+        </a>
+      </div>
     </section>
 
-    <section class="slot">
-      <p class="slot-label">6 · Purchase terms</p>
-      <p class="slot-note">Refund window and lead time, in trust language.</p>
+    <!-- 6 · What happens next, with purchase terms -->
+    <section class="sec">
+      <span class="sec-label">What happens next</span>
+      <div class="steps-strip">
+        <div class="step-cell">
+          <span class="step-number">1</span>
+          <p class="step-title">Confirmation</p>
+          <p class="step-desc">You'll receive an order confirmation and your serial number by email right away. Your place in the production sequence is secured.</p>
+        </div>
+        <div class="step-cell">
+          <span class="step-number">2</span>
+          <p class="step-title">Workshop contact</p>
+          <p class="step-desc">Someone from the workshop will contact you to confirm your configuration and answer any questions before the build begins.</p>
+        </div>
+        <div class="step-cell">
+          <span class="step-number">3</span>
+          <p class="step-title">Build</p>
+          <p class="step-desc">Your instrument enters production. You'll receive updates as it progresses.</p>
+        </div>
+        <div class="step-cell">
+          <span class="step-number">4</span>
+          <p class="step-title">Delivery</p>
+          <p class="step-desc">Your instrument will arrive with documentation, warranty, and setup guidance.</p>
+        </div>
+      </div>
+      <div class="terms">
+        <p class="terms-q">Can I change my mind?</p>
+        <p class="terms-a">Yes, at any point. Before your instrument is built, during production, or within two weeks of delivery. Cancel or return for a full refund, no explanation required.</p>
+      </div>
     </section>
 
-    <section class="slot">
-      <p class="slot-label">7 · Play one first</p>
-      <p class="slot-note">The workshop and artist sessions, as a fork.</p>
+    <!-- 7 · Play one first -->
+    <section class="sec">
+      <span class="sec-label">Play one first</span>
+      <div class="paths">
+        <div>
+          <span class="path-label">Visit the workshop</span>
+          <p class="path-text">Our full instrument stock, available to play. Sessions are by appointment and unhurried. Write to arrange a time, bring an afternoon.</p>
+          <a class="path-cta" onclick="alert('Function: Opens email client\n\nOpens the default email client addressed to the workshop. Subject: Visit enquiry.')">Write to us &rarr;</a>
+        </div>
+        <div>
+          <span class="path-label">Artist sessions</span>
+          <p class="path-text">Players around the world who keep an instrument and will sit down with you. Some host in person, some over a call.</p>
+          <a class="path-cta" onclick="alert('Function: Artist session request\n\nOpens the artist directory, filtered to those offering sessions in the visitor\'s region.')">Find a player &rarr;</a>
+        </div>
+      </div>
     </section>
   </main>
 
@@ -668,10 +830,9 @@
 
       <div class="footer-bottom">
         <div class="footer-utility">
-          <a onclick="utilityLink('About')">About</a>
           <a onclick="utilityLink('Workshop')">Workshop</a>
+          <a href="manual.html">Manual</a>
           <a onclick="utilityLink('Contact')">Contact</a>
-          <a onclick="utilityLink('FAQ')">FAQ</a>
           <a onclick="utilityLink('Terms')">Terms</a>
           <a onclick="utilityLink('Privacy')">Privacy</a>
         </div>
@@ -724,6 +885,20 @@
 
     let slideDistance = null;
 
+    /* The opening holds its position while the page scrolls under it and fades,
+       rather than being carried off the top. The fade is deliberately quicker
+       than the gap beneath the heading, so it is gone before the content below
+       arrives at it and the two never overlap while both are visible. */
+    const opening = document.querySelector('.opening');
+    const OPENING_FADE_PX = 120;
+    const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function updateOpening() {
+      if (!opening) return;
+      const held = Math.min(Math.max(window.scrollY, 0), OPENING_FADE_PX);
+      if (!REDUCED_MOTION) opening.style.transform = `translateY(${held}px)`;
+      opening.style.opacity = String(1 - held / OPENING_FADE_PX);
+    }
+
     navLinks[ACTIVE].addEventListener('click', e => {
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -762,6 +937,7 @@
       });
 
       updateSelNav();
+      updateOpening();
     }
 
     const prevActive = parseInt(sessionStorage.getItem('prevActive') ?? '-1', 10);
@@ -1154,6 +1330,8 @@
         "Destination: " + name + "\n\n" +
         (name === 'Workshop'
           ? "An article, not a utility page: the photographed workshop piece with everyone named. It earns a footer permalink because it is evergreen."
+          : name === 'Manual'
+          ? "The practical layer. Which control, what it does, written in three registers: basic walkthrough, deeper functionality, and the craft questions underneath. Also reached from inside the software, beside the control it explains. The parts that hold on their own surface as neOS pieces."
           : "A utility page. Renders identically to an article, but carries the plain Neotone mark since it has no container to return to.")
       );
     }
