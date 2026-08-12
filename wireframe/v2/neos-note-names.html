@@ -276,7 +276,6 @@
       <span class="next-label">Read next</span>
       <ul class="next-list">
         <li><a href="neos.html#digital-lutherie"><span class="next-kicker">Sensing</span><span class="next-title">Digital lutherie</span></a></li>
-        <li><a href="manual-scales.html"><span class="next-kicker">Manual</span><span class="next-title">Scales, in three registers</span></a></li>
       </ul>
     </nav>
 
@@ -384,8 +383,21 @@
     navLinks[ACTIVE].addEventListener('click', e => {
       e.preventDefault();
       if (RETURN_TO) {
+        /* Scroll up before leaving, so the mark expands and the cross-page
+           animation continues from the state on screen. Same behaviour as a
+           footer section link. The timeout fires regardless, covering smooth
+           scrolling being disabled or interrupted. */
         sessionStorage.setItem('prevActive', String(ACTIVE));
-        window.location.href = RETURN_TO + navQuery;
+        if (typeof markReturn === 'function') markReturn();
+        const target = RETURN_TO + navQuery;
+        if (window.scrollY < 4) { window.location.href = target; return; }
+        let gone = false;
+        const go = () => { if (!gone) { gone = true; window.location.href = target; } };
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        const watch = setInterval(() => {
+          if (window.scrollY < 4) { clearInterval(watch); setTimeout(go, TRANSITION_MS * 0.5); }
+        }, 50);
+        setTimeout(() => { clearInterval(watch); go(); }, 1200);
       } else {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }

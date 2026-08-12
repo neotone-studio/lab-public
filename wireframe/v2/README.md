@@ -307,6 +307,12 @@ Three separate things, often confused with each other.
 
 The restore runs immediately rather than inside `requestAnimationFrame`, with the frame after used only as a re-apply. rAF is throttled in a hidden document, which silently defeated the first attempt.
 
+**Read next carries one item**, chosen because it follows from the piece just read. Two made it a list to choose from, which is a different gesture: propulsion means one obvious next thing.
+
+**Every feed item carries a continue link.** Only the first one did, which read as the lead piece being the only finished one.
+
+**The masthead scrolls up before it navigates** on article and utility pages, the same as a footer section link, so the mark expands and the cross-page animation continues from the state on screen instead of jumping.
+
 **Propulsion is a third thing**, and it is what a piece needs at the end. `Read next` carries two items chosen for relevance, not recency. A neOS piece can point back down to the manual section it grew out of, which closes the loop between the intelligence layer and the practical one.
 
 ### Where articles come from
