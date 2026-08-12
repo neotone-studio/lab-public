@@ -201,7 +201,7 @@ Seven sections, all real structure at real type scale holding placeholder words.
 
 Two things sank it. Three of five rows were placeholders, because the real I/O is not known here, and the section's main justification was a gesture that image tests did not support. A workflow diagram or connection list high on a product page is computer-music convention, and it reads as gear that integrates into a rig, which is the category the page exists to leave.
 
-**The fact underneath it is worth keeping**: the instrument plays and changes scale with nothing attached, and Quick Load exists so scales can be recalled without the software running. That answers a real pre-purchase question and makes the anti-computer point in one line. It belongs in the specs strip or in the orientation paragraph when that copy is written, rather than in a section of its own.
+Standalone operation is not stated anywhere either, and should not be. For an instrument shaped like a handpan it is the assumption, so saying it plants a doubt: a reader wonders why the page felt the need. Quick Load, which exists so scales can be recalled without the software running, is a manual subject.
 
 A ports diagram still belongs in the manual, where it answers which socket to use.
 
@@ -430,7 +430,6 @@ Flagged rather than assumed.
 1. **Selection affordance on One.** Recommendation above is One + checkout only. Needs a visual form now that it cannot be a nav item.
 2. **Tonefield merch** (`EUR 12`) has no home, since Tonefield is an article now. Drop, or re-home later?
 4. **Questions contact form.** v1 has it on One; the principles document puts contact in the footer. Keep both, or footer only?
-8. **Where the standalone fact lands.** Specs strip cell, or a sentence in the orientation paragraph. See The One page.
 9. **"Built to order" in the One opening echoes lead time** three lines below it in the specs strip. Harmless, but the same fact is stated twice in different precision.
 5. **Reaching other sections on mobile** once the bar holds one mark. See Mobile: deliberately deferred, not overlooked. v1's hamburger does not transfer to a wordmark-only nav.
 6. ~~Subpage direct-load state~~ Resolved. Entry state is now uniform on every page; see Current state.
