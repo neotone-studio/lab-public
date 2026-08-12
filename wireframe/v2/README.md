@@ -192,10 +192,15 @@ Seven sections, all real structure at real type scale holding placeholder words.
 | 1 | Opening | One centred statement, name set inline |
 | 2 | Specs strip | Five cells, close to final |
 | 3 | Orientation | One centred measure, ~120 words |
-| 4 | Order fork | Real, ported from v1 |
-| 5 | Read further | Three article cards, new tab |
-| 6 | What happens next | Four steps plus purchase terms |
-| 7 | Play one first | Workshop and artist sessions, as a fork |
+| 4 | Connections | Rows outward from nothing, two awaiting real specs |
+| 5 | Order fork | Real, ported from v1 |
+| 6 | Read further | Three article cards, new tab |
+| 7 | What happens next | Four steps plus purchase terms |
+| 8 | Play one first | Workshop and artist sessions, as a fork |
+
+**Connections sits before the order fork**, because how the instrument fits what someone already has is the last question before deciding, and after the fork they have decided. The rows run outward from nothing: the instrument on its own first, a computer three rows down as an option. That order is the argument, which is why no line says "the centre of your setup". It is a superlative every controller manufacturer prints, and it fails the rule about claiming what the reader has not been shown.
+
+It is deliberately not a diagram. Boxes and arrows are gear-catalogue language and would draw the computer as a peer. Two rows, audio and other instruments, carry italic placeholders: the real I/O specification is not known and inventing it would put fiction next to verified facts.
 
 Chrome appears only where it carries information. The specs strip and steps strip keep hairline dividers between cells because the dividers separate data, but their outer boxes are gone. Sections are separated by an 88px rhythm rather than borders. Bordered `.slot` boxes with uppercase labels were tried and removed: they described the section instead of being it.
 

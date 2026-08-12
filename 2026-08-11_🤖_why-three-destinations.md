@@ -109,6 +109,10 @@ The same questions work on any music company's site, and the answers tend to arr
 5. **Are questions answered where they arise, or collected in a support section?**
 6. **Could you tell, from the structure alone, what this company believes about how music is made?**
 
-The last one is the one that sorts them. Ableton believes the computer is the studio and that learning is part of the product, which is why the teaching subdomains exist at all. Teenage Engineering believes the object is the argument, which is why the prose is slogans. Roland makes pianos, wind instruments, drums, DJ gear and professional A/V, so it holds no single view and its site does not pretend to one. It is an index of a catalogue, and a good one.
+The last one is the one that sorts them, and on the question of where a player sits the three answers are plain. Ableton puts a computer at the centre, and treats learning as part of the product, which is why the teaching subdomains exist at all. Teenage Engineering makes the computer small enough to hold, and lets the object carry the argument, which is why the prose is slogans. Neotone makes it feel as though there is no computer.
+
+Roland makes pianos, wind instruments, drums, DJ gear and professional A/V, so it holds no single view and its site does not pretend to one. It is an index of a catalogue, and a good one.
+
+The position has a consequence on the product page. The instrument's connections are listed outward from nothing, so the first row is the instrument on its own and the computer appears three rows down as an option. A reader draws the conclusion from the order.
 
 That last question is the one Neotone is answering, and it is the reason the structure looks the way it does. A reader should be able to tell from the shape of the site, before reading a word, that this is a position about how music is made and not a product with a blog attached.

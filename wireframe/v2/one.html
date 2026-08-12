@@ -111,6 +111,28 @@
     }
     .spec-value { font-size: 13px; line-height: 1.45; }
 
+    /* 4 · Connections. Rows ordered outward from nothing, so the first row is
+       the instrument on its own and everything under it is optional. The
+       arrangement makes the claim, which is why no line here says "the centre
+       of your setup": that is a superlative every controller maker prints, and
+       it fails the rule about claiming what the reader has not been shown.
+
+       Deliberately not a diagram. Boxes and arrows are gear-catalogue language,
+       and they would put the computer in the picture as a peer. */
+    .env { max-width: 680px; margin-left: auto; margin-right: auto; }
+    .env-lead { margin: 0 0 26px; font-size: 13px; line-height: 1.6; color: var(--muted); }
+    .env-row {
+      display: grid; grid-template-columns: 180px 1fr; gap: 24px;
+      padding: 15px 0; border-bottom: 1px solid var(--line);
+    }
+    .env-row:first-of-type { border-top: 1px solid var(--line); }
+    .env-key { font-size: 13px; }
+    .env-val { font-size: 13px; line-height: 1.55; color: var(--muted); }
+    .env-todo { font-style: italic; }
+    @media (max-width: 980px) {
+      .env-row { grid-template-columns: 1fr; gap: 6px; }
+    }
+
     /* 3 · Orientation. One measure of prose, centred, no heading. */
     .editorial { max-width: 620px; margin-left: auto; margin-right: auto; }
     .editorial-text { font-size: 17px; line-height: 1.75; margin: 0; }
@@ -500,6 +522,37 @@
       <div class="spec-cell">
         <span class="spec-label">Lead time</span>
         <span class="spec-value">~60 days, or stock available immediately</span>
+      </div>
+    </section>
+
+    <!-- 4 · Connections -->
+    <section class="sec env">
+      <span class="sec-label">Connections</span>
+      <p class="env-lead">The first row is the instrument. Everything below it is optional.</p>
+
+      <div class="env-row">
+        <span class="env-key">Nothing</span>
+        <span class="env-val">Plays, and changes scale, with nothing attached. Quick Load maps scales from My Scales onto tonefields, so they can be recalled from the instrument itself when the software is not running.</span>
+      </div>
+
+      <div class="env-row">
+        <span class="env-key">A computer, if you want one</span>
+        <span class="env-val">neOS builds scales, holds the gallery, and manages the instrument. It is where scales are made, not where they are played.</span>
+      </div>
+
+      <div class="env-row">
+        <span class="env-key">Wifi</span>
+        <span class="env-val">Firmware arrives over the air. Connect, power off, power on.</span>
+      </div>
+
+      <div class="env-row">
+        <span class="env-key">Audio</span>
+        <span class="env-val env-todo">Placeholder: outputs, headphones, and what a player hears without an amplifier. Needs the real specification.</span>
+      </div>
+
+      <div class="env-row">
+        <span class="env-key">Other instruments</span>
+        <span class="env-val env-todo">Placeholder: MIDI, sync, pedals, and what the continuous data looks like to something else. Needs the real specification.</span>
       </div>
     </section>
 
