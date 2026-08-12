@@ -1,6 +1,8 @@
 # Why this site has three destinations
 
-Neotone, One, neOS. No Blog, Videos, Artists, Features, Press or Resources.
+Neotone, One, neOS. 
+
+Not Products, Blog, Videos, Artists, Features, Press or Resources.
 
 This is not minimalism as taste. It is the structure that follows from what Neotone actually is.
 
@@ -14,6 +16,9 @@ Neotone has one product line, one workshop, one voice, and about one piece of wr
 
 Two further costs, both about the writing rather than the layout. A blog is reverse-chronological and undifferentiated, which is correct for a lot of writing of variable quality and wrong for a little writing of high quality: it hides your best work behind whatever came last. And a blog has to be fed. A cadence lowers the bar, because the alternative to publishing something mediocre is a page that looks abandoned. Curated containers carry no cadence, so every piece can be good.
 
+So:
+Buyer segments, volume and quality of content.
+
 ---
 
 ## What we do instead
@@ -22,9 +27,9 @@ Two further costs, both about the writing rather than the layout. A blog is reve
 |---|---|---|
 | **Neotone** | Belonging | A way of making music you recognise as yours, and the people already doing it |
 | **One** | The instrument | The object, and the purchase |
-| **neOS** | Craft | The intelligence inside the instrument, made visible |
+| **neOS** | Craft Knowledge | The intelligence inside the instrument, made visible |
 
-Belonging and craft are things a reader wants to become, not categories of content. A piece rarely sits ambiguously between them.
+Belonging and craft are **things a reader wants to become, not categories of content.** A piece rarely sits ambiguously between them.
 
 Neotone answers *what will I be a part of.* neOS answers *how does someone who really understands this think about it.* Craft depth, not technical depth: digital lutherie belongs, firmware instructions do not.
 

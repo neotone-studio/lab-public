@@ -147,7 +147,16 @@
     .footer-utility { display: flex; flex-wrap: wrap; gap: 8px 22px; }
     .footer-utility a { font-size: 12px; color: rgba(255,255,255,0.55); text-decoration: none; cursor: pointer; font-family: Arial, Helvetica, sans-serif; }
     .footer-utility a:hover { color: #fff; }
+    /* Right column of the bottom band: the places you can turn up, most real
+       first. The room in Budapest, then the four you can reach tonight.
+       Text rather than brand glyphs, for the same reason the footer carries no
+       wordmarks: a place is named, not badged, and four logos would put another
+       company's branding at mark weight inside a black Neotone bar. */
+    .footer-place { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+    @media (min-width: 981px) { .footer-place { align-items: flex-end; text-align: right; } }
     .footer-meta { margin: 0; font-size: 12px; color: rgba(255,255,255,0.38); font-family: Arial, Helvetica, sans-serif; }
+    .footer-social a { color: rgba(255,255,255,0.55); cursor: pointer; }
+    .footer-social a:hover { color: #fff; }
 
     /* ---- Page opening ----
        Every page opens with one centred statement of what it is for, with the
@@ -308,7 +317,15 @@
           <a onclick="utilityLink('Terms')">Terms</a>
           <a onclick="utilityLink('Privacy')">Privacy</a>
         </div>
-        <p class="footer-meta">Neotone, Budapest</p>
+        <div class="footer-place">
+          <p class="footer-meta">Budapest &middot; visits by appointment</p>
+          <p class="footer-meta footer-social">
+            <a onclick="socialLink('Instagram')">Instagram</a> &middot;
+            <a onclick="socialLink('YouTube')">YouTube</a> &middot;
+            <a onclick="socialLink('TikTok')">TikTok</a> &middot;
+            <a onclick="socialLink('Facebook')">Facebook</a>
+          </p>
+        </div>
       </div>
 
     </div>
@@ -456,6 +473,12 @@
         "The same index drives load-more in the containers, and is what a Tonefield issue is assembled from."
       );
     }
+    /* Outbound, so they leave the site rather than routing through it. Wired as
+       alerts here because the accounts are not linked yet. */
+    function socialLink(name) {
+      alert("Outbound: Neotone on " + name + "\n\nOpens in a new tab. Social sits low and quiet on purpose: it is how people find their way back, not a destination the site promotes.");
+    }
+
     function utilityLink(name) {
       alert(
         "Destination: " + name + "\n\n" +

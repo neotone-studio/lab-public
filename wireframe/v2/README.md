@@ -308,9 +308,20 @@ Two bands, no column headings and a single hairline between them:
 | Band | Left | Right |
 |---|---|---|
 | Top | Section links: Neotone, One, neOS (+ Anima in future mode) | Search: underlined field and an arrow |
-| Bottom | About, Workshop, Contact, FAQ, Terms, Privacy | Budapest · visits by appointment |
+| Bottom | Workshop, Manual, Contact, Terms, Privacy | Place, then social |
 
 Everything is text, sans-serif: sections at 13px solid white, utility at 12px and 55% white. Both bands wrap, so no breakpoints are needed.
+
+**The right column of the bottom band is the places you can turn up**, most real first:
+
+```
+Budapest · visits by appointment
+Instagram · YouTube · TikTok · Facebook
+```
+
+"Neotone, Budapest" was there first and is a colophon: it states a location and repeats a name the masthead already carries. "Visits by appointment" states access, which is the persuasive fact, and it quietly says the operation is small in a way that reads as confidence. Social sits under it because those are also places you can turn up, in order of how real they are. Ordering within them is by actual usage, not convention.
+
+**Social is text, not brand icons**, for the same reason the footer carries no wordmarks. Four logos would put another company's branding at mark weight inside a black Neotone bar, and a place is named rather than badged. They are deliberately subordinate: the site's whole argument is that the good material is here, so social is how people find their way back rather than a destination being promoted.
 
 **The footer uses text, not the wordmarks.** The nav owns the marks and works them: they shrink into the masthead and act as the return mechanism. A footer cannot give them that job. Principle 9 makes the footer utility, and a wordmark is brand rather than utility.
 
@@ -378,7 +389,6 @@ Flagged rather than assumed.
 2. **Tonefield merch** (`EUR 12`) has no home, since Tonefield is an article now. Drop, or re-home later?
 3. **"Receive Tonefield" email capture** is not in items 1–7. Does it appear on One at all?
 4. **Questions contact form.** v1 has it on One; the principles document puts contact in the footer. Keep both, or footer only?
-7. **FAQ is still linked in the footer** but was ruled out: questions are answered where they arise, which is what makes an FAQ unnecessary rather than merely unfashionable. Remove the link, or keep About as the container for what an FAQ was really for?
 8. **"Built to order" in the One opening echoes lead time** three lines below it in the specs strip. Harmless, but the same fact is stated twice in different precision.
 5. **Reaching other sections on mobile** once the bar holds one mark. See Mobile: deliberately deferred, not overlooked. v1's hamburger does not transfer to a wordmark-only nav.
 6. ~~Subpage direct-load state~~ Resolved. Entry state is now uniform on every page; see Current state.
