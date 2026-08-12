@@ -308,7 +308,7 @@ Two bands, no column headings and a single hairline between them:
 | Band | Left | Right |
 |---|---|---|
 | Top | Section links: Neotone, One, neOS (+ Anima in future mode) | Search: underlined field and an arrow |
-| Bottom | Workshop, Manual, Contact, Terms, Privacy | Place, then social |
+| Bottom | Workshop, Manual, Contact, Legal | Place, then social |
 
 Everything is text, sans-serif: sections at 13px solid white, utility at 12px and 55% white. Both bands wrap, so no breakpoints are needed.
 
@@ -322,6 +322,10 @@ Instagram · YouTube · TikTok · Facebook
 "Neotone, Budapest" was there first and is a colophon: it states a location and repeats a name the masthead already carries. "Visits by appointment" states access, which is the persuasive fact, and it quietly says the operation is small in a way that reads as confidence. Social sits under it because those are also places you can turn up, in order of how real they are. Ordering within them is by actual usage, not convention.
 
 **Social is text, not brand icons**, for the same reason the footer carries no wordmarks. Four logos would put another company's branding at mark weight inside a black Neotone bar, and a place is named rather than badged. They are deliberately subordinate: the site's whole argument is that the good material is here, so social is how people find their way back rather than a destination being promoted.
+
+**Terms and Privacy collapsed into one Legal link.** Two links were a high share of the utility row next to genuinely useful items, and nothing requires a link labelled "Privacy": the requirement is that the information be findable. `legal.html` holds three anchored sections, ordered privacy, terms of sale, terms of website use, because privacy applies to every reader and the other two only once someone orders.
+
+`legal.html` is a wireframe scaffold, not the documents. Each section carries an editorial review list, cut and missing, against the real published policies. Findings in short: both current documents were written for other companies. The privacy policy is a Japanese manufacturer's template, citing the Personal Information Protection Law and Committee, with a GDPR section appended so obligations are stated twice under two regimes. The terms are US boilerplate with "the laws of the EU" as the governing law, covering message boards and registration that do not exist. The Submissions clause claims ownership of anything a user posts, which read against the Scale Gallery claims ownership of scales players made, and should be a licence. There are no terms of sale at all, which is the document with real consequences for a made-to-order instrument with a sixty day lead time. Not legal advice; the page exists so the brief is written down.
 
 **The footer uses text, not the wordmarks.** The nav owns the marks and works them: they shrink into the masthead and act as the return mechanism. A footer cannot give them that job. Principle 9 makes the footer utility, and a wordmark is brand rather than utility.
 
@@ -340,6 +344,20 @@ A 1200ms safety timeout fires the navigation regardless, covering smooth scrolli
 Utility pages are not built yet; their links fire `alert()` describing the destination and the species rule (utility pages render identically to articles but carry the plain Neotone mark, having no container to return to). Search fires an `alert()` describing the JSON index mechanism, so the intended plumbing is documented where it will live rather than spelled out on the page.
 
 `margin-top: 96px` keeps it clear of content. On short pages such as an empty checkout it falls below the fold and is reached by scrolling, rather than floating mid-viewport.
+
+---
+
+### Subscribe
+
+At the foot of the container feed on Neotone and neOS, not in the footer and not on One.
+
+The footer is where an ask goes when you do not know when to ask. Here we do: the moment a reader is most willing to hear from you again is when they have just finished something good, which is the end of a feed. The bottom of the page is where someone went looking for the Instagram link.
+
+It is named for the publication. "Tonefield" asks for a subscription to a thing that exists; "keep me updated" asks for permission to market, and the first is the honest description of a company that publishes weekly at most.
+
+Not on One. Someone mid-purchase is already going to hear from you, and an email field beside a five-figure order reads as a lead form. This resolves open decision 3.
+
+Same hairline field as the footer search so the two read as one family, but on white above the black bar.
 
 ---
 
@@ -387,7 +405,6 @@ Flagged rather than assumed.
 
 1. **Selection affordance on One.** Recommendation above is One + checkout only. Needs a visual form now that it cannot be a nav item.
 2. **Tonefield merch** (`EUR 12`) has no home, since Tonefield is an article now. Drop, or re-home later?
-3. **"Receive Tonefield" email capture** is not in items 1–7. Does it appear on One at all?
 4. **Questions contact form.** v1 has it on One; the principles document puts contact in the footer. Keep both, or footer only?
 8. **"Built to order" in the One opening echoes lead time** three lines below it in the specs strip. Harmless, but the same fact is stated twice in different precision.
 5. **Reaching other sections on mobile** once the bar holds one mark. See Mobile: deliberately deferred, not overlooked. v1's hamburger does not transfer to a wordmark-only nav.
@@ -412,6 +429,7 @@ v2/
   neos-note-names.html        article, neOS container
   manual.html                 utility, contents page
   manual-scales.html          utility, one worked section
+  legal.html                  utility, privacy + terms of sale + terms of use
 ```
 
 Assets resolve as `../../media/…` from any v2 page.

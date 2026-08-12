@@ -203,6 +203,34 @@
     .feed-more { font-size: 14px; font-style: italic; color: var(--muted); }
     .feed-more:hover { color: var(--ink); text-decoration: underline; }
     @media (max-width: 980px) { .feed { padding: 48px 24px 24vh; } .feed-title { font-size: 24px; } }
+
+    /* ---- Subscribe ----
+       At the foot of the feed rather than in the footer. The moment a reader is
+       most willing to hear from you again is when they have just finished
+       something good, not when they went looking for the Instagram link. Named
+       for the publication: a subscription to Tonefield, not permission to
+       market. */
+    .subscribe { max-width: 680px; margin: 0 auto; padding-top: 44px; border-top: 1px solid var(--line); }
+    .subscribe-label {
+      display: block; margin-bottom: 12px;
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.14em; color: var(--muted);
+    }
+    .subscribe p { margin: 0 0 22px; font-size: 17px; line-height: 1.75; }
+    .subscribe-form { display: flex; align-items: center; max-width: 420px; }
+    .subscribe-form input {
+      flex: 1; min-width: 0; background: none; color: var(--ink);
+      border: none; border-bottom: 1px solid var(--line);
+      padding: 8px 0; font-size: 15px; font-family: inherit;
+    }
+    .subscribe-form input::placeholder { color: var(--muted); }
+    .subscribe-form input:focus { outline: none; border-bottom-color: var(--ink); }
+    .subscribe-form button {
+      background: none; border: none; border-bottom: 1px solid var(--line);
+      color: var(--muted); padding: 8px 0 8px 16px;
+      font-size: 15px; font-family: inherit; cursor: pointer;
+    }
+    .subscribe-form button:hover { color: var(--ink); }
   </style>
 </head>
 <body>
@@ -244,6 +272,16 @@
         <p class="feed-excerpt">Standard MIDI describes an event: this note, this hard, now. The instrument senses something continuous and multidimensional. Spatial MIDI is the attempt to carry the second thing through a channel built for the first.</p>
       </article>
 
+
+      <div class="subscribe">
+        <span class="subscribe-label">Tonefield</span>
+        <p>An occasional issue from the workshop. What we work out about the instrument, sent when there is something worth sending.</p>
+        <form class="subscribe-form" onsubmit="handleSubscribe(event)">
+          <input type="email" placeholder="Email" required />
+          <button type="submit" aria-label="Subscribe">&rarr;</button>
+        </form>
+      </div>
+
   </div>
 
   <footer class="site-footer">
@@ -267,8 +305,7 @@
           <a onclick="utilityLink('Workshop')">Workshop</a>
           <a href="manual.html">Manual</a>
           <a onclick="utilityLink('Contact')">Contact</a>
-          <a onclick="utilityLink('Terms')">Terms</a>
-          <a onclick="utilityLink('Privacy')">Privacy</a>
+          <a href="legal.html">Legal</a>
         </div>
         <div class="footer-place">
           <p class="footer-meta">Budapest &middot; visits by appointment</p>
@@ -408,6 +445,17 @@
     window.addEventListener('resize', () => { slideDistance = null; updateNav(); });
 
     /* ---- Footer ---- */
+
+    /* Named publication, not a newsletter signup: the ask is a subscription to
+       a thing that exists. Nothing is sent to One, where an email field beside
+       a five-figure order would read as a lead form. */
+    function handleSubscribe(e) {
+      e.preventDefault();
+      const value = e.target.querySelector('input').value;
+      alert("Subscribe: " + value + "\n\nTonefield, the occasional issue from the workshop. Double opt-in, one unsubscribe link, no other mail. Sits at the foot of a feed because that is where a reader has just finished something.");
+      e.target.reset();
+    }
+
     function handleSearch(e) {
       e.preventDefault();
       alert(
