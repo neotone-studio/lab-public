@@ -32,7 +32,9 @@ What it holds is the culture side of belonging. Somebody here is asking what the
 
 Each piece gets close to a screen to itself, so you arrive at one rather than scanning a list.
 
-The running order is ours to choose. A new piece can go anywhere in it, and whatever sits at the top is the claim we're making that week.
+The running order is ours to choose. A new piece can go anywhere in it, and somebody makes that call every time we publish.
+
+Which makes the lead piece the most important decision on the site. It carries the weight a statement of what Neotone is would carry, so it has to be something a stranger can hold: a person, an object, a place. Somebody landing cold on a photograph of a player knows within a second that this isn't a gear site, and that's what buys us their next five minutes. A piece of pure argument in that position leaves them nothing to take hold of.
 
 ---
 
@@ -43,6 +45,8 @@ The running order is ours to choose. A new piece can go anywhere in it, and what
 This is an **article**, the second type.
 
 It has its own address, which is what lets search find it, lets you send it to somebody, and lets a Tonefield issue collect it later.
+
+It's written to hold up whenever somebody reads it, so nothing in it depends on when it went up. That's the difference from a post, which belongs to the week it was published, and it's why we show no dates.
 
 *[Scroll down.]*
 
