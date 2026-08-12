@@ -208,7 +208,9 @@ Two things block it. Connections that have not been specified cannot be drawn, a
 
 Chrome appears only where it carries information. The specs strip and steps strip keep hairline dividers between cells because the dividers separate data, but their outer boxes are gone. Sections are separated by an 88px rhythm rather than borders. Bordered `.slot` boxes with uppercase labels were tried and removed: they described the section instead of being it.
 
-The instrument imagery lives in the order fork's preview, so there is no hero image above it: two grey blocks on one screen would be weight without information. Whether a banner image eventually appears is still an open design-pass question.
+The instrument imagery lives in the order fork's preview, so there is no hero image above it: two grey blocks on one screen would be weight without information.
+
+A real photograph changes that calculation, and prompts for two candidate images are at the repository root. If a hero is added the two images need distinct jobs: the hero shows the instrument situated in a room, and the fork preview shows the object itself, which is what someone choosing a wood needs to see.
 
 **Read further sits after the purchase flow**, not before it. These are depth for the already committed, which is what the summary block's bookend note already says. All three carry `target="_blank"`: their parent is Neotone, so the masthead would otherwise carry someone mid-purchase back to culture.
 

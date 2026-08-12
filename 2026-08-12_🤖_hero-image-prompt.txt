@@ -1,0 +1,155 @@
+PROMPT FOR CHATGPT IMAGE GENERATION
+Neotone One, hero photograph for the product page
+Written 2026-08-12. Attach a photograph of the Neotone One with this prompt.
+
+===============================================================================
+READ THIS FIRST (context for whoever is running the prompt, not part of it)
+===============================================================================
+
+This is the first image on the product page for a single handmade instrument,
+made in a workshop in Budapest. The page around it is quiet and editorial:
+white background, black text, hairline rules, Arial, no chrome. The photograph
+is the only place colour enters, so it carries all of the warmth.
+
+The image has one job: show the instrument in a life, not in a rig. Someone
+should look at it and understand what kind of person owns one and what kind of
+room it lives in. It is a picture about belonging, and the instrument happens
+to be in it.
+
+It is NOT a gear photograph. If it looks like a home studio shot from a music
+retailer, or a product on a seamless backdrop, or a desk covered in equipment,
+it has failed.
+
+Generate WITHOUT TEXT of any kind.
+
+Two variants are requested at the end. Generate both.
+
+===============================================================================
+PROMPT BEGINS
+===============================================================================
+
+I am attaching a photograph of a musical instrument called the Neotone One. It
+is a handmade wooden handpan-shaped electronic instrument: a round body with a
+domed playing surface, made of hardwood. Reproduce it faithfully. Its
+proportions, its wood grain, and the arrangement of its playing surfaces must
+match the attached photograph exactly. It must read as this specific object.
+
+Create a photorealistic photograph of this instrument in a real room.
+
+THE ROOM
+
+An older Central European apartment or workshop, the kind found in Budapest.
+Specific things that make it right:
+
+  - tall windows with slim glazing bars, daylight coming in from one side
+  - worn parquet or plain wooden floorboards
+  - plain plaster walls, slightly imperfect, off white or pale warm grey
+  - high ceiling implied by the framing rather than shown in full
+  - a few honest objects: a wooden stool or a simple chair, a rug, a stack of
+    books or paper, a cup, a coat over a chair back
+  - lived in but uncluttered. Someone works here. It has not been styled
+
+Daylight only. Soft, directional, slightly cool, the light of an overcast
+afternoon through a large window. No lamps, no coloured lighting, no studio
+strobes, no lens flare.
+
+THE INSTRUMENT IN THE ROOM
+
+The instrument is present and clearly the point of the picture, but it is not
+isolated or displayed. It sits on a stand, on a low table, or on a chair, at a
+height where someone would sit down and play it. It should look like it was
+left there by a person a moment ago.
+
+It occupies roughly a quarter to a third of the frame. It is in sharp focus.
+The room around it falls off gently, with a shallow but not extreme depth of
+field, as from a 35mm or 50mm lens at a moderate aperture.
+
+Frame it slightly off centre, with breathing room around it, so the image
+reads as a photograph of a room that contains this instrument.
+
+HUMAN PRESENCE
+
+There is evidence of a person and no portrait. Do not put a face in the frame.
+Acceptable and encouraged: a chair pulled out, a jacket over its back, an open
+notebook with handwriting too small to read, worn slippers, a half drunk cup of
+coffee, a window left open.
+
+Do not show hands playing the instrument. Do not show a seated player. Do not
+show anyone at all.
+
+WHAT MUST NOT BE IN THE PICTURE
+
+  - laptops, tablets, phones, screens of any kind
+  - studio monitors, mixing desks, rack gear, cables, microphones on stands
+  - other branded instruments or equipment, and any visible logos
+  - acoustic foam, treatment panels, or anything that says recording studio
+  - fairy lights, neon, plants arranged for effect, styled interior decor
+  - a seamless backdrop, a plinth, a display case, a shop
+  - text, watermarks, signatures, captions
+
+COLOUR AND TREATMENT
+
+Muted and natural. Warm wood against cool daylight and pale plaster. Low
+saturation overall, no filter look, no teal and orange grade, no heavy
+vignette, no film grain effect, no HDR. It should look like an unhurried
+photograph taken by someone who knows the room, not like an advertisement.
+
+FORMAT
+
+  - Aspect ratio 16:9, landscape, at least 2400 pixels wide.
+  - Compose so the image can also be cropped to a 2.4:1 letterbox band without
+    losing the instrument or the window light.
+  - Keep the instrument away from the extreme left and right edges.
+
+WHAT IT SHOULD FEEL LIKE
+
+Quiet, warm, slightly austere. A room in a European city on an ordinary
+afternoon, with a beautiful wooden instrument in it that someone plays. A
+viewer should be able to imagine living there.
+
+VARIANTS
+
+Generate two versions:
+
+  1. As described above: the instrument in the room, no person, evidence of a
+     person.
+
+  2. The same room and the same light, photographed from further back, with the
+     instrument smaller in the frame and more of the room visible. Same rules:
+     no person, no screens, no equipment. This tests whether the situated
+     reading gets stronger as the instrument gets smaller.
+
+===============================================================================
+PROMPT ENDS
+===============================================================================
+
+NOTES FOR REVIEWING THE RESULT
+
+The first thing to check is fidelity. Image models distort real objects when
+placing them into scenes. If the instrument's proportions, playing surfaces or
+grain do not match the attached photograph, the image is unusable no matter how
+good the room looks, and this is the most likely failure.
+
+Then reject and regenerate if:
+
+  - any screen, cable or piece of studio equipment has appeared
+  - the room looks styled, American, or like a furniture catalogue
+  - the lighting is warm and golden rather than daylight
+  - a person, a face or a pair of hands has appeared
+  - the instrument is centred and isolated, which turns it back into a product
+    shot
+  - the colour has been graded into something cinematic
+
+Whatever comes back is a wireframe placeholder. The real version of this image
+is a photograph taken in the Budapest workshop or in a player's flat, and it
+will be better than anything generated, because the point of the picture is
+that the room is real.
+
+RELATED DECISION
+
+The product page currently has no hero image, on the grounds that the
+instrument already appears in the order fork preview and two placeholder blocks
+on one screen would be weight without information. A real photograph changes
+that. If a hero is added, the two images need distinct jobs: the hero shows the
+instrument situated, and the fork preview shows the object itself, which is
+what someone choosing a wood actually needs to see.
