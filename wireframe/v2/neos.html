@@ -305,7 +305,7 @@
 
       <div class="subscribe">
         <span class="subscribe-label">Mailing list</span>
-        <p>News from the workshop</p>
+        <p>Updates from the Neotone workshop</p>
         <form class="subscribe-form" onsubmit="handleSubscribe(event)">
           <input type="email" placeholder="Email" required />
           <button type="submit" aria-label="Subscribe">&rarr;</button>
@@ -483,16 +483,12 @@
     function handleSubscribe(e) {
       e.preventDefault();
       const value = e.target.querySelector('input').value;
-      alert("Updates: " + value + "
-
-Occasional public list. Double opt-in, one unsubscribe link, no other mail. Owners are on a separate list for their own instruments.");
+      alert("Mailing list: " + value + "\n\nOccasional public list. Double opt-in, one unsubscribe link, no other mail. Owners are on a separate list for their own instruments.");
       e.target.reset();
     }
 
     function loadMore() {
-      alert("Load more
-
-Fetches the next page of previews from the JSON metadata index, the same index behind search. Lazy: the feed ships with three and grows on request rather than rendering everything. The button is removed when the index is exhausted, leaving Updates as the end of the page.");
+      alert("Load more\n\nFetches the next page of previews from the JSON metadata index, the same index behind search. Lazy: the feed ships with three and grows on request rather than rendering everything. The button is removed when the index is exhausted, leaving the mailing list as the end of the page.");
     }
 
     function handleSearch(e) {

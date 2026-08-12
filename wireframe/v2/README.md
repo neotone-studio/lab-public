@@ -357,11 +357,11 @@ Pieces, then **Load more**, then **Updates**. On Neotone and neOS only.
 
 **The button is a solid black bar at the reading measure**, the only solid black in the white part of the page. It reads as the end of the run and rhymes with the footer arriving under it. It fetches the next page of previews from the JSON metadata index, the same index behind search, so the feed ships with three and grows on request.
 
-**Label names the mechanism, line names the content**: `MAILING LIST` over `News from the workshop`. Labelling it Updates put two synonyms two lines apart. "Stay updated with the latest from Neotone" was considered and dropped: three phrases doing one job, and an instruction to the reader about their own posture, which is a thing marketing copy does and this site does not.
+**Label names the mechanism, line names the content**: `MAILING LIST` over `Updates from the Neotone workshop`. "News" was tried and dropped: it implies a stream, and this is not one. Labelling it Updates put two synonyms two lines apart. "Stay updated with the latest from Neotone" was considered and dropped: three phrases doing one job, and an instruction to the reader about their own posture, which is a thing marketing copy does and this site does not.
 
 **The list is not Tonefield.** Tonefield is a publication and would be its own subscription. This is a public notice board. "Stay in touch" promises a relationship from a company that will write four times a year; a mailing list says plainly what it is, the same move as "Budapest · visits by appointment".
 
-The copy is four words: **News from the workshop**. An earlier version explained the frequency, listed what might arrive, and noted that owners are on a separate list. Explaining that you will not email much is the behaviour of a company expecting to be suspected of it, and "workshop" already tells the reader how often a room that size has news. The owners caveat belongs in the confirmation email, not in the ask.
+The copy is **Updates from the Neotone workshop**. An earlier version explained the frequency, listed what might arrive, and noted that owners are on a separate list. Explaining that you will not email much is the behaviour of a company expecting to be suspected of it, and "workshop" already tells the reader how often a room that size has news. The owners caveat belongs in the confirmation email, not in the ask.
 
 **Not on One.** Someone mid-purchase is already going to hear from you, and an email field beside a five-figure order reads as a lead form. Resolves open decision 3.
 
