@@ -265,6 +265,8 @@ Articles have their own URL and render identically to utility pages. The only di
 
 **Layout.** Media runs to the content grid at 1084px; head and body stay at a 680px reading measure. Kicker, title, standfirst, media, prose, with quiet sub-heads.
 
+**Width signals position.** A lead image runs to the content grid at 1084px; anything inside the body sits at the 680px measure with the prose. The lead is the one moment a piece uses the full grid, and it is what makes opening an article feel like arriving somewhere: you clicked a 680px preview and the thing got bigger. Aligning the lead to the measure would make the article page dimensionally identical to the feed item you just left. Only the lead slot exists so far, so nothing needs changing; the rule is written down before a second image appears.
+
 **Format is independent of species.** The video box is a placeholder for a piece that may be prose, video, or prose built around video. That is a production decision, not a structural one, so the template carries media as a first-class element rather than an afterthought.
 
 **Feed blocks are links**, per principle 14: the whole block is the click target, no read-more button.
@@ -364,6 +366,8 @@ Pieces, then **Load more**, then **Updates**. On Neotone and neOS only.
 The copy is **Updates from the Neotone workshop**. An earlier version explained the frequency, listed what might arrive, and noted that owners are on a separate list. Explaining that you will not email much is the behaviour of a company expecting to be suspected of it, and "workshop" already tells the reader how often a room that size has news. The owners caveat belongs in the confirmation email, not in the ask.
 
 **Not on One.** Someone mid-purchase is already going to hear from you, and an email field beside a five-figure order reads as a lead form. Resolves open decision 3.
+
+The line sits above the field, not below it. The block repeats the article head: kicker, a line saying what this is, then the thing itself, the same shape as `SCALES / Why the note names change as you build / article`. Above the field a line is a proposition; below it, in the space a form gives to helper text, the same words read as a disclaimer, and that position pulls for frequency and unsubscribe language, which is the hedging the copy exists to avoid. Nothing sits under the field, because nothing collected here needs explaining.
 
 Spacing puts the block at the bottom of the scroll rather than in the middle of it: 22vh below the last piece, 56px from button to field, 96px to the footer. The feed itself no longer carries bottom padding; the end block owns that space.
 
