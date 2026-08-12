@@ -190,7 +190,7 @@
        14, which assumes a block with nothing interactive inside it. */
     /* No opening line here: the masthead names Neotone and the pieces say what it is,
    so the feed itself opens the page and carries the entry fade. */
-    .feed { max-width: var(--max); margin: 0 auto; padding: 104px 48px 30vh;
+    .feed { max-width: var(--max); margin: 0 auto; padding: 104px 48px 0;
             animation: opening-in 760ms ease 140ms both; }
     @media (prefers-reduced-motion: reduce) { .feed { animation: none; } }
     .feed-item { max-width: 680px; margin: 0 auto; scroll-margin-top: 140px; }
@@ -206,15 +206,37 @@
     .feed-excerpt { margin: 0 0 18px; font-size: 16px; line-height: 1.7; }
     .feed-more { font-size: 14px; font-style: italic; color: var(--muted); }
     .feed-more:hover { color: var(--ink); text-decoration: underline; }
-    @media (max-width: 980px) { .feed { padding: 72px 24px 24vh; } .feed-title { font-size: 24px; } }
+    @media (max-width: 980px) { .feed { padding: 72px 24px 0; } .feed-title { font-size: 24px; } }
+
+    /* ---- End of feed ----
+       Load more, then subscribe. Load more continues the reading; subscribing
+       is what you do once you have decided to stop, so putting the field first
+       would interrupt a reader who is still going. When the feed eventually
+       runs out the button goes and subscribe becomes the terminus, with nothing
+       rearranged.
+
+       The bar is the only solid black in the white part of the page, so it
+       reads as the end of the run and rhymes with the footer arriving under it.
+       Sits well below the last piece and close to the footer, so scrolling to
+       it feels like reaching the end rather than finding another section. */
+    .feed-end { max-width: var(--max); margin: 22vh auto 0; padding: 0 48px; }
+    @media (max-width: 980px) { .feed-end { margin-top: 16vh; padding: 0 24px; } }
+    .feed-end-inner { max-width: 680px; margin: 0 auto; }
+
+    .load-more {
+      display: block; width: 100%; background: #000; color: #fff;
+      border: none; padding: 18px 0; cursor: pointer;
+      font-family: inherit; font-size: 12px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.14em;
+    }
+    .load-more:hover { background: #222; }
 
     /* ---- Subscribe ----
-       At the foot of the feed rather than in the footer. The moment a reader is
-       most willing to hear from you again is when they have just finished
-       something good, not when they went looking for the Instagram link. Named
-       for the publication: a subscription to Tonefield, not permission to
-       market. */
-    .subscribe { max-width: 680px; margin: 0 auto; padding-top: 44px; border-top: 1px solid var(--line); }
+       Not Tonefield: that is a publication, and this is a notice board. Not
+       "stay in touch" either, which promises a relationship from a company that
+       will write four times a year. Updates says plainly what it is, the same
+       move as "Budapest · visits by appointment". */
+    .subscribe { margin-top: 56px; }
     .subscribe-label {
       display: block; margin-bottom: 12px;
       font-size: 11px; font-weight: 700; text-transform: uppercase;
@@ -273,15 +295,24 @@
       </article>
 
 
+
+  </div>
+
+  <div class="feed-end">
+    <div class="feed-end-inner">
+
+      <button class="load-more" onclick="loadMore()">Load more</button>
+
       <div class="subscribe">
-        <span class="subscribe-label">Tonefield</span>
-        <p>An occasional issue from the workshop. Pieces like these, a few times a year, and nothing else.</p>
+        <span class="subscribe-label">Updates</span>
+        <p>Occasional, and only when something happens: a new instrument, a new scale, somewhere to hear one played. Owners hear about their instruments separately.</p>
         <form class="subscribe-form" onsubmit="handleSubscribe(event)">
           <input type="email" placeholder="Email" required />
           <button type="submit" aria-label="Subscribe">&rarr;</button>
         </form>
       </div>
 
+    </div>
   </div>
 
   <footer class="site-footer">
@@ -446,14 +477,22 @@
 
     /* ---- Footer ---- */
 
-    /* Named publication, not a newsletter signup: the ask is a subscription to
-       a thing that exists. Nothing is sent to One, where an email field beside
-       a five-figure order would read as a lead form. */
+    /* A notice board, not a newsletter, and not the Tonefield subscription:
+       that is a publication and would be its own list. Nothing on One, where an
+       email field beside a five-figure order reads as a lead form. */
     function handleSubscribe(e) {
       e.preventDefault();
       const value = e.target.querySelector('input').value;
-      alert("Subscribe: " + value + "\n\nTonefield, the occasional issue from the workshop. Double opt-in, one unsubscribe link, no other mail. Sits at the foot of a feed because that is where a reader has just finished something.");
+      alert("Updates: " + value + "
+
+Occasional public list. Double opt-in, one unsubscribe link, no other mail. Owners are on a separate list for their own instruments.");
       e.target.reset();
+    }
+
+    function loadMore() {
+      alert("Load more
+
+Fetches the next page of previews from the JSON metadata index, the same index behind search. Lazy: the feed ships with three and grows on request rather than rendering everything. The button is removed when the index is exhausted, leaving Updates as the end of the page.");
     }
 
     function handleSearch(e) {

@@ -310,6 +310,8 @@ Two bands, no column headings and a single hairline between them:
 | Top | Section links: Neotone, One, neOS (+ Anima in future mode) | Search: underlined field and an arrow |
 | Bottom | Workshop, Manual, Contact, Legal | Place, then social |
 
+The place line stays **Budapest · visits by appointment**. The social row names Instagram rather than Neotone Instagram, so "Budapest" is parallel to it and the reader supplies whose it is; putting the company name on only the first line breaks that pattern one line before it is established. "Neotone Budapest" also reads as a branch office, which is the opposite of what "by appointment" is telling people. "Budapest" alone loses the invitation, which is the only clause doing persuasive work.
+
 Everything is text, sans-serif: sections at 13px solid white, utility at 12px and 55% white. Both bands wrap, so no breakpoints are needed.
 
 **The right column of the bottom band is the places you can turn up**, most real first:
@@ -347,17 +349,19 @@ Utility pages are not built yet; their links fire `alert()` describing the desti
 
 ---
 
-### Subscribe
+### End of feed
 
-At the foot of the container feed on Neotone and neOS, not in the footer and not on One.
+Pieces, then **Load more**, then **Updates**. On Neotone and neOS only.
 
-The footer is where an ask goes when you do not know when to ask. Here we do: the moment a reader is most willing to hear from you again is when they have just finished something good, which is the end of a feed. The bottom of the page is where someone went looking for the Instagram link.
+**Load more before subscribe.** Load more continues the reading; subscribing is what you do once you have decided to stop, so a field above the button interrupts a reader who is still going. When the index is eventually exhausted the button is removed and Updates becomes the terminus, with nothing rearranged.
 
-It is named for the publication. "Tonefield" asks for a subscription to a thing that exists; "keep me updated" asks for permission to market, and the first is the honest description of a company that publishes weekly at most.
+**The button is a solid black bar at the reading measure**, the only solid black in the white part of the page. It reads as the end of the run and rhymes with the footer arriving under it. It fetches the next page of previews from the JSON metadata index, the same index behind search, so the feed ships with three and grows on request.
 
-Not on One. Someone mid-purchase is already going to hear from you, and an email field beside a five-figure order reads as a lead form. This resolves open decision 3.
+**The list is Updates, not Tonefield.** Tonefield is a publication and would be its own subscription. This is a public notice board: occasional, only when something happens, and owners are on a separate list for their own instruments. "Stay in touch" promises a relationship from a company that will write four times a year. Updates says plainly what it is, the same move as "Budapest · visits by appointment".
 
-Same hairline field as the footer search so the two read as one family, but on white above the black bar.
+**Not on One.** Someone mid-purchase is already going to hear from you, and an email field beside a five-figure order reads as a lead form. Resolves open decision 3.
+
+Spacing puts the block at the bottom of the scroll rather than in the middle of it: 22vh below the last piece, 56px from button to field, 96px to the footer. The feed itself no longer carries bottom padding; the end block owns that space.
 
 ---
 
