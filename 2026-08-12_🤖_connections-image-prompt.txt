@@ -1,0 +1,151 @@
+PROMPT FOR CHATGPT IMAGE GENERATION
+Neotone One, "connections" image for the product page
+Written 2026-08-12. Attach a photograph of the Neotone One with this prompt.
+
+===============================================================================
+READ THIS FIRST (context for whoever is running the prompt, not part of it)
+===============================================================================
+
+The image sits on a product page for a single handmade instrument. The page is
+a quiet editorial layout: white background, black text, hairline grey rules,
+Arial, no chrome, no shadows, no gradients, no colour anywhere.
+
+The point of the image is NOT to show connectivity. It is to show that the
+instrument does not require anything. It is a location image, not a wiring
+diagram. Emptiness is the content. If the finished image looks like the back
+panel diagram in an audio interface manual, it has failed.
+
+Generate WITHOUT TEXT. Labels are added in HTML afterwards so they stay crisp,
+editable and consistent with the site's typeface. Do not ask the model for
+lettering, callout text, captions or a title.
+
+Two variants are requested at the end. Generate both.
+
+===============================================================================
+PROMPT BEGINS
+===============================================================================
+
+I am attaching a photograph of a musical instrument called the Neotone One. It
+is a handmade wooden handpan-shaped electronic instrument: a round body with a
+domed playing surface, made of hardwood.
+
+Create a single flat, minimal illustration for a website, using the attached
+instrument as the subject.
+
+SUBJECT AND COMPOSITION
+
+Place the instrument alone at the exact centre of the frame, seen from directly
+above, filling roughly one third of the image width. Render it faithfully to the
+attached photograph: the same proportions, the same wood, the same arrangement
+of playing surfaces. It should read as this specific object, not a generic
+drum or a symbol of one.
+
+Surround it with a large amount of empty white space. The emptiness is the
+subject of the picture as much as the instrument is. Do not fill it.
+
+At the outer edges of the frame, place four or five very small, very simple
+outline glyphs, drawn in thin uniform grey line work, evenly distributed around
+the instrument and set well back from it. Each glyph should be no more than
+about one twentieth of the image width, so that they read as faint notes at the
+periphery rather than as components of a system. Suggested glyphs, drawn as
+minimal outlines:
+
+  - a pair of headphones
+  - a small laptop, closed or seen edge on, deliberately unremarkable
+  - a simple wifi arc
+  - a plain speaker cone or monitor outline
+  - one small blank rounded rectangle standing in for an unspecified device
+
+Leave meaningful empty gaps between them. Do not arrange them in a perfect ring
+or a symmetrical clock face; a slightly uneven scatter reads as optional, an
+even ring reads as a system diagram.
+
+CRITICAL RULES ABOUT CONNECTIONS
+
+  - Draw NO cables, NO wires, NO arrows, NO connecting lines of any kind
+    between the instrument and the peripheral glyphs. Nothing touches the
+    instrument. This is the single most important instruction in the brief.
+  - The instrument must not appear to be plugged into anything.
+  - Do not draw ports, sockets, jacks or connectors on the instrument.
+  - Do not add a signal flow, a routing path, or any indication of direction.
+
+The relationship between the centre and the edges must be conveyed only by
+position and by size. The instrument is large, central, fully rendered and
+complete. Everything else is small, distant, faint and clearly optional.
+
+STYLE
+
+  - Absolutely flat. No perspective on the peripheral glyphs, no isometric
+    view, no 3D rendering, no photorealism outside the instrument itself.
+  - No drop shadows, no glows, no reflections, no gradients, no textures, no
+    background patterns, no grid, no vignette.
+  - Pure white background, hex #FFFFFF, edge to edge.
+  - Peripheral glyphs in a single light grey line, roughly hex #B8B8B8, with
+    a consistent hairline stroke weight of about 1.5 pixels at 2000 pixels
+    wide. No fills.
+  - The instrument may be rendered more richly than the glyphs, either as a
+    clean photographic cutout on white, or as a detailed line and tone drawing.
+    It should be the only element in the image with any weight or detail.
+  - Entirely monochrome apart from the natural colour of the wood. No accent
+    colour anywhere. No brand colours.
+  - No text, no numbers, no labels, no captions, no title, no watermark, no
+    logo, no signature.
+  - No people, no hands, no room, no furniture, no plants, no studio setting,
+    no desk.
+
+FORMAT
+
+  - Aspect ratio 16:9, landscape.
+  - At least 2000 pixels wide.
+  - Generous internal margins: nothing should come close to the frame edge.
+    Keep the outermost glyphs at least 8 percent of the image width in from
+    every edge, because HTML labels will be positioned just outside them.
+
+WHAT IT SHOULD FEEL LIKE
+
+Someone glancing at this for one second should think: that instrument is
+complete on its own, and those other things are around it if you want them. It
+should feel calm, spacious and slightly austere, closer to a museum object card
+than to a product manual or a gear advertisement.
+
+WHAT IT MUST NOT LOOK LIKE
+
+  - An audio interface connection diagram
+  - A "studio setup" or signal chain illustration
+  - A hub and spoke network graphic
+  - An infographic
+  - A product feature callout image with lines pointing at parts
+  - Anything where a computer appears equal in size or importance to the
+    instrument
+
+VARIANTS
+
+Generate two versions:
+
+  1. As described above, with the peripheral glyphs.
+  2. Identical composition and style, with the instrument alone and no
+     peripheral glyphs at all: just the instrument, centred, on white, with the
+     same generous margins.
+
+===============================================================================
+PROMPT ENDS
+===============================================================================
+
+NOTES FOR REVIEWING THE RESULT
+
+Reject and regenerate if any of the following are present, since each defeats
+the purpose of the image:
+
+  - any line, cable or arrow touching or approaching the instrument
+  - peripheral glyphs large enough to compete with the instrument
+  - the glyphs arranged in an even ring, which reads as a system
+  - a laptop drawn with any prominence, detail or screen content
+  - shadows, gradients, or an off-white background
+  - generated text of any kind
+  - the instrument rendered generically rather than as the attached object
+
+Variant 2, the instrument alone, is worth keeping regardless. It may turn out
+to be the better image for the top of the product page, in which case the
+connections stay as the existing list of rows further down and this exercise
+will have settled the question rather than answered it in the expected
+direction.
