@@ -1,12 +1,12 @@
 # Why the site is built this way
 
-The site does two things. It lets a reader understand what they would be joining, and it sells them an instrument. Every decision below follows from those two, in that order.
+The site does two things. It shows a reader the way of making music the instrument comes from, and it sells them the instrument. Every decision below follows from those two, in that order.
 
-Neotone makes one instrument. That fact is what allows the site to be organised around meaning instead of around a catalogue, and it is the advantage to protect.
+Neotone makes one instrument. That is what allows the site to be organised around meaning instead of around a catalogue, and it is the advantage to protect. It survives more instruments, because any instrument Neotone makes will be an expression of the same values as the One. Three products would be three expressions of one position, which is a different thing from a catalogue and can still be navigated by what a reader wants.
 
-The examples throughout are Ableton, Teenage Engineering and Sunhouse, taken from reading their sites. Each is a competent response to a constraint Neotone does not have: all three sell more products than a nav has slots, so their navigation has to be organised by product, and everything that is not a product has to go somewhere else.
+The examples throughout are Ableton, Teenage Engineering and Roland, taken from reading their sites. None of them is doing it badly. Each is a competent response to a constraint Neotone does not have: they sell more products than a nav has slots, so their navigation has to be organised by product, and everything that is not a product has to go somewhere else.
 
-Teenage Engineering is the one to be careful with, because its site is the best of the three. It persuades through the object: photography, exploded diagrams, and short display slogans in place of prose. A company whose case is written cannot take its structure from one that succeeds by saying very little.
+Teenage Engineering is the one to be careful with, because its site is the best of the three. It persuades through the object: photography, exploded diagrams, and short display slogans in place of prose. That works when a product explains itself in the hand. What makes the Neotone One different is invisible in a photograph, so the same approach would land it in exactly the category it needs to leave.
 
 ---
 
@@ -46,7 +46,7 @@ Prose written only to hold a page together also does one job, and it is the most
 
 Lead time sits in the specs. What happens next sits under the order. Can I change my mind sits beside the commitment. A reader is always on the page where the question occurred to them, which is where the answer belongs.
 
-An FAQ moves those answers somewhere else and then has to be kept in step with the pages that already contain them, and it multiplies: Sunhouse answers questions across a support page, an FAQ, a downloads page, a user guide on one subdomain and a forum on another. Each is defensible alone. Together they are a situation where a person with a question does not know where to look.
+An FAQ moves those answers somewhere else and then has to be kept in step with the pages that already contain them. It also multiplies. Roland's Support section holds Updates and Drivers, Owner's Manuals, Support Documents, Quick Start Video, Knowledge Base, Support News and Legacy Product Info, with the knowledge base on its own subdomain. Each is defensible alone. Together they are a place a person goes to search rather than a place they find an answer.
 
 ## The manual produces the editorial
 
@@ -70,7 +70,7 @@ The containers are not in reverse chronological order. A piece can be added with
 
 Two things separate this from a blog with a better name. One is structural and holds on its own: there are two containers split by what the reader wants, so every piece is assigned to belonging or to craft before it is published, and there is no single undifferentiated stream for things to fall into. The other is a practice, and it has to be performed every time: deciding where a new piece goes in the order.
 
-The practice is the fragile part, and the failure is common enough to be the default. Sunhouse calls its blog Stories. Teenage Engineering calls its blog `now`, a single reverse-chronological stream where a firmware release note sits between two artist interviews, with no categories at all. Ableton keeps the word blog and folds artists, news, podcasts, tutorials and videos into it as categories, then puts it in a "More" overflow menu, so it cannot be an entrance for anyone who has not already arrived. In each case the label was chosen carefully and the behaviour was inherited without being chosen.
+The practice is the fragile part, and the failure is common enough to be the default. Teenage Engineering calls its blog `now`, a single reverse-chronological stream where a firmware release note sits between two artist interviews, with no categories at all. Ableton keeps the word blog and folds artists, news, podcasts, tutorials and videos into it as categories, then puts it in a "More" overflow menu, so it cannot be an entrance for anyone who has not already arrived. Roland runs a genuine magazine at articles.roland.com, with Stories, Learn and Discover, and it is a separate site. In each case the label was chosen carefully and the behaviour was inherited without being chosen.
 
 A Neotone container is a vertical list of previews with a load more button, which is interactively a feed, and load more implies an ordered archive. If that order quietly becomes newest first, the curation is only a label.
 
@@ -90,8 +90,25 @@ Three products are three nav items. A fourth destination has to earn its place b
 
 ## The test for anything new
 
-**What species is it?** Article, container, section page, or utility. There is no fifth thing.
+**What species is it?** Article, container, product page, or utility. There is no fifth thing.
 
 **What does the reader want?** If it is belonging or craft, it is an article in an existing container. If it collects one thing, it is an article.
 
-**Does it help someone understand what they would be joining, or help them get an instrument?** If neither, it does not go on the site.
+**Does it show someone the way of making music this comes from, or help them get an instrument?** If neither, it does not go on the site.
+
+---
+
+## Using this as a lens
+
+The same questions work on any music company's site, and the answers tend to arrive quickly.
+
+1. **Is the nav made of products, or of things a reader wants?**
+2. **Where does the thinking live, and can you reach it without already knowing it exists?**
+3. **Is the editorial ordered by judgement or by date?** A date order is a feed whatever it is called.
+4. **Does a piece do more than one job?** Look for a product page that links to an article.
+5. **Are questions answered where they arise, or collected in a support section?**
+6. **Could you tell, from the structure alone, what this company believes about how music is made?**
+
+The last one is the one that sorts them. Ableton believes the computer is the studio and that learning is part of the product, which is why the teaching subdomains exist at all. Teenage Engineering believes the object is the argument, which is why the prose is slogans. Roland makes pianos, wind instruments, drums, DJ gear and professional A/V, so it holds no single view and its site does not pretend to one. It is an index of a catalogue, and a good one.
+
+That last question is the one Neotone is answering, and it is the reason the structure looks the way it does. A reader should be able to tell from the shape of the site, before reading a word, that this is a position about how music is made and not a product with a blog attached.

@@ -22,7 +22,9 @@ v2 rebuilds around three destinations ordered by reader state, four page species
 |---|---|---|
 | **Article** | An individual piece. Own URL. | All written content |
 | **Container** | Holds articles. | Neotone, neOS |
-| **Section page** | A page of sections. Carries purchase. | One, later Anima |
+| **Product page** | Carries the instrument and the purchase. | One, later Anima |
+
+Renamed from "section page", which described how the One page is built rather than what it is, and read as a section of the manual. A manual section is a utility page.
 | **Utility** | Footer material. | Terms, privacy, contact, manual, workshop address |
 
 Nothing is a fifth thing. A page that is none of these is either an article or it does not exist.
@@ -277,9 +279,9 @@ Articles have their own URL and render identically to utility pages. The only di
 
 Same template as an article, which is the point: they render identically. The difference is the mark. An article carries its container's mark and returns there. A utility page carries the plain Neotone mark and returns to root, because it has no container.
 
-**The manual is a contents page onto section pages.** Every section has its own address, which is what lets a tooltip inside the software link straight to the part that answers the question in front of the player. Sections are grouped rather than listed flat: the instrument, getting started, the Interface, and troubleshooting.
+**The manual is a contents page onto product pages.** Every section has its own address, which is what lets a tooltip inside the software link straight to the part that answers the question in front of the player. Sections are grouped rather than listed flat: the instrument, getting started, the Interface, and troubleshooting.
 
-**A section page shows the three registers.** `manual-scales.html` lays out Basics, Going deeper, and Deeper still. The third register's items carry a small neOS marker and leave for the container, which is the practical layer handing off to the intelligence layer at exactly the point the question turns into a why.
+**A product page shows the three registers.** `manual-scales.html` lays out Basics, Going deeper, and Deeper still. The third register's items carry a small neOS marker and leave for the container, which is the practical layer handing off to the intelligence layer at exactly the point the question turns into a why.
 
 Structure taken from the real manual, version 3.2, fifty pages. Headings within Scales follow the walkthrough script.
 
@@ -432,7 +434,7 @@ v1/                 reference implementation, superseded IA, correct purchase lo
 v2/
   README.md         this file
   index.html        Neotone, container and root
-  one.html          One, section page, carries purchase
+  one.html          One, product page, carries purchase
   anima.html        Anima, placeholder for future product
   neos.html         neOS, container
   checkout.html     purchase completion; not a nav destination
