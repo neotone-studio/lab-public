@@ -1,191 +1,199 @@
 # A walk through the Neotone site
 
-*Section headings are for navigation. Stage directions in italics. This replaces the three earlier documents: the principles list, the three destinations argument, and its summary.*
-
----
-
 ### Greeting
 
 Hello, sziasztok, from the Neotone workshop in Budapest.
 
-Today we're going to walk through the whole site, page by page, in the order someone would actually meet it. We'll start with the shape of the thing, then go through each part, and at the end we'll circle back and look at how a few other companies do it, and why we're not doing that.
+We're going to walk through the site together, in the order somebody actually moves through it. Click by click, scroll by scroll. By the end you'll have seen every kind of page we have, and you'll be able to place any new page we're asked to build.
 
 ---
 
 ### The one fact everything rests on
 
-First things first: Neotone makes one instrument.
+We make one instrument.
 
-That sounds like a limitation, and for the website it's the opposite. It means the navigation doesn't have to be a list of products. Nobody needs help choosing between things, because there's one thing. So the slots in the menu are free, and we can spend them on what a reader wants instead of on what the company sells.
+That's the whole reason this site can be shaped the way it is. Nobody arriving needs help choosing between products, so the menu doesn't have to be a list of them. The slots are free, and we spend them on what a reader wants.
 
-Keep that in mind, because almost every decision below comes back to it.
-
-And it survives more instruments. Anything Neotone builds later will be an expression of the same values as the One, so three products would be three expressions of one position. That's a different situation from a catalogue.
+This holds as we grow. Anima and Treangle will be expressions of the same values as the One, so three instruments would be three expressions of one position. That's a different situation from a catalogue, and it needs no restructuring.
 
 ---
 
-### The three destinations
+### The home page
 
-*[Open the site. Look at the top of the page.]*
+*[Open the site.]*
 
-There are three things up there: **Neotone**, **One**, and **neOS**.
+Here's what we land on. A handpan player from Iran, named Golsa Nazari. Under that, a piece called The hijaz tetrachord. Under that, Made of wood.
 
-That's a company, an instrument, and a piece of software. You can point at each one. There's no Products, no Features, no Resources, no Press, because those name the activities of a marketing department rather than things that exist.
+Each one shows an image, a small kicker, a title, and the opening lines.
 
-Here's what each one is for:
+So the home page is a **container**: a page that holds articles. That's the first of our page types, and we'll meet the rest as we go.
 
-- **Neotone** is where you go when you don't have a question. It's the way of making music, and the people already doing it.
-- **One** is where you go when you want the instrument. It carries the object and the purchase.
-- **neOS** is where you go when you do have a question. It's the intelligence inside the instrument, made visible.
-
-So the menu is ordered by what a reader wants, not by what kind of content sits behind it.
-
-And notice where One is: in the middle, with the culture on one side and the craft on the other. The shape of the menu says the instrument is what everything else is arranged around, before anyone has read a word.
+What it holds is the culture side of belonging. A reader here is asking what they'd be part of, and the answer is a person, a tradition, and a material. Everything in this container is chosen to answer that.
 
 ---
 
-### Two ideas that look alike and aren't
+### How the feed behaves
 
-Now, before we go any further, there are two ways of sorting pages, and they need to stay separate in your head.
+*[Hover over the first piece.]*
 
-The first is **what kind of page it is**. There are four kinds and there is no fifth:
+The whole block is the link. The image, the title, the text.
 
-1. **An article.** An individual piece with its own address.
-2. **A container.** Something that holds articles. Neotone and neOS are containers.
-3. **A product page.** Carries an instrument and its purchase. One is one, and Anima will be.
-4. **A utility page.** Footer material. Contact, legal, the manual.
+*[Scroll down.]*
 
-The second is **where it sits in the menu**, which is by reader state, as we just said.
+There's a lot of space between pieces. Each one gets a screen to itself, so you arrive at it rather than scanning past it.
 
-These are different axes. Neotone and neOS are both containers, and they're different destinations. A product page isn't inside a container at all; it sits at the same level as one.
-
-When someone asks for a new page, this is the question to ask: which of the four is it? And if it collects only one thing, it's an article, not a container.
-
-A container only appears when one of the four outgrows the menu. Three products are three menu items. There's no grouping page until there are more products than the menu can carry, and we're nowhere near that.
+And the running order is chosen by us. A new piece can go anywhere in it. Whatever sits at the top is the claim the site is making that week, so somebody decides that every time we publish. We'll come back to this in the deeper dive, because it's the part that can quietly go wrong.
 
 ---
 
-### Neotone, the home page
+### Opening a piece
 
-*[Click Neotone.]*
+*[Click Golsa Nazari.]*
 
-So this is the home page, and the first thing to notice is what isn't here. There's no headline.
+Now we're on an **article**, our second page type.
 
-Every other page opens with one sentence saying what it's for. This one doesn't, and the reason is that a heading exists to explain a name a reader can't decode yet. Neotone is already up there in the menu. There's nothing to explain.
+It has its own web address. That matters four times over: search can find it, you can send it to somebody, a Tonefield issue can collect it, and a print edition later needs pieces to be discrete objects. A pop-up gives us none of that.
 
-So instead, the page opens directly on a piece. Right now that's a handpan player from Iran, then a piece about wood, then a piece about a tetrachord.
+*[Scroll down the article.]*
 
-And that does something a sentence can't. If the page said "Neotone is a new musical culture," it would be making that claim from outside the thing it's describing. Landing on the player, the wood and the tetrachord puts the same claim in front of you and lets you arrive at it yourself.
+The image runs the full width of the page and the text sits in a narrower column. Width tells you where you are: a lead image runs wide, anything further down sits with the prose.
 
-Which brings us to the one rule the whole site's writing follows: **never claim what the reader hasn't been shown.**
-
----
-
-### The pieces in the feed
-
-Each piece in the feed shows an image, a small kicker, a title, and the first few lines.
-
-The whole block is the link. There's no "read more" button, because a button is a second thing to look at when the piece itself is right there.
-
-And the order of these is a decision, not a date. A new piece can go in anywhere. Since there's no headline on this page, whatever sits at the top is the claim the site is making that week, so somebody has to choose it. We'll come back to why that's the fragile part.
+At the bottom there's **Read next**, with two pieces chosen for relevance.
 
 ---
 
-### Opening a piece, and coming back
+### Getting back
 
-*[Click the first piece.]*
+*[Look at the top left.]*
 
-Now we're on an article. It has its own address, which matters for four reasons: search finds it, you can send it to somebody, a Tonefield issue can collect it, and a print edition later needs pieces to be discrete objects. None of that works with a pop-up.
-
-Look at the top of the screen. As you scrolled, the Neotone wordmark shrank into the corner. That's your way back.
+While we scrolled, the Neotone wordmark shrank into the corner. That's the way back.
 
 *[Click the small wordmark.]*
 
-And we're back in the feed, in the same position we left it.
+And we're in the feed again, at the position we left it, not at the top.
 
-That's the whole navigation system: **every page returns to its parent, and the wordmark is how.** An article returns to its container. A page with no container returns to Neotone, which is also the home page. No breadcrumbs, no back links, no "return to index" at the bottom of the piece.
+That's the whole navigation system, and it's one rule: **every page returns to its parent, and the shrinking wordmark is how.** An article returns to its container. Anything without a container returns to the home page. There are no breadcrumbs and no back links at the foot of a piece, because the mark is visible the entire way down.
 
-The mark you see on an article is the container's mark, so an article reads as being *inside* its container rather than off somewhere else.
+The mark on an article is its container's mark, so an article reads as sitting inside its container.
 
 ---
 
 ### The end of the feed
 
-*[Scroll to the bottom of Neotone.]*
+*[Scroll to the bottom of the home page.]*
 
-At the bottom there's a black bar that says **Load more**, and underneath it, a small mailing list signup.
+Past the last piece there's a solid black bar, **Load more**, and beneath it a small signup.
 
-That order is deliberate. Load more continues the reading. The mailing list is what you reach for once you've decided to stop. Put the signup above the button and you're interrupting somebody who's still going.
+Load more continues the reading. The signup is for somebody who's decided to stop. That's why it's second: put it above the button and we interrupt a reader who's still going. When the feed eventually runs out, the button goes and the signup becomes the end of the page, with nothing needing to move.
 
-And when the feed eventually runs out of pieces, the button disappears and the mailing list becomes the end of the page, with nothing needing to be rearranged.
+The signup says **Mailing list**, and under it, **Updates from the Neotone workshop**. It states no frequency and promises no relationship, because we write a few times a year.
 
-The signup says **Mailing list**, and under that, **Updates from the Neotone workshop**. It doesn't promise a frequency, and it doesn't say "stay in touch." A company that writes four times a year shouldn't promise a relationship.
+---
 
-There's no archive page, by the way, and there won't be. There are already three ways into older material: load more if you're browsing, search if you know what you want, and a Tonefield issue, which is a curated selection and therefore already an archive view.
+### The footer
+
+*[Keep scrolling.]*
+
+Black band, white text, two rows.
+
+Top row: the three destinations again, and a search field. Bottom row: Workshop, Manual, Contact, Legal on the left. On the right:
+
+```
+Budapest · visits by appointment
+Instagram · YouTube · TikTok · Facebook
+```
+
+That right column is the places somebody can turn up, most real first. The room in Budapest, then the four they can reach tonight. All set as words, because a place is named.
+
+The footer test is this: **nobody arrives here by browsing.** You get here by searching or by needing something specific. That's why it can hold unrelated things and stay useful, and why nothing interesting lives in it.
+
+*[Click Neotone in the footer.]*
+
+The page scrolls back to the top first, so the wordmark grows before the site changes underneath you.
+
+---
+
+### A utility page
+
+*[Click Manual in the footer.]*
+
+This is our third page type, a **utility page**.
+
+Look at the top: the plain Neotone wordmark, and clicking it returns to the home page, because a utility page has no container.
+
+Otherwise this page is built exactly like the article we just read. Same measure, same type, same masthead behaviour. That costs us nothing and it means we never have to argue about whether some page is really an article.
+
+*[Look at the contents.]*
+
+The manual is a contents page leading to section pages: The instrument, Getting started, The Interface, When something is wrong. Every section has its own address, so a tooltip inside the software can link straight to the part that answers the question in front of a player.
+
+This is where somebody goes with a question. It tells them which control does what.
+
+---
+
+### The three registers
+
+*[Open the Scales section.]*
+
+Here's a section page, and here's the thing worth understanding about it.
+
+It's written in three registers, and you can see all three:
+
+**Basics.** Before you start: firmware. The Scale Gallery. Anatomy of a scale card. My Scales. Quick Load.
+
+**Going deeper.** The Scale Builder. The root, sharps and flats. Editing, duplicating, deleting. Sharing to the gallery.
+
+**Deeper still.** Why the note names change as you build. What the instrument compares when it matches scales.
+
+*[Point at Deeper still.]*
+
+Those last two carry a small **neOS** marker, and they leave the manual.
+
+Explaining the instrument three times at increasing depth is how its intelligence gets articulated in the first place. By the time we've written the third register, we've written the reasoning underneath the instrument, and that reasoning is worth reading on its own.
+
+So the manual produces our editorial. It isn't overhead sitting opposite the writing; it's the method that makes it. A workshop this size can't hire its way to a publication, and it doesn't have to.
+
+---
+
+### Following the handoff
+
+*[Click "Why the note names change as you build".]*
+
+We've arrived at an article, and look at the mark in the corner: it's the neOS wordmark now, not Neotone.
+
+*[Click it.]*
 
 ---
 
 ### neOS
 
-*[Click neOS.]*
+And here's the second container. Same shape as the home page: a feed of pieces, load more, mailing list, footer.
 
-This looks exactly like Neotone, and it works exactly the same way. Same feed, same load more, same mailing list.
+Three pieces: Why the note names change as you build. Digital lutherie. What is Spatial MIDI?
 
-The difference is who it's for. Neotone is for someone without a question. neOS is for someone with one.
+This holds the craft side of belonging. A reader here has found something with depth they can participate in. Not a support desk, which is what the manual is, but the reasoning a person can join.
 
-The same subject can appear in both, in different registers. "How to build a scale" belongs on neOS, because you look it up. "Hijaz" belongs on Neotone, because you browse it. That's a loop, and a loop needs two ends.
+So the two containers are two halves of the same feeling. Neotone is *I want to be part of this*. neOS is *this has something to teach me, and I can take part in it*.
 
-This page opens with a line, because neOS is a made-up word: **neOS is the window into Neotone's musical intelligence.**
+*[Look above the first piece.]*
 
-And it's craft depth, not technical depth. Digital lutherie belongs here. Firmware instructions don't.
+This page carries one line: **neOS is the window into Neotone's musical intelligence.**
 
----
-
-### Where neOS pieces come from
-
-Now this is the part that makes everything else possible, so it's worth going slowly.
-
-A small company can't hire its way to a publication. So neOS can't depend on somebody sitting down each week to invent an article. It has to come out of work that's happening anyway.
-
-And it does. It comes out of the manual.
-
-*[Open the manual from the footer.]*
-
-The manual is the practical layer. It tells you which control does what, and it lives in the footer and inside the software, next to the control it's explaining.
-
-neOS is the intelligence layer. It says why the instrument behaves that way.
-
-And the manual is written in three registers: the basic walkthrough, then a layer for deeper functionality, then a layer that reaches the craft questions underneath. Explaining the instrument three times at increasing depth is *how its intelligence gets articulated in the first place*. So writing the manual is what produces the neOS material.
-
-Documentation isn't overhead sitting opposite the editorial. It's the method that makes it.
+That line exists because neOS is a word we made up, and a reader can't decode it. The home page carries no such line, because Neotone is already named in the masthead and the pieces say what it is better than a sentence would.
 
 ---
 
-### Which parts get promoted
+### What gets promoted
 
-Not everything in the manual becomes a piece. The middle register, which control does what and in what order, stays where it is. It's purely operational.
+Not everything in the manual becomes a piece.
 
-The first and last registers are the ones that travel. An introduction has to explain the premise, and that stands alone: how the sensors read continuous, multidimensional data instead of firing MIDI events is interesting whether or not you own one. And the deepest register carries the craft reasoning.
+The middle register stays put. Which control does what and in what order is operational, and it belongs where a player is standing when they need it.
 
-Here's the test. **A piece is promoted if it holds for someone who will never touch the control it describes.**
+The first and last registers travel. An introduction has to explain the premise, and the premise stands alone: how the sensors read continuous, multidimensional data instead of firing MIDI events is interesting to somebody who doesn't own one. The deepest register carries the craft reasoning.
 
-Why a Kurd scale spells that note as a B flat is interesting to somebody who never opens the scale builder. A MIDI implementation chart isn't. So the first becomes a neOS piece, and the second stays in the manual.
+Here's the test we apply. **A piece is promoted when it holds for somebody who will never touch the control it describes.**
 
----
-
-### The manual pages themselves
-
-*[Open the manual contents.]*
-
-The manual is a contents page leading to section pages, and every section has its own address. That's what lets a tooltip inside the software link straight to the part that answers the question in front of a player.
-
-*[Open the scales section.]*
-
-A section page shows the three registers laid out: Basics, Going deeper, and Deeper still. The deepest items carry a small marker and leave for neOS, which is the practical layer handing off to the intelligence layer at exactly the point where a question turns into a why.
-
-And notice the mark at the top of this page. It's the plain Neotone mark, not a container's, because a utility page has no container. It returns to the home page.
-
-Which means articles and utility pages look identical. The only difference is which mark they carry and where it takes you. That costs nothing to build, and it means we never have to argue about whether some page is "really" an article.
+Why a Kurd scale spells that note as a B flat is interesting to a reader who never opens the scale builder. A MIDI implementation chart isn't. So the first becomes a neOS piece and the second stays in the manual.
 
 ---
 
@@ -193,13 +201,15 @@ Which means articles and utility pages look identical. The only difference is wh
 
 *[Click One.]*
 
-Now, this page is different from the other two, and the difference is an assumption: somebody here has already decided.
+This is our fourth page type, a **product page**. It carries an instrument and its purchase, and it sits at the same level as a container rather than inside one.
 
-So the page doesn't argue for the instrument. It opens with **The Neotone One is handcrafted in Budapest, built to order**, and then about a hundred and twenty words orienting you: the shape, the material, the serial number it carries.
+*[Look at the top.]*
 
-The rule across the whole site is: slow down the undecided, and get out of the way of the decided. Neotone is where somebody gets slowed down. This is not that page.
+**The Neotone One is handcrafted in Budapest, built to order.** Then about a hundred and twenty words: the shape, the material, the serial number it carries.
 
-Underneath the prose is the specs strip: material, sound, control, scales, lead time. Five cells, hairlines between them, no box around it.
+Then the specs strip: material, sound, control, scales, lead time.
+
+Somebody arriving here has already decided. So the page assumes intent and orients them. The place where we slow a reader down is the home page.
 
 ---
 
@@ -207,147 +217,139 @@ Underneath the prose is the specs strip: material, sound, control, scales, lead 
 
 *[Scroll to the order fork.]*
 
-Here's the fork: **built to order**, or **from stock**.
+Two paths: **built to order**, and **from stock**.
 
-Built to order shows the woods, each with its own price. Pick one and the summary updates.
+Built to order shows the woods, each with its price. Choose one and the summary updates.
 
-From stock shows actual instruments with serial numbers, some of them B-stock. If there's nothing in stock, this side has a real empty state, because an empty shelf is a thing a buyer needs to see honestly.
+From stock shows real instruments with serial numbers, some marked B-stock. When stock is empty, that side has an honest empty state.
 
-Then accessories: a case and a donut stand that come included, and the rest priced. Five across on a desktop, four on a phone with a show-more.
+*[Scroll to accessories.]*
 
-Notice the prices. They already include VAT for wherever you say you are, and if you change the country, every price on the site changes with it, and stays changed when you move to another page. The breakdown only appears at checkout, where somebody actually needs to see the arithmetic.
+A case and a donut stand come included. The rest are priced. Five across on a desktop, four on a phone with a show-more.
 
-Referral codes work on the instrument but not on accessories or B-stock. And at checkout, an eligible item shows its discount line even at zero percent, so you can see the thing exists.
+*[Change the destination country.]*
+
+Every price on the site just changed, and it stays changed on every other page. Displayed prices include VAT; the arithmetic appears at checkout, where somebody needs to see it.
+
+Referral codes apply to the instrument. Accessories and B-stock are excluded. At checkout an eligible item shows its discount line even at zero percent, so a reader can see that the discount exists.
 
 ---
 
 ### After the purchase
 
-Below the fork are three articles: on waiting for your instrument, why an electronic instrument is made of wood, and the workshop with everyone in it.
+*[Keep scrolling.]*
 
-These sit *after* the purchase flow, not before it, because they're depth for somebody who's already committed. And they open in a new tab, because their home is Neotone, and the wordmark would otherwise carry somebody mid-purchase back to culture.
+Three articles: On waiting for your instrument. Why an electronic instrument is made of wood. The workshop, with everyone in it.
 
-Then **what happens next**: four steps, in second person, future tense. Confirmation with a serial number, contact from the workshop, the build, delivery. And the purchase terms right underneath.
+They sit after the purchase flow because they're depth for somebody already committed. And they open in a new tab: their home is the Neotone container, and the wordmark would otherwise carry somebody mid-purchase back into culture.
 
-And last, **play one first**: the workshop visit and artist sessions, as a fork.
+Then **what happens next**: four steps in second person, future tense. Confirmation with a serial number, contact from the workshop, the build, delivery. Purchase terms underneath.
 
-That's the whole page, and notice what isn't on it. There's no FAQ, and there won't be one, because every question is answered at the moment it comes up. Lead time is in the specs. What happens next is under the order. Can I change my mind sits next to the commitment.
+Then **play one first**: the workshop visit and artist sessions, as a fork.
+
+Every question a buyer has is answered at the moment it comes up. Lead time in the specs. What happens next under the order. Changing your mind beside the commitment. That's why the site has no FAQ, and why it doesn't need one.
 
 ---
 
 ### The workshop piece
 
-That third article, the workshop with everyone in it, is also the team page.
+That third article is also our team page.
 
-The need is real. For a handmade object with a two month wait, the people are a trust signal doing commercial work. But a grid of headshots and job titles is what a product company does, and that's the reading this whole site exists to interrupt.
+The need is real: for a handmade object with a two month wait, the people are a trust signal doing commercial work. The format is where it usually goes wrong. A grid of headshots and job titles is what a product company does, and that's the reading this site exists to interrupt.
 
-So it's a photographed piece with everyone named, written as an article. Faces on the site, permanent link in the footer, and it's a piece that was on the list anyway.
-
----
-
-### The footer
-
-*[Scroll all the way down.]*
-
-Black bar, white text. Two rows.
-
-The top row has the three destinations again, and a search field. The bottom row has Workshop, Manual, Contact and Legal on the left, and on the right:
-
-```
-Budapest · visits by appointment
-Instagram · YouTube · TikTok · Facebook
-```
-
-That right-hand column is the places you can turn up, most real first. The room in Budapest, then the four you can reach tonight. They're set as words rather than logos, because a place is named, not badged.
-
-The footer test is this: **nobody arrives here by browsing.** You get here by searching or by needing something. That's why it can hold unrelated things without turning into a junk drawer, and why nothing interesting goes in it.
-
-Legal is one link rather than two, holding privacy, terms of sale, and terms of website use.
-
-And if you click Neotone or One or neOS down here, the page scrolls back to the top first, so the wordmark grows back before the site changes underneath you.
+So it's a photographed piece with everyone named, written as an article, permanently linked from the footer. Faces on the site, and a piece that was on the list anyway.
 
 ---
 
-### Anima, and the future
+### The four types
 
-There's a fourth product coming, called Anima, and it isn't shipping yet, so it isn't in the menu.
+We've now seen all four:
 
-Add `?future=show` to any address and it appears, and stays as you click around. So there's a browsable version of the site as it'll be, without a half-finished product sitting in front of customers today.
+1. **Container.** Holds articles. Neotone and neOS.
+2. **Article.** An individual piece with its own address.
+3. **Utility.** Footer material, rendered like an article, carrying the plain Neotone mark. The manual, contact, legal.
+4. **Product page.** Carries an instrument and its purchase. One today, Anima and Treangle later. Sits at the same level as a container.
 
-When Anima does ship, nothing restructures. Neotone, One, Anima, neOS. That's the whole change.
+Whenever somebody asks for a new page, that's the question: **which of the four is it?** If it collects one thing, it's an article. If it collects several, it's a container, and a container only earns a place in the menu when a species has outgrown it. Three instruments are three menu items, and we're a long way from that threshold.
+
+The menu holds containers and product pages. The footer holds utility and search.
 
 ---
 
 ### How the site talks
 
-We said the rule at the start: never claim what the reader hasn't been shown. Here's what it rules out, all of which got tried.
+We've seen two openings now, on neOS and on One, and none on the home page. The rule behind all three is the one to carry into everything we write:
 
-**Superlatives**, like "the world's most organic digital instrument." Nobody can check it, so nobody believes it.
+**Never claim what the reader hasn't been shown.**
 
-**Coined phrases the reader hasn't earned**, like calling Neotone "a Linked Resonant Field." That might be a great piece one day. It's not an opening line, because the reader has no way in.
+An opening exists to explain a name a reader can't decode. That's why neOS has one and the home page opens on Golsa Nazari instead. If the home page said "Neotone is a new musical culture," it would be making that claim from outside the thing it describes. The player, the tetrachord and the wood put the same claim in front of a reader and let them arrive at it.
 
-**Slogans without a subject**, like "Redefining digital craftsmanship." Those read as product-page taglines rather than as something a person wrote.
+Three kinds of line got tried and rejected for the same fault:
 
-Two more habits worth naming. The voice talks about the workshop, not from it: a musician engaged with the object, at slight remove. The one exception is small and designated, which is the first-person note at the top of a Tonefield issue.
+**Superlatives**, like "the world's most organic digital instrument." Unverifiable, so unbelieved.
 
-And the copy never says what something isn't. Say what it is.
+**Coinages the reader hasn't earned**, like calling Neotone "a Linked Resonant Field." That may be a good piece one day. It's an opening line only once a reader has a way in.
+
+**Slogans with no subject**, like "Redefining digital craftsmanship." Those read as taglines rather than as something a person wrote.
+
+Two habits go with it. The voice talks about the workshop rather than from inside it: a musician engaged with the object, at slight remove. The one exception is the first-person note at the top of a Tonefield issue. And the copy says what a thing is, in positive constructions.
 
 ---
 
-### Two rules for anything new
+### Two rules for anything we make
 
-**Every piece does more than one job.** An article sits in its container, gets linked from the product page where it's relevant, and is eligible for a Tonefield issue. One address, several appearances. Prose written only to hold a page together does one job, and it's the most expensive kind to maintain.
+**Every piece does more than one job.** An article sits in its container, gets linked from the product page where it's relevant, and is eligible for a Tonefield issue. One address, several appearances. Prose written to hold a page together does one job and is the most expensive kind to maintain.
 
-**Nothing goes in the wireframe without a reader.** A block that exists because the structure implies it should exist is what made the first wireframe a record of its own structuring rather than a site.
+**Nothing goes in the wireframe without a reader.** A block that exists because the structure implies it should exist is what made the first wireframe a record of its own structuring.
 
-And that's the site.
+That's the site.
 
 ---
 ---
 
 # Deeper dive
 
-Now let's circle back, because there are a few things that need more than a passing mention.
+A few things need more than a passing mention.
 
 ---
 
 ### The part that can quietly break
 
-The containers aren't in date order, and that's the difference between them and a blog. A piece can be added without going to the top.
+Our containers aren't in date order, and that's what separates them from a blog.
 
-But be honest about what's holding that up. Two things separate this from a blog with a nicer name, and only one of them is structural.
+Two things hold that up, and only one is structural.
 
-The structural one: there are two containers split by what a reader wants, so every piece gets assigned to belonging or to craft before it's published. There's no single undifferentiated stream for things to fall into. That holds on its own.
+The structural one: there are two containers split by what a reader wants, so every piece gets assigned to culture or to craft before it's published. There's no single stream for things to fall into. That holds by itself.
 
-The other one is a practice, and somebody has to perform it every single time: deciding where a new piece goes in the order.
+The other is a practice somebody performs every time: deciding where a new piece goes in the order.
 
-And that's fragile, because a container is a vertical list with a load-more button, which is interactively a feed, and load more implies an ordered archive. The day somebody adds a piece by dropping it at the top because that's where new things go, this is a blog with extra steps.
+That's the fragile one. A container is a vertical list with a load-more button, which is interactively a feed, and load more implies an ordered archive. The day somebody adds a piece by dropping it at the top because that's where new things go, we have a blog with extra steps.
 
 ---
 
 ### How other people do it
 
-Three companies, all doing a competent job of a different problem.
+Three companies, each solving a different problem competently.
 
-**Ableton** sells five product lines and several hundred packs, so every slot in the menu is a product. It has to be. And the consequence shows up in two places. Their best teaching work isn't on their site: Learning Music, Learning Synths, Making Music and Explore Tunings are four separate subdomains you reach through the help section. And Loop, the conference that did more than anything to make Ableton an institution, now redirects to a blog category.
+**Ableton** sells five product lines and several hundred packs, so every menu slot is a product. It has to be. Two consequences follow. Their best teaching work isn't on their site: Learning Music, Learning Synths, Making Music and Explore Tunings are four separate subdomains reached through the help section, and Loop, the conference that did more than anything to make Ableton an institution, now redirects to a blog category.
 
-The second consequence is orientation. Each product has its own sub-menu and no page compares one to another. The Push page never mentions Move, doesn't say which edition of Live you need, and doesn't say what software is in the box. That site works for somebody renewing. It assumes you arrived knowing.
+The second consequence is orientation. Each product has its own sub-menu and no page compares one to another. The Push page never mentions Move, doesn't say which edition of Live you need, and doesn't say what software is in the box. Their site serves somebody renewing. It assumes you arrived knowing.
 
 A menu made of products can't hold a comparison between products, because a comparison isn't a product.
 
-**Teenage Engineering** sells forty or fifty things in families. Their editorial is called `now`, and it's a single reverse-chronological stream where a firmware release note sits between two artist interviews, with no categories and no link to it from any product page. Renaming a blog changes the label and leaves the behaviour.
+**Teenage Engineering** sells forty or fifty things in families. Their editorial is called `now`: a single reverse-chronological stream where a firmware release note sits between two artist interviews, with no categories, linked from no product page. Renaming a blog changes the label and keeps the behaviour.
 
-Their product pages carry short display slogans, photography and exploded diagrams, and they persuade almost entirely through the object. It's the best-looking site of the three, and it argues for a bet we're not making. That approach works when a product explains itself in your hands. What makes the Neotone One different is invisible in a photograph, so the same approach would land it exactly where it's trying not to be.
+Their product pages carry short display slogans, photography and exploded diagrams, and persuade through the object. It's the best-looking site of the three, and it argues for a bet we're not making. That approach works when a product explains itself in the hand. What makes the One different is invisible in a photograph, so the same approach would land us exactly where we're trying not to be.
 
-**Roland** makes pianos, wind instruments, drums, DJ gear and professional A/V. Their menu has to carry investor relations and sustainability alongside Products, which has fourteen categories under it. They run a real magazine, and it's on its own domain. Their support section holds seven different things, with the knowledge base on yet another subdomain, so it's a place you go to search rather than a place you find an answer.
+**Roland** makes pianos, wind instruments, drums, DJ gear and professional A/V. Their menu carries investor relations and sustainability alongside Products, which has fourteen categories under it. They run a real magazine, on its own domain. Their support section holds seven things, with the knowledge base on another subdomain, so it's a place to search rather than a place to find an answer.
 
-None of that is carelessness. All three have more products than a menu has slots, so the menu has to be organised by product, and everything that isn't a product ends up in one undifferentiated stream or off the site entirely.
+All three have more products than a menu has slots. The menu has to be organised by product, and the thinking then goes into one undifferentiated stream or off the site.
 
 ---
 
 ### Six questions for any music company's site
 
-You can put these to anyone, including us.
+Worth putting to anyone, including us.
 
 1. Is the menu made of products, or of things a reader wants?
 2. Where does the thinking live, and can you reach it without already knowing it exists?
@@ -356,19 +358,19 @@ You can put these to anyone, including us.
 5. Are questions answered where they come up, or collected in a support section?
 6. Could you tell, from the structure alone, what this company believes about how music is made?
 
-That last one is the one that sorts them. Ableton puts a computer at the centre. Teenage Engineering makes the computer small enough to hold. Neotone makes it feel as though there's no computer.
+The last one sorts them. Ableton puts a computer at the centre. Teenage Engineering makes the computer small enough to hold. We make it feel as though there's no computer.
 
-Roland holds no single view, and its site correctly doesn't pretend to. It's an index of a catalogue, and a good one.
+Roland holds no single view, and their site is honest about that. It's an index of a catalogue, and a good one.
 
 ---
 
 ### The honest risk
 
-Documentation is the slowest-moving thing there is, and neOS currently has a couple of sketched pieces. If the stack stays thin, neOS is a download page holding a menu item on brand weight it hasn't earned.
+Documentation moves slowly, and neOS has two sketched pieces so far. If the stack stays thin, neOS is a download page holding a menu item on brand weight it hasn't earned.
 
-That's survivable if it's wireframed short and allowed to grow. It's not survivable if six blocks get drawn that never fill.
+Survivable if we wireframe it short and let it grow. Not survivable if we draw six blocks that never fill.
 
-The same applies to the whole site. Everything above rests on the writing being good, and there are two real pieces so far. Six to ten will settle whether this works, and nothing else will.
+The same goes for the whole site. Everything here rests on the writing being good, and we have two real pieces. Six to ten will settle whether this works, and nothing else will.
 
 ---
 
@@ -376,22 +378,20 @@ The same applies to the whole site. Everything above rests on the writing being 
 
 Roughly in the order that unblocks the build.
 
-**The One page**, about nine hundred words in small units: the opening, the specs strip, the orientation paragraph, the order fork, what happens next, the purchase terms, and play one first.
+**The One page**, about nine hundred words in small units: opening, specs strip, orientation paragraph, order fork, what happens next, purchase terms, play one first.
 
-**The three One-page articles**, which are the most-written subjects in the project: on waiting for your instrument, why an electronic instrument is made of wood, and the workshop with everyone in it.
+**The three One-page articles**, our most-written subjects: on waiting for your instrument, why an electronic instrument is made of wood, and the workshop with everyone in it.
 
-**The Neotone launch set**: you never play a single note, forty years of electronic music assumed a piano, and the players who have no predecessors. Then two or three player pieces, a profile, an interview, a debut. Commission the first interview early, since it's the only item waiting on somebody else's calendar.
+**The Neotone launch set**: you never play a single note, forty years of electronic music assumed a piano, and the players who have no predecessors. Then two or three player pieces: a profile, an interview, a debut. Commission the first interview early, since it's the only item waiting on somebody else's calendar.
 
-**neOS**: a short page saying what the software is and how to get it, plus two pieces to open the stack. Build the link from the scale piece across to the hijaz piece on day one, because a loop that exists in one place is more convincing than a loop described in a brief.
+**neOS**: a short page saying what the software is and how to get it, plus two pieces to open the stack. Build the link from the scales piece across to hijaz on day one, because a loop that exists in one place is more convincing than a loop described in a brief.
 
-**A Tonefield issue** once there are enough pieces to select from, and not before. An issue is an article: a maker's note plus what it collects.
+**A Tonefield issue**, once there are enough pieces to select from. An issue is an article: a maker's note plus what it collects.
 
 ---
 
 ### Outro
 
-So that's the site.
+The site does two things, in this order. It shows somebody the way of making music the instrument comes from, and it sells them the instrument.
 
-The short version, if you only keep one thing: it does two jobs, in this order. It shows somebody the way of making music the instrument comes from, and it sells them the instrument. If a page does neither, it doesn't go on the site.
-
-Have a look around it, and when something doesn't fit any of the four kinds of page, come back to this and we'll work out what it actually is.
+If a page does neither, it doesn't go on the site. And when something doesn't fit any of the four types, come back to this and we'll work out what it actually is.
