@@ -190,8 +190,8 @@ Seven sections, all real structure at real type scale holding placeholder words.
 | # | Section | State |
 |---|---|---|
 | 1 | Opening | One centred statement, name set inline |
-| 2 | Specs strip | Five cells, close to final |
-| 3 | Orientation | One centred measure, ~120 words |
+| 2 | Orientation | One centred measure, ~120 words |
+| 3 | Specs strip | Five cells, close to final |
 | 4 | Connections | Rows outward from nothing, two awaiting real specs |
 | 5 | Order fork | Real, ported from v1 |
 | 6 | Read further | Three article cards, new tab |
@@ -200,7 +200,11 @@ Seven sections, all real structure at real type scale holding placeholder words.
 
 **Connections sits before the order fork**, because how the instrument fits what someone already has is the last question before deciding, and after the fork they have decided. The rows run outward from nothing: the instrument on its own first, a computer three rows down as an option. That order is the argument, which is why no line says "the centre of your setup". It is a superlative every controller manufacturer prints, and it fails the rule about claiming what the reader has not been shown.
 
-It is deliberately not a diagram. Boxes and arrows are gear-catalogue language and would draw the computer as a peer. Two rows, audio and other instruments, carry italic placeholders: the real I/O specification is not known and inventing it would put fiction next to verified facts.
+Two rows, audio and other instruments, carry italic placeholders: the real I/O specification is not known, and inventing it would put fiction next to verified facts.
+
+**A diagram is the better form, and it is deferred rather than rejected.** The kind to avoid is the interface-manual diagram: a box in the middle with arrows to a laptop, a mixer and a pedal at equal weight, which draws the computer as a peer. The kind that works has the instrument drawn and everything else as a label at the edge, because it can show the instrument complete on its own instead of saying so, and it locates a reader in a way a list cannot.
+
+Two things block it. Connections that have not been specified cannot be drawn, and two of five are unknown, so a diagram would be redrawn entirely once they are settled. And a locating image would want to move: it works as orientation, so it belongs immediately after the opening, and the 120 word paragraph could then get shorter because a picture of an instrument that needs nothing does part of that paragraph's job. That is a structural change to the top of the page rather than a change of presentation, and it wants the real specification in hand first.
 
 Chrome appears only where it carries information. The specs strip and steps strip keep hairline dividers between cells because the dividers separate data, but their outer boxes are gone. Sections are separated by an 88px rhythm rather than borders. Bordered `.slot` boxes with uppercase labels were tried and removed: they described the section instead of being it.
 
@@ -425,7 +429,8 @@ Flagged rather than assumed.
 1. **Selection affordance on One.** Recommendation above is One + checkout only. Needs a visual form now that it cannot be a nav item.
 2. **Tonefield merch** (`EUR 12`) has no home, since Tonefield is an article now. Drop, or re-home later?
 4. **Questions contact form.** v1 has it on One; the principles document puts contact in the footer. Keep both, or footer only?
-8. **"Built to order" in the One opening echoes lead time** three lines below it in the specs strip. Harmless, but the same fact is stated twice in different precision.
+8. **Connections as a diagram**, moved up to sit after the opening as an orientation image, with the prose shortened. Blocked on the real I/O specification. See The One page.
+9. **"Built to order" in the One opening echoes lead time** three lines below it in the specs strip. Harmless, but the same fact is stated twice in different precision.
 5. **Reaching other sections on mobile** once the bar holds one mark. See Mobile: deliberately deferred, not overlooked. v1's hamburger does not transfer to a wordmark-only nav.
 6. ~~Subpage direct-load state~~ Resolved. Entry state is now uniform on every page; see Current state.
 
