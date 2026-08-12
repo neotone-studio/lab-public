@@ -1,6 +1,8 @@
 # Neotone Wireframe v2
 
-Working documentation and build plan. Supersedes `v1/site-structure.md`, which remains the reference for purchase logic being ported forward.
+Why this build is the way it is: decisions taken, alternatives rejected, questions still open.
+
+For what it contains, see [site-structure.md](site-structure.md) alongside this: component reference, state, storage keys, and behaviour that is not obvious from the markup. The two are meant to be read together. Supersedes `v1/site-structure.md`, which remains the reference for purchase logic being ported forward.
 
 Source of principles: `../../docs/2026-08-03_🤖_wireframe-principles.md`. Where this document and that one disagree, that one wins.
 
