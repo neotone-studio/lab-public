@@ -33,9 +33,7 @@ Everything else is kept for reference and stays browsable by URL, so a past vers
 
 ### The documents, in `docs/`
 
-- [Why the site is built this way](docs/2026-08-11_🤖_why-three-destinations.md). The design position: three destinations, where the writing comes from, how the site talks, and six questions that can be asked of any music company's site. Read this first.
-- [Wireframe principles](docs/2026-08-03_🤖_wireframe-principles.md). The numbered principles the wireframe is built against. Where it and any other document disagree, this one wins.
-- [Three destinations, summary](docs/2026-08-12_🤖_three-destinations-summary.md). Short form of the argument.
+- [A walk through the Neotone site](docs/2026-08-12_🤖_site-walkthrough.md). The whole design, as a tour: the three destinations, each page in the order a reader meets it, where the writing comes from, how the site talks, and a deeper dive on how three other companies are organised. Start here. Where this and any other document disagree, this one wins.
 
 ### Per version
 

@@ -4,7 +4,7 @@ Why this build is the way it is: decisions taken, alternatives rejected, questio
 
 For what it contains, see [site-structure.md](site-structure.md) alongside this: component reference, state, storage keys, and behaviour that is not obvious from the markup. The two are meant to be read together. Supersedes `v1/site-structure.md`, which remains the reference for purchase logic being ported forward.
 
-Source of principles: `../../docs/2026-08-03_🤖_wireframe-principles.md`. Where this document and that one disagree, that one wins.
+Source of principles: [`../../docs/2026-08-12_🤖_site-walkthrough.md`](../../docs/2026-08-12_🤖_site-walkthrough.md). Where this document and that one disagree, that one wins.
 
 ---
 
@@ -117,7 +117,7 @@ This exception decouples One from the entire article system. One can be built to
 
 **Neotone has no opening, and that is the rule working rather than an omission.** neOS is a coined word, One is a five-figure purchase, and Anima is a product nobody has heard of, so each needs a line. Neotone is on the masthead and the pieces beneath it say what it is better than a sentence can. The home page opens directly on its lead piece, so the running order is editorial rather than chronological: position one *is* the claim, and what sits there is a decision taken every time something is published.
 
-Three registers failed and should not return: superlatives ("the world's most organic digital instrument"), coinages the reader has not yet earned ("a Linked Resonant Field"), and nameless slogans ("Redefining digital craftsmanship"). Each claims something the reader has not been shown. See `../../docs/2026-08-11_🤖_why-three-destinations.md`, How it reads.
+Three registers failed and should not return: superlatives ("the world's most organic digital instrument"), coinages the reader has not yet earned ("a Linked Resonant Field"), and nameless slogans ("Redefining digital craftsmanship"). Each claims something the reader has not been shown. See the walkthrough, How the site talks.
 
 Copy is David's. Terminal periods are dropped: one is a fragment and cannot take one, and display statements read cleaner without. Apostrophes are typographic.
 
@@ -311,7 +311,7 @@ The restore runs immediately rather than inside `requestAnimationFrame`, with th
 
 ### Where articles come from
 
-The manual is the practical layer and neOS the intelligence layer. The manual is written in three registers: basic walkthrough, deeper functionality, and the craft questions underneath. neOS material comes from the first and last of those, never the middle, and only when a piece holds for someone who will never touch the control it describes. See `../../docs/2026-08-11_🤖_why-three-destinations.md`.
+The manual is the practical layer and neOS the intelligence layer. The manual is written in three registers: basic walkthrough, deeper functionality, and the craft questions underneath. neOS material comes from the first and last of those, never the middle, and only when a piece holds for someone who will never touch the control it describes. See the walkthrough, Where neOS pieces come from.
 
 ---
 
