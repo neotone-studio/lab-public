@@ -42,6 +42,7 @@ Everything else is kept for reference and stays browsable by URL, so a past vers
 - [`wireframe/v2/README.md`](wireframe/v2/README.md). Why the current build is the way it is: decisions, rejected alternatives, open questions.
 - [`wireframe/v2/site-structure.md`](wireframe/v2/site-structure.md). What the current build contains: component reference, state, storage keys, and behaviour that is not obvious from the markup. Read alongside the README.
 - [`wireframe/v1/site-structure.md`](wireframe/v1/site-structure.md). Full component reference for the superseded build. Still the source for purchase logic.
+- [`design/v2/README.md`](design/v2/README.md). The mockup the current wireframe was copied from.
 - [`design/v1/README.md`](design/v1/README.md). Describes the original colour-scroll mockup.
 
 ---
