@@ -113,6 +113,4 @@ The last one is the one that sorts them, and on the question of where a player s
 
 Roland makes pianos, wind instruments, drums, DJ gear and professional A/V, so it holds no single view and its site does not pretend to one. It is an index of a catalogue, and a good one.
 
-The position has a consequence on the product page. The instrument's connections are listed outward from nothing, so the first row is the instrument on its own and the computer appears three rows down as an option. A reader draws the conclusion from the order.
-
 That last question is the one Neotone is answering, and it is the reason the structure looks the way it does. A reader should be able to tell from the shape of the site, before reading a word, that this is a position about how music is made and not a product with a blog attached.
