@@ -67,13 +67,28 @@ Sticky, 100px, `overflow: hidden`, full bleed background with contents in `.nav-
 | `BASE_SCALE` | 0.58 | size of an inactive or collapsed mark |
 | `TRANSITION_MS` | 600 | cross-page entry animation |
 
-**Behaviour.** The active mark scales `1 → BASE_SCALE` in place and slides to the content-left boundary. Inactive marks lift `-80px` and fade out. Each mark scales about the edge it is anchored to (`neotone` left, `neos` right, `one` centre), and the active mark is overridden to a left origin in JS because it collapses leftwards.
+**Two modes.** `MASTHEAD` is declared per page. Containers and product pages are hero pages: the active mark starts at full size and collapses as you scroll. Everything reached from inside one of those, articles, utility pages and checkout, is a masthead: `navProgress()` returns a fixed `{p: 1, q: 1}`, so the mark arrives collapsed and stays there.
+
+A collapsed mark sits at the same size and position on every page, so moving from a scrolled container into a piece changes nothing at the top of the screen.
+
+**Behaviour.** The active mark scales `1 → BASE_SCALE` in place and slides to the content-left boundary. Inactive marks lift `-80px` and fade out. `updateNav()` sets opacity on the active mark explicitly, because the entry state can paint it hidden when the previous page's active mark was a different one. Each mark scales about the edge it is anchored to (`neotone` left, `neos` right, `one` centre), and the active mark is overridden to a left origin in JS because it collapses leftwards.
 
 `slideDistance` is computed once on first scroll as `leftOf(navLinks[0]) - leftOf(navLinks[ACTIVE])` and reset on resize. Neotone resolves to 0.
 
 **`ACTIVE` is derived, never hardcoded.** Each link carries `data-page`; `ACTIVE` is the index of the link whose `data-page` matches `PAGE`, looked up from the rendered nav after Anima has been removed. Hardcoding it breaks in default mode, where indices shift.
 
-**Clicking the active mark** scrolls to top, unless `RETURN_TO` is set, in which case it navigates there.
+**Clicking the active mark** scrolls to top, unless `RETURN_TO` is set, in which case it navigates there without scrolling first: the container restores the position it was left at, where its own mark is already collapsed.
+
+**Entry continuity.** Every outbound click calls `rememberNavState()`, storing `prevActive` and `prevCollapsed`. On load, `paintEntry()` places the marks where the previous page left them, and `settleEntry()` attaches a transition and calls `updateNav()` to move them to this page's state.
+
+| Leaving | Arriving | What is seen |
+|---|---|---|
+| Scrolled container | Article in it | Nothing moves |
+| Container at the top | Article in it | The mark shrinks into the corner |
+| Scrolled One or neOS | Manual, via the footer | The two marks exchange in place |
+| Article | Its container, restored | Nothing moves |
+
+`settleEntry()` flushes the arrival state with a synchronous reflow rather than waiting on `requestAnimationFrame`. rAF is throttled while the document is hidden, and an earlier version left the nav frozen at `BASE_SCALE` on every page because of it.
 
 ---
 

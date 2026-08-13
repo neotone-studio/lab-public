@@ -290,6 +290,8 @@
     }
     const navQuery = FUTURE ? '?future=show' : '';
 
+    const MASTHEAD = true;
+
     const TRANSITION_MS = 600;
     const BASE_SCALE    = 0.58;
     const TRANSITION_PX = 90;
@@ -326,14 +328,27 @@
     navLinks.forEach((link, i) => {
       link.addEventListener('click', e => {
         e.preventDefault();
-        sessionStorage.setItem('prevActive',    String(ACTIVE));
+        rememberNavState();
         window.location.href = link.getAttribute('href') + navQuery;
       });
     });
 
+    /* Two nav modes. Containers and the product page open with the marks at
+       full size and collapse them as you scroll. Everything reached from
+       inside one of those is a masthead: the mark arrives already collapsed
+       and stays there. A collapsed mark sits at the same size and position on
+       every page, so moving from a scrolled container into a piece changes
+       nothing at the top of the screen. */
+    function navProgress() {
+      if (MASTHEAD) return { p: 1, q: 1 };
+      return {
+        p: Math.min(Math.max(window.scrollY / TRANSITION_PX, 0), 1),
+        q: Math.min(Math.max((window.scrollY - TRANSITION_PX) / SLIDE_PX, 0), 1)
+      };
+    }
+
     function updateNav() {
-      const p     = Math.min(Math.max(window.scrollY / TRANSITION_PX, 0), 1);
-      const q     = Math.min(Math.max((window.scrollY - TRANSITION_PX) / SLIDE_PX, 0), 1);
+      const { p, q } = navProgress();
       const scale = 1 - p * (1 - BASE_SCALE);
 
       if (q > 0 && slideDistance === null) {
@@ -348,6 +363,9 @@
       navItems.forEach((item, i) => {
         if (i === ACTIVE) {
           item.style.transform = `translateX(${tx}px) scale(${scale})`;
+          /* Explicit, because the entry state may have painted this mark hidden
+             when we arrived from a page whose active mark was a different one. */
+          item.style.opacity = 1;
         } else {
           item.style.transform = `translateY(${-80 * p}px) scale(${inactiveScale})`;
           item.style.opacity   = 1 - p;
@@ -357,27 +375,62 @@
       updateOpening();
     }
 
-    const prevActive = parseInt(sessionStorage.getItem('prevActive') ?? '-1', 10);
+    const prevActive    = parseInt(sessionStorage.getItem('prevActive') ?? '-1', 10);
+    const prevCollapsed = sessionStorage.getItem('prevCollapsed') === '1';
     sessionStorage.removeItem('prevActive');
+    sessionStorage.removeItem('prevCollapsed');
 
-    /* Entry animation, identical on every page including the landing page: this
-       page's own mark is full size and every other mark is reduced. Arriving
-       from another page, that page's mark starts full size and shrinks as this
-       one grows, so the marks stay continuous across navigation. */
-    navItems.forEach((item, i) => {
-      item.style.transform = `scale(${i === prevActive ? 1 : BASE_SCALE})`;
-    });
-    requestAnimationFrame(() => requestAnimationFrame(() => {
+    /* Written on every outbound click, so the next page knows what the top of
+       the screen looked like when we left it. */
+    function rememberNavState() {
+      sessionStorage.setItem('prevActive', String(ACTIVE));
+      sessionStorage.setItem('prevCollapsed', navProgress().q >= 1 ? '1' : '0');
+    }
+
+    /* Entry animation: paint the marks where the previous page left them, then
+       transition to where this page wants them. When both pages were collapsed
+       those two states are identical and nothing moves, which is the point.
+       Arriving from the top of a container, the mark shrinks into the corner,
+       which reads as going inside. Leaving one destination for a utility page
+       belonging to another, the two marks exchange in place. */
+    function collapsedShift(i) {
+      return navLinks[0].getBoundingClientRect().left
+           - navLinks[i].getBoundingClientRect().left;
+    }
+
+    function paintEntry() {
       navItems.forEach((item, i) => {
-        const start = (i === prevActive) ? 1 : BASE_SCALE;
-        const end   = (i === ACTIVE)     ? 1 : BASE_SCALE;
-        if (start !== end) item.style.transition = `transform ${TRANSITION_MS}ms ease`;
-        item.style.transform = `scale(${end})`;
+        const isPrev = (i === prevActive);
+        if (prevCollapsed) {
+          item.style.transform = isPrev
+            ? `translateX(${collapsedShift(i)}px) scale(${BASE_SCALE})`
+            : `translateY(-80px) scale(${BASE_SCALE})`;
+          item.style.opacity = isPrev ? 1 : 0;
+        } else {
+          item.style.transform = `scale(${isPrev ? 1 : BASE_SCALE})`;
+          item.style.opacity = 1;
+        }
       });
+    }
+
+    /* Runs at the end of the script, after any scroll restoration, so the
+       target state is the one this page actually settles at. */
+    function settleEntry() {
+      /* Flush the arrival state with a synchronous reflow, then attach the
+         transition and set the live state in the same tick. Correctness never
+         waits on requestAnimationFrame, which is throttled while the document
+         is hidden and would otherwise leave the nav stuck where it landed. */
+      void navInner.offsetHeight;
+      navItems.forEach(item => {
+        item.style.transition = `transform ${TRANSITION_MS}ms ease, opacity ${TRANSITION_MS}ms ease`;
+      });
+      updateNav();
       setTimeout(() => {
         navItems.forEach(item => { item.style.transition = ''; });
       }, TRANSITION_MS + 100);
-    }));
+    }
+
+    paintEntry();
 
     window.addEventListener('scroll', updateNav, { passive: true });
 
@@ -549,11 +602,15 @@
         const here = location.pathname.split('/').pop() || 'index.html';
         if (href === here) { scrollToTopThen(null); return; }   // already here: just return to top
         scrollToTopThen(() => {
-          sessionStorage.setItem('prevActive', String(ACTIVE));
+          rememberNavState();
           window.location.href = href + navQuery;
         });
       });
     });
+
+
+    /* Last, so any scroll restoration above has already happened. */
+    settleEntry();
 
   </script>
 
