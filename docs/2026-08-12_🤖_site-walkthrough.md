@@ -1,5 +1,7 @@
 # A walk through the Neotone site
 
+*This walks `wireframe/v2`. Most of it is about the site rather than the build: the two registers, where the writing comes from, the four page types, how the site talks. The navigation passages are v2 specific, and `wireframe/v3` answers them differently, with Neotone as a masthead over Culture, Instrument and Craft. When one of the two is chosen, this gets rewritten for it.*
+
 ### Greeting
 
 Hello, sziasztok, from the Neotone workshop in Budapest.

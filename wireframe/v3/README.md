@@ -30,11 +30,19 @@ For the reasoning behind the site as a whole, see [the walkthrough](../../docs/2
 | 60 to 460 | the mark and your section travel to the content boundary |
 | beyond | mark and section name on one left edge |
 
-**Arriving by choosing marks you straight away.** Clicking Instrument means you chose it, so the bar marks it from the first frame. Landing cold, which in practice means the root, is not a choice: the bar opens as a menu and resolves as you scroll, then stays resolved, so coming back up shows the three options with your position among them. The referrer is the test, so nothing is carried in storage.
+**Arriving by choosing marks you straight away**, with the underline fading in. Clicking Instrument means you chose it, so the bar marks it on arrival. Landing cold, which in practice means the root, is not a choice: the bar opens as a menu and resolves as you scroll, then stays resolved, so coming back up shows the three options with your position among them.
+
+**How the page knows which of those happened.** The page you leave records the navigation in `sessionStorage`; the page you arrive at reads it. This began as a `document.referrer` test, which was wrong: browsers and privacy settings strip the referrer often enough that the bar marked correctly for some readers and, for others, stayed neutral until they scrolled. It looked like a marking bug and was a signal bug.
+
+**The marked state is set outright, and the fade only decorates it.** A CSS transition in a document that is not painting continuously can sit in the running state indefinitely, which left the underline stranded invisible. So the resting state is always written directly, and animation never carries correctness. Second time this pattern has bitten in this codebase.
 
 **Returning stopped being a mechanism.** With the sections on screen the whole way down there is nothing to return from, so `RETURN_TO`, the mark collapse, the entry animation, `prevActive` and `prevCollapsed` are gone. Around 150 lines of navigation script per page became about 60. Scroll position is still restored when a piece's own section is clicked.
 
 **Future-products mode is gone.** `?future=show` existed because Anima needed a nav slot it had not earned. A section called Instrument holds any number of instruments.
+
+**The footer keeps its section links**, named for the sections. They were removed on the grounds that a bar visible the whole way down makes them redundant, and put back: footers restate a site's structure because at the bottom of a page a reader is deciding what is next, and the links also give search a left side so it can sit right at its own size. Removing them produced a band holding one small thing, and then a full width search field to cover the hole, which was worse than the problem.
+
+Footer section links still rise before they leave. From the bottom of a page the bar is collapsed to a label, so navigating straight away would cut to a page with the menu already open. Scrolling up first lets it unfold on the way out.
 
 ---
 
