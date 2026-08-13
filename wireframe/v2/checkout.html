@@ -293,6 +293,8 @@
     const MASTHEAD = true;
 
     const TRANSITION_MS = 600;
+    const SWAP_LIFT_MS  = 260;   // outgoing mark up, incoming mark down
+    const SWAP_SLIDE_MS = 420;   // incoming mark across to the masthead
     const BASE_SCALE    = 0.58;
     const TRANSITION_PX = 90;
     const SLIDE_PX      = 120;
@@ -387,48 +389,101 @@
       sessionStorage.setItem('prevCollapsed', navProgress().q >= 1 ? '1' : '0');
     }
 
-    /* Entry animation: paint the marks where the previous page left them, then
-       transition to where this page wants them. When both pages were collapsed
-       those two states are identical and nothing moves, which is the point.
-       Arriving from the top of a container, the mark shrinks into the corner,
-       which reads as going inside. Leaving one destination for a utility page
-       belonging to another, the two marks exchange in place. */
+    /* Entry animation. Movement when the state changes, a fade when the
+       identity changes: the same mark going from full size to collapsed is one
+       object moving, while Neotone becoming neOS is two different objects, and
+       sliding one into the other's place would imply they were the same thing. */
+    const SWAP = prevActive >= 0 && prevActive !== ACTIVE;
+
     function collapsedShift(i) {
       return navLinks[0].getBoundingClientRect().left
            - navLinks[i].getBoundingClientRect().left;
     }
 
+    /* The size this page's own mark settles at. Held constant through a swap,
+       so an exchange of marks never reads as a zoom. */
+    function activeScale() {
+      return 1 - navProgress().p * (1 - BASE_SCALE);
+    }
+
     function paintEntry() {
       navItems.forEach((item, i) => {
-        const isPrev = (i === prevActive);
-        if (prevCollapsed) {
-          item.style.transform = isPrev
+        if (i === prevActive) {
+          item.style.transform = prevCollapsed
             ? `translateX(${collapsedShift(i)}px) scale(${BASE_SCALE})`
-            : `translateY(-80px) scale(${BASE_SCALE})`;
-          item.style.opacity = isPrev ? 1 : 0;
-        } else {
-          item.style.transform = `scale(${isPrev ? 1 : BASE_SCALE})`;
+            : 'scale(1)';
           item.style.opacity = 1;
+        } else if (i === ACTIVE && SWAP) {
+          /* Waits above its own home position, at the size it will keep. */
+          item.style.transform = `translateY(-80px) scale(${activeScale()})`;
+          item.style.opacity = 0;
+        } else {
+          item.style.transform = `translateY(${prevCollapsed ? -80 : 0}px) scale(${BASE_SCALE})`;
+          item.style.opacity = prevCollapsed ? 0 : 1;
         }
       });
     }
 
     /* Runs at the end of the script, after any scroll restoration, so the
-       target state is the one this page actually settles at. */
+       target state is the one this page actually settles at. Correctness never
+       waits on requestAnimationFrame, which is throttled while the document is
+       hidden. */
     function settleEntry() {
-      /* Flush the arrival state with a synchronous reflow, then attach the
-         transition and set the live state in the same tick. Correctness never
-         waits on requestAnimationFrame, which is throttled while the document
-         is hidden and would otherwise leave the nav stuck where it landed. */
       void navInner.offsetHeight;
       navItems.forEach(item => {
         item.style.transition = `transform ${TRANSITION_MS}ms ease, opacity ${TRANSITION_MS}ms ease`;
       });
+
+      if (SWAP) {
+        /* Two beats, in the vocabulary the nav already uses: marks that are not
+           the active one move vertically, and the active one moves sideways.
+           First the outgoing mark lifts away while the incoming one drops into
+           its own place in the bar. Then the incoming one slides across to the
+           masthead. It reads as a short return to the menu, showing only the
+           two marks involved. */
+        navItems.forEach(item => {
+          item.style.transition = `transform ${SWAP_LIFT_MS}ms ease, opacity ${SWAP_LIFT_MS}ms ease`;
+        });
+        navItems.forEach((item, i) => {
+          if (i === ACTIVE) {
+            item.style.transform = `translateY(0px) scale(${activeScale()})`;
+            item.style.opacity = 1;
+          } else {
+            item.style.transform = `translateY(-80px) scale(${BASE_SCALE})`;
+            item.style.opacity = 0;
+          }
+        });
+
+        setTimeout(() => {
+          navItems.forEach(item => {
+            item.style.transition = `transform ${SWAP_SLIDE_MS}ms ease, opacity ${SWAP_SLIDE_MS}ms ease`;
+          });
+          updateNav();
+          setTimeout(() => {
+            navItems.forEach(item => { item.style.transition = ''; });
+            updateNav();
+          }, SWAP_SLIDE_MS + 80);
+        }, SWAP_LIFT_MS);
+
+        return;
+      }
+
       updateNav();
+
       setTimeout(() => {
         navItems.forEach(item => { item.style.transition = ''; });
+        updateNav();
       }, TRANSITION_MS + 100);
     }
+
+    /* The marks are images with no intrinsic width until they load. Measured
+       before then, a link collapses to zero width and space-between parks it on
+       the far boundary, which cached a slide roughly 190px too far. */
+    function remeasureNav() { slideDistance = null; updateNav(); }
+    window.addEventListener('load', remeasureNav);
+    navItems.forEach(img => {
+      if (!img.complete) img.addEventListener('load', remeasureNav, { once: true });
+    });
 
     paintEntry();
 
@@ -543,7 +598,7 @@
     document.getElementById('checkout-country').value = checkoutCountry;
     renderCheckout();
     /* Marks move on resize, so the cached slide target must be recomputed. */
-    window.addEventListener('resize', () => { slideDistance = null; updateNav(); });
+    window.addEventListener('resize', remeasureNav);
 
     /* ---- Footer ---- */
     function handleSearch(e) {
