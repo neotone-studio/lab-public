@@ -138,7 +138,9 @@ And that tells us which manual material gets to become a piece. **It travels whe
 
 *[Click One.]*
 
-Now we've seen the world the instrument comes from and the thinking inside it. That's the context you need for the middle of the menu, which is the instrument itself, and the path from wanting one to owning one.
+We've come here last, and plenty of people will come here first. It sits in the middle of the menu, and it's the page a search result or a shared link lands on, so somebody can easily arrive with none of the context we just walked through.
+
+That's fine, and the page is built for it. It doesn't lean on anything we've seen. What it does carry is a way back out to the context, which we'll get to in a moment.
 
 This is the fourth type, a **product page**. It sits at the same level as a container rather than inside one.
 
@@ -158,7 +160,9 @@ Two things on this page do the same job, and it's worth seeing them as one idea.
 
 *[Close it, scroll to the articles below the purchase flow.]*
 
-These are pieces about the wait, the material, and the workshop. They open in a new tab, for the same reason: their home is the Neotone container, so the mark at the top of them would carry somebody mid-purchase back into culture.
+These are pieces about the wait, the material, and the workshop, and this is the way back out. Somebody who arrived here first, knowing nothing about us, picks up the context from these rather than from having walked the site in order.
+
+They open in a new tab, for the same reason as the panel: their home is the Neotone container, so the mark at the top of them would carry somebody mid-purchase back into culture.
 
 A panel and a new tab, both keeping this page intact behind whatever you're looking at.
 
