@@ -34,15 +34,16 @@ Masthead above two sections.
 
 ```
               NEOTONE
-      Tonefield    Instruments
-                   ├ One
-                   ├ Anima
-                   └ Treangle
+      Tonefield    Instruments              Selection (2)
 ```
+
+Selection appears at the right of the row on the instrument page only, and only when the selection is non-empty. Smaller and grey, no underline: the underline means "you are here" and Selection is not a place. It follows the row through the collapse.
+
+The instruments are not in the nav. They are named in a row at the top of every instrument page (`.instrument-row`): One, Anima, Treangle, current one marked. The nav says Instruments; the page says which.
 
 **The mark is identity, not a link.** A `div`, not an `a`. Once the bar has moved, clicking anywhere in it scrolls to the top and reopens the bar. At rest it does nothing.
 
-**Instruments is a group**: a parent link (`.section-parent`, goes to `instrument.html`) with a submenu (`.submenu`) of product names that opens on hover or focus. The current instrument carries `.current-instrument`. The submenu is hidden once the bar has collapsed (`.sections.is-label`), because the bar is a label then, not a menu.
+**Instruments is a plain link** to `instrument.html`. A hover submenu was built and removed: it hung over page text, needed a background, had no touch equivalent, and was the nav doing the page's job.
 
 **Everything in the bar is a function of scroll position.** No timed transitions on any moving value. The two ramps overlap:
 
@@ -56,11 +57,9 @@ Masthead above two sections.
 
 Both ramps are scaled by `k = min(1, scrollRange / SHIFT_TO)`, so a short page completes its collapse by its own bottom rather than stopping part way.
 
-At the end of the travel the mark and the current section name share one left edge at the content boundary. Measured in `measure()` from rects with the row put at rest, not from `offsetLeft`, because the Instruments link sits inside a positioned group.
+**Collapsed, the bar is the name alone.** Every section name fades over the fade range, the current one included, and only the mark travels to the content boundary. The page announces where you are, through its opening line, kicker or title, so the bar does not repeat it. Clicking the collapsed bar scrolls to the top and reopens the menu. An earlier version carried the current section name into the corner beside the mark; on instrument pages that put the word Instruments over a page whose name is One, and there was no honest word to swap in mid-travel.
 
-**Marking the current section.** Arriving by an internal link marks the section on arrival with a 420ms fade. Landing cold opens neutral and resolves as you scroll, then latches (`resolved`). Whether the arrival was internal is written by the page you leave into `sessionStorage['neotone_internal_nav']`, read and cleared on load. It was a `document.referrer` test first, which browsers strip often enough that the bar looked broken for some readers.
-
-**The marked state is set outright; the fade only decorates it.** A CSS transition in a document that is not painting continuously can sit in `running` forever, which stranded the underline invisible. `markSection()` writes the resting values first and hard-resets after the fade.
+**The current section is marked from the first frame**, on every page, with no arrival logic. A neutral cold-landing state with a scroll-resolve and a latch was built for a front page that belonged to no section; that page is gone, the root is Tonefield, and being on it is being on it. Removing the arrival state also removed a `sessionStorage` flag, the referrer test before it, and the fade machinery that had stranded the underline invisible in a non-painting document.
 
 ---
 
@@ -68,13 +67,18 @@ At the end of the travel the mark and the current section name share one left ed
 
 Used by Tonefield and Updates. Items at 680px inside a `var(--max)` container.
 
-| Rule | Value |
-|---|---|
-| `.feed` top padding | 88px |
-| `.feed-item + .feed-item` | `margin-top: 24vh` |
-| `.feed-item.lead + .feed-item.second` | `margin-top: 6vh` |
+One vertical rhythm, in pixels so it does not change with the window:
 
-**The first screen shows two.** The lead carries `.lead` and a 2:1 image; the second carries `.second` and puts its kicker and title before its image (`order` on a flex column), so both titles land inside the first viewport. Which two, and which registers they carry, is editorial. The classes are placed by hand.
+| | px |
+|---|---|
+| Heading text below the bar, or below the instrument row | 62 |
+| Heading to first piece | 56 |
+| Between Tonefield pieces | 96 |
+| Between Updates entries | 64 |
+| Last piece to the end block | 96 |
+| Load more to the sign-up | 56 |
+
+**Every piece is built the same way**: image, kicker, title, excerpt, link, 16:9 image, same gap. `.lead` and `.second` classes remain on the first two items as editorial markers and style nothing. A wider lead image and a reordered second piece were tried to force both titles into a 900px viewport and read as three different layouts.
 
 A feed item is kicker, title, excerpt, continue link, media. The block is not an `<a>`, because media has to be clickable on its own; the title and the continue link are the anchors. Every item carries a continue link.
 
@@ -111,7 +115,19 @@ Width signals position: a lead image runs to the grid, anything inside the body 
 
 ### Placeholders
 
-`anima.html`, `treangle.html`: one opening line, one block, no specification, no date, no image. They exist so the submenu can carry the names and the site can be browsed in its future shape without promising anything.
+`anima.html`, `treangle.html`: one opening line, one block, no specification, no date, no image. They exist so the instrument row can carry the names and the site can be browsed in its future shape without promising anything.
+
+---
+
+## Opening
+
+Tonefield, the instrument page and the placeholders open with one centred line, the name in a larger span: `.opening-wrap > .opening > .opening-name`. It is in the flow of the document and scrolls with it, like a heading. An earlier version held it in place and faded it while the page slid underneath, which read as the heading arriving from somewhere other than the page. The wrapper keeps a once-only fade-in on load (`opening-in`, 760ms), the only animation outside the nav.
+
+| Page | Line |
+|---|---|
+| `index.html` | **Tonefield** is Neotone's craft and culture publication |
+| `instrument.html` | The **Neotone One** is handcrafted in Budapest, built to order |
+| `anima.html`, `treangle.html` | **Anima** is in development |
 
 ---
 
@@ -183,7 +199,7 @@ Unbuilt destinations fire `alert()`: `utilityLink()`, `socialLink()`, `handleSea
 
 ## Mobile
 
-Page bodies carry their own responsive rules from v2. The bar has not been designed for a phone width and is the open problem: at 375px the masthead and two sections fit, but the submenu, the collapse travel and the footer bands are untested.
+Page bodies carry their own responsive rules from v2. The bar has not been designed for a phone width and is the open problem: at 375px the masthead and two sections fit, but the collapse travel, the instrument row and the footer bands are untested.
 
 ---
 
@@ -194,6 +210,7 @@ Page bodies carry their own responsive rules from v2. The bar has not been desig
 | Nav markup, CSS and script | 11 |
 | Footer markup, CSS and script | 11 |
 | `updateNav()`, `measure()`, `markSection()`, `scrollToTopThen()` | 11 |
+| `.instrument-row` markup and CSS | 4 (instrument, anima, treangle, checkout) |
 | `handleSearch()`, `socialLink()`, `utilityLink()` | 11 |
 | Feed CSS | 2 (`index.html`, `updates.html`) |
 | Selection panel and its script | 2 |

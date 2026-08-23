@@ -71,24 +71,6 @@
     }
     .sections a:first-child { margin-left: 0; }
 
-    /* Instruments is a group: a parent link that goes to the current instrument,
-       and a submenu of names beneath it. The names are products, so they live
-       one level down, the way a category holds its items. Today the submenu
-       defaults to One; Anima and Treangle land on a placeholder. When the bar is
-       collapsed the submenu is not offered, because the bar is a label then. */
-    .section-group { position: relative; margin-left: 30px; }
-    .section-group > .section-parent { margin-left: 0; }
-    .submenu {
-      position: absolute; left: 0; top: 100%; padding-top: 10px;
-      display: flex; flex-direction: column; gap: 8px;
-      opacity: 0; pointer-events: none; transition: opacity 160ms ease;
-      white-space: nowrap;
-    }
-    .submenu a { margin-left: 0; font-size: 13px; color: var(--muted); }
-    .submenu a:hover, .submenu a.current-instrument { color: var(--ink); }
-    .section-group:hover .submenu,
-    .section-group:focus-within .submenu { opacity: 1; pointer-events: auto; }
-    .sections.is-label .submenu { display: none; }
 
     .sections a:hover { color: var(--ink); }
     /* Emphasis on where you are: ink rather than grey, with a hairline under
@@ -108,29 +90,6 @@
       .sections a { margin-left: 20px; }
     }
 
-    /* Selection: absolutely positioned so it stays out of the space-between
-       flow and cannot disturb the four wordmarks. Revealed only once the
-       inactive marks have fully faded (scrollY > TRANSITION_PX) and the
-       selection is non-empty. */
-    .sel-nav {
-      position: absolute;
-      right: 48px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: none;
-      border: none;
-      padding: 0;
-      cursor: pointer;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 11px;
-      letter-spacing: 0.02em;
-      color: var(--ink);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.25s ease;
-    }
-    .sel-nav.visible { opacity: 1; pointer-events: auto; }
-    .sel-count { color: var(--muted); }
 
     /* ---- Page ---- */
     .page { max-width: var(--max); margin: 0 auto; padding: 0 48px 120px; }
@@ -209,7 +168,7 @@
     .path-cta:hover { text-decoration: underline; }
 
     @media (max-width: 980px) {
-      .opening { padding: 72px 0 64px; font-size: 19px; }
+      .opening { padding: 32px 0 40px; font-size: 19px; }
       .opening-name { font-size: 28px; }
       .specs-strip, .steps-strip, .stack, .paths { grid-template-columns: 1fr; }
       .spec-cell, .step-cell { border-right: none; border-bottom: 1px solid var(--line); padding-left: 0; }
@@ -480,6 +439,41 @@
     .footer-social a { color: rgba(255,255,255,0.55); cursor: pointer; }
     .footer-social a:hover { color: #fff; }
 
+
+    /* ---- Instrument row ----
+       The instruments, named, at the top of every instrument page. This is the
+       page doing the job the nav should not: the nav says Instruments, the page
+       says which. Selection sits at the right end, on these pages only, because
+       purchase happens here. */
+    .instrument-row {
+      max-width: var(--max); margin: 0 auto; padding: 28px 48px 0;
+      display: flex; align-items: baseline; justify-content: space-between;
+    }
+    .instrument-row .names { display: flex; align-items: baseline; gap: 26px; }
+    .instrument-row .names a {
+      font-size: 13px; letter-spacing: 0.02em; color: var(--muted);
+      padding-bottom: 3px; border-bottom: 1px solid transparent;
+    }
+    .instrument-row .names a:hover { color: var(--ink); }
+    .instrument-row .names a.current { color: var(--ink); border-bottom-color: var(--ink); }
+    /* Selection, in the nav row at the right, level with the section names.
+       Only when the selection is non-empty, only on pages where purchase
+       happens. Stays through the collapse. */
+    /* Quieter than the section names: smaller, grey, no underline. The
+       underline means "you are here", and Selection is not a place. It is a
+       utility that happens to share the row. */
+    .sel-nav {
+      position: absolute; right: 48px; top: 88px;
+      font-size: 12px; letter-spacing: 0.03em; color: var(--muted);
+      background: none; border: none; padding: 0; cursor: pointer;
+      font-family: inherit;
+      opacity: 0; pointer-events: none; will-change: top;
+    }
+    .sel-nav:hover { color: var(--ink); }
+    .sel-nav.visible { opacity: 1; pointer-events: auto; }
+    .sel-count { margin-left: 5px; }
+    @media (max-width: 980px) { .instrument-row { padding: 20px 24px 0; } }
+
     /* ---- Page opening ----
        Every page opens with one centred statement of what it is for, with the
        section's own name inside that sentence rather than above it as a
@@ -495,9 +489,8 @@
     }
     .opening {
       max-width: 720px; margin-left: auto; margin-right: auto;
-      padding: 104px 0 88px; text-align: center;
+      padding: 64px 0 56px; text-align: center;
       font-size: 21px; font-weight: 400; line-height: 1.7; color: var(--ink);
-      will-change: opacity, transform;
     }
     .opening-name { font-size: 34px; line-height: 1; letter-spacing: -0.01em; white-space: nowrap; }
     @media (prefers-reduced-motion: reduce) {
@@ -512,17 +505,20 @@
       <div class="masthead" role="presentation"><img src="../../media/svg_wordmarks/neotone.svg" alt="Neotone"></div>
       <div class="sections">
         <a href="index.html" data-section="tonefield">Tonefield</a>
-        <span class="section-group" data-section="instruments">
-          <a href="instrument.html" class="section-parent" data-section="instruments">Instruments</a>
-          <span class="submenu" role="menu">
-            <a href="instrument.html" data-instrument="one">One</a>
-            <a href="anima.html"      data-instrument="anima">Anima</a>
-            <a href="treangle.html"   data-instrument="treangle">Treangle</a>
-          </span>
-        </span>
+        <a href="instrument.html" data-section="instruments">Instruments</a>
       </div>
+      <button class="sel-nav" id="sel-nav" onclick="openSelectionPanel()">Selection<span class="sel-count" id="sel-count"></span></button>
     </div>
   </nav>
+
+  <div class="instrument-row">
+    <div class="names" role="navigation" aria-label="Instruments">
+      <a href="instrument.html" class="current">One</a>
+      <a href="anima.html">Anima</a>
+      <a href="treangle.html">Treangle</a>
+    </div>
+  </div>
+
 
   <main class="page">
 
@@ -893,9 +889,8 @@
 
       <div class="footer-top">
         <div class="footer-sections">
-          <a href="index.html">Culture</a>
-          <a href="instrument.html">Instrument</a>
-          <a href="index.html">Craft</a>
+          <a href="index.html">Tonefield</a>
+          <a href="instrument.html">Instruments</a>
         </div>
         <form class="footer-search" onsubmit="handleSearch(event)">
           <input type="search" placeholder="Search" />
@@ -905,9 +900,9 @@
 
       <div class="footer-band">
         <div class="footer-utility">
-          <a onclick="utilityLink('Workshop')">Workshop</a>
           <a href="manual.html">Manual</a>
           <a href="updates.html">Updates</a>
+          <a onclick="utilityLink('Workshop')">Workshop</a>
           <a onclick="utilityLink('Contact')">Contact</a>
           <a href="legal.html">Legal</a>
         </div>
@@ -937,46 +932,12 @@
     const navInner = document.querySelector('.nav-inner');
     const masthead = document.querySelector('.masthead');
     const sections = document.querySelector('.sections');
-    /* Top-level section links only. Submenu items are products, and they do
-       not take part in the fade, the emphasis or the travel. */
-    const links    = [...document.querySelectorAll('.sections > a, .sections > .section-group > .section-parent')];
-    const INSTRUMENT = 'one';
-    document.querySelectorAll('.submenu a').forEach(a => {
-      if (a.dataset.instrument === INSTRUMENT) a.classList.add('current-instrument');
-    });
+    const links    = [...document.querySelectorAll('.sections a')];
 
-    /* Arriving at a section by clicking its name is choosing it, so the bar
-       marks it straight away. Landing cold, which in practice means the root,
-       is not a choice: the bar opens as a menu of three and resolves into where
-       you are as you scroll, then stays resolved.
-
-       The referrer is the test, so no state has to be carried. A reload counts
-       as a cold arrival, which is fair.
-
-       Pages belonging to no section, legal for instance, never resolve. */
+    /* The section this page belongs to is marked from the first frame. Pages
+       belonging to no section, legal for instance, mark nothing. */
     const current = links.find(a => a.dataset.section === SECTION);
-    /* Did the reader arrive by clicking something on this site, or land cold?
-       Recorded by the page they left rather than read from document.referrer,
-       which browsers and privacy settings strip often enough that a bar
-       depending on it looks broken for some readers and fine for others.
-
-       Any internal link counts, not only a section name: opening a piece from a
-       feed is still arriving inside a section you already chose. */
-    const ARRIVAL_KEY = 'neotone_internal_nav';
-    const cameFromSite = sessionStorage.getItem(ARRIVAL_KEY) === '1';
-    sessionStorage.removeItem(ARRIVAL_KEY);
-
-    document.addEventListener('click', e => {
-      const a = e.target.closest('a[href]');
-      if (!a) return;
-      const href = a.getAttribute('href');
-      if (!href || href.startsWith('#') || href.startsWith('mailto:') || a.target === '_blank') return;
-      if (/^https?:\/\//i.test(href) && !href.startsWith(location.origin)) return;
-      sessionStorage.setItem(ARRIVAL_KEY, '1');
-    }, true);
-
-    const MUTED = [79, 79, 79], INK = [17, 17, 17];
-    const mix = t => 'rgb(' + MUTED.map((v, i) => Math.round(v + (INK[i] - v) * t)).join(',') + ')';
+    if (current) current.classList.add('current');
 
     /* Two overlapping ranges. The sections you are not in fade first and
        slowly; the pair travels left over a longer distance, so the move reads
@@ -987,59 +948,8 @@
     const SECT_TOP   = [86, 62];
     const MARK_SCALE = [1, 0.55];
 
-    let markShift = null, sectionShift = null;
-    /* Chosen means marked from the first frame. */
-    let resolved = false;
-    /* Marks a section. The fade belongs to the moment of choosing: clicking a
-       section name underlines it there and then, on the page you are still
-       looking at, because the content changes underneath and the bar has to
-       confirm what you picked. Arriving already marked does not fade, since the
-       fade has just happened on the page you came from. */
-    function markSection(el, fade) {
-      links.forEach(l => { if (l !== el) l.classList.remove('current'); });
-      el.classList.add('current');
-      /* Marked state first, unconditionally, so it is correct even if nothing
-         after this line ever runs. A stranded transition would otherwise hold
-         the link at its starting values forever, which is what happened here:
-         in a document that is not painting continuously, a CSS transition can
-         sit in the running state indefinitely. */
-      el.style.transition = 'none';
-      el.style.color = '';
-      el.style.borderBottomColor = '';
-      if (!fade) return;
-
-      /* The fade is decoration on top of an already correct state, and it hard
-         resets when it is done rather than trusting the transition to land. */
-      el.style.color = 'rgb(79,79,79)';
-      el.style.borderBottomColor = 'transparent';
-      void el.offsetHeight;
-      el.style.transition = 'color 420ms ease, border-bottom-color 420ms ease';
-      el.style.color = '';
-      el.style.borderBottomColor = '';
-      setTimeout(() => {
-        el.style.transition = 'none';
-        el.style.color = '';
-        el.style.borderBottomColor = '';
-        void el.offsetHeight;
-        el.style.transition = '';
-      }, 520);
-    }
-
-    /* Faded on arrival, not on the click. The page you clicked from is replaced
-       in a few milliseconds, so a fade started there is never painted. The one
-       a reader can actually see is this one. */
-    if (current && cameFromSite) {
-      resolved = true;
-      markSection(current, true);
-    }
-
-    links.forEach(a => {
-      a.addEventListener('click', () => {
-        if (a.dataset.section === SECTION) return;
-        resolved = true;
-        markSection(a, true);
-      });
-    });
+    let markShift = null;
+    const selNav = document.getElementById('sel-nav');
 
 
     /* Measured with the bar at rest, so the numbers are the distance from where
@@ -1055,25 +965,12 @@
         el.style.transform = prev;
         return left;
       };
-      const restSections = rest(sections);
       markShift = Math.round(contentLeft - rest(masthead));
       /* offsetLeft on a link is measured inside .sections, which is its offset
          parent, so it is added to the row's own left rather than compared with
          it. Both targets are the same content boundary, which is what puts the
          mark and the section you are in on one left edge. */
-      /* Measured from rects rather than offsetLeft, because the Instruments
-         link sits inside a positioned group and offsetLeft would be relative to
-         that group. The row is put at rest, the link's edge is read, then the
-         row is put back. */
-      if (current) {
-        const prev = sections.style.transform;
-        sections.style.transform = 'translateX(-50%)';
-        const curLeft = current.getBoundingClientRect().left;
-        sections.style.transform = prev;
-        sectionShift = Math.round(contentLeft - curLeft);
-      } else {
-        sectionShift = Math.round(contentLeft - restSections);
-      }
+
     }
 
     const ramp = (y, a, b) => Math.min(Math.max((y - a) / (b - a), 0), 1);
@@ -1100,28 +997,20 @@
         'translateX(calc(-50% + ' + (markShift * shift) + 'px)) scale(' + lerp(MARK_SCALE, shift) + ')';
 
       sections.style.top = lerp(SECT_TOP, shift) + 'px';
-      sections.style.transform = 'translateX(calc(-50% + ' + (sectionShift * shift) + 'px))';
-      sections.classList.toggle('is-label', shift > 0.5);
 
+      /* Selection sits at the right of the row, level with the section names,
+         and stays through the collapse: it is an affordance, not a section. */
+      if (selNav) selNav.style.top = (lerp(SECT_TOP, shift) + 2) + 'px';
+
+      /* Every section fades, the current one included. Collapsed, the bar is
+         the name alone: present, and a way back to the menu. The page says
+         where you are; the bar does not have to. */
       links.forEach(a => {
-        if (a === current) return;
         a.style.opacity = String(1 - fade);
         a.style.pointerEvents = fade > 0.9 ? 'none' : '';
       });
 
-      if (current && !resolved) {
-        if (shift >= 1) {
-          resolved = true;
-          current.classList.add('current');
-          current.style.color = '';
-          current.style.borderBottomColor = '';
-        } else {
-          current.style.color = mix(fade);
-          current.style.borderBottomColor = 'rgba(17,17,17,' + fade + ')';
-        }
-      }
 
-      updateOpening();
     }
 
     /* Once the bar has moved, the mark reopens it. At rest it goes to the
@@ -1153,18 +1042,6 @@
       if (!img.complete) img.addEventListener('load', remeasure, { once: true });
     });
 
-    /* The opening holds its position while the page scrolls under it and fades,
-       rather than being carried off the top. Absent on pages that have no
-       opening, so this returns early there. */
-    const opening = document.querySelector('.opening');
-    const OPENING_FADE_PX = 120;
-    const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    function updateOpening() {
-      if (!opening) return;
-      const held = Math.min(Math.max(window.scrollY, 0), OPENING_FADE_PX);
-      if (!REDUCED_MOTION) opening.style.transform = `translateY(${held}px)`;
-      opening.style.opacity = String(1 - held / OPENING_FADE_PX);
-    }
 
 
     window.addEventListener('scroll', updateNav, { passive: true });
@@ -1200,6 +1077,359 @@
         scrollToTopThen(() => { window.location.href = href; });
       });
     });
+
+    /* ================================================================
+       Purchase machinery, ported from v1/one.html.
+       ================================================================ */
+
+    var state = {
+      wood: "Mahogany", woodExtra: 90, discount: 0, orderMode: "build",
+      stockSelection: "", stockPrice: 0, stockIsBstock: false
+    };
+    var BASE_PRICE = 3150;
+    var stockEmptyVisible = false;
+    var VAT_RATES = { HU: 0.27, DE: 0.19, FR: 0.20, US: null };
+    var VAT_NAMES = { HU: "Hungary", DE: "Germany", FR: "France", US: "United States" };
+    var vatCountry = localStorage.getItem('neotone_country') || 'HU';
+
+    /* Accessories are data rather than duplicated markup: the same list is
+       rendered into both panels, and cards are built with addEventListener
+       rather than inline onclick so names containing quotes cannot break
+       attribute parsing. */
+    const ACCESSORIES = [
+      { name: 'Neotone Semi-Rigid Case', desc: 'Safely transport and store your Neotone One', included: true },
+      { name: 'Donut Stand',             desc: 'Low profile protection when playing on a flat surface', included: true },
+      { name: 'Desktop Stand',           desc: 'For tabletop display and cable organization', price: 12 },
+      { name: 'Intech Knot',             desc: 'Midi USB host for controlling Neotone One with external instruments', price: 80 },
+      { name: 'Headphone “L” Adapter', desc: 'Low profile headphone connection', price: 2, vis: 'acc-fifth' },
+      { name: 'MIDI DIN Adapter',        desc: 'Connect to classic MIDI hardware', price: 8,  vis: 'acc-extra' },
+      { name: 'Wood Care Kit',           desc: 'Maintain the finish of your instrument', price: 9,  vis: 'acc-extra' },
+      { name: 'Neotone Carry Bag',       desc: 'Lightweight canvas bag for everyday transport', price: 28, vis: 'acc-extra' }
+    ];
+
+    function renderAccessories() {
+      ['acc-grid-build', 'acc-grid-stock'].forEach(function(gridId) {
+        const grid = document.getElementById(gridId);
+        if (!grid) return;
+        grid.innerHTML = '';
+        ACCESSORIES.forEach(function(a) {
+          const card = document.createElement('div');
+          card.className = 'acc-card' + (a.vis ? ' ' + a.vis : '');
+
+          const swatch = document.createElement('div');
+          swatch.className = 'acc-swatch';
+          card.appendChild(swatch);
+
+          const body = document.createElement('div');
+          body.className = 'acc-body';
+
+          const nm = document.createElement('p');
+          nm.className = 'acc-name';
+          nm.textContent = a.name;
+          body.appendChild(nm);
+
+          const ds = document.createElement('p');
+          ds.className = 'acc-desc';
+          ds.textContent = a.desc;
+          body.appendChild(ds);
+
+          if (a.included) {
+            const inc = document.createElement('p');
+            inc.className = 'acc-included';
+            inc.textContent = 'Included';
+            body.appendChild(inc);
+          } else {
+            const pr = document.createElement('p');
+            pr.className = 'acc-price';
+            pr.setAttribute('data-raw', a.price);
+            pr.textContent = 'EUR ' + a.price;
+            body.appendChild(pr);
+
+            const btn = document.createElement('button');
+            btn.className = 'opt acc-btn';
+            btn.textContent = 'Add to Selection';
+            btn.addEventListener('click', function() { addAccToSelection(a.name, a.desc, a.price); });
+            body.appendChild(btn);
+          }
+
+          card.appendChild(body);
+          grid.appendChild(card);
+        });
+      });
+    }
+
+    function formatWithVat(rawBase) {
+      var rate = VAT_RATES[vatCountry];
+      var total = rate ? Math.round(rawBase * (1 + rate)) : rawBase;
+      return 'EUR ' + total.toLocaleString('en-US');
+    }
+    function updateAccPrices() {
+      document.querySelectorAll('[data-raw]').forEach(function(el) {
+        el.textContent = formatWithVat(parseFloat(el.getAttribute('data-raw')));
+      });
+    }
+    function changeVATCountry(val) {
+      vatCountry = val;
+      localStorage.setItem('neotone_country', val);
+      var d1 = document.getElementById("vat-country-build");
+      var d2 = document.getElementById("vat-country-stock");
+      if (d1) d1.value = val;
+      if (d2) d2.value = val;
+      updateBuildSummary();
+      updateStockSummary();
+      updateAccPrices();
+    }
+    function vatLine(subtotal) {
+      var rate = VAT_RATES[vatCountry];
+      if (rate === null) return { text: "No VAT (import duties may apply)", total: subtotal };
+      var amount = Math.round(subtotal * rate);
+      return {
+        text: Math.round(rate * 100) + "% VAT (" + VAT_NAMES[vatCountry] + "): EUR " + amount.toLocaleString("en-US"),
+        total: subtotal + amount
+      };
+    }
+
+    function switchFork(which) {
+      state.orderMode = which;
+      document.getElementById("tab-build").classList.toggle("active", which === "build");
+      document.getElementById("tab-stock").classList.toggle("active", which === "stock");
+      document.getElementById("panel-build").classList.toggle("hidden", which !== "build");
+      document.getElementById("panel-stock").classList.toggle("hidden", which !== "stock");
+      updateCaption();
+    }
+
+    function selectWood(name, extra) {
+      state.wood = name; state.woodExtra = extra;
+      ["ash","oak","mahogany","cherry","walnut"].forEach(function(id) {
+        document.getElementById("wood-"+id).classList.remove("active");
+      });
+      document.getElementById("wood-"+name.toLowerCase()).classList.add("active");
+      updateCaption(); updateBuildSummary();
+    }
+
+    function selectStock(serialName, isBstock) {
+      state.stockSelection = serialName; state.stockIsBstock = isBstock;
+      var prices = {"Serial No. 821":3800,"Serial No. 873":3980,"Serial No. 907":3100};
+      state.stockPrice = prices[serialName] || 0;
+      ["stock-a","stock-b","stock-c"].forEach(function(id) { document.getElementById(id).classList.remove("selected"); });
+      var idMap = {"Serial No. 821":"stock-a","Serial No. 873":"stock-b","Serial No. 907":"stock-c"};
+      if (idMap[serialName]) document.getElementById(idMap[serialName]).classList.add("selected");
+      updateCaption(); updateStockSummary();
+    }
+
+    function updateCaption() {
+      var el = document.getElementById("selection-caption");
+      if (state.orderMode === "stock") {
+        el.textContent = state.stockSelection ? "From Stock · " + state.stockSelection : "From Stock · Select an instrument below";
+      } else {
+        el.textContent = "Built to Order · " + state.wood;
+      }
+    }
+
+    function applyCode() {
+      var code = document.getElementById("refcode").value.trim().toUpperCase();
+      var valid = ["DANNY10","LENA","SOFIA"];
+      state.discount = valid.indexOf(code) !== -1 ? 5 : 0;
+      document.getElementById("refmsg").textContent = valid.indexOf(code) !== -1
+        ? "Valid code. 5% discount applied." : (code.length > 0 ? "Code not recognised." : "No code applied.");
+      updateBuildSummary();
+    }
+
+    function applyStockCode() {
+      var code = document.getElementById("stock-refcode").value.trim().toUpperCase();
+      var valid = ["DANNY10","LENA","SOFIA"];
+      if (state.stockIsBstock) {
+        document.getElementById("stock-refmsg").textContent = "Referral codes do not apply to B-stock items.";
+        state.discount = 0;
+      } else {
+        state.discount = valid.indexOf(code) !== -1 ? 5 : 0;
+        document.getElementById("stock-refmsg").textContent = valid.indexOf(code) !== -1
+          ? "Valid code. 5% discount applied." : (code.length > 0 ? "Code not recognised." : "No code applied.");
+      }
+      updateStockSummary();
+    }
+
+    function updateBuildSummary() {
+      var rawBase = BASE_PRICE + state.woodExtra;
+      var subtotal = rawBase - Math.round(rawBase * state.discount / 100);
+      var vat = vatLine(subtotal);
+      document.getElementById("sum-wood").textContent = "Wood: " + state.wood;
+      document.getElementById("sum-base").textContent = "Base price: EUR " + rawBase.toLocaleString("en-US");
+      document.getElementById("sum-disc").textContent = "Referral discount: " + state.discount + "%";
+      document.getElementById("sum-vat").textContent = vat.text;
+      document.getElementById("sum-total").innerHTML = "<strong>Total: EUR " + vat.total.toLocaleString("en-US") + "</strong>";
+    }
+
+    function updateStockSummary() {
+      if (!state.stockSelection) return;
+      var rawBase = state.stockPrice;
+      var subtotal = state.stockIsBstock ? rawBase : rawBase - Math.round(rawBase * state.discount / 100);
+      var vat = vatLine(subtotal);
+      document.getElementById("stock-sum-item").textContent = state.stockSelection;
+      document.getElementById("stock-sum-base").textContent = "Base price: EUR " + rawBase.toLocaleString("en-US");
+      document.getElementById("stock-sum-disc").textContent = state.stockIsBstock
+        ? "Referral discount: not applicable (B-stock)" : "Referral discount: " + state.discount + "%";
+      document.getElementById("stock-sum-vat").textContent = vat.text;
+      document.getElementById("stock-sum-total").innerHTML = "<strong>Total: EUR " + vat.total.toLocaleString("en-US") + "</strong>";
+    }
+
+    function toggleStockEmpty() {
+      stockEmptyVisible = !stockEmptyVisible;
+      document.getElementById("stock-available").classList.toggle("hidden", stockEmptyVisible);
+      document.getElementById("stock-empty-state").classList.toggle("hidden", !stockEmptyVisible);
+    }
+
+    function toggleAccessories(btn) {
+      var grid = btn.closest('.acc-section').querySelector('.acc-grid');
+      var expanded = grid.classList.toggle('acc-expanded');
+      btn.innerHTML = expanded ? 'Show fewer accessories &uarr;' : 'Show more accessories &darr;';
+    }
+
+    function addAccToSelection(name, desc, rawBase) {
+      var vat = vatLine(rawBase);
+      addToSelection(name, desc, 'EUR ' + vat.total.toLocaleString('en-US'),
+        { rawBase: rawBase, discountPct: 0, discountEligible: false });
+    }
+
+    function addBuildToSelection() {
+      var rawBase = BASE_PRICE + state.woodExtra;
+      var subtotal = Math.round(rawBase * (1 - state.discount / 100));
+      var vat = vatLine(subtotal);
+      addToSelection('Neotone One', 'Built to Order · ' + state.wood, 'EUR ' + vat.total.toLocaleString("en-US"),
+        { rawBase: rawBase, discountPct: state.discount, discountEligible: true });
+    }
+
+    function addStockToSelection() {
+      if (!state.stockSelection) {
+        alert('No instrument selected. Please choose an instrument from the list above.');
+        return;
+      }
+      var rawBase = state.stockPrice;
+      var subtotal = state.stockIsBstock ? rawBase : Math.round(rawBase * (1 - state.discount / 100));
+      var vat = vatLine(subtotal);
+      addToSelection('Neotone One', 'From Stock · ' + state.stockSelection, 'EUR ' + vat.total.toLocaleString("en-US"),
+        { rawBase: rawBase, discountPct: state.stockIsBstock ? 0 : state.discount, discountEligible: !state.stockIsBstock });
+    }
+
+    function handleNotify(e) {
+      e.preventDefault();
+      alert(
+        "Function: Stock notification email\n\n" +
+        "Submitting this form adds the provided email address to the stock availability mailing list. " +
+        "You will receive an email when a new instrument is listed for sale."
+      );
+      var form = e.target;
+      form.querySelector(".subscribe-btn").style.display = "none";
+      form.querySelector(".subscribe-confirm").style.display = "inline";
+    }
+
+    /* ---- Selection (ported from v1) ---- */
+
+    // Cached so the scroll handler never parses localStorage.
+    let selCount = 0;
+
+    /* The indicator lives at the right end of the instrument row, on
+       instrument pages only, because that is where purchase happens. Shown
+       whenever the selection is non-empty. */
+    function updateSelNav() {
+      const el = document.getElementById('sel-nav');
+      if (!el) return;
+      el.classList.toggle('visible', selCount > 0);
+    }
+
+    function getSelItems() {
+      try { return JSON.parse(localStorage.getItem('neotone_sel') || '[]'); } catch(e) { return []; }
+    }
+    function saveSelItems(items) {
+      try { localStorage.setItem('neotone_sel', JSON.stringify(items)); } catch(e) {}
+    }
+    function addToSelection(name, detail, price, extras) {
+      const items = getSelItems();
+      const item = { id: Date.now(), name: name, detail: detail, price: price };
+      if (extras) { item.rawBase = extras.rawBase; item.discountPct = extras.discountPct; item.discountEligible = extras.discountEligible || false; }
+      items.push(item);
+      saveSelItems(items);
+      renderSelection();
+      openSelectionPanel();
+    }
+    function removeFromSelection(id) {
+      const items = getSelItems().filter(i => i.id !== id);
+      saveSelItems(items);
+      renderSelection();
+    }
+    function renderSelection() {
+      const items       = getSelItems();
+      const body        = document.getElementById('sel-body');
+      const count       = document.getElementById('sel-count');
+      const cta         = document.getElementById('sel-cta');
+      const totalDiv    = document.getElementById('sel-total');
+      const totalAmt    = document.getElementById('sel-total-amount');
+      const saveSection = document.getElementById('sel-save-section');
+
+      selCount = items.length;
+
+      if (items.length === 0) {
+        body.innerHTML = '<p class="sel-empty">Your selection is empty.</p>';
+        count.textContent = '';
+        cta.disabled = true;
+        totalDiv.style.display = 'none';
+        saveSection.style.display = 'none';
+      } else {
+        body.innerHTML = items.map(item =>
+          '<div class="sel-item">' +
+            '<div class="sel-item-info">' +
+              '<p class="sel-item-name">' + item.name + '</p>' +
+              '<p class="sel-item-detail">' + item.detail + '</p>' +
+              '<p class="sel-item-price">' + item.price + '</p>' +
+            '</div>' +
+            '<button class="sel-remove" onclick="removeFromSelection(' + item.id + ')">Remove</button>' +
+          '</div>'
+        ).join('');
+        count.textContent = ' (' + items.length + ')';
+        cta.disabled = false;
+        saveSection.style.display = 'block';
+
+        let sum = 0;
+        items.forEach(item => {
+          const n = parseFloat(item.price.replace('EUR ', '').replace(/,/g, ''));
+          if (!isNaN(n)) sum += n;
+        });
+        totalAmt.textContent = 'EUR ' + sum.toLocaleString('en-US');
+        totalDiv.style.display = 'flex';
+      }
+
+      updateSelNav();
+    }
+    function goToCheckout() {
+      window.location.href = 'checkout.html';
+    }
+    function openSelectionPanel() {
+      renderSelection();
+      document.getElementById('sel-overlay').classList.add('open');
+      document.getElementById('sel-panel').classList.add('open');
+    }
+    function closeSelectionPanel() {
+      document.getElementById('sel-overlay').classList.remove('open');
+      document.getElementById('sel-panel').classList.remove('open');
+    }
+    function handleSaveSelection(e) {
+      e.preventDefault();
+      alert(
+        "Function: Selection saved\n\n" +
+        "Submitting this form generates a unique URL representing the current selection (all items, quantities, and configurations) and emails it to the address provided. No account is created."
+      );
+      const form = e.target;
+      form.querySelector('.sel-save-btn').style.display = 'none';
+      form.querySelector('.subscribe-confirm').style.display = 'inline';
+    }
+
+    /* ---- Init ----
+       Order matters: accessory cards must exist before updateAccPrices()
+       can find their [data-raw] elements, which changeVATCountry() triggers. */
+    renderAccessories();
+    changeVATCountry(vatCountry);
+    updateCaption();
+    renderSelection();
 
     function handleSearch(e) {
       e.preventDefault();
