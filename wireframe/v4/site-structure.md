@@ -10,8 +10,8 @@ Every page is standalone HTML with inline CSS and JavaScript. No build step, no 
 
 | File | Type | `SECTION` | `INSTRUMENT` |
 |---|---|---|---|
-| `index.html` | Container (Tonefield), the root | `tonefield` | |
-| `instrument.html` | Product page | `instruments` | `one` |
+| `index.html` | Product page, the root | `instruments` | `one` |
+| `tonefield.html` | Container (Tonefield) | `tonefield` | |
 | `checkout.html` | Product page, second half | `instruments` | `one` |
 | `anima.html` | Placeholder | `instruments` | `anima` |
 | `treangle.html` | Placeholder | `instruments` | `treangle` |
@@ -34,7 +34,7 @@ Masthead above two sections.
 
 ```
               NEOTONE
-      Tonefield    Instruments              Selection (2)
+      Instruments    Tonefield              Selection (2)
 ```
 
 Selection appears at the right of the row on the instrument page only, and only when the selection is non-empty. Smaller and grey, no underline: the underline means "you are here" and Selection is not a place. It follows the row through the collapse.
@@ -125,7 +125,7 @@ Tonefield, the instrument page and the placeholders open with one centred block,
 
 | Page | Line |
 |---|---|
-| `index.html` | **Tonefield** / A quarterly of craft and culture |
+| `tonefield.html` | **Tonefield** / Neotone's quarterly of craft and culture |
 | `instrument.html` | The **Neotone One** is handcrafted in Budapest, built to order |
 | `anima.html`, `treangle.html` | **Anima** is in development |
 
@@ -214,6 +214,6 @@ Page bodies carry their own responsive rules from v2. The bar has not been desig
 | `updateNav()`, `measure()`, `markSection()`, `scrollToTopThen()` | 11 |
 | `.instrument-row` markup and CSS | 4 (instrument, anima, treangle, checkout) |
 | `handleSearch()`, `socialLink()`, `utilityLink()` | 11 |
-| Feed CSS | 2 (`index.html`, `updates.html`) |
+| Feed CSS | 2 (`tonefield.html`, `updates.html`) |
 | Selection panel and its script | 2 |
 | Background colour, on `body` and on `nav` | 2 per page |

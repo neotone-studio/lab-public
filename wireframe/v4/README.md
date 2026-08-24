@@ -2,11 +2,11 @@
 
 Built from v3. One structural change, with its consequences.
 
-**The nav is Tonefield · Instruments.** Culture and Craft collapsed into one publication, named. The instrument section became plural, with the instruments named in a row at the top of each instrument page.
+**The nav is Instruments · Tonefield, and the site lands on the instrument.** Culture and Craft collapsed into one publication, named, standing second in the masthead. The instrument section became plural, with the instruments named in a row at the top of each instrument page.
 
 ```
               NEOTONE
-      Tonefield    Instruments
+      Instruments    Tonefield
 ```
 
 Why, and the editorial rules that go with it, are in the content structure document in the workspace `docs/`. This file is what changed in the build. [site-structure.md](site-structure.md) is the component reference.
@@ -17,8 +17,8 @@ Why, and the editorial rules that go with it, are in the content structure docum
 
 | v3 | v4 |
 |---|---|
-| Culture · Instrument · Craft | Tonefield · Instruments |
-| `index.html` is Culture, `craft.html` is Craft | one feed at `index.html`; `craft.html` removed |
+| Culture · Instrument · Craft | Instruments · Tonefield |
+| `index.html` is Culture, `craft.html` is Craft | the root is the instrument page; the feed is `tonefield.html`; `craft.html` removed |
 | Instrument is one link | Instruments is a link; the instruments are named in a row at the top of each instrument page |
 | Anima page with placeholder sections | Anima and Treangle as placeholders that promise nothing |
 | Manual's third register marked neOS | marked Tonefield |
@@ -38,9 +38,9 @@ Why, and the editorial rules that go with it, are in the content structure docum
 
 | When | Nav |
 |---|---|
-| Now | Tonefield · Instruments (One) |
-| Anima ships | Tonefield · Instruments (One, Anima) |
-| neOS ships standalone | Tonefield · Instruments · Software |
+| Now | Instruments (One) · Tonefield |
+| Anima ships | Instruments (One, Anima) · Tonefield |
+| neOS ships standalone | Instruments · Software · Tonefield |
 
 No rename events. A name enters the nav when the thing ships. An ad landing page is the instrument page shown without the publication around it: not a page type, never in the nav.
 
@@ -50,5 +50,5 @@ No rename events. A name enters the nav when the thing ships. An ad landing page
 
 - **Mobile.** The bar is undesigned below 980px. The collapse travel, the instrument row and the footer bands are untested at phone width.
 - **Workshop page** is still an alert. It is a utility page carrying the team and the company boilerplate.
-- **Tonefield opens with the name over a subtitle**: A quarterly of craft and culture. A sentence form ("Tonefield is...") was tried and read as the site narrating itself; the subtitle is the magazine form. It was also tried with nothing and the word sat in the nav unexplained. "Quarterly" is a commitment made on purpose: the wireframe says it so the company has to do it. Craft before culture, because that is the order the knowledge moves in.
+- **Tonefield opens with the name over a subtitle**: Neotone's quarterly of craft and culture. A sentence form ("Tonefield is...") was tried and read as the site narrating itself; the subtitle is the magazine form. It was also tried with nothing and the word sat in the nav unexplained. "Quarterly" is a commitment made on purpose: the wireframe says it so the company has to do it. Craft before culture, because that is the order the knowledge moves in.
 - **The wordmark choreography of v2 is gone**, traded for a structure that scales. Worth knowing what was traded.
