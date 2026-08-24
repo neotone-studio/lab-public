@@ -30,7 +30,7 @@ Why, and the editorial rules that go with it, are in the content structure docum
 
 **Updates carry dates; Tonefield pieces do not.** The one visible difference between the two feeds, and the species difference.
 
-**The feed holds seven real pieces**, titles and standfirsts for work genuinely in progress, sourced from the 1000th-instrument draft, the artist interviews and the manual's third register. The landing makes its own case instead of showing grey boxes.
+**The feed holds nine pieces, every one a row in the pieces table** (`docs/content-strategy-notes/9_pieces.md` in the workspace), sourced from the 1000th-instrument draft, the three artist interviews and the manual's third register. Two invented placeholders (hijaz tetrachord, made of wood) were removed: the feed claims only material that exists. Kickers are the registers, Culture, Craft, Studio. Quotation marks in a title mean somebody said it; titles without them are statements.
 
 ---
 
@@ -50,6 +50,5 @@ No rename events. A name enters the nav when the thing ships. An ad landing page
 
 - **Mobile.** The bar is undesigned below 980px. The collapse travel, the instrument row and the footer bands are untested at phone width.
 - **Workshop page** is still an alert. It is a utility page carrying the team and the company boilerplate.
-- **Tonefield opens with a line**, in the instrument page's shape: the name large, the sentence plain. It was tried without one and the word sat in the nav unexplained. Craft before culture, because that is the order the knowledge moves in.
-- **Whether the thousandth-instrument material is one piece or two.**
+- **Tonefield opens with the name over a subtitle**: A quarterly of craft and culture. A sentence form ("Tonefield is...") was tried and read as the site narrating itself; the subtitle is the magazine form. It was also tried with nothing and the word sat in the nav unexplained. "Quarterly" is a commitment made on purpose: the wireframe says it so the company has to do it. Craft before culture, because that is the order the knowledge moves in.
 - **The wordmark choreography of v2 is gone**, traded for a structure that scales. Worth knowing what was traded.

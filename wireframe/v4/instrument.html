@@ -129,6 +129,7 @@
        tab: their parent is Neotone, and the masthead would otherwise carry
        someone mid-purchase back to culture. */
     .stack { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .stack-two { grid-template-columns: repeat(2, 1fr); max-width: 760px; }
     .stack-card { display: block; cursor: pointer; }
     .stack-img { width: 100%; aspect-ratio: 4 / 3; background: #ededed; margin-bottom: 14px; }
     .stack-kicker {
@@ -787,24 +788,19 @@
       </div>
     </section>
 
-    <!-- 5 · Learn more. Opens in a new tab: the purchase flow stays intact behind it. -->
+    <!-- 5 · The instrument's own pieces. Same tab: they belong to this section. -->
     <section class="sec">
       <span class="sec-label">Read further</span>
-      <div class="stack">
-        <a class="stack-card" href="#" target="_blank" rel="noopener">
+      <div class="stack stack-two">
+        <a class="stack-card" href="#" onclick="pieceLink(event)">
           <div class="stack-img"></div>
-          <span class="stack-kicker">On the wait</span>
-          <p class="stack-title">On waiting for your instrument</p>
+          <span class="stack-kicker">Asked of every artist</span>
+          <p class="stack-title">Who is the Neotone for?</p>
         </a>
-        <a class="stack-card" href="#" target="_blank" rel="noopener">
+        <a class="stack-card" href="#" onclick="pieceLink(event)">
           <div class="stack-img"></div>
-          <span class="stack-kicker">On material</span>
-          <p class="stack-title">Why an electronic instrument is made of wood</p>
-        </a>
-        <a class="stack-card" href="#" target="_blank" rel="noopener">
-          <div class="stack-img"></div>
-          <span class="stack-kicker">On the makers</span>
-          <p class="stack-title">The workshop, with everyone in it</p>
+          <span class="stack-kicker">The people and the process</span>
+          <p class="stack-title">Every instrument starts with a conversation</p>
         </a>
       </div>
     </section>
@@ -847,12 +843,12 @@
         <div>
           <span class="path-label">Visit the workshop</span>
           <p class="path-text">Our full instrument stock, available to play. Sessions are by appointment and unhurried. Write to arrange a time, bring an afternoon.</p>
-          <a class="path-cta" onclick="alert('Function: Opens email client\n\nOpens the default email client addressed to the workshop. Subject: Visit enquiry.')">Write to us &rarr;</a>
+          <a class="path-cta" onclick="alert('Opens an email to the workshop. Not wired up yet.')">Write to us &rarr;</a>
         </div>
         <div>
           <span class="path-label">Artist sessions</span>
           <p class="path-text">Players around the world who keep an instrument and will sit down with you. Some host in person, some over a call.</p>
-          <a class="path-cta" onclick="alert('Function: Artist session request\n\nOpens the artist directory, filtered to those offering sessions in the visitor\'s region.')">Find a player &rarr;</a>
+          <a class="path-cta" onclick="alert('Opens the artist directory. Not mocked up yet.')">Find a player &rarr;</a>
         </div>
       </div>
     </section>
@@ -900,9 +896,9 @@
 
       <div class="footer-band">
         <div class="footer-utility">
+          <a onclick="utilityLink(\'Workshop\')">Workshop</a>
           <a href="manual.html">Manual</a>
           <a href="updates.html">Updates</a>
-          <a onclick="utilityLink('Workshop')">Workshop</a>
           <a onclick="utilityLink('Contact')">Contact</a>
           <a href="legal.html">Legal</a>
         </div>
@@ -1313,11 +1309,7 @@
 
     function handleNotify(e) {
       e.preventDefault();
-      alert(
-        "Function: Stock notification email\n\n" +
-        "Submitting this form adds the provided email address to the stock availability mailing list. " +
-        "You will receive an email when a new instrument is listed for sale."
-      );
+      alert("Stock notification sign-up. Not wired up yet.");
       var form = e.target;
       form.querySelector(".subscribe-btn").style.display = "none";
       form.querySelector(".subscribe-confirm").style.display = "inline";
@@ -1414,10 +1406,7 @@
     }
     function handleSaveSelection(e) {
       e.preventDefault();
-      alert(
-        "Function: Selection saved\n\n" +
-        "Submitting this form generates a unique URL representing the current selection (all items, quantities, and configurations) and emails it to the address provided. No account is created."
-      );
+      alert("Emails a link to this selection. Not wired up yet.");
       const form = e.target;
       form.querySelector('.sel-save-btn').style.display = 'none';
       form.querySelector('.subscribe-confirm').style.display = 'inline';
@@ -1431,29 +1420,25 @@
     updateCaption();
     renderSelection();
 
+    function pieceLink(e) {
+      e.preventDefault();
+      alert("Piece not drafted yet.");
+    }
+
     function handleSearch(e) {
       e.preventDefault();
-      alert(
-        "Function: Site search\n\n" +
-        "Queries a client-side JSON index of article metadata: title, kicker, date, container, first line. " +
-        "The same index drives load-more in the containers, and is what a Tonefield issue is assembled from."
-      );
+      alert("Site search. Not mocked up yet.");
     }
     /* Outbound, so they leave the site rather than routing through it. Wired as
        alerts here because the accounts are not linked yet. */
     function socialLink(name) {
-      alert("Outbound: Neotone on " + name + "\n\nOpens in a new tab. Social sits low and quiet on purpose: it is how people find their way back, not a destination the site promotes.");
+      alert("Neotone on " + name + ". External link, not wired up yet.");
     }
 
     function utilityLink(name) {
-      alert(
-        "Destination: " + name + "\n\n" +
-        (name === 'Workshop'
-          ? "An article, not a utility page: the photographed workshop piece with everyone named. It earns a footer permalink because it is evergreen."
-          : name === 'Manual'
-          ? "The practical layer. Which control, what it does, written in three registers: basic walkthrough, deeper functionality, and the craft questions underneath. Also reached from inside the software, beside the control it explains. The parts that hold on their own surface as Tonefield pieces. Covers the instrument and the software both."
-          : "A utility page. Renders identically to an article, but carries the plain Neotone mark since it has no container to return to.")
-      );
+      alert(name === 'Workshop'
+        ? "Workshop: the people and the production process. Not mocked up yet."
+        : name + " page. Not mocked up yet.");
     }
 
 

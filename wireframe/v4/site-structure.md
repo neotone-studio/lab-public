@@ -121,11 +121,11 @@ Width signals position: a lead image runs to the grid, anything inside the body 
 
 ## Opening
 
-Tonefield, the instrument page and the placeholders open with one centred line, the name in a larger span: `.opening-wrap > .opening > .opening-name`. It is in the flow of the document and scrolls with it, like a heading. An earlier version held it in place and faded it while the page slid underneath, which read as the heading arriving from somewhere other than the page. The wrapper keeps a once-only fade-in on load (`opening-in`, 760ms), the only animation outside the nav.
+Tonefield, the instrument page and the placeholders open with one centred block, the name in a larger span: `.opening-wrap > .opening > .opening-name`. Tonefield's is the name over a subtitle (`.opening-sub`), the magazine form; the product and placeholder pages speak in a sentence, because a product page talks about the object and a masthead does not talk about itself. The block is in the flow of the document and scrolls with it, like a heading. An earlier version held it in place and faded it while the page slid underneath, which read as the heading arriving from somewhere other than the page. The wrapper keeps a once-only fade-in on load (`opening-in`, 760ms), the only animation outside the nav.
 
 | Page | Line |
 |---|---|
-| `index.html` | **Tonefield** is Neotone's craft and culture publication |
+| `index.html` | **Tonefield** / A quarterly of craft and culture |
 | `instrument.html` | The **Neotone One** is handcrafted in Budapest, built to order |
 | `anima.html`, `treangle.html` | **Anima** is in development |
 
@@ -136,6 +136,8 @@ Tonefield, the instrument page and the placeholders open with one centred line, 
 `instrument.html`, sections in order: opening, orientation, specs strip, **neOS**, order fork, read further, what happens next, play one first.
 
 **neOS block.** Names the software on the instrument, because it ships with the instrument. One paragraph, links to the manual. When neOS ships standalone it becomes a product and the nav gains Software; the block stays.
+
+**Read further** carries the section's own pieces, currently two: Who is the Neotone for?, and the workshop piece, Every instrument starts with a conversation. They are Instruments pieces, not Tonefield links: same tab, `SECTION = 'instruments'` when built. The footer's Workshop link points at the second.
 
 ### Purchase state
 
