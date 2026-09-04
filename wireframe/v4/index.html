@@ -99,6 +99,9 @@
        is a labelled box describing what will go in it: dropping copy in should
        not require touching layout. Chrome only where it carries information. */
     .sec { margin-bottom: 88px; }
+    /* The instrument and its interface are one description in two parts, so the
+       specs and neOS sit together rather than a section apart. */
+    .sec.specs-strip { margin-bottom: 0; }
     .sec:last-child { margin-bottom: 0; }
 
 
@@ -117,9 +120,10 @@
 
     /* 3 · Orientation. One measure of prose, centred, no heading. */
     .editorial { max-width: 620px; margin-left: auto; margin-right: auto; }
-    .neos { max-width: 620px; margin-left: auto; margin-right: auto; }
-    .neos-text { font-size: 17px; line-height: 1.75; margin: 0; }
-    .neos-name { font-size: 22px; line-height: 1; }
+    /* Full width, like the strip it belongs to. The prose inside keeps a
+       reading measure of its own. */
+    .neos-text { max-width: 620px; }
+    .neos-text { font-size: 16px; line-height: 1.7; margin: 0; max-width: 620px; }
     .neos-text a { border-bottom: 1px solid var(--line); }
     .neos-text a:hover { border-bottom-color: var(--ink); }
     .editorial-text { font-size: 17px; line-height: 1.75; margin: 0; }
@@ -153,17 +157,19 @@
     .step-number { display: block; margin-bottom: 12px; font-size: 22px; color: var(--muted); }
     .step-title { margin: 0 0 7px; font-size: 13px; font-weight: 700; }
     .step-desc { margin: 0; font-size: 12px; line-height: 1.55; color: var(--muted); }
-    .terms { margin-top: 30px; max-width: 620px; }
-    .terms-q { margin: 0 0 8px; font-size: 13px; font-weight: 700; }
-    .terms-a { margin: 0; font-size: 13px; line-height: 1.6; color: var(--muted); }
+    .terms { margin: 34px auto 0; max-width: 620px; }
+    .terms-q { margin: 0 0 26px; font-size: 17px; font-weight: 400; text-align: center; }
+    .terms-a { margin: 0; font-size: 16px; line-height: 1.7; color: var(--muted); }
 
     /* 7 · Play one first, as a fork. */
+    /* One centred family: the statement never outranks the page opening, and the
+       subtitle and text step down from it. */
     .sec-line {
-      margin: 0 auto 48px; max-width: 860px; text-align: center;
-      font-size: 25px; font-weight: 400; line-height: 1.4; letter-spacing: -0.01em;
+      margin: 0 auto 48px; max-width: 720px; text-align: center;
+      font-size: 21px; font-weight: 400; line-height: 1.5; letter-spacing: -0.01em;
     }
-    .way-title { margin: 0 0 12px; font-size: 21px; font-weight: 400; letter-spacing: -0.01em; }
-    .way-text { margin: 0 0 16px; font-size: 15px; line-height: 1.7; }
+    .way-title { margin: 0 0 12px; font-size: 18px; font-weight: 400; letter-spacing: -0.01em; }
+    .way-text { margin: 0 0 16px; font-size: 16px; line-height: 1.7; }
     .path-cta { font-size: 14px; cursor: pointer; }
     .path-cta:hover { text-decoration: underline; }
 
@@ -226,8 +232,8 @@
     .tab-desc { display: block; font-size: 12px; color: var(--muted); line-height: 1.5; }
     .panel { padding: 0; }
     .panel-intro {
-      font-size: 15px; line-height: 1.7;
-      margin: 0 auto 24px; max-width: 560px; color: var(--ink);
+      font-size: 16px; line-height: 1.7;
+      margin: 0 auto 24px; max-width: 620px; color: var(--ink);
     }
 
     /* ---- Material cards ---- */
@@ -503,24 +509,41 @@
       border-left: 1px solid var(--line);
       font-size: 21px; font-style: italic; line-height: 1.5; color: var(--muted);
     }
-    .sec.neos { border: 1px solid var(--line); padding: 0; }
-    .neos-bar {
-      background: var(--ink); color: #fff; padding: 10px 40px;
-      font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
-      font-family: Arial, Helvetica, sans-serif;
+    .sec.neos { border: none; border-bottom: 1px solid var(--line); padding: 0; }
+    /* Kicker over title, the figure the whole site uses. The category is
+       software; the name is neOS. */
+    .neos-kicker {
+      display: block; margin-bottom: 12px;
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.14em; color: var(--muted);
     }
-    .neos-body { padding: 30px 40px 34px; }
+    .neos-title { margin: 0 0 16px; font-size: 21px; font-weight: 400; letter-spacing: -0.01em; }
+    .neos-body { padding: 56px 0 32px; }
     .neos-links { margin-top: 20px; display: flex; gap: 28px; flex-wrap: wrap; }
     .ref-note { margin: 8px 0 0; font-size: 12px; color: var(--muted); font-family: Arial, Helvetica, sans-serif; }
     .ref-note a { border-bottom: 1px solid var(--line); }
     .ref-note a:hover { color: var(--ink); border-bottom-color: var(--ink); }
     .network { margin-top: 44px; }
-    .artists-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .place-where {
+      margin: 0 0 8px; font-size: 12px; line-height: 1.5;
+      color: var(--muted); font-family: Arial, Helvetica, sans-serif;
+    }
+    /* Rows share a height and the body is a column, so the description takes
+       whatever space is left and the links land on one line across every card. */
+    .artists-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; grid-auto-rows: 1fr; }
     .artist-card { border: 1px solid var(--line); display: flex; flex-direction: column; }
     .artist-img { width: 100%; height: 180px; background: var(--line); flex-shrink: 0; }
-    .artist-card-body { padding: 12px; flex: 1; }
-    .artist-name { margin: 0 0 3px; font-size: 13px; font-weight: 700; font-family: Arial, Helvetica, sans-serif; }
-    .artist-desc { margin: 0 0 6px; font-size: 12px; color: var(--muted); font-family: Arial, Helvetica, sans-serif; line-height: 1.4; }
+    .artist-card-body { padding: 12px; flex: 1; display: flex; flex-direction: column; }
+    /* Kicker over name, the same figure the feed uses. The country is the
+       thing a reader is scanning for, so it goes above rather than trailing
+       the name behind a separator. */
+    .artist-kicker {
+      display: block; margin-bottom: 6px;
+      font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted); font-family: Arial, Helvetica, sans-serif;
+    }
+    .artist-name { margin: 0 0 4px; font-size: 15px; font-weight: 400; line-height: 1.3; }
+    .artist-desc { margin: 0 0 6px; flex: 1; font-size: 12px; color: var(--muted); font-family: Arial, Helvetica, sans-serif; line-height: 1.5; }
     .session-status {
       display: inline-block; font-size: 10px; font-family: Arial, Helvetica, sans-serif;
       padding: 2px 7px; border: 1px solid var(--line);
@@ -572,19 +595,30 @@
       font-size: 15px; font-family: inherit; cursor: pointer;
     }
     .subscribe-form button:hover { color: var(--ink); }
-    @media (max-width: 980px) { .artists-grid { grid-template-columns: 1fr; } .sec.neos { padding: 24px 20px; } }
+    @media (max-width: 980px) { .artists-grid { grid-template-columns: 1fr; } }
     .piece-media { margin: 0 0 88px; }
     .lead-box { width: 100%; aspect-ratio: 2.4 / 1; background: #ededed; }
     .diagram-caption { max-width: 860px; margin: 12px auto 0; font-size: 12px; color: var(--muted); font-family: Arial, Helvetica, sans-serif; text-align: center; }
-    .neos-doors { margin-top: 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .neos-door { display: block; border: 1px solid var(--line); padding: 14px 16px; }
+    /* Three cells divided by hairlines, the same way the five above are. */
+    /* Three cells divided by hairlines, the way the five above are. */
+    .neos-doors {
+      margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--line);
+      display: grid; grid-template-columns: repeat(3, 1fr);
+    }
+    .neos-door { display: block; padding: 0 24px; border-right: 1px solid var(--line); }
+    .neos-door:first-child { padding-left: 0; }
+    .neos-door:last-child { padding-right: 0; border-right: none; }
     .neos-door:hover .door-title { text-decoration: underline; }
-    .door-kind { display: block; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-family: Arial, Helvetica, sans-serif; margin-bottom: 6px; }
-    .door-title { display: block; font-size: 15px; margin-bottom: 4px; }
+    .door-kind { display: block; font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-family: Arial, Helvetica, sans-serif; margin-bottom: 7px; }
+    .door-title { display: block; font-size: 13px; line-height: 1.45; margin-bottom: 4px; }
     .door-desc { display: block; font-size: 12px; color: var(--muted); font-family: Arial, Helvetica, sans-serif; line-height: 1.5; }
-    .q-block { margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--line); max-width: 560px; }
-    .q-label { margin: 0 0 6px; font-size: 13px; font-weight: 700; font-family: Arial, Helvetica, sans-serif; }
-    .q-desc { margin: 0 0 12px; font-size: 12px; color: var(--muted); font-family: Arial, Helvetica, sans-serif; }
+    .q-block { margin: 64px auto 0; padding-top: 34px; border-top: 1px solid var(--line); max-width: 620px; }
+    .q-label {
+      display: block; margin: 0 0 10px;
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.14em; color: var(--muted);
+    }
+    .q-desc { margin: 0 0 18px; font-size: 15px; line-height: 1.7; color: var(--muted); }
     .card-single { max-width: 480px; margin: 44px auto 0; }
     .card-single .stack-img { aspect-ratio: 16 / 9; }
     .stack-desc { margin: 4px 0 0; font-size: 13px; color: var(--muted); font-family: Arial, Helvetica, sans-serif; line-height: 1.5; }
@@ -600,8 +634,12 @@
     .path-card .stack-img { aspect-ratio: 16 / 9; }
     .way { max-width: 620px; margin: 0 auto 72px; text-align: center; }
     .way:last-of-type { margin-bottom: 0; }
+    /* A way and the grid it introduces belong together, so they sit close;
+       the gap that separates one way from the next goes under the grid. */
+    #places { margin-bottom: 26px; }
+    #places-list { margin-bottom: 76px; }
     .way .path-card { margin: 32px auto 0; text-align: left; }
-    .terms-box { border: 1px solid var(--line); padding: 22px 26px; max-width: 620px; }
+    .terms-box { max-width: 620px; }
     /* Eased only while the bar is being held open or let go by hand.
        Scroll-driven movement stays untransitioned so it tracks the wheel. */
     nav.nav-eased .masthead,
@@ -650,7 +688,6 @@
       <p class="editorial-text">Roughly 120 words introducing the instrument concretely: its shape, its material, the serial number it carries. Plain prose in a single measure, no heading.</p>
       <p class="editorial-pull">&ldquo;Pull quote that gives visual emphasis and draws the reader deeper into the instrument.&rdquo;</p>
       <p class="editorial-text">A second short paragraph describing what comes with the instrument: warranty, what the order process looks like, a brief orientation to key features before the reader moves into the order section.</p>
-      <p class="editorial-text">Whether it is for you is a question the artists have answered in their own words: <a href="#" onclick="pieceLink(event)">Who is the Neotone for?</a></p>
     </section>
 
     <!-- 3 · Specs strip -->
@@ -684,9 +721,10 @@
          sibling called Software. Until then this block is where a reader learns
          the name. -->
     <section class="sec neos">
-      <div class="neos-bar">neOS</div>
       <div class="neos-body">
-        <p class="neos-text">Every Neotone One runs <span class="neos-name">neOS</span>, the software that holds its scales, its gallery and its settings. It is where scales are built and shared, and it updates over the air, so an instrument keeps changing after it leaves the workshop. It comes with the instrument.</p>
+        <span class="neos-kicker">Software</span>
+        <h2 class="neos-title">neOS</h2>
+        <p class="neos-text">The software every Neotone One runs. It holds the scales, the gallery and the settings, it is where scales are built and shared, and it updates over the air, so an instrument keeps changing after it leaves the workshop. It comes with the instrument.</p>
         <div class="neos-doors">
         <a class="neos-door" href="manual.html">
           <span class="door-kind">Reference</span>
@@ -944,12 +982,12 @@
         <p class="terms-a">Yes, at any point. Before your instrument is built, during production, or within two weeks of delivery. Cancel or return for a full refund, no explanation required.</p>
       </div>
       <div class="q-block">
-        <p class="q-label">Questions?</p>
+        <span class="q-label">Ask us</span>
         <p class="q-desc">Anything the page has not covered. Someone from the workshop replies.</p>
         <input class="field" placeholder="Your name" />
         <input class="field" placeholder="Email" />
         <textarea class="field" rows="3" placeholder="Your question or message" style="resize:vertical;"></textarea>
-        <button class="opt" style="margin-top:8px;" onclick="alert('Sends to the workshop inbox. Not wired up yet.')">Send</button>
+        <button class="opt" style="margin-top:8px;" onclick="alert('Sends to the workshop inbox.')">Send</button>
       </div>
     </section>
 
@@ -958,196 +996,56 @@
          grid the day a partnership is real, and not before. -->
     <section class="sec" id="play-one">
       <span class="sec-label">Play one first</span>
-      <p class="sec-line">If you&rsquo;d like to play a Neotone One in person, there are two ways.</p>
+      <p class="sec-line">If you&rsquo;d like to play a Neotone One in person, there are three ways.</p>
       <div class="way">
         <h3 class="way-title">Visit the workshop</h3>
         <p class="way-text">Our full stock, available to play. Sessions are by appointment and unhurried. Write to arrange a time, bring an afternoon.</p>
-        <a class="path-cta" onclick="alert('Opens an email to the workshop. Not wired up yet.')">Write to us &rarr;</a>
+        <a class="path-cta" onclick="alert('Opens an email to the workshop.')">Write to us &rarr;</a>
         <a class="stack-card path-card" href="#" onclick="pieceLink(event)">
           <div class="stack-img"></div>
           <p class="stack-title">Every instrument starts with a conversation</p>
           <p class="stack-desc">Read about the workshop: the production line, told through the twelve people who run it.</p>
         </a>
       </div>
+      <div class="way" id="places">
+        <h3 class="way-title">Play one at a partner space</h3>
+        <p class="way-text">Studios, schools and showrooms that keep an instrument and will make time for you. Lessons and consultations are theirs to arrange; the instrument is there either way.</p>
+      </div>
+      <div class="artists-grid" id="places-list"></div>
+
       <div class="way" id="artist-directory">
         <h3 class="way-title">Reach out to a Neotone artist</h3>
         <p class="way-text">Artists host sessions in their studios and homes around the world; some answer questions over a call, in your language. Sessions are free, and if you order afterwards your host&rsquo;s code takes five percent off and credits them.</p>
       </div>
       <div class="network">
-    <div class="opt-row sans">
-      <button class="opt active" onclick="filterArtists('all',this)">All</button>
-      <button class="opt" onclick="filterArtists('europe',this)">Europe</button>
-      <button class="opt" onclick="filterArtists('americas',this)">Americas</button>
-      <button class="opt" onclick="filterArtists('asia',this)">Asia</button>
-      <button class="opt" onclick="filterArtists('sessions',this)">In-person sessions</button>
-    </div>
-    <div id="artists" class="artists-grid">
-
-      <div class="artist-card artist" data-region="europe" data-sessions="true">
-        <div class="artist-img"></div>
-        <div class="artist-card-body">
-          <p class="artist-name">Lena Voss &middot; Germany</p>
-          <p class="artist-desc">Electroacoustic composition and live gesture practice.</p>
-          <span class="session-status available">In-person sessions</span>
-          <button class="artist-expand" onclick="toggleArtist('artist-lena', this)">Expand</button>
-        </div>
-        <div id="artist-lena" class="artist-detail">
-          <p class="block-desc" style="font-size:12px; margin-bottom:8px;">Lena works between acoustic improvisation and electronic processing. Based in Berlin, she teaches instrument practice and runs monthly open sessions.</p>
-          <div class="artist-links">
-            <a class="artist-link-btn" href="#">Website</a>
-            <a class="artist-link-btn" href="#">Instagram</a>
-            <a class="artist-link-btn" href="#">Soundcloud</a>
-            <a class="artist-link-btn" href="#">Contact for sessions</a>
-          </div>
-        </div>
+        <div class="opt-row sans" id="artist-filters"></div>
+        <div id="artists" class="artists-grid"></div>
+        <button class="show-all-btn" id="show-all-btn" onclick="toggleShowAll(this)">Show all artists</button>
       </div>
+    </section>
 
-      <div class="artist-card artist" data-region="americas" data-sessions="false">
-        <div class="artist-img"></div>
-        <div class="artist-card-body">
-          <p class="artist-name">Rafael Montes &middot; Colombia</p>
-          <p class="artist-desc">Ritual performance and scale-driven improvisation.</p>
-          <button class="artist-expand" onclick="toggleArtist('artist-rafael', this)">Expand</button>
-        </div>
-        <div id="artist-rafael" class="artist-detail">
-          <p class="block-desc" style="font-size:12px; margin-bottom:8px;">Rafael's practice integrates tuning systems from Andean tradition with contemporary gesture. His recordings are available via Bandcamp.</p>
-          <div class="artist-links">
-            <a class="artist-link-btn" href="#">Bandcamp</a>
-            <a class="artist-link-btn" href="#">Instagram</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="artist-card artist" data-region="asia" data-sessions="true">
-        <div class="artist-img"></div>
-        <div class="artist-card-body">
-          <p class="artist-name">Yuki Tanaka &middot; Japan</p>
-          <p class="artist-desc">Minimalist solo work and spatial listening sessions.</p>
-          <span class="session-status available">In-person sessions</span>
-          <button class="artist-expand" onclick="toggleArtist('artist-yuki', this)">Expand</button>
-        </div>
-        <div id="artist-yuki" class="artist-detail">
-          <p class="block-desc" style="font-size:12px; margin-bottom:8px;">Yuki focuses on sustained tones and room acoustics. Based in Kyoto, she hosts small-group listening and instrument sessions by arrangement.</p>
-          <div class="artist-links">
-            <a class="artist-link-btn" href="#">Website</a>
-            <a class="artist-link-btn" href="#">YouTube</a>
-            <a class="artist-link-btn" href="#">Contact for sessions</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="artist-card artist" data-region="europe" data-sessions="true">
-        <div class="artist-img"></div>
-        <div class="artist-card-body">
-          <p class="artist-name">Marta Hoffmann &middot; Poland</p>
-          <p class="artist-desc">Improvisation and contemporary compositional practice.</p>
-          <span class="session-status available">In-person sessions</span>
-          <button class="artist-expand" onclick="toggleArtist('artist-marta', this)">Expand</button>
-        </div>
-        <div id="artist-marta" class="artist-detail">
-          <p class="block-desc" style="font-size:12px; margin-bottom:8px;">Marta works across composed and improvised forms. Based in Warsaw, she runs regular sessions and is available for workshops and collaborative projects.</p>
-          <div class="artist-links">
-            <a class="artist-link-btn" href="#">Website</a>
-            <a class="artist-link-btn" href="#">Instagram</a>
-            <a class="artist-link-btn" href="#">Contact for sessions</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="artist-card artist" data-region="americas" data-sessions="true">
-        <div class="artist-img"></div>
-        <div class="artist-card-body">
-          <p class="artist-name">Elena Vasquez &middot; Argentina</p>
-          <p class="artist-desc">Field recording, tuning research, and ensemble work.</p>
-          <span class="session-status available">In-person sessions</span>
-          <button class="artist-expand" onclick="toggleArtist('artist-elena', this)">Expand</button>
-        </div>
-        <div id="artist-elena" class="artist-detail">
-          <p class="block-desc" style="font-size:12px; margin-bottom:8px;">Elena's practice draws on acoustic ecology and microtonality. Based in Buenos Aires, she hosts instrument sessions and gives talks on tuning systems.</p>
-          <div class="artist-links">
-            <a class="artist-link-btn" href="#">Website</a>
-            <a class="artist-link-btn" href="#">Instagram</a>
-            <a class="artist-link-btn" href="#">Contact for sessions</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="artist-card artist artist-sixth" data-region="asia" data-sessions="false">
-        <div class="artist-img"></div>
-        <div class="artist-card-body">
-          <p class="artist-name">Hiroshi Naka &middot; South Korea</p>
-          <p class="artist-desc">Electronic texture and extended technique for handpan.</p>
-          <button class="artist-expand" onclick="toggleArtist('artist-hiroshi', this)">Expand</button>
-        </div>
-        <div id="artist-hiroshi" class="artist-detail">
-          <p class="block-desc" style="font-size:12px; margin-bottom:8px;">Hiroshi combines the Neotone One with modular synthesis and live processing. His practice is centred on timbre and spectral density. Virtual sessions by arrangement.</p>
-          <div class="artist-links">
-            <a class="artist-link-btn" href="#">Website</a>
-            <a class="artist-link-btn" href="#">YouTube</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="artist-card artist artist-extra" data-region="europe" data-sessions="true">
-        <div class="artist-img"></div>
-        <div class="artist-card-body">
-          <p class="artist-name">Anna Svensson &middot; Sweden</p>
-          <p class="artist-desc">Ambient composition and meditative performance practice.</p>
-          <span class="session-status available">In-person sessions</span>
-          <button class="artist-expand" onclick="toggleArtist('artist-anna', this)">Expand</button>
-        </div>
-        <div id="artist-anna" class="artist-detail">
-          <p class="block-desc" style="font-size:12px; margin-bottom:8px;">Anna works with long-form ambient pieces and sustained resonance. Based in Gothenburg, she hosts intimate listening sessions in her studio.</p>
-          <div class="artist-links">
-            <a class="artist-link-btn" href="#">Website</a>
-            <a class="artist-link-btn" href="#">Soundcloud</a>
-            <a class="artist-link-btn" href="#">Contact for sessions</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="artist-card artist artist-extra" data-region="europe" data-sessions="false">
-        <div class="artist-img"></div>
-        <div class="artist-card-body">
-          <p class="artist-name">Marco Ferretti &middot; Italy</p>
-          <p class="artist-desc">Solo performance and instrument pedagogy.</p>
-          <button class="artist-expand" onclick="toggleArtist('artist-marco', this)">Expand</button>
-        </div>
-        <div id="artist-marco" class="artist-detail">
-          <p class="block-desc" style="font-size:12px; margin-bottom:8px;">Marco teaches instrument practice and has developed a method for integrating handpan techniques with the Neotone One. Virtual sessions available.</p>
-          <div class="artist-links">
-            <a class="artist-link-btn" href="#">Website</a>
-            <a class="artist-link-btn" href="#">Instagram</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="artist-card artist artist-extra" data-region="asia" data-sessions="true">
-        <div class="artist-img"></div>
-        <div class="artist-card-body">
-          <p class="artist-name">Sung-Ah Kim &middot; Taiwan</p>
-          <p class="artist-desc">Cross-cultural improvisation and collaborative sound work.</p>
-          <span class="session-status available">In-person sessions</span>
-          <button class="artist-expand" onclick="toggleArtist('artist-sungah', this)">Expand</button>
-        </div>
-        <div id="artist-sungah" class="artist-detail">
-          <p class="block-desc" style="font-size:12px; margin-bottom:8px;">Sung-Ah performs and teaches across East Asia, working between traditional Korean forms and contemporary improvised practice. Sessions held in Taipei.</p>
-          <div class="artist-links">
-            <a class="artist-link-btn" href="#">Website</a>
-            <a class="artist-link-btn" href="#">Instagram</a>
-            <a class="artist-link-btn" href="#">Contact for sessions</a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-    <button class="show-all-btn" id="show-all-btn" onclick="toggleShowAll(this)">Show all artists</button>
-      </div>
-      <div class="card-single">
+    <!-- 7 · Out into Tonefield. The last gesture of the page where you buy the
+         instrument is an invitation to read, not another prompt to buy: the
+         commercial flow runs one direction and this is the door. When Anima
+         ships, other instruments come first and this follows them. -->
+    <section class="sec">
+      <span class="sec-label">From Tonefield</span>
+      <p class="sec-line">The Neotone One grew out of an exploration of the handpan&rsquo;s craft and culture. That exploration continues in Tonefield.</p>
+      <div class="stack">
         <a class="stack-card" href="#" onclick="pieceLink(event)">
           <div class="stack-img"></div>
-          <p class="stack-title">Who is the Neotone for?</p>
-          <p class="stack-desc">The question, answered by the artists in their own words.</p>
+          <p class="stack-title">Not how many scales, but how much freedom</p>
+          <p class="stack-desc">The scale used to be the maker&rsquo;s decision, made once. Now it is yours, and you make it constantly.</p>
+        </a>
+        <a class="stack-card" href="#" onclick="pieceLink(event)">
+          <div class="stack-img"></div>
+          <p class="stack-title">A strike is not a trigger</p>
+          <p class="stack-desc">What it took to make electronics feel a hand: kitchen scales taken apart, and twelve microphones.</p>
+        </a>
+        <a class="stack-card" href="#" onclick="pieceLink(event)">
+          <div class="stack-img"></div>
+          <p class="stack-title">Only beginning to understand what they had built</p>
+          <p class="stack-desc">Two programmers, a handpan that seemed too expensive, and seven years of finding out.</p>
         </a>
       </div>
     </section>
@@ -1207,13 +1105,13 @@
 
       <div class="footer-band">
         <div class="footer-utility">
-          <a onclick="utilityLink('Workshop')">Workshop</a>
+          <a href="brief.html">Brief</a>
           <a href="updates.html">Updates</a>
           <a onclick="utilityLink('Contact')">Contact</a>
           <a href="legal.html">Legal</a>
         </div>
         <div class="footer-place">
-          <p class="footer-meta">Budapest &middot; visits by appointment</p>
+          <p class="footer-meta">Neotone &middot; Budapest</p>
           <p class="footer-meta footer-social">
             <a onclick="socialLink('Instagram')">Instagram</a> &middot;
             <a onclick="socialLink('YouTube')">YouTube</a> &middot;
@@ -1663,7 +1561,7 @@
 
     function handleNotify(e) {
       e.preventDefault();
-      alert("Stock notification sign-up. Not wired up yet.");
+      alert("Stock notification sign-up.");
       var form = e.target;
       form.querySelector(".subscribe-btn").style.display = "none";
       form.querySelector(".subscribe-confirm").style.display = "inline";
@@ -1760,7 +1658,7 @@
     }
     function handleSaveSelection(e) {
       e.preventDefault();
-      alert("Emails a link to this selection. Not wired up yet.");
+      alert("Emails a link to this selection.");
       const form = e.target;
       form.querySelector('.sel-save-btn').style.display = 'none';
       form.querySelector('.subscribe-confirm').style.display = 'inline';
@@ -1800,6 +1698,143 @@
     seedSelection();
     renderSelection();
 
+
+    /* ---------------------------------------------------------------
+       The network, from the company's ambassador list: active only.
+       Two components, because they answer different questions. A place
+       has an address you can travel to. A person is someone you write to.
+       Descriptions and links are the artists' own public words where they
+       publish them, and absent where they do not, because inventing a
+       sentence about a real person is worse than showing none.
+       --------------------------------------------------------------- */
+
+    const PLACES = [
+      { name: 'Handpan Studio Amsterdam', where: 'T.T. Neveritaweg 57, Amsterdam', country: 'Netherlands',
+        desc: 'Showroom, beginner workshops and private lessons. Founded by Joris Cohen and Deniz Kavafoglu, who met playing on the Museumplein.',
+        url: 'https://handpanstudio.com' },
+      { name: 'Handpan.live', where: 'Neckarstraße 102, Ludwigsburg', country: 'Germany',
+        desc: 'Marius Bechtold runs workshops for beginners and advanced players, jam evenings and an open study group. Instruments to try, rent or buy.',
+        url: 'https://handpan.live' },
+      { name: 'Seelenklang Zentrum', where: 'Steinhalde 7, Freiburg', country: 'Germany',
+        desc: 'Benjamin Schwettmann&rsquo;s sound centre, where handpan lessons sit alongside gong and singing bowl work.',
+        url: 'https://seelenklang-zentrum.de' },
+      { name: 'David Lesage', where: 'Paris, 20th arrondissement', country: 'France',
+        desc: 'Showroom of the musician, pedagogue and inventor behind Handpan Constellation Studio.',
+        url: 'https://lesagedavid.fr' },
+      { name: 'Handpancenter België', where: '', country: 'Belgium',
+        desc: 'Jeroen Baeken teaches individually and in groups, and keeps the largest selection of handpans in Belgium.',
+        url: 'https://handpancenter.be' },
+      { name: 'Handpan Oase Allgäu', where: 'Memmingen', country: 'Germany',
+        desc: 'Tobias Mrzyk has worked with handpans since 2009. Rentals and sales; the showroom is closed at present, consultation by phone.',
+        url: 'https://handpan-verleih.de' }
+    ];
+
+    const ARTISTS = [
+      { n: 'Adam Ethereal',        c: 'USA',         r: 'americas' },
+      { n: 'Adrian Högström', c: 'Sweden',  r: 'europe' },
+      { n: 'Alem',                 c: 'France',      r: 'europe' },
+      { n: 'Amarok',               c: 'Spain',       r: 'europe' },
+      { n: 'Amy Naylor',           c: 'UK',          r: 'europe' },
+      { n: 'Berno van der Wal',    c: 'Netherlands', r: 'europe',
+        d: 'Runs the Online Handpan School. “I created this school to help others find what music gave me: a voice, a rhythm, and a sense of inner peace.”',
+        l: [['Handpan School','https://handpanschool.online'],['YouTube','https://www.youtube.com/@Handpanschoolonline'],['Instagram','https://instagram.com/handpanschoolonline']] },
+      { n: 'Bo Bayer',             c: 'Germany',     r: 'europe' },
+      { n: 'Bronkar Lee',          c: 'USA',         r: 'americas' },
+      { n: 'Cajonico',             c: 'Israel',      r: 'asia' },
+      { n: 'Chopperlin Soulwave',  c: 'Taiwan',      r: 'asia' },
+      { n: 'Cosmyte',              c: 'France',      r: 'europe' },
+      { n: 'Daniel Waples',        c: 'USA',         r: 'americas',
+        d: 'Performs as Hang in Balance and has played in more than fifty countries. Sees the handpan as an instrument of inner journeys.',
+        l: [['Hang in Balance','https://hanginbalance.com'],['Instagram','https://instagram.com/hanginbalance'],['Bandcamp','https://hanginbalance.bandcamp.com']] },
+      { n: 'Danny Cudd',           c: 'UK',          r: 'europe',
+        d: 'Half of Hang Massive, touring Beyond The Horizon.',
+        l: [['Hang Massive','https://hangmassive.com'],['Instagram','https://www.instagram.com/hangmassive'],['YouTube','https://www.youtube.com/hangmassive']] },
+      { n: 'Golsa Nazari',         c: 'Iran',        r: 'asia',
+        d: 'Handpan player, composer and teacher, blending Persian and Middle Eastern influences with modern soundscapes.',
+        l: [['In Tonefield','neotone-golsa-nazari.html']] },
+      { n: 'Handpan360',           c: 'USA',         r: 'americas' },
+      { n: 'Hernán Suárez', c: 'Peru',     r: 'americas' },
+      { n: 'Ismael Barredo',       c: 'Spain',       r: 'europe' },
+      { n: 'Ivan Judas',           c: 'Croatia',     r: 'europe' },
+      { n: 'James Hunter Crossley',c: 'UK',          r: 'europe' },
+      { n: 'Kabeção',    c: 'Portugal',    r: 'europe',
+        d: 'Teaches through the Pantam School and develops custom instruments with Yishama.',
+        l: [['Website','https://www.kabecao.com'],['Instagram','https://www.instagram.com/kabecaohandpan/'],['YouTube','https://www.youtube.com/user/Kabexon']] },
+      { n: 'Lavinia Gerster',      c: 'Germany',     r: 'europe' },
+      { n: 'Lucas Fanchon',        c: 'France',      r: 'europe' },
+      { n: 'Maja Wlazly',          c: 'Poland',      r: 'europe' },
+      { n: 'Mar Loi',              c: 'Spain',       r: 'europe' },
+      { n: 'Marco Kögel',     c: 'Germany',     r: 'europe',
+        d: 'Runs Circularts, booking artists and running handpan workshops at venues across the region.',
+        l: [['Circularts','https://circularts.com']] },
+      { n: 'Megatone',             c: 'France',      r: 'europe' },
+      { n: 'Nadayana',             c: 'Romania',     r: 'europe',
+        d: '“Translating the voices of handpan and gong into a momentum, a refreshing healing soundscape.” Also composes for theatre and film.',
+        l: [['Website','https://nadayana.com'],['YouTube','https://youtube.com/Nadayana'],['Instagram','https://instagram.com/nadayanamusic']] },
+      { n: 'Paco Casas',           c: 'Spain',       r: 'europe' },
+      { n: 'Reo Matsumoto',        c: 'Japan',       r: 'asia' },
+      { n: 'Roni Vybeshift',       c: 'USA',         r: 'americas' },
+      { n: 'Sandro Rocca',         c: 'Italy',       r: 'europe' },
+      { n: 'Sjaak van Dam',        c: 'Netherlands', r: 'europe',
+        d: 'Drummer and handpan player, teaching handpan.',
+        l: [['Website','https://sjaakvandam.nl']] },
+      { n: 'Taylor Sol',           c: 'Australia',   r: 'oceania',
+        d: '“A musician, sound alchemist and mentor devoted to creating musical experiences that guide you toward greater joy, presence, and connection.”',
+        l: [['Website','https://taylorsol.love'],['Instagram','https://instagram.com/taylorthesol'],['YouTube','https://youtube.com/@taylorsol']] },
+      { n: 'Waagal',               c: 'France',      r: 'europe' },
+      { n: 'Walter Scalzone',      c: 'UAE',         r: 'asia' },
+      { n: 'Yaima',                c: 'USA',         r: 'americas',
+        d: 'Cascadian electronic duo based in Seattle.',
+        l: [['Website','https://www.yaimamusic.com']] }
+    ];
+
+    const REGIONS = [['all','All'],['europe','Europe'],['americas','Americas'],['asia','Asia'],['oceania','Oceania']];
+    const VISIBLE = 6;
+
+    function renderPlaces() {
+      const el = document.getElementById('places-list');
+      if (!el) return;
+      el.innerHTML = PLACES.map(p =>
+        '<div class="artist-card">' +
+          '<div class="artist-img"></div>' +
+          '<div class="artist-card-body">' +
+            '<span class="artist-kicker">' + p.country + '</span>' +
+            '<p class="artist-name">' + p.name + '</p>' +
+            (p.where ? '<p class="place-where">' + p.where + '</p>' : '') +
+            '<p class="artist-desc">' + p.desc + '</p>' +
+            '<div class="artist-links"><a class="artist-link-btn" href="' + p.url +
+              '" target="_blank" rel="noopener">Website</a></div>' +
+          '</div>' +
+        '</div>').join('');
+    }
+
+    function renderArtists() {
+      const grid = document.getElementById('artists');
+      if (!grid) return;
+      document.getElementById('artist-filters').innerHTML = REGIONS.map(([k, label], i) =>
+        '<button class="opt' + (i === 0 ? ' active' : '') + '" onclick="filterArtists(\'' + k + '\',this)">' + label + '</button>'
+      ).join('');
+      /* The wireframe shows only artists whose own public words we have, so no
+         card carries an invented sentence about a real person. The full list
+         stays in ARTISTS: adding a description is what puts someone on the page. */
+      const shown = ARTISTS.filter(a => a.d);
+      grid.innerHTML = shown.map((a, i) =>
+        '<div class="artist-card artist' + (i >= VISIBLE ? ' artist-extra' : '') + '" data-region="' + a.r + '">' +
+          '<div class="artist-img"></div>' +
+          '<div class="artist-card-body">' +
+            '<span class="artist-kicker">' + a.c + '</span>' +
+            '<p class="artist-name">' + a.n + '</p>' +
+            '<p class="artist-desc">' + a.d + '</p>' +
+            (a.l ? '<div class="artist-links">' + a.l.map(([t, h]) =>
+              '<a class="artist-link-btn" href="' + h + '"' +
+              (h.indexOf('http') === 0 ? ' target="_blank" rel="noopener"' : '') + '>' + t + '</a>').join('') + '</div>' : '') +
+          '</div>' +
+        '</div>').join('');
+    }
+
+    renderPlaces();
+    renderArtists();
+
     var currentFilter = "all";
     var showAllActive = false;
 
@@ -1807,11 +1842,8 @@
       currentFilter = filter;
       document.querySelectorAll(".artist").forEach(function(card) {
         var isExtra = card.classList.contains("artist-extra");
-        var isSixth = card.classList.contains("artist-sixth") && window.innerWidth <= 980;
-        if (!showAllActive && (isExtra || isSixth)) { card.style.display = "none"; return; }
-        var show = filter === "all"
-          || (filter === "sessions" && card.getAttribute("data-sessions") === "true")
-          || card.getAttribute("data-region") === filter;
+        if (!showAllActive && isExtra) { card.style.display = "none"; return; }
+        var show = filter === "all" || card.getAttribute("data-region") === filter;
         card.style.display = show ? "flex" : "none";
       });
       document.querySelectorAll(".opt-row .opt").forEach(function(b) { b.classList.remove("active"); });
@@ -1833,7 +1865,7 @@
 
     function handleSubscribe(e) {
       e.preventDefault();
-      alert("Mailing list sign-up. Not wired up yet.");
+      alert("Mailing list sign-up.");
     }
 
     function specFocus(cell, label) {
@@ -1844,7 +1876,7 @@
 
     function pieceLink(e) {
       e.preventDefault();
-      alert("Piece not drafted yet.");
+      alert("Piece not staged yet.");
     }
 
     function handleSearch(e) {
@@ -1854,13 +1886,11 @@
     /* Outbound, so they leave the site rather than routing through it. Wired as
        alerts here because the accounts are not linked yet. */
     function socialLink(name) {
-      alert("Neotone on " + name + ". External link, not wired up yet.");
+      alert("Neotone on " + name + ".");
     }
 
     function utilityLink(name) {
-      alert(name === 'Workshop'
-        ? "Workshop: the people and the production process. Not mocked up yet."
-        : name + " page. Not mocked up yet.");
+      alert("Piece not staged yet.");
     }
 
 
