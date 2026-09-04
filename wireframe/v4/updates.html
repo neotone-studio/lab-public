@@ -281,8 +281,7 @@
     /* ---- Subscribe ----
        Not Tonefield: that is a publication, and this is a notice board. Not
        "stay in touch" either, which promises a relationship from a company that
-       will write four times a year. Updates says plainly what it is, the same
-       move as "Budapest · visits by appointment". */
+       will write four times a year. Updates says plainly what it is. */
     .subscribe { margin-top: 56px; }
     .subscribe-label {
       display: block; margin-bottom: 12px;
@@ -392,13 +391,13 @@
 
       <div class="footer-band">
         <div class="footer-utility">
-          <a onclick="utilityLink('Workshop')">Workshop</a>
+          <a href="brief.html">Brief</a>
           <a href="updates.html">Updates</a>
           <a onclick="utilityLink('Contact')">Contact</a>
           <a href="legal.html">Legal</a>
         </div>
         <div class="footer-place">
-          <p class="footer-meta">Budapest &middot; visits by appointment</p>
+          <p class="footer-meta">Neotone &middot; Budapest</p>
           <p class="footer-meta footer-social">
             <a onclick="socialLink('Instagram')">Instagram</a> &middot;
             <a onclick="socialLink('YouTube')">YouTube</a> &middot;
@@ -589,12 +588,12 @@
     function handleSubscribe(e) {
       e.preventDefault();
       const value = e.target.querySelector('input').value;
-      alert("Mailing list sign-up. Not wired up yet.");
+      alert("Mailing list sign-up.");
       e.target.reset();
     }
 
     function loadMore() {
-      alert("Loads the next pieces. Not mocked up yet.");
+      alert("Loads the next pieces.");
     }
 
     /* Footer section links rise before they leave. At the bottom of a page the
@@ -634,13 +633,11 @@
     /* Outbound, so they leave the site rather than routing through it. Wired as
        alerts here because the accounts are not linked yet. */
     function socialLink(name) {
-      alert("Neotone on " + name + ". External link, not wired up yet.");
+      alert("Neotone on " + name + ".");
     }
 
     function utilityLink(name) {
-      alert(name === 'Workshop'
-        ? "Workshop: the people and the production process. Not mocked up yet."
-        : name + " page. Not mocked up yet.");
+      alert("Piece not staged yet.");
     }
 
 

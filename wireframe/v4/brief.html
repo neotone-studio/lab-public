@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Legal · Neotone</title>
+  <title>Brief · Neotone</title>
   <style>
     :root { --ink: #111; --line: #d9d9d9; --muted: #4f4f4f; --green: #2a7a2a; --max: 1180px; }
 
@@ -214,7 +214,7 @@
        page carries the plain Neotone mark. Media runs to the content grid;
        reading stays at a measure. */
     .piece { max-width: var(--max); margin: 0 auto; padding: 0 48px 40px; }
-    .piece-head { max-width: 680px; margin: 0 auto; padding: 64px 0 40px; }
+    .piece-head { max-width: 680px; margin: 0 auto; padding: 64px 0 44px; }
     .piece-kicker {
       display: block; margin-bottom: 16px;
       font-size: 11px; font-weight: 700; text-transform: uppercase;
@@ -260,34 +260,19 @@
        Same vocabulary as the manual: a contents jump, hairline rows, and the
        small uppercase label from .piece-sub. No new devices, because a utility
        page that invented its own would read as a different site. */
-    /* A div, not a nav: the masthead's `nav` rule sets height 118px and would
-       be inherited, which is what made this bar a tall white block.
-       The three sections are long and far apart, so the jump bar holds under the
-       nav instead of scrolling away with the head, and the text runs beneath it.
-       Centred: a left-aligned strip sitting under a wordmark that travels left
-       reads as two things stacking on the same edge. */
-    .legal-jump {
-      position: sticky; top: 118px; z-index: 9;
-      margin: 0 0 56px; padding: 13px 48px;
-      background: #fff; border-bottom: 1px solid var(--line);
-      display: flex; align-items: baseline; justify-content: center; gap: 14px; flex-wrap: wrap;
-    }
-    .legal-jump a { font-size: 13px; color: var(--muted); }
-    .legal-jump a:hover { color: var(--ink); }
-    .legal-jump span { font-size: 13px; color: var(--line); }
 
-    .legal-sec { max-width: 680px; margin: 0 auto 72px; scroll-margin-top: 196px; }
-    .legal-sec:last-of-type { margin-bottom: 0; }
-    .legal-sec h2 { margin: 0 0 18px; font-size: 26px; font-weight: 400; letter-spacing: -0.01em; }
-    .legal-sec > p { margin: 0 0 1.45em; font-size: 17px; line-height: 1.75; }
-    .legal-note { margin: 0 0 6px; font-size: 13px; line-height: 1.6; color: var(--muted); }
+    /* A question is a head rather than a heading: quieter than a section title,
+       so the answer under it carries the weight. */
+    .brief-q { max-width: 680px; margin: 0 auto 52px; scroll-margin-top: 140px; }
+    .brief-q:last-of-type { margin-bottom: 0; }
+    .brief-q h2 { margin: 0 0 14px; font-size: 21px; font-weight: 400; letter-spacing: -0.01em; }
+    .brief-q > p { margin: 0 0 1.45em; font-size: 17px; line-height: 1.75; }
+    .brief-q > p:last-child { margin-bottom: 0; }
+    .brief-q a { border-bottom: 1px solid var(--line); }
+    .brief-q a:hover { border-bottom-color: var(--ink); }
 
     /* Rows, matching .toc-list exactly. A review point is a line you can act on,
        which is the same shape as a contents entry. */
-    .legal-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
-    .legal-list li { border-bottom: 1px solid var(--line); padding: 13px 0; font-size: 16px; line-height: 1.6; }
-    .legal-list li b { font-weight: 400; }
-    .legal-list li span { color: var(--muted); }
     /* Eased only while the bar is being held open or let go by hand.
        Scroll-driven movement stays untransitioned so it tracks the wheel. */
     nav.nav-eased .masthead,
@@ -311,84 +296,72 @@
   <article class="piece">
 
     <header class="piece-head">
-      <span class="piece-kicker">Soundventure Kft</span>
-      <h1 class="piece-title">Legal</h1>
-      <p class="piece-standfirst">One page rather than two links. Privacy first because it applies to everyone reading, then the terms that apply once you order, then the terms that apply to the site itself.</p>
+      <span class="piece-kicker">Neotone</span>
+      <h1 class="piece-title">Brief</h1>
+      <p class="piece-standfirst">The short way in: what the company is, what the instrument is, and who it is for, in the order the questions arrive.</p>
     </header>
 
-    <div class="legal-jump" role="navigation" aria-label="Sections">
-      <a href="#privacy">Privacy</a>
-      <span>&middot;</span>
-      <a href="#sale">Terms of sale</a>
-      <span>&middot;</span>
-      <a href="#site">Terms of website use</a>
-    </div>
+    <!-- The Brief holds orienting questions only: what the thing is, and whether
+         it is for you. Shipping, returns, warranty and troubleshooting are not
+         brief questions and already have homes, in the purchase terms, the
+         Questions form and the manual. The moment those arrive here it has become
+         an FAQ and should be renamed. The order is authored rather than sorted by
+         how often anyone asks, which is the whole difference between the two. -->
 
-    <section class="legal-sec" id="privacy">
-      <h2>Privacy</h2>
-      <p>What is collected, why, for how long, and how to get it back or have it deleted. It applies to every reader, including one who never orders anything, which is why it comes first.</p>
-      <p class="legal-note">Reviewed against the current policy at digitalhandpan.com/privacy-policy.pdf. That document is a Japanese manufacturer's template with the names changed: it cites the Personal Information Protection Law and the Personal Information Protection Committee, which are Japan's statute and regulator, and refers to group companies, a distributor, repaired products being dispatched, and servers outside "our plant." A GDPR section is appended, so obligations are stated twice under two regimes, one of which does not apply.</p>
-
-      <span class="piece-sub">Cut</span>
-      <ul class="legal-list">
-        <li><b>The entire Japanese half.</b> <span>Sections resting on the Personal Information Protection Law are not the law you operate under. GDPR and the Hungarian implementation are.</span></li>
-        <li><b>Group companies, distributors, subsidiaries, the plant.</b> <span>There is one company and one workshop.</span></li>
-        <li><b>Behavioural advertising via Google.</b> <span>The policy discloses targeted advertising cookies. If that is not running, it declares processing that does not happen. If it is, a footer opt-out link is not consent.</span></li>
-        <li><b>"2022 DigitalOcean, LLC"</b> <span>as the named host. That is a copyright string pasted in as a party.</span></li>
-        <li><b>Survey, contest and event language.</b> <span>None of it exists.</span></li>
-      </ul>
-
-      <span class="piece-sub">Missing</span>
-      <ul class="legal-list">
-        <li><b>The real categories of data.</b> <span>The policy declares name and email. You take orders: postal address, telephone, payment handled by a processor, and a serial number tied to a person for the life of the instrument.</span></li>
-        <li><b>neOS accounts and the Scale Gallery.</b> <span>An account, a public display name, and user-created scales published to other players. None of it is mentioned, and it is the most personal thing the company holds.</span></li>
-        <li><b>Named processors.</b> <span>Payment provider, email sender, host, and anything the software talks to. A list, kept current.</span></li>
-        <li><b>Retention periods that are actual periods.</b> <span>"As long as necessary" is not one. An instrument warranty gives a real number to anchor to.</span></li>
-        <li><b>Controller identity in full.</b> <span>Registered company name, seat, company registration number, and a contact route that is not only an email address.</span></li>
-        <li><b>Cookies, honestly.</b> <span>Easiest version: run none beyond what the site needs to function, say so in a sentence, and never build a consent banner. A site whose principle is answering questions where they arise should not open with a modal asking permission to track.</span></li>
-      </ul>
+    <section class="brief-q" id="what-is-neotone">
+      <h2>What is Neotone?</h2>
+      <p>A small company in Budapest that makes an electronic musical instrument and publishes Tonefield, on handpan craft and culture. Twelve people, seven years of research, and around a thousand instruments now in sixty-two countries.</p>
     </section>
 
-    <section class="legal-sec" id="sale">
-      <h2>Terms of sale</h2>
-      <p>The document that does not currently exist, and the one with real consequences. Someone is paying five figures for an object that will not exist for another sixty days.</p>
-      <p class="legal-note">The One page already states purchase terms inline, where the question arises. This section is what those statements have to be consistent with. If the two ever disagree, the customer relies on the one they read at the moment of ordering, which is the inline one.</p>
-
-      <span class="piece-sub">Cover</span>
-      <ul class="legal-list">
-        <li><b>Right of withdrawal.</b> <span>Fourteen days on a distance sale, when the clock starts, and how to exercise it. Whether a made-to-order instrument in a chosen wood is exempt as a personalised good is exactly the question to get answered rather than assumed.</span></li>
-        <li><b>The two year guarantee of conformity</b> <span>, separate from and additional to any warranty offered voluntarily. Say which is which, because buyers conflate them.</span></li>
-        <li><b>Lead time as a commitment.</b> <span>"~60 days" appears in the specs. What happens at day 90, and what the buyer can do about it.</span></li>
-        <li><b>Deposit, balance and cancellation.</b> <span>When money is taken, what is refundable once wood has been cut, and what is not.</span></li>
-        <li><b>B-stock.</b> <span>What the grade means, what is excluded, and whether the guarantee differs.</span></li>
-        <li><b>Delivery, risk and customs.</b> <span>When risk passes, who clears the instrument, and who pays duty outside the EU.</span></li>
-        <li><b>Repairs.</b> <span>An instrument that comes back to Budapest and returns: shipping, timescale, what is covered.</span></li>
-        <li><b>Referral discounts.</b> <span>Who is eligible, whether codes stack, and how long one is good for. The wireframe already enforces rules that no document states.</span></li>
-        <li><b>The software is part of the product.</b> <span>A buyer purchases an instrument whose behaviour changes with updates. Say what is guaranteed to keep working, and for how long.</span></li>
-      </ul>
+    <section class="brief-q" id="what-is-the-one">
+      <h2>What is the Neotone One?</h2>
+      <p>The instrument. A hardwood body with twenty tonefields and a ding, built to order, sensing where you strike, how hard, how long the contact lasts and how you damp it. It holds any scale rather than one.</p>
     </section>
 
-    <section class="legal-sec" id="site">
-      <h2>Terms of website use</h2>
-      <p>The shortest of the three, and the one currently doing the least. Reading this site creates almost no relationship: there is no account, nothing to post, and nothing to agree to.</p>
-      <p class="legal-note">Reviewed against digitalhandpan.com/terms-of-use.pdf. US-style boilerplate: all-caps disclaimers, attorneys' fees, and "the laws of the EU" in the governing law clause. The EU is not a jurisdiction that can be chosen. It also governs message boards and user registration, neither of which exists, and spells the company "Sounventure" once.</p>
+    <section class="brief-q" id="difference">
+      <h2>How is it different from an acoustic handpan?</h2>
+      <p>On an acoustic handpan the scale is chosen once, by the maker, before you ever play it. Here the scale leaves the object and becomes something you apply to it, so a choice that used to belong to the instrument maker belongs to you, and it can change between one piece of music and the next.</p>
+      <p>It is not a replacement for an acoustic instrument. It is a different instrument that came out of studying one.</p>
+    </section>
 
-      <span class="piece-sub">Cut</span>
-      <ul class="legal-list">
-        <li><b>The Submissions clause,</b> <span>which is the one actively working against the company. It states that anything a user posts becomes Soundventure's property, free to exploit commercially. Read against the Scale Gallery, that claims ownership of scales players made. It should be a licence: the player keeps the scale, Neotone gets the right to host, display and distribute it, and can say so in one sentence.</span></li>
-        <li><b>Message boards and registration requirements.</b> <span>Neither exists on this site.</span></li>
-        <li><b>Blanket exclusion of all liability and all warranties.</b> <span>Largely unenforceable against consumers here, so it buys little and reads as hostile from a company whose whole argument is that it is serious.</span></li>
-        <li><b>The prohibition on saving or printing pages.</b> <span>Unenforceable, and strange on a site built to be read.</span></li>
-      </ul>
+    <section class="brief-q" id="neos">
+      <h2>What is neOS?</h2>
+      <p>The software every Neotone One runs. It holds the scales, the gallery and the settings, it is where scales are built and shared, and it updates over the air, so an instrument keeps changing after it leaves the workshop. It comes with the instrument, and the <a href="manual.html">manual</a> covers both.</p>
+    </section>
 
-      <span class="piece-sub">Fix or add</span>
-      <ul class="legal-list">
-        <li><b>Governing law and venue:</b> <span>Hungary, and a named court, with the note that consumers keep the protections of their own country.</span></li>
-        <li><b>Who publishes this site,</b> <span>in a line: registered name, seat, registration number, contact.</span></li>
-        <li><b>Editorial content is the company's,</b> <span>and quotation with attribution is welcome. Cheaper to say than to litigate, and it matches how the writing is meant to travel.</span></li>
-        <li><b>Scale Gallery rules,</b> <span>if they live anywhere: what may be shared, what happens when a scale is unshared, and the fact that a copy already added to someone's list stays with them. The software already behaves this way; nothing states it.</span></li>
-        <li><b>The company name spelled correctly.</b> <span></span></li>
-      </ul>
+    <section class="brief-q" id="with-other-gear">
+      <h2>Does it work with other instruments and software?</h2>
+      <p>Yes. It sends MIDI, so it can play synthesisers, samplers and anything in a computer, and it can be recorded as audio like any other instrument. That is a thing it does rather than a description of what it is: the sound and the playing surface are the instrument, and the MIDI is a door out of it.</p>
+    </section>
+
+    <section class="brief-q" id="who-for">
+      <h2>Who is it for?</h2>
+      <p>Players who want more than one scale without owning more than one instrument. Musicians working in rooms too loud to mic an acoustic handpan. People who came to the handpan recently and want somewhere to keep going. It is played on stages, in studios, and at kitchen tables.</p>
+    </section>
+
+    <section class="brief-q" id="cost">
+      <h2>What does it cost?</h2>
+      <p>From around EUR 3,150 before VAT, depending on the wood, with a case and a stand included. It is built to order by hand, so the price is the price of the sixty days and the twelve people rather than a position in a market. Current figures, the woods and the accessories are on the <a href="index.html">instrument page</a>.</p>
+    </section>
+
+    <section class="brief-q" id="where-made">
+      <h2>Where is it made?</h2>
+      <p>In the workshop in Budapest, by the people who designed it. Every instrument starts with a conversation about wood and configuration, and takes roughly sixty days once it enters production. <a href="index.html" onclick="pieceLink(event)">The workshop piece</a> walks the production line through the twelve people who run it.</p>
+    </section>
+
+    <section class="brief-q" id="tonefield">
+      <h2>What is Tonefield?</h2>
+      <p><a href="tonefield.html">Tonefield</a> is the publication, on handpan craft and culture. It is about making music, making instruments and being a musician rather than about the instrument, and it is meant to be worth reading whether or not you own one.</p>
+    </section>
+
+    <section class="brief-q" id="try">
+      <h2>Can I play one before ordering?</h2>
+      <p>Three ways: the workshop in Budapest, the studios and schools that keep an instrument, or a Neotone artist near you. All of them are listed at the foot of the <a href="index.html">instrument page</a>.</p>
+    </section>
+
+    <section class="brief-q" id="keeping-up">
+      <h2>How do I keep up?</h2>
+      <p>The mailing list, which goes out when there is something to say rather than on a schedule, and whose <a href="updates.html">archive is public</a>. Tonefield publishes when a piece is ready. Neither is frequent, and both are the whole of it: there is no blog and no news feed.</p>
     </section>
 
   </article>
@@ -628,6 +601,11 @@
         scrollToTopThen(() => { window.location.href = href; });
       });
     });
+
+    function pieceLink(e) {
+      e.preventDefault();
+      alert("Piece not staged yet.");
+    }
 
     function handleSearch(e) {
       e.preventDefault();

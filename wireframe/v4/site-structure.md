@@ -125,7 +125,7 @@ Tonefield, the instrument page and the placeholders open with one centred block,
 
 | Page | Line |
 |---|---|
-| `tonefield.html` | **Tonefield** / Neotone's quarterly of craft and culture |
+| `tonefield.html` | **Tonefield** / On handpan craft and culture |
 | `instrument.html` | The **Neotone One** is handcrafted in Budapest, built to order |
 | `anima.html`, `treangle.html` | **Anima** is in development |
 

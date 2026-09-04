@@ -289,13 +289,13 @@
 
       <div class="footer-band">
         <div class="footer-utility">
-          <a onclick="utilityLink('Workshop')">Workshop</a>
+          <a href="brief.html">Brief</a>
           <a href="updates.html">Updates</a>
           <a onclick="utilityLink('Contact')">Contact</a>
           <a href="legal.html">Legal</a>
         </div>
         <div class="footer-place">
-          <p class="footer-meta">Budapest &middot; visits by appointment</p>
+          <p class="footer-meta">Neotone &middot; Budapest</p>
           <p class="footer-meta footer-social">
             <a onclick="socialLink('Instagram')">Instagram</a> &middot;
             <a onclick="socialLink('YouTube')">YouTube</a> &middot;
@@ -516,13 +516,11 @@
     /* Outbound, so they leave the site rather than routing through it. Wired as
        alerts here because the accounts are not linked yet. */
     function socialLink(name) {
-      alert("Neotone on " + name + ". External link, not wired up yet.");
+      alert("Neotone on " + name + ".");
     }
 
     function utilityLink(name) {
-      alert(name === 'Workshop'
-        ? "Workshop: the people and the production process. Not mocked up yet."
-        : name + " page. Not mocked up yet.");
+      alert("Piece not staged yet.");
     }
 
 
