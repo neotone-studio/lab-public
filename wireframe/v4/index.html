@@ -1720,9 +1720,35 @@
     /* ---- Init ----
        Order matters: accessory cards must exist before updateAccPrices()
        can find their [data-raw] elements, which changeVATCountry() triggers. */
+    /* A fresh visitor arrives with a selection already made, so the Selection
+       control in the bar is there to be found rather than hidden behind an
+       action nobody has taken yet. Seeded once and recorded, so emptying the
+       selection deliberately sticks. 3240 is the 3150 base plus 90 for
+       mahogany, the wood the page opens on. */
+    function seedSelection() {
+      try {
+        if (localStorage.getItem('neotone_sel_seeded')) return;
+        localStorage.setItem('neotone_sel_seeded', '1');
+        if (getSelItems().length) return;
+        var rate = VAT_RATES[localStorage.getItem('neotone_country') || 'HU'];
+        function withVat(base) {
+          var total = rate ? Math.round(base * (1 + rate)) : base;
+          return 'EUR ' + total.toLocaleString('en-US');
+        }
+        saveSelItems([
+          { id: 1, name: 'Neotone One', detail: 'Built to Order \u00b7 Mahogany',
+            price: withVat(3240), rawBase: 3240, discountPct: 0, discountEligible: true },
+          { id: 2, name: 'Intech Knot',
+            detail: 'Midi USB host for controlling Neotone One with external instruments',
+            price: withVat(80), rawBase: 80, discountPct: 0, discountEligible: false }
+        ]);
+      } catch (e) {}
+    }
+
     renderAccessories();
     changeVATCountry(vatCountry);
     updateCaption();
+    seedSelection();
     renderSelection();
 
     var currentFilter = "all";
