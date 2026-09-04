@@ -483,12 +483,19 @@
     }
 
     nav.addEventListener('click', e => {
-      /* Your own section name is the way to the top of the page you are on. */
+      /* Your own section name goes to the top when you are already on that page,
+         and navigates when you are on one of its sub-pages: checkout, a
+         placeholder instrument, or a piece returning to its container. Matching
+         on the section alone trapped every sub-page, since the name was marked
+         current and the click was swallowed. */
       const own = e.target.closest('.sections a[data-section="' + SECTION + '"]');
       if (own) {
-        e.preventDefault();
-        releaseNav(false);
-        if (window.scrollY > 0) window.scrollTo({ top: 0, behavior: 'smooth' });
+        const here = location.pathname.split('/').pop() || 'index.html';
+        if (own.getAttribute('href') === here) {
+          e.preventDefault();
+          releaseNav(false);
+          if (window.scrollY > 0) window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
         return;
       }
       if (e.target.closest('.sections a') || e.target.closest('.sel-nav')) return;
