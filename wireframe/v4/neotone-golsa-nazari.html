@@ -259,6 +259,12 @@
     }
     .next-title { font-size: 17px; }
     .next-list a:hover .next-title { color: var(--muted); }
+    /* Eased only while the bar is being held open or let go by hand.
+       Scroll-driven movement stays untransitioned so it tracks the wheel. */
+    nav.nav-eased .masthead,
+    nav.nav-eased .sections,
+    nav.nav-eased .sel-nav { transition: top .18s ease, transform .18s ease; }
+    nav.nav-eased .sections a { transition: opacity .18s ease; }
   </style>
 </head>
 <body>
@@ -419,12 +425,14 @@
       return Math.max(document.documentElement.scrollHeight - window.innerHeight, 0);
     }
 
+    let navHeld = false;
+
     function updateNav() {
       if (markShift === null) measure();
       const y = window.scrollY;
       const k = Math.min(1, scrollRange() / SHIFT_TO) || 1;
-      const fade  = ramp(y, FADE_FROM * k, FADE_TO * k);
-      const shift = ramp(y, SHIFT_FROM * k, SHIFT_TO * k);
+      const fade  = navHeld ? 0 : ramp(y, FADE_FROM * k, FADE_TO * k);
+      const shift = navHeld ? 0 : ramp(y, SHIFT_FROM * k, SHIFT_TO * k);
 
       masthead.style.top = lerp(MARK_TOP, shift) + 'px';
       masthead.style.transform =
@@ -447,26 +455,54 @@
 
     }
 
-    /* Once the bar has moved, the mark reopens it. At rest it goes to the
-       front, which is what it says. */
-    /* Collapsed, the bar is a label rather than a menu: the two sections you are
-       not in are invisible and take no clicks. Anywhere in the bar reopens it,
-       so reaching for a section name that is not there does something sensible
-       instead of nothing. The section you are in still behaves as a link. */
-    /* Collapsed, the bar is a label rather than a menu, and anywhere in it
-       reopens the bar. The section you are in behaves exactly as the mark does,
-       because at that point the two are halves of one label and clicking either
-       should do the same thing. */
+    /* Collapsed, the bar is the name alone, which leaves most of a long page
+       with no navigation on screen. Clicking the mark holds the bar open where
+       you are rather than travelling to the top: the same bar at its resting
+       open state, at your current scroll position. Nothing new is shown, and
+       the mark still goes nowhere, which is what it says.
+
+       Opening is eased, because the bar is arriving. Dismissing by scroll is
+       instant, because the bar is getting out of the way. Either way the state
+       is set outright and the transition only decorates it. */
+    function holdNav() {
+      navHeld = true;
+      nav.classList.add('nav-eased');
+      updateNav();
+    }
+
+    function releaseNav(eased) {
+      if (!navHeld) return;
+      navHeld = false;
+      if (eased) {
+        updateNav();
+        setTimeout(() => { if (!navHeld) nav.classList.remove('nav-eased'); }, 220);
+      } else {
+        nav.classList.remove('nav-eased');
+        updateNav();
+      }
+    }
+
     nav.addEventListener('click', e => {
+      /* Your own section name is the way to the top of the page you are on. */
       const own = e.target.closest('.sections a[data-section="' + SECTION + '"]');
       if (own) {
         e.preventDefault();
+        releaseNav(false);
         if (window.scrollY > 0) window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
       }
+      if (e.target.closest('.sections a') || e.target.closest('.sel-nav')) return;
       if (window.scrollY <= SHIFT_FROM) return;
       e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      navHeld ? releaseNav(true) : holdNav();
+    });
+
+    document.addEventListener('click', e => {
+      if (navHeld && !e.target.closest('nav')) releaseNav(true);
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && navHeld) releaseNav(true);
     });
 
     function remeasure() { markShift = null; updateNav(); }
@@ -478,7 +514,13 @@
 
 
 
-    window.addEventListener('scroll', updateNav, { passive: true });
+    window.addEventListener('scroll', () => {
+      /* Eased on the way out too. Past the shift range the collapsed target is
+         fixed, so easing toward it cannot fall behind the scroll, and the bar
+         leaves the way it arrived. */
+      if (navHeld) releaseNav(true);
+      updateNav();
+    }, { passive: true });
     updateNav();
 
     /* ---- Footer ---- */
