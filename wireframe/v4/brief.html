@@ -57,19 +57,25 @@
        of the flow, which changes the width and makes the target move, the row
        slides until the section you are in reaches the boundary. The others
        travel with it and fade out. */
+    /* Two equal columns, so the gap between the words centres on the page
+       whatever the words measure. The wordmark is strongly symmetrical about
+       its T, and a row centred as a block put the gap 9px right of it, because
+       Instruments is the wider word. */
     .sections {
-      position: absolute; left: 50%; top: 86px;
+      position: absolute; left: 50%; top: 92px;
       transform: translateX(-50%);
-      display: flex; align-items: baseline;
+      display: grid; grid-template-columns: 1fr 1fr; column-gap: 30px;
+      align-items: baseline;
       will-change: transform, top;
     }
     .sections a {
       font-size: 14px; letter-spacing: 0.02em; color: var(--muted);
-      cursor: pointer; margin-left: 30px; white-space: nowrap;
+      cursor: pointer; white-space: nowrap;
       /* No colour transition. Everything in this bar is a function of scroll
          position, and a 200ms ease made the emphasis lag the scroll. */
     }
-    .sections a:first-child { margin-left: 0; }
+    .sections a:first-child { justify-self: end; }
+    .sections a:last-child { justify-self: start; }
 
 
     .sections a:hover { color: var(--ink); }
@@ -87,7 +93,7 @@
 
     @media (max-width: 980px) {
       .nav-inner { padding: 0 24px; }
-      .sections a { margin-left: 20px; }
+      .sections { column-gap: 20px; }
     }
 
     /* Blocks size to their content rather than the viewport. The 115vh height
@@ -426,7 +432,7 @@
     const FADE_FROM  = 20,  FADE_TO  = 220;
     const SHIFT_FROM = 60,  SHIFT_TO = 460;
     const MARK_TOP   = [30, 22];
-    const SECT_TOP   = [86, 62];
+    const SECT_TOP   = [92, 62];
     const MARK_SCALE = [1, 0.55];
 
     let markShift = null;
