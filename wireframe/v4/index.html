@@ -238,7 +238,7 @@
     .tab-desc { display: block; font-size: 12px; color: var(--muted); line-height: 1.5; }
     .panel { padding: 0; }
     .panel-intro {
-      font-size: 16px; line-height: 1.7;
+      font-size: 16px; line-height: 1.7; text-align: center;
       margin: 0 auto 24px; max-width: 620px; color: var(--ink);
     }
 
@@ -685,40 +685,40 @@
          object before asking for the order. -->
     <figure class="piece-media">
       <div class="lead-box"></div>
-      <figcaption class="diagram-caption">Lead image: the instrument, perhaps in a scene. Image or interactive image; the designer&rsquo;s space.</figcaption>
+      <figcaption class="diagram-caption">Image or video: the instrument in a setting. Design decision.</figcaption>
     </figure>
     </div>
 
     <!-- 2 · Orientation -->
     <section class="sec editorial">
-      <p class="editorial-text">Roughly 120 words introducing the instrument concretely: its shape, its material, the serial number it carries. Plain prose in a single measure, no heading.</p>
-      <p class="editorial-pull">&ldquo;Pull quote that gives visual emphasis and draws the reader deeper into the instrument.&rdquo;</p>
-      <p class="editorial-text">A second short paragraph describing what comes with the instrument: warranty, what the order process looks like, a brief orientation to key features before the reader moves into the order section.</p>
+      <p class="editorial-text">The Neotone One is an electronic instrument with a body made of premium hardwood. Under each of its twenty tonefields is a sensor array that interprets the pressure, location, and precise gesture of every strike. Its novel approach to sampler design creates a rich and nuanced sound, making it feel surprisingly close to playing an acoustic instrument.</p>
+      <p class="editorial-pull">A study, and an extension of the handpan.</p>
+      <p class="editorial-text">The instrument supports hundreds of scales, including those you design yourself, so you become an instrument maker as well as a player. Everything you create is fully extendable to your digital setup via MIDI.</p>
     </section>
 
     <!-- 3 · Specs strip -->
     <section class="sec specs-strip">
       <div class="spec-cell" onclick="specFocus(this, 'Material')">
         <span class="spec-label">Material</span>
-        <span class="spec-value">Hand selected instrument grade hardwood</span>
+        <span class="spec-value">Hardwood body in ash, oak, mahogany, cherry, or walnut.</span>
       </div>
       <div class="spec-cell" onclick="specFocus(this, 'Sound')">
         <span class="spec-label">Sound</span>
-        <span class="spec-value">Cor sound engine, samples from world-class instruments</span>
+        <span class="spec-value">Up to 1,240 unique samples in a single scale.</span>
       </div>
       <div class="spec-cell" onclick="specFocus(this, 'Control')">
         <span class="spec-label">Control</span>
-        <span class="spec-value">20 tonefields, gesture resolution, fully assignable</span>
+        <span class="spec-value">20 tonefields sensing pressure, location, and gesture. Fully assignable.</span>
       </div>
       <div class="spec-cell" onclick="specFocus(this, 'Scales')">
         <span class="spec-label">Scales</span>
-        <span class="spec-value">Unlimited, including harmonics, crosstalk, and articulation</span>
+        <span class="spec-value">Unlimited. Hundreds curated. Adjustable harmonics and crosstalk.</span>
       </div>
       <div class="spec-cell" onclick="specFocus(this, 'Lead time')">
         <span class="spec-label">Lead time</span>
-        <span class="spec-value">~60 days, or stock available immediately</span>
+        <span class="spec-value">~60 days, or from stock when available.</span>
       </div>
-      <div class="spec-diagram-box"><span class="spec-diagram-note" id="spec-diagram-caption">Interactive diagram: select a spec above and the corresponding part of the instrument highlights.</span></div>
+      <div class="spec-diagram-box"><span class="spec-diagram-note" id="spec-diagram-caption">Interactive product diagram: select a spec above to highlight.</span></div>
     </section>
 
     <!-- 3b · neOS. The software is part of the instrument today, so it is
@@ -730,22 +730,22 @@
       <div class="neos-body">
         <span class="neos-kicker">Software</span>
         <h2 class="neos-title">neOS</h2>
-        <p class="neos-text">The software every Neotone One runs. It holds the scales, the gallery and the settings, it is where scales are built and shared, and it updates over the air, so an instrument keeps changing after it leaves the workshop. It comes with the instrument.</p>
+        <p class="neos-text">Included with every Neotone One. This is where you set the instrument&rsquo;s sound and touch, build scales and share them, and connect over MIDI. It updates over the air, so the instrument keeps improving after it leaves the workshop.</p>
         <div class="neos-doors">
         <a class="neos-door" href="manual.html">
           <span class="door-kind">Reference</span>
           <span class="door-title">The manual</span>
-          <span class="door-desc">Every control, in three depths.</span>
+          <span class="door-desc">Every control explained.</span>
         </a>
         <a class="neos-door" href="manual-scales.html">
           <span class="door-kind">Walkthrough</span>
           <span class="door-title">Scales</span>
-          <span class="door-desc">Build one, guided, in a few minutes.</span>
+          <span class="door-desc">Build your first scale.</span>
         </a>
-        <a class="neos-door" href="integrating-integral.html">
-          <span class="door-kind">The idea</span>
-          <span class="door-title">Integrating Integral</span>
-          <span class="door-desc">In Tonefield.</span>
+        <a class="neos-door" href="manual-scales.html#harmony-wizard">
+          <span class="door-kind">Going deeper</span>
+          <span class="door-title">The Harmony Wizard</span>
+          <span class="door-desc">In the manual.</span>
         </a>
       </div>
       </div>
@@ -757,11 +757,11 @@
       <div class="tabs sans">
         <button class="tab active" id="tab-build" onclick="switchFork('build')">
           <span class="tab-title">Built to Order</span>
-          <span class="tab-desc">Built for you in Budapest. About six weeks.</span>
+          <span class="tab-desc">Built to your specification. About sixty days.</span>
         </button>
         <button class="tab" id="tab-stock" onclick="switchFork('stock')">
           <span class="tab-title">From Stock</span>
-          <span class="tab-desc">Finished instruments at the workshop, ready to ship.</span>
+          <span class="tab-desc">Finished instruments, ready to ship.</span>
         </button>
       </div>
 
@@ -769,42 +769,42 @@
 
         <!-- Built to Order -->
         <div id="panel-build" class="panel">
-          <p class="panel-intro">Choose the wood. A deposit confirms your place in the build queue.</p>
+          <p class="panel-intro">Select your wood.</p>
 
           <div class="material-grid">
             <div class="material-card" id="wood-ash" onclick="selectWood('Ash',0)">
               <div class="material-swatch"></div>
               <div class="material-card-body">
                 <p class="material-name">Ash</p>
-                <p class="material-note">Light grain, bright attack</p>
+                <p class="material-note">Pale, open grain</p>
               </div>
             </div>
             <div class="material-card" id="wood-oak" onclick="selectWood('Oak',0)">
               <div class="material-swatch"></div>
               <div class="material-card-body">
                 <p class="material-name">Oak</p>
-                <p class="material-note">Dense body, warm sustain</p>
+                <p class="material-note">Straight grain, mid brown</p>
               </div>
             </div>
             <div class="material-card active" id="wood-mahogany" onclick="selectWood('Mahogany',90)">
               <div class="material-swatch"></div>
               <div class="material-card-body">
                 <p class="material-name">Mahogany</p>
-                <p class="material-note">Rich mid-range, full resonance</p>
+                <p class="material-note">Fine grain, reddish</p>
               </div>
             </div>
             <div class="material-card" id="wood-cherry" onclick="selectWood('Cherry',90)">
               <div class="material-swatch"></div>
               <div class="material-card-body">
                 <p class="material-name">Cherry</p>
-                <p class="material-note">Refined tone, medium weight</p>
+                <p class="material-note">Warm and even, darkens with age</p>
               </div>
             </div>
             <div class="material-card" id="wood-walnut" onclick="selectWood('Walnut',190)">
               <div class="material-swatch"></div>
               <div class="material-card-body">
                 <p class="material-name">Walnut</p>
-                <p class="material-note">Dark grain, deep bass response</p>
+                <p class="material-note">Dark, rich grain</p>
               </div>
             </div>
           </div>
@@ -856,7 +856,7 @@
 
         <!-- From Stock -->
         <div id="panel-stock" class="panel hidden">
-          <p class="panel-intro">Each stock instrument is a specific, complete object with its own history. Select one below.</p>
+          <p class="panel-intro">Select your instrument.</p>
 
           <div id="stock-available">
             <div class="stock-grid">
@@ -945,7 +945,7 @@
 
           <div class="block sans" style="margin-bottom: 14px;">
             <p class="block-label">Notify me when new stock becomes available</p>
-            <p class="block-desc" style="margin-top:4px;">We'll email you when a new instrument is listed. No account required.</p>
+            <p class="block-desc" style="margin-top:4px;">We'll email you when a new instrument is listed.</p>
             <form class="email-row" onsubmit="handleNotify(event)">
               <input type="email" placeholder="Email address" required />
               <button class="subscribe-btn" type="submit">Notify me</button>
@@ -970,7 +970,7 @@
         <div class="step-cell">
           <span class="step-number">2</span>
           <p class="step-title">Workshop contact</p>
-          <p class="step-desc">Someone from the workshop will contact you to confirm your configuration and answer any questions before the build begins.</p>
+          <p class="step-desc">Someone from the workshop will reach out to confirm your order and answer questions before the build begins.</p>
         </div>
         <div class="step-cell">
           <span class="step-number">3</span>
@@ -980,7 +980,7 @@
         <div class="step-cell">
           <span class="step-number">4</span>
           <p class="step-title">Delivery</p>
-          <p class="step-desc">Your instrument will arrive with its <a href="manual.html">manual</a>, warranty, and setup guidance.</p>
+          <p class="step-desc">You will receive a tracking number once your instrument ships, as well as support for customs and other logistics.</p>
         </div>
       </div>
       <div class="terms terms-box">
@@ -989,7 +989,7 @@
       </div>
       <div class="q-block">
         <span class="q-label">Ask us</span>
-        <p class="q-desc">Anything the page has not covered. Someone from the workshop replies.</p>
+        <p class="q-desc">Anything this page has not covered, reach out and someone from the workshop will reply.</p>
         <input class="field" placeholder="Your name" />
         <input class="field" placeholder="Email" />
         <textarea class="field" rows="3" placeholder="Your question or message" style="resize:vertical;"></textarea>
@@ -1004,24 +1004,27 @@
       <span class="sec-label">Play one first</span>
       <p class="sec-line">If you&rsquo;d like to play a Neotone One in person, there are three ways.</p>
       <div class="way">
+        <span class="step-number">1</span>
         <h3 class="way-title">Visit the workshop</h3>
-        <p class="way-text">Our full stock, available to play. Sessions are by appointment and unhurried. Write to arrange a time, bring an afternoon.</p>
+        <p class="way-text">Tour the production process and play our collection of stock instruments. Sessions are by appointment, write us to arrange a time.</p>
         <a class="path-cta" onclick="alert('Opens an email to the workshop.')">Write to us &rarr;</a>
         <a class="stack-card path-card" href="#" onclick="pieceLink(event)">
           <div class="stack-img"></div>
           <p class="stack-title">Every instrument starts with a conversation</p>
-          <p class="stack-desc">Read about the workshop: the production line, told through the twelve people who run it.</p>
+          <p class="stack-desc">Read about the workshop: the production process, told through the twelve people who run it.</p>
         </a>
       </div>
       <div class="way" id="places">
-        <h3 class="way-title">Play one at a partner space</h3>
-        <p class="way-text">Studios, schools and showrooms that keep an instrument and will make time for you. Lessons and consultations are theirs to arrange; the instrument is there either way.</p>
+        <span class="step-number">2</span>
+        <h3 class="way-title">Visit a partner location</h3>
+        <p class="way-text">Studios, schools and showrooms that keep an instrument and offer in-person sessions. Contact the location to arrange a time.</p>
       </div>
       <div class="artists-grid" id="places-list"></div>
 
       <div class="way" id="artist-directory">
+        <span class="step-number">3</span>
         <h3 class="way-title">Reach out to a Neotone artist</h3>
-        <p class="way-text">Artists host sessions in their studios and homes around the world; some answer questions over a call, in your language. Sessions are free, and if you order afterwards your host&rsquo;s code takes five percent off and credits them.</p>
+        <p class="way-text">Neotone artists can speak with you about the instrument in your native language and answer questions. Artists can also provide a code that takes five percent off your purchase.</p>
       </div>
       <div class="network">
         <div class="opt-row sans" id="artist-filters"></div>
@@ -1058,7 +1061,7 @@
 
     <!-- 7 · Mailing list, the same component as the feed's end -->
     <section class="sec">
-      <div class="subscribe">
+      <div class="subscribe" id="subscribe">
         <span class="subscribe-label">Mailing list</span>
         <p>Updates from the Neotone workshop</p>
         <form class="subscribe-form" onsubmit="handleSubscribe(event)">
@@ -1351,7 +1354,8 @@
        attribute parsing. */
     const ACCESSORIES = [
       { name: 'Neotone Semi-Rigid Case', desc: 'Safely transport and store your Neotone One', included: true },
-      { name: 'Donut Stand',             desc: 'Low profile protection when playing on a flat surface', included: true },
+      { name: 'Charger',                 desc: '12 V adapter', included: true },
+      { name: 'Donut Stand',             desc: 'Low profile protection when playing on a flat surface', price: 25 }, /* price to confirm; not included */
       { name: 'Desktop Stand',           desc: 'For tabletop display and cable organization', price: 12 },
       { name: 'Intech Knot',             desc: 'Midi USB host for controlling Neotone One with external instruments', price: 80 },
       { name: 'Headphone “L” Adapter', desc: 'Low profile headphone connection', price: 2, vis: 'acc-fifth' },
@@ -1874,10 +1878,19 @@
       alert("Mailing list sign-up.");
     }
 
+    /* What the diagram would say beside each highlighted part. The strip
+       stays short; the detail lives here, where a reader has asked for it. */
+    const SPEC_NOTES = {
+      'Material':  '3.7 kg in walnut, 4.2 kg in ash. 47 cm across, 16 cm tall.',
+      'Sound':     'Up to 1,240 samples in a scale, and every strike mixes several by where and how hard it lands. Stereo line out and headphones. Eight hours on a battery, four to charge.',
+      'Control':   'Position to within a centimetre, force to within a gram, about five milliseconds from strike to sound. The wooden body senses too: eighteen areas, and six MIDI control surfaces. MIDI in and out on DIN and USB, and a pedal input.',
+      'Scales':    'Hundreds in the gallery, from players and from acoustic makers. Build your own, and choose the recording each note is played from.',
+      'Lead time': 'Built to order in about sixty days. Stock instruments ship now.'
+    };
     function specFocus(cell, label) {
       document.querySelectorAll(".spec-cell").forEach(function(c){ c.classList.remove("active"); });
       cell.classList.add("active");
-      document.getElementById("spec-diagram-caption").textContent = "Highlighting: " + label + ".";
+      document.getElementById("spec-diagram-caption").textContent = label + ": " + (SPEC_NOTES[label] || "");
     }
 
     function pieceLink(e) {
