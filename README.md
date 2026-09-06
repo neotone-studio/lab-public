@@ -12,13 +12,13 @@ python3 -m http.server 7899
 
 ## What is current
 
-**`wireframe/v4/`** is the live work. Masthead over Tonefield and Instruments, one publication feed with real pieces, an Instruments submenu, a dated Updates archive, the purchase flow, the manual and the legal page.
+**`wireframe/current/`** is the live work. Masthead over Tonefield and Instruments, one publication feed with real pieces, an Instruments submenu, a dated Updates archive, the purchase flow, the manual and the legal page.
 
 Everything else is kept for reference and stays browsable by URL, so a past version can be opened alongside the current one while working.
 
 | Path | What it is |
 |---|---|
-| `wireframe/v4/` | **Current.** Tonefield and Instruments under a masthead, Updates archive |
+| `wireframe/current/` | **Current.** Tonefield and Instruments under a masthead, Updates archive |
 | `wireframe/v3/` | Masthead over Culture, Instrument, Craft. The step between v2 and v4 |
 | `wireframe/v2/` | Three wordmark destinations: Neotone, One, neOS. The article system and purchase flow were built here |
 | `wireframe/v1/` | Superseded structure. Its `site-structure.md` documents the purchase logic v2 ports |
@@ -40,8 +40,8 @@ Everything else is kept for reference and stays browsable by URL, so a past vers
 
 ### Per version
 
-- [`wireframe/v4/README.md`](wireframe/v4/README.md). What changed from v3, growth, open questions.
-- [`wireframe/v4/site-structure.md`](wireframe/v4/site-structure.md). Component reference for the current build: pages, nav, feed, purchase state, storage keys, what is duplicated. For whoever builds it.
+- [`wireframe/current/README.md`](wireframe/current/README.md). What changed from v3, growth, open questions.
+- [`wireframe/current/site-structure.md`](wireframe/current/site-structure.md). Component reference for the current build: pages, nav, feed, purchase state, storage keys, what is duplicated. For whoever builds it.
 - [`wireframe/v3/README.md`](wireframe/v3/README.md). The masthead decision and the scroll-linked bar.
 - [`wireframe/v2/README.md`](wireframe/v2/README.md) and [`site-structure.md`](wireframe/v2/site-structure.md). Where most of the decisions were made; still the fullest record of the purchase flow.
 - [`wireframe/v1/site-structure.md`](wireframe/v1/site-structure.md). Full component reference for the superseded build. Still the source for purchase logic.

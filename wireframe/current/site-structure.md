@@ -1,6 +1,6 @@
 # Site Structure, v4
 
-Component reference for `wireframe/v4`. What exists, what state it holds, and behaviour that is not obvious from the markup. For why anything is the way it is, read [README.md](README.md) and the content structure document in the workspace `docs/`.
+Component reference for `wireframe/current`. What exists, what state it holds, and behaviour that is not obvious from the markup. For why anything is the way it is, read [README.md](README.md) and the content structure document in the workspace `docs/`.
 
 Every page is standalone HTML with inline CSS and JavaScript. No build step, no dependencies. Shared components are duplicated across pages, and a change to one has to be applied to every page that carries it. The last section says which.
 
