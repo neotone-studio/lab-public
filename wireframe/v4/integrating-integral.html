@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Why the note names change as you build · Tonefield</title>
+  <title>Integrating Integral &middot; Tonefield</title>
   <style>
     :root { --ink: #111; --line: #d9d9d9; --muted: #4f4f4f; --green: #2a7a2a; --max: 1180px; }
 
@@ -231,9 +231,15 @@
     .piece-media { margin: 0 0 56px; }
     .video-box { width: 100%; aspect-ratio: 16 / 9; background: #ededed; }
     .piece-caption { margin: 12px 0 0; font-size: 12px; line-height: 1.5; color: var(--muted); }
+    /* Media inside the reading measure: the same grey box and caption as
+       everywhere else a placeholder appears, at the width of the prose. */
+    .media-box { width: 100%; aspect-ratio: 3 / 2; background: #ededed; }
+    .piece-body .piece-media { margin: 44px 0 48px; }
     .piece-body { max-width: 680px; margin: 0 auto; }
     .piece-body p { margin: 0 0 1.45em; font-size: 17px; line-height: 1.75; }
     .piece-body p:last-child { margin-bottom: 0; }
+    /* Wireframe note, not part of the piece: says what this text is for. */
+    .piece-body .piece-note { margin: 2.6em 0 0; font-size: 12px; line-height: 1.5; color: var(--muted); }
     .piece-sub {
       margin: 2.4em 0 1em; font-size: 11px; font-weight: 700;
       text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted);
@@ -283,38 +289,40 @@
   <article class="piece">
 
     <header class="piece-head">
-      <span class="piece-kicker">Craft</span>
-      <h1 class="piece-title">Why the note names change as you build</h1>
-      <p class="piece-standfirst">The Scale Builder respells notes as you place them. What looks like a quirk is the instrument reading what kind of scale you are making.</p>
+      <span class="piece-kicker">Scales</span>
+      <h1 class="piece-title">Integrating Integral</h1>
     </header>
 
-    <figure class="piece-media">
-      <div class="video-box"></div>
-      <figcaption class="piece-caption">The respelling happening in the Scale Builder. Video, or prose built around video: format is a production decision, not a structural one.</figcaption>
-    </figure>
-
     <div class="piece-body">
-      <p>Build a D Kurd and something quiet happens. You place the note your ear calls an A sharp, and the instrument writes it down as a B flat.</p>
+      <p>The first Hang scale was called Integral. PanART&rsquo;s name for it connotes wholeness, consonance, integration, and I think it also connotes an intention: that the notes of the instrument, and the harmonics inside each note, were meant to fit together as one resonant system. Whether any Hang ever achieved that is another question. But it&rsquo;s a beautiful problem, and it&rsquo;s worth asking what it would actually take.</p>
 
-      <p>Nothing has changed about the pitch. The frequency is identical, the tonefield is identical, what you hear is identical. What changed is the name, and the name is the instrument telling you what it thinks you are building.</p>
+      <p>Start with the craft of tuning. Bracketing whether the instrument is acoustic or digital, there&rsquo;s a project of getting a tonefield&rsquo;s fundamental to resonate at exactly the frequency you intend. That is, as close to exactly as the physical world allows. So, closer to exactly. Then, to calculate what the pure ratios of that fundamental&rsquo;s overtones would be, and get those to sound exactly too. And God knows, in hammered metal, there&rsquo;s a bit of a dance in balancing those three tones.</p>
 
-      <p class="piece-sub">A scale is a set of positions</p>
+      <p>If that part is done, in principle, we can start to look at the relationships between tonefields. And these are multiple relationships, remember: between the fundamentals, between each of the overtones, and between the overtones and the fundamentals. Because they&rsquo;re a result of craft, every one of them is an independent design choice. The harmonics aren&rsquo;t an uncontrolled consequence of the fundamental. It&rsquo;s three notes in one, interacting with three notes in another.</p>
 
-      <p>A scale is not a list of pitches. It is a list of positions relative to a root, and every position has a conventional name. The second degree of a Kurd is a flattened second, so it is written as a flat. Writing it as a raised first would describe the same sound and the wrong idea.</p>
+      <figure class="piece-media">
+        <div class="media-box"></div>
+        <figcaption class="piece-caption">Image: a diagram of two tonefields, six tones, and the lines of relationship between them.</figcaption>
+      </figure>
 
-      <p>This is why the sharps and flats toggle governs only the root. Once the instrument knows the root and recognises the shape you are assembling, every other spelling follows from it. Choose D as your root and the flattened second is a B flat. Choose C sharp and the same position becomes a D natural, because a C sharp Kurd is spelled from a different starting point.</p>
+      <p>The simplest tuning aligns the non-octave harmonic of one tonefield, its twelfth, with the fundamental of another. I imagine it has never been achieved on any acoustic handpan. Do that around the instrument and you&rsquo;ve built a scale in pure fifths, which is to say a Pythagorean tuning, the oldest one there is. To have such a scale, rendered in the timbral vocabulary of the handpan, would be a very interesting thing to place next to its equal-tempered twin: a scale rendered just as precisely, but with the fundamentals tuned to equal temperament rather than to each other&rsquo;s harmonics. Setting the two next to each other would be instructive at least. This is the difference, you could say, between a pure-tuned handpan and an equal-tempered one, and you&rsquo;d hear it most in the thirds.</p>
 
-      <p class="piece-sub">Why the instrument does this at all</p>
+      <figure class="piece-media">
+        <div class="video-box"></div>
+        <figcaption class="piece-caption">Video: two recordings, the same scale tuned both ways.</figcaption>
+      </figure>
 
-      <p>It would be simpler to store pitches and print whatever name was typed. Most software does. The cost lands later, when a player writes a scale down to share it, or reads one from a maker, and the notation says something different from what the scale is.</p>
+      <p>I can very well imagine achieving this on a Neotone. And I can imagine achieving it with the Anima, which uses electromagnets to drive the tonefields of an acoustic handpan. Whether you want that level of precision on an acoustic instrument is another question. But let&rsquo;s say it&rsquo;s possible. Let&rsquo;s say the craft magic is removed, replaced with science, and the door is opened. To the pure magic of sounding ratios. Unpolluted by the pesky physical world.</p>
 
-      <p>The Scale Builder is doing the thing a musician does without thinking: hearing a position rather than a pitch, and writing it the way it functions. Getting that right is a small piece of lutherie, done in software rather than in metal.</p>
+      <p>Then what? When you have a baseline of craft that allows for the construction of very specific scales, you also have a way into other musical cultures and other philosophies of building a musical system. Kurd, Amara, Pygmy. Each of the names the handpan world has given its scales is a door, and each deserves a walk through.</p>
+
+      <p class="piece-note">[This is an early draft, placed here to establish the register. It&rsquo;s not a finished piece.]</p>
     </div>
 
     <nav class="next" aria-label="Read next">
       <span class="next-label">Read next</span>
       <ul class="next-list">
-        <li><a href="tonefield.html#digital-lutherie"><span class="next-kicker">Sensing</span><span class="next-title">Digital lutherie</span></a></li>
+        <li><a href="tonefield.html#three-journeys"><span class="next-kicker">Origins</span><span class="next-title">Three journeys of discovery</span></a></li>
       </ul>
     </nav>
 

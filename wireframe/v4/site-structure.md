@@ -15,8 +15,8 @@ Every page is standalone HTML with inline CSS and JavaScript. No build step, no 
 | `checkout.html` | Product page, second half | `instruments` | `one` |
 | `anima.html` | Placeholder | `instruments` | `anima` |
 | `treangle.html` | Placeholder | `instruments` | `treangle` |
-| `neotone-golsa-nazari.html` | Article | `tonefield` | |
-| `neos-note-names.html` | Article | `tonefield` | |
+| `bach-on-a-handpan.html` | Article | `tonefield` | |
+| `transformation-alchemy-mystery.html` | Article | `tonefield` | |
 | `updates.html` | Container (Updates), utility | none | |
 | `manual.html` | Utility | none | |
 | `manual-scales.html` | Utility | none | |

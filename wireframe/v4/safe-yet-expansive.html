@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tonefield · Neotone</title>
+  <title>A safe yet expansive possibility space &middot; Tonefield</title>
   <style>
     :root { --ink: #111; --line: #d9d9d9; --muted: #4f4f4f; --green: #2a7a2a; --max: 1180px; }
 
@@ -206,105 +206,66 @@
     }
     .opening {
       max-width: 720px; margin-left: auto; margin-right: auto;
-      padding: 64px 0 0; text-align: center;
+      padding: 104px 0 88px; text-align: center;
       font-size: 21px; font-weight: 400; line-height: 1.7; color: var(--ink);
     }
     .opening-name { font-size: 34px; line-height: 1; letter-spacing: -0.01em; white-space: nowrap; }
-    .opening-sub { display: block; margin-top: 14px; font-size: 15px; line-height: 1.4; color: var(--muted); letter-spacing: 0.02em; }
-    /* The editor's note is a masthead document rather than a piece, so it sits
-       under the line that names the publication and never in the feed. */
-    .opening-note { margin: 18px 0 56px; text-align: center; font-size: 13px; }
-    .opening-note a { color: var(--muted); border-bottom: 1px solid var(--line); }
-    .opening-note a:hover { color: var(--ink); border-bottom-color: var(--ink); }
     @media (prefers-reduced-motion: reduce) {
       .opening-wrap { animation: none; }
     }
 
-    /* ---- Container feed ----
-       Previews, not cards. You read a little in place and may watch something
-       before deciding to open the piece. Because a preview can carry media, the
-       block itself is not a link: clicking a video has to play it. The title is
-       the target, with a quiet continue link at the end. This amends principle
-       14, which assumes a block with nothing interactive inside it. */
-    /* No opening line here: the masthead names Neotone and the pieces say what it is,
-   so the feed itself opens the page and carries the entry fade. */
-    .feed { max-width: var(--max); margin: 0 auto; padding: 0 48px 0;
-            animation: opening-in 760ms ease 140ms both; }
-    @media (prefers-reduced-motion: reduce) { .feed { animation: none; } }
-    .feed-item { max-width: 680px; margin: 0 auto; scroll-margin-top: 140px; }
-    .feed-item + .feed-item { margin-top: 96px; }
-    /* Every piece is built the same way: image, kicker, title, excerpt, link,
-       at the same size, with the same gap. The lead and second carry classes
-       for the editorial rule that the first two show one register each, and
-       nothing else distinguishes them. Earlier versions gave the lead a wider
-       image and put the second's image below its text to force both titles
-       into a 900px viewport; together they made the feed read as three
-       different layouts. Uniform wins. On a 900px screen the second piece's
-       kicker sits at the edge; its title is inside the first screen on
-       anything taller. */
-    .feed-media { width: 100%; aspect-ratio: 16 / 9; background: #ededed; margin-bottom: 24px; }
-    .feed-kicker {
-      display: block; margin-bottom: 12px;
+    /* ---- Article ----
+       Articles and utility pages render identically. The only difference is the
+       mark in the masthead: an article carries its container's mark, a utility
+       page carries the plain Neotone mark. Media runs to the content grid;
+       reading stays at a measure. */
+    .piece { max-width: var(--max); margin: 0 auto; padding: 0 48px 40px; }
+    .piece-head { max-width: 680px; margin: 0 auto; padding: 64px 0 44px; }
+    .piece-kicker {
+      display: block; margin-bottom: 16px;
       font-size: 11px; font-weight: 700; text-transform: uppercase;
       letter-spacing: 0.14em; color: var(--muted);
     }
-    .feed-title { margin: 0 0 16px; font-size: 28px; font-weight: 400; line-height: 1.2; letter-spacing: -0.01em; }
-    .feed-title a:hover { color: var(--muted); }
-    .feed-excerpt { margin: 0 0 18px; font-size: 16px; line-height: 1.7; }
-    .feed-more { font-size: 14px; font-style: italic; color: var(--muted); }
-    .feed-more:hover { color: var(--ink); text-decoration: underline; }
-    @media (max-width: 980px) { .feed { padding: 0 24px 0; } .feed-title { font-size: 24px; } }
-
-    /* ---- End of feed ----
-       Load more, then subscribe. Load more continues the reading; subscribing
-       is what you do once you have decided to stop, so putting the field first
-       would interrupt a reader who is still going. When the feed eventually
-       runs out the button goes and subscribe becomes the terminus, with nothing
-       rearranged.
-
-       The bar is the only solid black in the white part of the page, so it
-       reads as the end of the run and rhymes with the footer arriving under it.
-       Sits well below the last piece and close to the footer, so scrolling to
-       it feels like reaching the end rather than finding another section. */
-    .feed-end { max-width: var(--max); margin: 96px auto 0; padding: 0 48px; }
-    @media (max-width: 980px) { .feed-end { margin-top: 80px; padding: 0 24px; } }
-    .feed-end-inner { max-width: 680px; margin: 0 auto; }
-
-    .load-more {
-      display: block; width: 100%; background: #000; color: #fff;
-      border: none; padding: 18px 0; cursor: pointer;
-      font-family: inherit; font-size: 12px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.14em;
+    .piece-title { margin: 0 0 20px; font-size: 40px; font-weight: 400; line-height: 1.15; letter-spacing: -0.01em; }
+    .piece-standfirst { margin: 0; font-size: 18px; line-height: 1.6; color: var(--muted); }
+    .piece-media { margin: 0 0 56px; }
+    .video-box { width: 100%; aspect-ratio: 16 / 9; background: #ededed; }
+    .piece-caption { margin: 12px 0 0; font-size: 12px; line-height: 1.5; color: var(--muted); }
+    /* Media inside the reading measure: the same grey box and caption as
+       everywhere else a placeholder appears, at the width of the prose. */
+    .media-box { width: 100%; aspect-ratio: 3 / 2; background: #ededed; }
+    .piece-body .piece-media { margin: 44px 0 48px; }
+    .piece-body { max-width: 680px; margin: 0 auto; }
+    .piece-body p { margin: 0 0 1.45em; font-size: 17px; line-height: 1.75; }
+    .piece-body p:last-child { margin-bottom: 0; }
+    /* Wireframe note, not part of the piece: says what this text is for. */
+    .piece-body .piece-note { margin: 2.6em 0 0; font-size: 12px; line-height: 1.5; color: var(--muted); }
+    .piece-sub {
+      margin: 2.4em 0 1em; font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted);
     }
-    .load-more:hover { background: #222; }
+    @media (max-width: 980px) {
+      .piece-title { font-size: 30px; }
+      .piece-head { padding-top: 48px; }
+    }
 
-    /* ---- Subscribe ----
-       Not Tonefield: that is a publication, and this is a notice board. Not
-       "stay in touch" either, which promises a relationship from a company that
-       will write four times a year. Updates says plainly what it is. */
-    .subscribe { margin-top: 56px; }
-    .subscribe-label {
-      display: block; margin-bottom: 12px;
-      font-size: 11px; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.14em; color: var(--muted);
+    /* ---- Read next ----
+       Propulsion, not return: the masthead already handles going back. Chosen
+       for relevance rather than recency, and quiet enough to read as a coda. */
+    .next { max-width: 680px; margin: 56px auto 0; }
+    .next-label {
+      display: block; margin-bottom: 14px; font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted);
     }
-    .subscribe p { margin: 0 0 22px; font-size: 17px; line-height: 1.75; }
-    .subscribe-archive { color: var(--muted); border-bottom: 1px solid var(--line); }
-    .subscribe-archive:hover { color: var(--ink); border-bottom-color: var(--ink); }
-    .subscribe-form { display: flex; align-items: center; max-width: 420px; }
-    .subscribe-form input {
-      flex: 1; min-width: 0; background: none; color: var(--ink);
-      border: none; border-bottom: 1px solid var(--line);
-      padding: 8px 0; font-size: 15px; font-family: inherit;
+    .next-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+    .next-list li { border-bottom: 1px solid var(--line); }
+    .next-list a { display: block; padding: 15px 0; }
+    .next-kicker {
+      display: block; margin-bottom: 5px; font-size: 10px; text-transform: uppercase;
+      letter-spacing: 0.12em; color: var(--muted);
     }
-    .subscribe-form input::placeholder { color: var(--muted); }
-    .subscribe-form input:focus { outline: none; border-bottom-color: var(--ink); }
-    .subscribe-form button {
-      background: none; border: none; border-bottom: 1px solid var(--line);
-      color: var(--muted); padding: 8px 0 8px 16px;
-      font-size: 15px; font-family: inherit; cursor: pointer;
-    }
-    .subscribe-form button:hover { color: var(--ink); }
+    .next-title { font-size: 17px; }
+    .next-list a:hover .next-title { color: var(--muted); }
     /* Eased only while the bar is being held open or let go by hand.
        Scroll-driven movement stays untransitioned so it tracks the wheel. */
     nav.nav-eased .masthead,
@@ -325,88 +286,58 @@
     </div>
   </nav>
 
-  <!-- Tonefield. One feed, two registers, the kicker tells you which. The
-       running order is editorial: the first screen shows a craft piece and a
-       culture piece together, so a reader of either kind sees their own.
-       Every entry below is a piece genuinely in progress, sourced from the
-       1000th-instrument draft, the artist interviews, and the manual's third
-       register. Titles are working titles. -->
-  <!-- Opening. Same shape as the instrument page's: the name large, the
-       sentence plain. Tonefield is a coined word and this is where it gets its
-       meaning. Craft and culture are the two registers, named once here and
-       then carried by the kickers. -->
-  <div class="opening-wrap">
-    <h1 class="opening"><span class="opening-name">Tonefield</span><span class="opening-sub">On handpan craft and culture</span></h1>
-    <p class="opening-note"><a href="#" onclick="pieceLink(event)">From the editor</a></p>
-  </div>
+  <article class="piece">
 
-  <div class="feed">
+    <header class="piece-head">
+      <span class="piece-kicker">Learning</span>
+      <h1 class="piece-title">A safe yet expansive possibility space</h1>
+    </header>
 
-      <article class="feed-item lead" id="transformation-alchemy-mystery">
-        <div class="feed-media"></div>
-        <span class="feed-kicker">Myth</span>
-        <h2 class="feed-title"><a href="transformation-alchemy-mystery.html">Transformation, Alchemy, Mystery</a></h2>
-        <p class="feed-excerpt">The handpan has a whole spiritual, mysterious thing going on. There&rsquo;s the exotic language around the different scales, and there&rsquo;s the idea that every instrument is totally unique in its sound. So even if the notion of a scale as a list of individual notes held up, which it doesn&rsquo;t, there&rsquo;s a sense that a scale on a handpan is imbued with something more: the qualities of the metal, the craftsmanship of the maker, the proportions of the crosstalk and harmonics.</p>
-        <a class="feed-more" href="transformation-alchemy-mystery.html">Continue reading &rarr;</a>
-      </article>
+    <div class="piece-body">
+      <p>A popular way for beginners to learn a piece of music these days is some version of scrolling piano roll notation. You know the YouTube video: little colored bars fall down the screen onto the keys you&rsquo;re supposed to play. The format is named for the player piano roll, where every event sits on a mechanical grid that tells you exactly what to hit and when. Its virtue is that it removes all the overhead of parsing music notation. Or of playing by ear, which, to most people, is a form of magic.</p>
 
-      <article class="feed-item second" id="safe-yet-expansive">
-        <div class="feed-media"></div>
-        <span class="feed-kicker">Learning</span>
-        <h2 class="feed-title"><a href="safe-yet-expansive.html">A safe yet expansive possibility space</a></h2>
-        <p class="feed-excerpt">A popular way for beginners to learn a piece of music these days is some version of scrolling piano roll notation. You know the YouTube video: little colored bars fall down the screen onto the keys you&rsquo;re supposed to play. The format is named for the player piano roll, where every event sits on a mechanical grid that tells you exactly what to hit and when.</p>
-        <a class="feed-more" href="safe-yet-expansive.html">Continue reading &rarr;</a>
-      </article>
+      <figure class="piece-media">
+        <div class="media-box"></div>
+        <figcaption class="piece-caption">Image: a frame from a scrolling piano-roll tutorial.</figcaption>
+      </figure>
 
-      <article class="feed-item" id="bach-on-a-handpan">
-        <div class="feed-media"></div>
-        <span class="feed-kicker">Lab</span>
-        <h2 class="feed-title"><a href="bach-on-a-handpan.html">Bach on a handpan?</a></h2>
-        <p class="feed-excerpt">At the end of an unassuming street in Győrújbarát, a village in the northwest of Hungary, a very unusual instrument fills the living room of an otherwise unassuming house. Four wooden towers of three acoustic handpans each, strewn with circuit boards, cables, and mechanical strikers, snake their way to a central control unit and a MIDI keyboard. It sits somewhere between a mad scientist&rsquo;s version of Keith Emerson&rsquo;s modular Moog and an early prototype of the Marble Machine.</p>
-        <a class="feed-more" href="bach-on-a-handpan.html">Continue reading &rarr;</a>
-      </article>
+      <p>The flipside is that this way of learning makes a song into something incredibly mechanical. Which, actually, reproduces the way many people who can read music approach learning a song. You decode which note you&rsquo;re supposed to hit and when, and where it is on your instrument. Then you hit it at the right time, along with all the other notes at the right time, and hopefully what comes out is music. At its worst, it feels like a game of whack-a-mole. In principle, you could listen to what comes out and verify that yes, indeed, it&rsquo;s music. Or at least that it somewhat resembles the song you were trying to play.</p>
 
-      <article class="feed-item" id="accidentally-microtonal">
-        <div class="feed-media"></div>
-        <span class="feed-kicker">Tuning</span>
-        <h2 class="feed-title"><a href="accidentally-microtonal.html">Accidentally microtonal</a></h2>
-        <p class="feed-excerpt">The harmonics hammered into a handpan&rsquo;s tonefield are perfect ratios: two to one for the octave, three to two for the fifth above it. But they aren&rsquo;t naturally occurring harmonics, so they aren&rsquo;t perfect. And even naturally occurring harmonics aren&rsquo;t perfect in the Pythagorean sense, because they exist in the material world.</p>
-        <a class="feed-more" href="accidentally-microtonal.html">Continue reading &rarr;</a>
-      </article>
+      <p>Piano roll also has some of the virtues of tablature, which swaps abstract symbolic notation for a symbol that directly represents the playing surface of the instrument. Hit this place here. The trade-off, which is big, is the same fact: it&rsquo;s purely mechanical. You could not be listening at all and still reproduce the correct notes at the correct time. You&rsquo;re also being handed a sequence of events with no musical context whatsoever. Nothing that matches the way we actually hear music, which is in relation to a tonal center. The only context is whatever the physical design of the playing surface conveys. Music notation, by contrast, gives you a subset of the notes a piano roll gives you. Whatever dots fall on those lines and spaces are a much more focused subset of what you hear. A much simpler stream of information to parse.</p>
 
-      <article class="feed-item" id="integrating-integral">
-        <div class="feed-media"></div>
-        <span class="feed-kicker">Scales</span>
-        <h2 class="feed-title"><a href="integrating-integral.html">Integrating Integral</a></h2>
-        <p class="feed-excerpt">The first Hang scale was called Integral. PanART&rsquo;s name for it connotes wholeness, consonance, integration, and I think it also connotes an intention: that the notes of the instrument, and the harmonics inside each note, were meant to fit together as one resonant system. Whether any Hang ever achieved that is another question. But it&rsquo;s a beautiful problem, and it&rsquo;s worth asking what it would actually take.</p>
-        <a class="feed-more" href="integrating-integral.html">Continue reading &rarr;</a>
-      </article>
+      <p>At the other end of the spectrum from reproduce-this-event-at-this-time is something closer to improvisation, to playing by ear. As a way of learning, this approach was most thoroughly developed in the early twentieth century by the composer Carl Orff, in what became the Orff Schulwerk. It&rsquo;s still alive and well in Montessori, Waldorf, and other alternative primary schools. Its signature objects are the familiar wooden xylophone with removable bars, and the notion that in a pentatonic scale, anything you play sounds good. A pentatonic scale is the five notes you get from the black keys of a piano. You see where I&rsquo;m going with this.</p>
 
-      <article class="feed-item" id="three-journeys">
-        <div class="feed-media"></div>
-        <span class="feed-kicker">Origins</span>
-        <h2 class="feed-title"><a href="#" onclick="pieceLink(event)">Three journeys of discovery</a></h2>
-        <p class="feed-excerpt">Nobody was shown how to make a handpan. Not the second time it was discovered, and not the third. PanART has been highly motivated, for a long time, to own the design of this instrument. Understandably: they put a lot into developing it.</p>
-        <a class="feed-more" href="#" onclick="pieceLink(event)">Continue reading &rarr;</a>
-      </article>
-  </div>
+      <figure class="piece-media">
+        <div class="media-box"></div>
+        <figcaption class="piece-caption">Image: an Orff xylophone with some of its bars removed.</figcaption>
+      </figure>
 
-  <div class="feed-end">
-    <div class="feed-end-inner">
+      <p>There&rsquo;s a popular video that feels relevant here: Bobby McFerrin hopping around a pentatonic scale on stage, with an audience singing every note back to him before he&rsquo;s sung it. And of course the pentatonic scale shows up in folk traditions and ancient musical cultures the world over.</p>
 
-      <button class="load-more" onclick="loadMore()">Load more</button>
+      <figure class="piece-media">
+        <div class="video-box"></div>
+        <figcaption class="piece-caption">Video: the McFerrin video.</figcaption>
+      </figure>
 
-      <div class="subscribe">
-        <span class="subscribe-label">Mailing list</span>
-        <p>Updates from the Neotone workshop</p>
-        <form class="subscribe-form" onsubmit="handleSubscribe(event)">
-          <input type="email" placeholder="Email" required />
-          <button type="submit" aria-label="Subscribe">&rarr;</button>
-        </form>
-      </div>
+      <p>The ethos of the handpan invites a holistic, intuitive, and deeply human approach to exploring and learning music. The difference comes down to what makes a handpan so satisfying at first: anything you play harmonizes right away. The handpan is something like a grown-up Orff instrument. And it&rsquo;s fundamentally different from the prevailing idea that learning music means, in some sense, learning to play the exact notes of a given song.</p>
 
+      <p>All of this raises real questions about what it means to learn music right now. Seen through a keyboard, learning music is largely about harmony and the Western tradition. Through a Push, the pad controller Ableton makes for its production software, it&rsquo;s about sound design and loop-based composition. Through the handpan, it&rsquo;s somewhat uncharted territory.</p>
+
+      <p>Imagine, as a first step, a handpan whose scale harmonizes with a current popular song, or a whole playlist. The player immediately has the feeling of being part of the music, and begins to interact with it. Implicitly, they&rsquo;re listening actively, playing with rhythm, with song structure, with tonality and tonal center. The foundation is intuitive musicianship, and out of that experience you gradually build explicit awareness of any number of distinct concepts and skills. This is essentially what already happens in the handpan world. An electronic handpan expands it to a larger ecosystem of sounds, styles, and sensibilities.</p>
+
+      <p>So the handpan opens a real opportunity for a totally different paradigm of music learning. It&rsquo;s not just that the approach can be improvisational. It&rsquo;s also that we don&rsquo;t need to think about music in terms of function, in terms of chords resolving to other chords. Music is much more modal these days, staying inside one scale rather than moving through changes, and handpan music is clearly, incredibly modal. The basic premise of Orff pedagogy can be extended to a very large and very interesting degree.</p>
+
+      <p class="piece-note">[This is an early draft, placed here to establish the register. It&rsquo;s not a finished piece.]</p>
     </div>
-  </div>
+
+    <nav class="next" aria-label="Read next">
+      <span class="next-label">Read next</span>
+      <ul class="next-list">
+        <li><a href="bach-on-a-handpan.html"><span class="next-kicker">Lab</span><span class="next-title">Bach on a handpan?</span></a></li>
+      </ul>
+    </nav>
+
+  </article>
 
   <footer class="site-footer">
     <div class="footer-inner">
@@ -614,21 +545,6 @@
     updateNav();
 
     /* ---- Footer ---- */
-
-    /* A notice board, not a newsletter, and not the Tonefield subscription:
-       that is a publication and would be its own list. Nothing on One, where an
-       email field beside a five-figure order reads as a lead form. */
-    function handleSubscribe(e) {
-      e.preventDefault();
-      const value = e.target.querySelector('input').value;
-      alert("Mailing list sign-up.");
-      e.target.reset();
-    }
-
-    function loadMore() {
-      alert("Loads the next pieces.");
-    }
-
     /* Footer section links rise before they leave. At the bottom of a page the
        bar is collapsed to a label, so navigating straight away would cut to a
        page with the menu already open. Scrolling up first lets it unfold on the
@@ -659,11 +575,6 @@
       });
     });
 
-    function pieceLink(e) {
-      e.preventDefault();
-      alert("Piece not staged yet.");
-    }
-
     function handleSearch(e) {
       e.preventDefault();
       alert("Site search. Not mocked up yet.");
@@ -680,32 +591,15 @@
 
 
 
-    /* ---- Scroll restoration ----
-       Opening a piece stores the container's position. The article's masthead
-       return sets a flag naming this page, and only that flag triggers a
-       restore, so arriving fresh from the nav still lands at the top. */
-    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-    const SCROLL_KEY = 'neotone_scroll_' + SECTION;
-    const RESTORE_KEY = 'neotone_restore';
-
-    document.querySelectorAll('.feed-item a[href]').forEach(a => {
-      const href = a.getAttribute('href');
-      if (!href || href === '#') return;
+    /* Clicking this piece's own section restores the position it was opened
+       from. Arriving there any other way lands at the top. */
+    document.querySelectorAll('.sections a').forEach(a => {
       a.addEventListener('click', () => {
-        sessionStorage.setItem(SCROLL_KEY, String(Math.round(window.scrollY)));
+        if (a.dataset.section === SECTION) {
+          sessionStorage.setItem('neotone_restore', SECTION);
+        }
       });
     });
-
-    if (sessionStorage.getItem(RESTORE_KEY) === SECTION) {
-      const y = parseFloat(sessionStorage.getItem(SCROLL_KEY) || '0');
-      if (y > 0) {
-        // immediately, because this script runs after layout; the frame after is
-        // only a re-apply in case late content shifts the page under us
-        window.scrollTo(0, y);
-        requestAnimationFrame(() => { window.scrollTo(0, y); updateNav(); });
-      }
-      sessionStorage.removeItem(RESTORE_KEY);
-    }
 
   </script>
 

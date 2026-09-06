@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>I don’t lose inspiration while searching for another instrument · Tonefield</title>
+  <title>Accidentally microtonal &middot; Tonefield</title>
   <style>
     :root { --ink: #111; --line: #d9d9d9; --muted: #4f4f4f; --green: #2a7a2a; --max: 1180px; }
 
@@ -231,9 +231,15 @@
     .piece-media { margin: 0 0 56px; }
     .video-box { width: 100%; aspect-ratio: 16 / 9; background: #ededed; }
     .piece-caption { margin: 12px 0 0; font-size: 12px; line-height: 1.5; color: var(--muted); }
+    /* Media inside the reading measure: the same grey box and caption as
+       everywhere else a placeholder appears, at the width of the prose. */
+    .media-box { width: 100%; aspect-ratio: 3 / 2; background: #ededed; }
+    .piece-body .piece-media { margin: 44px 0 48px; }
     .piece-body { max-width: 680px; margin: 0 auto; }
     .piece-body p { margin: 0 0 1.45em; font-size: 17px; line-height: 1.75; }
     .piece-body p:last-child { margin-bottom: 0; }
+    /* Wireframe note, not part of the piece: says what this text is for. */
+    .piece-body .piece-note { margin: 2.6em 0 0; font-size: 12px; line-height: 1.5; color: var(--muted); }
     .piece-sub {
       margin: 2.4em 0 1em; font-size: 11px; font-weight: 700;
       text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted);
@@ -241,11 +247,6 @@
     @media (max-width: 980px) {
       .piece-title { font-size: 30px; }
       .piece-head { padding-top: 48px; }
-    }
-
-    .piece-pull {
-      margin: 2.2em 0; padding-left: 22px; border-left: 1px solid var(--line);
-      font-size: 22px; line-height: 1.5; color: var(--ink);
     }
 
     /* ---- Read next ----
@@ -288,44 +289,39 @@
   <article class="piece">
 
     <header class="piece-head">
-      <span class="piece-kicker">Culture</span>
-      <h1 class="piece-title">&ldquo;I don&rsquo;t lose inspiration while searching for another instrument&rdquo;</h1>
-      <p class="piece-standfirst">Golsa Nazari on what switching instruments costs an idea, and what happens when the switch disappears.</p>
+      <span class="piece-kicker">Tuning</span>
+      <h1 class="piece-title">Accidentally microtonal</h1>
     </header>
 
-    <figure class="piece-media">
-      <div class="video-box"></div>
-      <figcaption class="piece-caption">Golsa Nazari in her studio. Photograph, or a short performance film.</figcaption>
-    </figure>
-
     <div class="piece-body">
-      <p>Golsa Nazari is a handpan player, composer and teacher from Iran. She started at five, on piano, and found the handpan years later. It redirected her playing almost immediately. &ldquo;It gave me a new way to express emotions that I couldn&rsquo;t easily put into words.&rdquo;</p>
+      <p>The harmonics hammered into a handpan&rsquo;s tonefield are perfect ratios: two to one for the octave, three to two for the fifth above it. But they aren&rsquo;t naturally occurring harmonics, so they aren&rsquo;t perfect. And even naturally occurring harmonics aren&rsquo;t perfect in the Pythagorean sense, because they exist in the material world. Our go-to guy for this one is Aristoxenus, Aristotle&rsquo;s student and the first theorist to say that the ear, not the number, is the judge. Musicians don&rsquo;t have to worry about playing truly perfect consonances, because there&rsquo;s always enough micro-variation. Nothing is ever perfect. Ptolemy is another. Pure mathematical ideals and the realities of the physical world have to be held a bit separately. The pure ratio is an ideal. The world is not. A Euclidean triangle isn&rsquo;t the same as a triangle-shaped thing in the world. It&rsquo;s the concept that lets you call the imperfectly triangle-shaped thing a triangle. It&rsquo;s triangleness.</p>
 
-      <p>Her music is cinematic and emotional, built on Persian and Middle Eastern material and arranged with modern textures. Asked what feeds it, she lists life experiences, emotions, Persian culture, nature, and silence. &ldquo;Sometimes a single feeling becomes an entire composition.&rdquo;</p>
+      <p>So there&rsquo;s material imperfection, compounded by the fact that the harmonics on a handpan are constructed. They&rsquo;re a result of craft, not physics. Or at least, of physics that results from craft. And there&rsquo;s another tension. The received tuning system in Europe around 2000, when the Hang was made, was equal temperament. That&rsquo;s the tuning that divides the octave into twelve equal steps, the one every piano and every DAW assumes. Equal temperament isn&rsquo;t based on Pythagorean ratios at all. Its fifths are very slightly narrow and its thirds noticeably wide, so that all twelve keys come out equally usable. Which means that even if you got the overtones of each tonefield to true consonant ratios, the fundamentals wouldn&rsquo;t be interacting with each other that way, nor would the overtones of different fundamentals.</p>
 
-      <p>The studio holds acoustic handpans, a piano, microphones and monitors, and the Neotone sits among them rather than in place of anything. She works both inside a DAW and away from one, sketching directly on the instrument before arranging. Reverb and delay for space, occasionally a looper, though she prefers to keep the sound close to natural.</p>
+      <p>The Integral scale was the first Hang scale, and I believe PanART intended a kind of harmony between its notes: that the tuning of each tonefield was meant to result from the relationships between fundamentals and harmonics across the whole instrument. But the imprecision at every step made this not exactly the case. If you play an early PanART instrument next to a modern high-end handpan, well, just try it. The first documented measurements of the Hang found the harmonics hammered into it far from perfect.</p>
 
-      <p class="piece-sub">What changed</p>
+      <figure class="piece-media">
+        <div class="media-box"></div>
+        <figcaption class="piece-caption">Image: a spectrum analysis of a single Hang tonefield, the three peaks and where they fall.</figcaption>
+      </figure>
 
-      <p>What the instrument altered was less the sound than the interruption. Moving between scales used to mean moving between instruments, and an idea rarely survived the trip.</p>
+      <p>Having to rely on pure craft means you can&rsquo;t even take equal temperament for granted. The actual tuning is kinda whatever you got on the other end of the tuner&rsquo;s hammering. So in principle you have three layers: an imperfect equal-tempered baseline, then a potentially perfect intention for a single scale and its overtones, and then the real-world deviation from that ideal. The notion that every PanART instrument is a unique sculpture makes sense here. One handpan doesn&rsquo;t fit neatly into a system of all handpans. Even under perfect circumstances, it isn&rsquo;t possible to extend a single scale, Integral or any other, across enough overlapping positions that they close neatly into a cohesive twelve-note system. This is the basis for the whole messy history of temperament.</p>
 
-      <p class="piece-pull">&ldquo;I don&rsquo;t lose inspiration while searching for another instrument. The creative flow stays uninterrupted.&rdquo;</p>
+      <p>It&rsquo;s worth flagging the terminology here, too, because a lot of assumptions get baked into the terms we take for granted. Take cents. When you use the word to describe a note&rsquo;s tuning, what you mean is hundredths of a semitone away from the idealized tuning. And if you don&rsquo;t qualify that, it probably means equal temperament. So for the purposes of this conversation, it&rsquo;s worth having a few different systems of calculation in the toolbox. Ratios are the most universally applicable, and the most abstract. But try to describe equal temperament in ratios and you get some pretty unwieldy numbers. And if you&rsquo;re speaking in frequencies, you&rsquo;re rooting whatever you&rsquo;re talking about in the physical world. Well, not entirely. But you&rsquo;re at least using a term that describes a rate of vibration, which is specific in a way a ratio isn&rsquo;t. Notes can share a ratio with other notes at entirely different frequencies.</p>
 
-      <p>Asked for a moment she will not forget, she names that one: &ldquo;the first time I realized I could move between completely different scales in seconds while keeping the same creative flow.&rdquo;</p>
+      <p>The reason for saying all this out loud is that whole frameworks for how we think hide inside the words. A &ldquo;perfect fifth&rdquo; only aligns with the ratio 3:2 once the system has developed to the point where there are five notes between the terms of that ratio. An &ldquo;octave&rdquo; implies eight of something. But the ratio 2:1 has only two of something. Develop a diatonic order, the familiar seven-note scale, and it becomes an octave. Before that, it&rsquo;s a ratio. And it&rsquo;s an abstract ratio, and an abstract octave, before it&rsquo;s applied to any frequencies. So: ratio, cent, semitone, frequency, octave, temperament. Or tuning system. Which maybe I&rsquo;d call an order. Although, no. An order is a set of relationships that doesn&rsquo;t need to be concretized as a tuning system. It&rsquo;s prior to that.</p>
 
-      <p>It has since taken her somewhere she had not planned. She uses it as a compositional sketchbook, testing ideas quickly before committing them to acoustic instruments, and increasingly to write for larger forces. Her own description of that is the best line in the conversation: composing orchestral ideas while still thinking like a handpan player.</p>
+      <p>Now add the layer of scale design in the handpan world, which forks a little into Western and non-Western considerations. It&rsquo;s the difference between wanting a Hijaz scale with correct maqam tuning, or a Pythagorean or just tuning with pure interval relationships, and wanting something like a nineteen-tone equal-tempered scale with &ldquo;microtones.&rdquo; Maqam is the system of melodic modes in Arabic and Turkish music, each with intervals of its own. And microtones, of course, means fractions of an equal-tempered semitone. More often than not, something like a maqam tuning will be described in terms of microtones. Which imports a theoretical structure from a totally different musical culture, and quietly imposes a frame that has nothing to do with it. Equal temperament.</p>
 
-      <p class="piece-sub">Advice</p>
+      <p>So there you go. Just as a baseline, the handpan is deeply, deeply, weirdly, accidentally microtonal. And what can we do with that? Well, the first thing, and the easiest to overlook in a context like this, is to just recognize it, and enjoy it. The weirdness of the full chain of everything that leads to a unique sound sculpture, Hang or handpan, is going to turn out a unique instrument every time. Each one has, in a real sense, its own scale, not quite the same as any scale on any other instrument in the world. At least not exactly. That&rsquo;s something to enjoy. The original Hang had a particular sound. And that was its sound.</p>
 
-      <p>What she offers players considering one is a reframing rather than a recommendation. &ldquo;Don&rsquo;t think of it as a replacement for an acoustic handpan. Think of it as a completely new creative instrument that expands your possibilities.&rdquo;</p>
-
-      <p>And once it arrives: &ldquo;Don&rsquo;t just play the presets. Explore different scales and create your own sounds. That&rsquo;s where the instrument really becomes personal.&rdquo;</p>
+      <p class="piece-note">[This is an early draft, placed here to establish the register. It&rsquo;s not a finished piece.]</p>
     </div>
 
     <nav class="next" aria-label="Read next">
       <span class="next-label">Read next</span>
       <ul class="next-list">
-        <li><a href="tonefield.html#hijaz-tetrachord"><span class="next-kicker">Theory and culture</span><span class="next-title">The hijaz tetrachord</span></a></li>
+        <li><a href="integrating-integral.html"><span class="next-kicker">Scales</span><span class="next-title">Integrating Integral</span></a></li>
       </ul>
     </nav>
 

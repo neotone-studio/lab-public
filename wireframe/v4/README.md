@@ -30,7 +30,7 @@ Why, and the editorial rules that go with it, are in the content structure docum
 
 **Updates carry dates; Tonefield pieces do not.** The one visible difference between the two feeds, and the species difference.
 
-**The feed holds nine pieces, every one a row in the pieces table** (`docs/content-strategy-notes/9_pieces.md` in the workspace), sourced from the 1000th-instrument draft, the three artist interviews and the manual's third register. Two invented placeholders (hijaz tetrachord, made of wood) were removed: the feed claims only material that exists. Kickers are the registers, Culture, Craft, Studio. Quotation marks in a title mean somebody said it; titles without them are statements.
+**The feed holds six pieces, drafted from dictation and edited in the desktop drafts of 2026-09-06.** Kickers are one word each and name the kind of thing the piece is: Myth, Learning, Lab, Tuning, Scales, Origins. Each article carries a bracketed note that it is an early draft placed to establish the register. Quotation marks in a title mean somebody said it; titles without them are statements.
 
 ---
 

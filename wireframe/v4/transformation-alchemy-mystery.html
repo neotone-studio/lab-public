@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tonefield · Neotone</title>
+  <title>Transformation, Alchemy, Mystery &middot; Tonefield</title>
   <style>
     :root { --ink: #111; --line: #d9d9d9; --muted: #4f4f4f; --green: #2a7a2a; --max: 1180px; }
 
@@ -206,105 +206,66 @@
     }
     .opening {
       max-width: 720px; margin-left: auto; margin-right: auto;
-      padding: 64px 0 0; text-align: center;
+      padding: 104px 0 88px; text-align: center;
       font-size: 21px; font-weight: 400; line-height: 1.7; color: var(--ink);
     }
     .opening-name { font-size: 34px; line-height: 1; letter-spacing: -0.01em; white-space: nowrap; }
-    .opening-sub { display: block; margin-top: 14px; font-size: 15px; line-height: 1.4; color: var(--muted); letter-spacing: 0.02em; }
-    /* The editor's note is a masthead document rather than a piece, so it sits
-       under the line that names the publication and never in the feed. */
-    .opening-note { margin: 18px 0 56px; text-align: center; font-size: 13px; }
-    .opening-note a { color: var(--muted); border-bottom: 1px solid var(--line); }
-    .opening-note a:hover { color: var(--ink); border-bottom-color: var(--ink); }
     @media (prefers-reduced-motion: reduce) {
       .opening-wrap { animation: none; }
     }
 
-    /* ---- Container feed ----
-       Previews, not cards. You read a little in place and may watch something
-       before deciding to open the piece. Because a preview can carry media, the
-       block itself is not a link: clicking a video has to play it. The title is
-       the target, with a quiet continue link at the end. This amends principle
-       14, which assumes a block with nothing interactive inside it. */
-    /* No opening line here: the masthead names Neotone and the pieces say what it is,
-   so the feed itself opens the page and carries the entry fade. */
-    .feed { max-width: var(--max); margin: 0 auto; padding: 0 48px 0;
-            animation: opening-in 760ms ease 140ms both; }
-    @media (prefers-reduced-motion: reduce) { .feed { animation: none; } }
-    .feed-item { max-width: 680px; margin: 0 auto; scroll-margin-top: 140px; }
-    .feed-item + .feed-item { margin-top: 96px; }
-    /* Every piece is built the same way: image, kicker, title, excerpt, link,
-       at the same size, with the same gap. The lead and second carry classes
-       for the editorial rule that the first two show one register each, and
-       nothing else distinguishes them. Earlier versions gave the lead a wider
-       image and put the second's image below its text to force both titles
-       into a 900px viewport; together they made the feed read as three
-       different layouts. Uniform wins. On a 900px screen the second piece's
-       kicker sits at the edge; its title is inside the first screen on
-       anything taller. */
-    .feed-media { width: 100%; aspect-ratio: 16 / 9; background: #ededed; margin-bottom: 24px; }
-    .feed-kicker {
-      display: block; margin-bottom: 12px;
+    /* ---- Article ----
+       Articles and utility pages render identically. The only difference is the
+       mark in the masthead: an article carries its container's mark, a utility
+       page carries the plain Neotone mark. Media runs to the content grid;
+       reading stays at a measure. */
+    .piece { max-width: var(--max); margin: 0 auto; padding: 0 48px 40px; }
+    .piece-head { max-width: 680px; margin: 0 auto; padding: 64px 0 44px; }
+    .piece-kicker {
+      display: block; margin-bottom: 16px;
       font-size: 11px; font-weight: 700; text-transform: uppercase;
       letter-spacing: 0.14em; color: var(--muted);
     }
-    .feed-title { margin: 0 0 16px; font-size: 28px; font-weight: 400; line-height: 1.2; letter-spacing: -0.01em; }
-    .feed-title a:hover { color: var(--muted); }
-    .feed-excerpt { margin: 0 0 18px; font-size: 16px; line-height: 1.7; }
-    .feed-more { font-size: 14px; font-style: italic; color: var(--muted); }
-    .feed-more:hover { color: var(--ink); text-decoration: underline; }
-    @media (max-width: 980px) { .feed { padding: 0 24px 0; } .feed-title { font-size: 24px; } }
-
-    /* ---- End of feed ----
-       Load more, then subscribe. Load more continues the reading; subscribing
-       is what you do once you have decided to stop, so putting the field first
-       would interrupt a reader who is still going. When the feed eventually
-       runs out the button goes and subscribe becomes the terminus, with nothing
-       rearranged.
-
-       The bar is the only solid black in the white part of the page, so it
-       reads as the end of the run and rhymes with the footer arriving under it.
-       Sits well below the last piece and close to the footer, so scrolling to
-       it feels like reaching the end rather than finding another section. */
-    .feed-end { max-width: var(--max); margin: 96px auto 0; padding: 0 48px; }
-    @media (max-width: 980px) { .feed-end { margin-top: 80px; padding: 0 24px; } }
-    .feed-end-inner { max-width: 680px; margin: 0 auto; }
-
-    .load-more {
-      display: block; width: 100%; background: #000; color: #fff;
-      border: none; padding: 18px 0; cursor: pointer;
-      font-family: inherit; font-size: 12px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.14em;
+    .piece-title { margin: 0 0 20px; font-size: 40px; font-weight: 400; line-height: 1.15; letter-spacing: -0.01em; }
+    .piece-standfirst { margin: 0; font-size: 18px; line-height: 1.6; color: var(--muted); }
+    .piece-media { margin: 0 0 56px; }
+    .video-box { width: 100%; aspect-ratio: 16 / 9; background: #ededed; }
+    .piece-caption { margin: 12px 0 0; font-size: 12px; line-height: 1.5; color: var(--muted); }
+    /* Media inside the reading measure: the same grey box and caption as
+       everywhere else a placeholder appears, at the width of the prose. */
+    .media-box { width: 100%; aspect-ratio: 3 / 2; background: #ededed; }
+    .piece-body .piece-media { margin: 44px 0 48px; }
+    .piece-body { max-width: 680px; margin: 0 auto; }
+    .piece-body p { margin: 0 0 1.45em; font-size: 17px; line-height: 1.75; }
+    .piece-body p:last-child { margin-bottom: 0; }
+    /* Wireframe note, not part of the piece: says what this text is for. */
+    .piece-body .piece-note { margin: 2.6em 0 0; font-size: 12px; line-height: 1.5; color: var(--muted); }
+    .piece-sub {
+      margin: 2.4em 0 1em; font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted);
     }
-    .load-more:hover { background: #222; }
+    @media (max-width: 980px) {
+      .piece-title { font-size: 30px; }
+      .piece-head { padding-top: 48px; }
+    }
 
-    /* ---- Subscribe ----
-       Not Tonefield: that is a publication, and this is a notice board. Not
-       "stay in touch" either, which promises a relationship from a company that
-       will write four times a year. Updates says plainly what it is. */
-    .subscribe { margin-top: 56px; }
-    .subscribe-label {
-      display: block; margin-bottom: 12px;
-      font-size: 11px; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.14em; color: var(--muted);
+    /* ---- Read next ----
+       Propulsion, not return: the masthead already handles going back. Chosen
+       for relevance rather than recency, and quiet enough to read as a coda. */
+    .next { max-width: 680px; margin: 56px auto 0; }
+    .next-label {
+      display: block; margin-bottom: 14px; font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted);
     }
-    .subscribe p { margin: 0 0 22px; font-size: 17px; line-height: 1.75; }
-    .subscribe-archive { color: var(--muted); border-bottom: 1px solid var(--line); }
-    .subscribe-archive:hover { color: var(--ink); border-bottom-color: var(--ink); }
-    .subscribe-form { display: flex; align-items: center; max-width: 420px; }
-    .subscribe-form input {
-      flex: 1; min-width: 0; background: none; color: var(--ink);
-      border: none; border-bottom: 1px solid var(--line);
-      padding: 8px 0; font-size: 15px; font-family: inherit;
+    .next-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+    .next-list li { border-bottom: 1px solid var(--line); }
+    .next-list a { display: block; padding: 15px 0; }
+    .next-kicker {
+      display: block; margin-bottom: 5px; font-size: 10px; text-transform: uppercase;
+      letter-spacing: 0.12em; color: var(--muted);
     }
-    .subscribe-form input::placeholder { color: var(--muted); }
-    .subscribe-form input:focus { outline: none; border-bottom-color: var(--ink); }
-    .subscribe-form button {
-      background: none; border: none; border-bottom: 1px solid var(--line);
-      color: var(--muted); padding: 8px 0 8px 16px;
-      font-size: 15px; font-family: inherit; cursor: pointer;
-    }
-    .subscribe-form button:hover { color: var(--ink); }
+    .next-title { font-size: 17px; }
+    .next-list a:hover .next-title { color: var(--muted); }
     /* Eased only while the bar is being held open or let go by hand.
        Scroll-driven movement stays untransitioned so it tracks the wheel. */
     nav.nav-eased .masthead,
@@ -325,88 +286,62 @@
     </div>
   </nav>
 
-  <!-- Tonefield. One feed, two registers, the kicker tells you which. The
-       running order is editorial: the first screen shows a craft piece and a
-       culture piece together, so a reader of either kind sees their own.
-       Every entry below is a piece genuinely in progress, sourced from the
-       1000th-instrument draft, the artist interviews, and the manual's third
-       register. Titles are working titles. -->
-  <!-- Opening. Same shape as the instrument page's: the name large, the
-       sentence plain. Tonefield is a coined word and this is where it gets its
-       meaning. Craft and culture are the two registers, named once here and
-       then carried by the kickers. -->
-  <div class="opening-wrap">
-    <h1 class="opening"><span class="opening-name">Tonefield</span><span class="opening-sub">On handpan craft and culture</span></h1>
-    <p class="opening-note"><a href="#" onclick="pieceLink(event)">From the editor</a></p>
-  </div>
+  <article class="piece">
 
-  <div class="feed">
+    <header class="piece-head">
+      <span class="piece-kicker">Myth</span>
+      <h1 class="piece-title">Transformation, Alchemy, Mystery</h1>
+    </header>
 
-      <article class="feed-item lead" id="transformation-alchemy-mystery">
-        <div class="feed-media"></div>
-        <span class="feed-kicker">Myth</span>
-        <h2 class="feed-title"><a href="transformation-alchemy-mystery.html">Transformation, Alchemy, Mystery</a></h2>
-        <p class="feed-excerpt">The handpan has a whole spiritual, mysterious thing going on. There&rsquo;s the exotic language around the different scales, and there&rsquo;s the idea that every instrument is totally unique in its sound. So even if the notion of a scale as a list of individual notes held up, which it doesn&rsquo;t, there&rsquo;s a sense that a scale on a handpan is imbued with something more: the qualities of the metal, the craftsmanship of the maker, the proportions of the crosstalk and harmonics.</p>
-        <a class="feed-more" href="transformation-alchemy-mystery.html">Continue reading &rarr;</a>
-      </article>
+    <div class="piece-body">
+      <p>The handpan has a whole spiritual, mysterious thing going on. There&rsquo;s the exotic language around the different scales, and there&rsquo;s the idea that every instrument is totally unique in its sound. So even if the notion of a scale as a list of individual notes held up, which it doesn&rsquo;t, there&rsquo;s a sense that a scale on a handpan is imbued with something more: the qualities of the metal, the craftsmanship of the maker, the proportions of the crosstalk and harmonics.</p>
 
-      <article class="feed-item second" id="safe-yet-expansive">
-        <div class="feed-media"></div>
-        <span class="feed-kicker">Learning</span>
-        <h2 class="feed-title"><a href="safe-yet-expansive.html">A safe yet expansive possibility space</a></h2>
-        <p class="feed-excerpt">A popular way for beginners to learn a piece of music these days is some version of scrolling piano roll notation. You know the YouTube video: little colored bars fall down the screen onto the keys you&rsquo;re supposed to play. The format is named for the player piano roll, where every event sits on a mechanical grid that tells you exactly what to hit and when.</p>
-        <a class="feed-more" href="safe-yet-expansive.html">Continue reading &rarr;</a>
-      </article>
+      <figure class="piece-media">
+        <div class="media-box"></div>
+        <figcaption class="piece-caption">Image: Gaffurio&rsquo;s 1492 woodcut of Pythagoras at the forge, hammers and bells and strings all labelled with their numbers.</figcaption>
+      </figure>
 
-      <article class="feed-item" id="bach-on-a-handpan">
-        <div class="feed-media"></div>
-        <span class="feed-kicker">Lab</span>
-        <h2 class="feed-title"><a href="bach-on-a-handpan.html">Bach on a handpan?</a></h2>
-        <p class="feed-excerpt">At the end of an unassuming street in Győrújbarát, a village in the northwest of Hungary, a very unusual instrument fills the living room of an otherwise unassuming house. Four wooden towers of three acoustic handpans each, strewn with circuit boards, cables, and mechanical strikers, snake their way to a central control unit and a MIDI keyboard. It sits somewhere between a mad scientist&rsquo;s version of Keith Emerson&rsquo;s modular Moog and an early prototype of the Marble Machine.</p>
-        <a class="feed-more" href="bach-on-a-handpan.html">Continue reading &rarr;</a>
-      </article>
+      <p>The origins of all of this come down to two places, and the two are related. One is Pythagoras, the Greek philosopher of the sixth century BC who is credited with discovering that musical harmony is a matter of simple numbers. The other is alchemy, the secretive craft of transforming metal. Pythagoras opens a few threads. The first is musical numerology: the idea that the perfect consonances are perfect because their ratios are. Two to one for the octave, three to two for the fifth. The Greeks called these superparticular ratios, and the idea echoed through Plato and beyond. It&rsquo;s the origin of harmony-of-the-spheres thinking, of 432 Hz, of pure temperaments for sound healing. The second thread is where he supposedly discovered all this: a blacksmith&rsquo;s shop, listening to the hammers. And that is two things at once. It&rsquo;s the transformation of metal, and it&rsquo;s embodied craft knowledge. Hephaestus, the Greek god of craft, was a blacksmith. He built Achilles&rsquo; shield in the Iliad, and he&rsquo;s also the god who probably did all the plumbing repairs on Mount Olympus for Zeus.</p>
 
-      <article class="feed-item" id="accidentally-microtonal">
-        <div class="feed-media"></div>
-        <span class="feed-kicker">Tuning</span>
-        <h2 class="feed-title"><a href="accidentally-microtonal.html">Accidentally microtonal</a></h2>
-        <p class="feed-excerpt">The harmonics hammered into a handpan&rsquo;s tonefield are perfect ratios: two to one for the octave, three to two for the fifth above it. But they aren&rsquo;t naturally occurring harmonics, so they aren&rsquo;t perfect. And even naturally occurring harmonics aren&rsquo;t perfect in the Pythagorean sense, because they exist in the material world.</p>
-        <a class="feed-more" href="accidentally-microtonal.html">Continue reading &rarr;</a>
-      </article>
+      <p>Transformation, especially of metal, is the definition of alchemy, and there&rsquo;s historically a lot of secrecy around it. Not necessarily because the craft was magical, but because of the role it played in some of the earliest and most valuable trade secrets. Early alchemy was especially concerned with turning non-precious metals into precious ones, so its vocabulary was heavily guarded. A language of secrecy developed among its practitioners so that the distribution of knowledge could be controlled. There&rsquo;s also a strong sense in which alchemy was concerned with the fundamental nature of things. The prime material, the substance that underlies all other substances. That&rsquo;s a metaphysical precursor to the natural sciences, perhaps never fully disentangled from them, and it dates back to the pre-Socratic philosophers. It also overlaps with the Pythagorean notion of consonance. Both are searches for what is underneath, one physical, one numerical. Which, by the way, Pythagoras probably didn&rsquo;t consider theoretical or separate from the physical at all. In that way of thinking, the numbers themselves are the root of the causal chain.</p>
 
-      <article class="feed-item" id="integrating-integral">
-        <div class="feed-media"></div>
-        <span class="feed-kicker">Scales</span>
-        <h2 class="feed-title"><a href="integrating-integral.html">Integrating Integral</a></h2>
-        <p class="feed-excerpt">The first Hang scale was called Integral. PanART&rsquo;s name for it connotes wholeness, consonance, integration, and I think it also connotes an intention: that the notes of the instrument, and the harmonics inside each note, were meant to fit together as one resonant system. Whether any Hang ever achieved that is another question. But it&rsquo;s a beautiful problem, and it&rsquo;s worth asking what it would actually take.</p>
-        <a class="feed-more" href="integrating-integral.html">Continue reading &rarr;</a>
-      </article>
+      <p>All of this clearly, and literally, collides in the acoustic handpan. The original Hang was made in Bern by PanART, starting in the year 2000, and it began with an extensive and closely guarded exploration into an alchemical process of nitriding steel. They named the material Pang. This has strong echoes of the Zildjian cymbal company, whose proprietary alloy has been a closely guarded trade secret for over 400 years, carried from Istanbul to the United States.</p>
 
-      <article class="feed-item" id="three-journeys">
-        <div class="feed-media"></div>
-        <span class="feed-kicker">Origins</span>
-        <h2 class="feed-title"><a href="#" onclick="pieceLink(event)">Three journeys of discovery</a></h2>
-        <p class="feed-excerpt">Nobody was shown how to make a handpan. Not the second time it was discovered, and not the third. PanART has been highly motivated, for a long time, to own the design of this instrument. Understandably: they put a lot into developing it.</p>
-        <a class="feed-more" href="#" onclick="pieceLink(event)">Continue reading &rarr;</a>
-      </article>
-  </div>
+      <p>Parallel to the metallurgy, PanART had to discover how to make that steel play a fundamental note with its two most superparticular overtones, the octave and the fifth above it. Metal is, by its nature, inharmonic. It doesn&rsquo;t vibrate at a clean frequency with orderly overtones the way a string does, which is exactly why a cymbal sounds like a crash rather than a note. The craft of building the Hang, and every handpan since, is quite literally about transforming this inharmonic metal into something harmonic. It&rsquo;s done by hammering the metal into a new shape. A physical transformation that yields audible frequencies.</p>
 
-  <div class="feed-end">
-    <div class="feed-end-inner">
+      <p>Now, back to the Pythagoras myth. One of its most notable qualities is that everything Pythagoras discovered that day is slightly impossible. It isn&rsquo;t true of metal. Hammers don&rsquo;t ring in the ratios of their weights. Ptolemy the astronomer dismissed the story a few hundred years later. Vincenzo Galilei, Galileo&rsquo;s father, proved it wrong with weights and strings in 1589. And yet the myth has persisted. It has continued to resonate through culture ever since. Which means, in some sense, that the mythical aspects of the story matter more than the physical. And remember, blacksmiths in the ancient world are not exactly plumbers.</p>
 
-      <button class="load-more" onclick="loadMore()">Load more</button>
+      <p>For the handpan, the question is where the mystery is located. With PanART, it began in the transformation of metal, because that&rsquo;s the one thing that is patentable, or at least protectable as a trade secret. You can own that.</p>
 
-      <div class="subscribe">
-        <span class="subscribe-label">Mailing list</span>
-        <p>Updates from the Neotone workshop</p>
-        <form class="subscribe-form" onsubmit="handleSubscribe(event)">
-          <input type="email" placeholder="Email" required />
-          <button type="submit" aria-label="Subscribe">&rarr;</button>
-        </form>
-      </div>
+      <figure class="piece-media">
+        <div class="media-box"></div>
+        <figcaption class="piece-caption">Image: an original first-generation PanART Hang.</figcaption>
+      </figure>
 
+      <p>But the Hang caught on, and PanART kept it artificially scarce. So other makers began working out on their own how to build a similar instrument, which came to be called the handpan. And it quickly became clear that Pang, the special metal, wasn&rsquo;t necessary at all. A modern handpan uses a heavy press to shape a sheet of steel of the right thickness into a dome, and then the tonefields are worked into that dome. That&rsquo;s shaping, in a sense, but it isn&rsquo;t alchemy. So the mystery dissolved there.</p>
+
+      <figure class="piece-media">
+        <div class="media-box"></div>
+        <figcaption class="piece-caption">Image: a tuner&rsquo;s hammer on a tonefield.</figcaption>
+      </figure>
+
+      <p>Then the mystery relocates to the craft knowledge of the tuners. As the cheap Amazon handpan illustrates, building a harmonically resonant handpan isn&rsquo;t simply a matter of stamping tonefields into a stamped shell. There&rsquo;s real craft and skill and variability in the art of tuning one, and there is no manual that can capture how to do it. It&rsquo;s embodied trade knowledge. It&rsquo;s the closest thing the handpan has to a trade secret.</p>
+
+      <p>So this has been a continuous relocation, a transformation, of whatever is secret in the handpan. First the material, then the craftsmanship, and then, perhaps as a result of both, the vocabulary of scales and their descriptions. Because they aren&rsquo;t lists of notes, whatever mass production tends to make of them. The original Hang scale was called Integral, which connotes wholeness, consonance, integration.</p>
+
+      <p>The thing that stopped Pythagoras in his tracks as he passed the blacksmith. For the player, this is the felt location of the mystery, its current resonations from a fundamental that dates back to prehistory. Such a thing can only be described as how it feels, not as what it is. If those things are separable at all.</p>
+
+      <p class="piece-note">[This is an early draft, placed here to establish the register. It&rsquo;s not a finished piece.]</p>
     </div>
-  </div>
+
+    <nav class="next" aria-label="Read next">
+      <span class="next-label">Read next</span>
+      <ul class="next-list">
+        <li><a href="safe-yet-expansive.html"><span class="next-kicker">Learning</span><span class="next-title">A safe yet expansive possibility space</span></a></li>
+      </ul>
+    </nav>
+
+  </article>
 
   <footer class="site-footer">
     <div class="footer-inner">
@@ -614,21 +549,6 @@
     updateNav();
 
     /* ---- Footer ---- */
-
-    /* A notice board, not a newsletter, and not the Tonefield subscription:
-       that is a publication and would be its own list. Nothing on One, where an
-       email field beside a five-figure order reads as a lead form. */
-    function handleSubscribe(e) {
-      e.preventDefault();
-      const value = e.target.querySelector('input').value;
-      alert("Mailing list sign-up.");
-      e.target.reset();
-    }
-
-    function loadMore() {
-      alert("Loads the next pieces.");
-    }
-
     /* Footer section links rise before they leave. At the bottom of a page the
        bar is collapsed to a label, so navigating straight away would cut to a
        page with the menu already open. Scrolling up first lets it unfold on the
@@ -659,11 +579,6 @@
       });
     });
 
-    function pieceLink(e) {
-      e.preventDefault();
-      alert("Piece not staged yet.");
-    }
-
     function handleSearch(e) {
       e.preventDefault();
       alert("Site search. Not mocked up yet.");
@@ -680,32 +595,15 @@
 
 
 
-    /* ---- Scroll restoration ----
-       Opening a piece stores the container's position. The article's masthead
-       return sets a flag naming this page, and only that flag triggers a
-       restore, so arriving fresh from the nav still lands at the top. */
-    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-    const SCROLL_KEY = 'neotone_scroll_' + SECTION;
-    const RESTORE_KEY = 'neotone_restore';
-
-    document.querySelectorAll('.feed-item a[href]').forEach(a => {
-      const href = a.getAttribute('href');
-      if (!href || href === '#') return;
+    /* Clicking this piece's own section restores the position it was opened
+       from. Arriving there any other way lands at the top. */
+    document.querySelectorAll('.sections a').forEach(a => {
       a.addEventListener('click', () => {
-        sessionStorage.setItem(SCROLL_KEY, String(Math.round(window.scrollY)));
+        if (a.dataset.section === SECTION) {
+          sessionStorage.setItem('neotone_restore', SECTION);
+        }
       });
     });
-
-    if (sessionStorage.getItem(RESTORE_KEY) === SECTION) {
-      const y = parseFloat(sessionStorage.getItem(SCROLL_KEY) || '0');
-      if (y > 0) {
-        // immediately, because this script runs after layout; the frame after is
-        // only a re-apply in case late content shifts the page under us
-        window.scrollTo(0, y);
-        requestAnimationFrame(() => { window.scrollTo(0, y); updateNav(); });
-      }
-      sessionStorage.removeItem(RESTORE_KEY);
-    }
 
   </script>
 
