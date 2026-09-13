@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cosmology</title>
+<style>
+  :root { --ink: #231f20; --ground: #ececea; --thumb: 16px; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font: 15px/1.4 -apple-system, "Helvetica Neue", Arial, sans-serif;
+  }
+  main { max-width: 1400px; margin: 0 auto; padding: 72px 24px 48px; }
+  .sides { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 72px; }
+  figure { margin: 0; display: grid; gap: 64px; align-content: start; }
+  /* All layers share one viewBox (860.48 x 857.73) with the center hole at 430.24, 430.24 */
+  .disc { position: relative; aspect-ratio: 860.48 / 857.73; }
+  .disc img { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .notes { transform-origin: 50% 50.1603%; }
+
+  /* Slider with a marker at each position: 6, 5L ... 1L, 0, 1R ... 5R, 6 */
+  .slider { position: relative; height: var(--thumb); }
+  .slider::before {
+    content: "";
+    position: absolute;
+    left: calc(var(--thumb) / 2);
+    right: calc(var(--thumb) / 2);
+    top: 50%;
+    border-top: 1px solid var(--ink);
+  }
+  .marker {
+    position: absolute;
+    top: 50%;
+    width: 10px;
+    height: 10px;
+    box-sizing: border-box;
+    border: 1.5px solid var(--ink);
+    border-radius: 50%;
+    background: var(--ground);
+    transform: translate(-50%, -50%);
+  }
+  .slider input {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: var(--thumb);
+    margin: 0;
+    background: transparent;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .slider input::-webkit-slider-runnable-track { height: var(--thumb); background: transparent; }
+  .slider input::-moz-range-track { height: var(--thumb); background: transparent; }
+  .slider input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: var(--thumb);
+    height: var(--thumb);
+    border: 0;
+    border-radius: 50%;
+    background: var(--ink);
+    cursor: grab;
+  }
+  .slider input::-moz-range-thumb {
+    width: var(--thumb);
+    height: var(--thumb);
+    border: 0;
+    border-radius: 50%;
+    background: var(--ink);
+    cursor: grab;
+  }
+  .slider input:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+</style>
+</head>
+<body>
+<main>
+  <div class="sides">
+    <figure>
+      <div class="slider">
+        <input type="range" min="-180" max="180" step="any" value="0" aria-label="Turn the notes, front">
+      </div>
+      <div class="disc">
+        <img src="side-1-bg.svg" alt="">
+        <img class="notes" src="notes.svg" alt="">
+        <img src="side-1-groups.svg" alt="Front">
+      </div>
+    </figure>
+    <figure>
+      <div class="slider">
+        <input type="range" min="-180" max="180" step="any" value="0" aria-label="Turn the notes, back">
+      </div>
+      <div class="disc">
+        <img src="side-2-bg.svg" alt="">
+        <img class="notes" src="notes.svg" alt="">
+        <img src="side-2-groups.svg" alt="Back">
+      </div>
+    </figure>
+  </div>
+</main>
+<script>
+  // Positions are 30° apart: at 0 Re is at the top, at 1R So is (it sits 30° clockwise of Re
+  // on the notes), and 6 at either end is ±180°, Pe at the top. Moving right turns the notes
+  // clockwise, so the R positions (So, Do, Fa...) are on the left.
+  const POSITIONS = ["6", "5R", "4R", "3R", "2R", "1R", "0", "1L", "2L", "3L", "4L", "5L", "6"];
+
+  document.querySelectorAll("figure").forEach(figure => {
+    const slider = figure.querySelector(".slider");
+    const turn = slider.querySelector("input");
+    const notes = figure.querySelector(".notes");
+
+    POSITIONS.forEach((name, i) => {
+      const marker = document.createElement("span");
+      marker.className = "marker";
+      marker.title = name;
+      // the thumb's center travels from half a thumb in from each end
+      marker.style.left = `calc(var(--thumb) / 2 + (100% - var(--thumb)) * ${i / (POSITIONS.length - 1)})`;
+      slider.insertBefore(marker, turn);
+    });
+
+    turn.addEventListener("input", () => {
+      notes.style.transform = `rotate(${turn.value}deg)`;
+    });
+  });
+</script>
+</body>
+</html>

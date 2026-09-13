@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="v8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860.48 857.73">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        stroke: #9abead;
+      }
+
+      .cls-2, .cls-3, .cls-4, .cls-5, .cls-6 {
+        fill: none;
+      }
+
+      .cls-2, .cls-4, .cls-5, .cls-6 {
+        stroke-linecap: round;
+        stroke-width: 28.68px;
+      }
+
+      .cls-3 {
+        stroke: #231f20;
+        stroke-width: .5px;
+      }
+
+      .cls-4 {
+        stroke: #588998;
+      }
+
+      .cls-5 {
+        stroke: #72a3a0;
+      }
+
+      .cls-6 {
+        stroke: #486d8c;
+      }
+    </style>
+  </defs>
+  <circle id="bg_circle" data-name="bg circle" class="cls-1" cx="430.24" cy="430.24" r="427.49"/>
+  <g id="side_1" data-name="side 1">
+    <g id="lines">
+      <circle id="g4_line" data-name="g4 line" class="cls-2" cx="430.24" cy="430.24" r="227.19" transform="translate(-178.21 430.24) rotate(-45)"/>
+      <circle id="g3_line" data-name="g3 line" class="cls-5" cx="430.24" cy="430.24" r="290.09" transform="translate(-178.21 430.24) rotate(-45)"/>
+      <path id="g2_line" data-name="g2 line" class="cls-4" d="M124.58,606.94c-30.11-51.97-47.34-112.32-47.34-176.69,0-194.95,158.04-353,353-353s353,158.04,353,353c0,64.24-17.16,124.47-47.14,176.36"/>
+      <path id="g1_line" data-name="g1 line" class="cls-6" d="M14.34,430.24C14.34,200.55,200.55,14.34,430.24,14.34s415.9,186.2,415.9,415.9"/>
+    </g>
+  </g>
+  <circle id="center_hole" data-name="center hole" class="cls-3" cx="430.24" cy="430.24" r="9"/>
+</svg>
