@@ -1,0 +1,33 @@
+# Accidentally microtonal
+
+**Kicker**
+Tuning
+
+**Preview**
+The harmonics hammered into a handpan's tonefield are perfect ratios: 2:1 for the octave, 3:2 for the fifth above it. But they aren't naturally occurring harmonics, so they aren't perfect. And even naturally occurring harmonics aren't perfect in the Pythagorean sense, because they exist in the material world…
+
+
+
+---
+
+
+
+The harmonics hammered into a handpan's tonefield are perfect ratios: 2:1 for the octave, 3:2 for the fifth above it. But they aren't naturally occurring harmonics, so they aren't perfect. And even naturally occurring harmonics aren't perfect in the Pythagorean sense, because they exist in the material world. Our go-to guy for this one is Aristoxenus, Aristotle's student and the first theorist to say that the ear, not the number, is the judge. Musicians don't have to worry about playing truly perfect consonances, because there's always enough micro-variation. Nothing is ever perfect. Ptolemy is another. Pure mathematical ideals and the realities of the physical world have to be held a bit separately. The pure ratio is an ideal. The world is not. A Euclidean triangle isn't the same as a triangle-shaped thing in the world. It's the concept that lets you call the imperfectly triangle-shaped thing a triangle. It's triangleness.
+
+So there's material imperfection, compounded by the fact that the harmonics on a handpan are constructed. They're a result of craft, not physics. Or at least, of physics that results from craft. And there's another tension. The received tuning system in Europe around 2000, when the Hang was made, was equal temperament. That's the tuning that divides the octave into twelve equal steps, the one every piano and every DAW assumes. Equal temperament isn't based on Pythagorean ratios at all. Its fifths are very slightly narrow and its thirds noticeably wide, so that all twelve keys come out equally usable. Which means that even if you got the overtones of each tonefield to true consonant ratios, the fundamentals wouldn't be interacting with each other that way, nor would the overtones of different fundamentals.
+
+The Integral scale was the first Hang scale, and PanART intended a kind of harmony between its notes: that the tuning of each tonefield was meant to result from the relationships between fundamentals and harmonics across the whole instrument. But the imprecision at every step made this not exactly the case. If you play an early PanART instrument next to a modern high-end handpan, well, just try it. The first documented measurements of the Hang found the harmonics hammered into it far from perfect.
+
+[Image: a spectrum analysis of a single Hang tonefield, the three peaks and where they fall.]
+
+Having to rely on pure craft means you can't even take equal temperament for granted. The actual tuning is kinda whatever you got on the other end of the tuner's hammering. So in principle you have three layers: an imperfect equal-tempered baseline, then a potentially perfect intention for a single scale and its overtones, and then the real-world deviation from that ideal. The notion that every PanART instrument is a unique sculpture makes sense here. One handpan doesn't fit neatly into a system of all handpans. Even under perfect circumstances, it isn't possible to extend a single scale, Integral or any other, across enough overlapping positions that they close neatly into a cohesive twelve-note system. This is the basis for the whole messy history of temperament.
+
+It's worth flagging the terminology here, too, because a lot of assumptions get baked into the terms we take for granted. Take "cents." When you use the word to describe a note's tuning, what you mean is hundredths of a semitone away from the idealized tuning. And if you don't qualify that, it probably means equal temperament. So for the purposes of this conversation, it's worth having a few different systems of calculation in the toolbox. Ratios are the most universally applicable, and the most abstract. But try to describe equal temperament in ratios and you get some pretty unwieldy numbers. And if you're speaking in frequencies, you're rooting whatever you're talking about in the physical world. Well, not entirely. But you're at least using a term that describes a rate of vibration, which is specific in a way a ratio isn't. Notes can share a ratio with other notes at entirely different frequencies.
+
+The reason for saying all this out loud is that whole frameworks for how we think hide inside the words. A "perfect fifth" only aligns with the ratio 3:2 once the system has developed to the point where there are five notes between the terms of that ratio. An "octave" implies eight of something. But the ratio 2:1 has only two of something. Develop a diatonic order, the familiar seven-note scale, and it becomes an octave. Before that, it's a ratio. And it's an abstract ratio, and an abstract octave, before it's applied to any frequencies. So: ratio, cent, semitone, frequency, octave, temperament. Or tuning system. Which maybe I'd call an order. Although, no. An order, like the diatonic order, is a set of relationships that doesn't need to be concretized as a tuning system. It's prior to that.
+
+Now add the layer of scale design in the handpan world, which forks a little into Western and non-Western considerations. It's the difference between wanting a Hijaz scale with correct maqam tuning, or a Pythagorean or just tuning with pure interval relationships, and wanting something like a nineteen-tone equal-tempered scale with "microtones." Maqam is the system of melodic modes in Arabic and Turkish music, each with intervals of its own. And microtones, of course, means fractions of an equal-tempered semitone. More often than not, something like a maqam tuning will be described in terms of microtones. Which imports a theoretical structure from a totally different musical culture, and quietly imposes a frame that has nothing to do with it: equal temperament.
+
+So there you go. Just as a baseline, the handpan is deeply, deeply, weirdly, accidentally microtonal. And what can we do with that? Well, the first thing, and the easiest to overlook before we get into the other things, is to just recognize it, and enjoy it. The weirdness of the full chain of everything that leads to a unique sound sculpture, Hang or handpan, is going to turn out a unique instrument every time. Each one has, in a real sense, its own scale, not quite the same as any scale on any other instrument in the world. At least not exactly. That's something to enjoy. The original Hang had a particular sound. And that was its sound.
+
+[This is an early draft, placed here to establish the register. It's not a finished piece.]
