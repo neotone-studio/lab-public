@@ -1,17 +1,17 @@
 # The **Neotone One** is handcrafted in Budapest, built to order
 
-The Neotone One is an electronic musical instrument with a body made of hardwood. It is both a percussion and a pitch instrument. Under each of its twenty tonefields is a sensor array that interprets the pressure, location, and precise gesture of every strike. Its novel approach to sensor and sampler integration creates a rich and nuanced sound, making it feel surprisingly like playing an acoustic instrument.
+The Neotone One is an electronic musical instrument with a hardwood body. It is both a percussion and a pitch instrument. Each of its twenty tonefields captures the pressure, location, and gesture of every touch. It grew out of rebuilding the acoustic handpan in another medium, and that study is what gives it the nuance of acoustic playing inside electronic music.
 
-> It is both a study, and an extension of the handpan.
+> The feeling is extraordinary. Your musical instinct takes over from the first touch, and the skill you can develop has no limit.
 
-The instrument holds hundreds of scales, including those you design yourself, so you become an instrument maker as well as a player. Everything you create is fully extendable to your digital setup via MIDI.
+The software comes with hundreds of scales and lets you build your own. Every tonefield can be calibrated to the way you play, and you can extend the instrument over MIDI.
 
 ## [Specs]
 
 - Material: Hardwood body in ash, oak, mahogany, cherry, or walnut.
-- Sound: Up to 1,240 unique samples in a single scale.
+- Sound: Over 1200 unique samples in a single scale.
 - Control: 20 tonefields sensing pressure, location, and gesture. Fully assignable.
-- Scales: Unlimited. Hundreds curated. Adjustable harmonics and crosstalk.
+- Scales: Hundreds curated. Design your own. Adjustable harmonics and crosstalk.
 - Lead time: ~60 days, or from stock when available.
 
 ## neOS
