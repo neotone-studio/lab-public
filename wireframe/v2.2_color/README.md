@@ -1,6 +1,6 @@
-# Design v2
+# Wireframe v2.2, colour
 
-Four visual mockups: `index`, `one`, `neos`, `anima`. The direct ancestor of `wireframe/v2`, which was copied from this directory and then diverged.
+Four visual mockups: `index`, `one`, `neos`, `anima`. The direct ancestor of `wireframe/v2.3`, which was copied from this directory and then diverged.
 
 Frozen. Kept browsable so the starting point can be opened alongside the current wireframe. The scroll-driven background colour system and the background photograph still work here; both were removed in the wireframe, which is flat white.
 

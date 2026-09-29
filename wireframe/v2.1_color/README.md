@@ -1,6 +1,6 @@
 # Neotone Site Mockup
 
-> **Superseded.** This describes the original scroll-driven colour mockup: four pages, a background colour that changes as you scroll, and a background photograph. That system was deliberately removed in `wireframe/v2`, which is flat white. Kept for reference and still browsable. See the repository README for what is current.
+> **Superseded.** This describes the original scroll-driven colour mockup: four pages, a background colour that changes as you scroll, and a background photograph. That system was deliberately removed in `wireframe/v2.3`, which is flat white. Kept for reference and still browsable. See the repository README for what is current.
 
 
 A scroll-driven, multi-page mockup for the Neotone site. Four pages correspond to the four brand sections (Neotone, One, Anima, neOS). Each page shares the same structure and behavior but with a different active nav item and starting color.

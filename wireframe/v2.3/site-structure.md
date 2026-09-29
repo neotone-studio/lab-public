@@ -1,6 +1,6 @@
-# Site Structure, v2
+# Site Structure, v2.3
 
-Component reference for `wireframe/v2`. Covers what exists, what state it holds, and behaviour that is not obvious from reading the markup. It does not explain why anything is the way it is: that is [README.md](README.md), and the two are meant to be read side by side.
+Component reference for `wireframe/v2.3`. Covers what exists, what state it holds, and behaviour that is not obvious from reading the markup. It does not explain why anything is the way it is: that is [README.md](README.md), and the two are meant to be read side by side.
 
 Every page is standalone HTML with inline CSS and JavaScript. No build step, no dependencies, no shared files. Components are therefore duplicated across pages, and a change to a shared component has to be applied to each page that carries it. The tables below say which those are.
 

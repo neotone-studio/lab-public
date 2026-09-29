@@ -4,8 +4,6 @@ A sketch of one change: **Neotone becomes a masthead, and the sections are Cultu
 
 Everything else is copied from v2 so the two can be compared directly. Where this and v2 differ in anything other than navigation, v2 is the more finished version.
 
-For the reasoning behind the site as a whole, see [the walkthrough](../../docs/2026-08-12_🤖_site-walkthrough.md), which still describes v2.
-
 ---
 
 ## What changed
