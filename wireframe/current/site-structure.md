@@ -133,7 +133,7 @@ Tonefield, the instrument page and the placeholders open with one centred block,
 
 ## Product page
 
-`instrument.html`, sections in order: opening, orientation, specs strip, **neOS**, order fork, read further, what happens next, play one first.
+`index.html`, sections in order: opening, orientation, specs strip, **neOS**, selection, what happens next, play one first, from Tonefield, mailing list.
 
 **neOS block.** Names the software on the instrument, because it ships with the instrument. One paragraph, links to the manual. When neOS ships standalone it becomes a product and the nav gains Software; the block stays.
 
@@ -143,17 +143,20 @@ Tonefield, the instrument page and the placeholders open with one centred block,
 
 ```js
 var BASE_PRICE = 3150;
-var state = {
-  wood: "Mahogany", woodExtra: 90, discount: 0, orderMode: "build",
-  stockSelection: "", stockPrice: 0, stockIsBstock: false
-};
+var discount = 0;                 // referral, 0 or 5
+var vatCountry = localStorage.getItem('neotone_country') || 'HU';
+var STOCK = [ { serial, wood, img, price, bstock, note }, ... ];
 ```
 
-`orderMode` is `build` or `stock` and drives `switchFork()`. Material cards: five woods, each with an extra over `BASE_PRICE`. Stock cards: three serials; B-stock carries a badge and is not referral eligible.
+**There is no fork, and nothing is configured.** The section opens with one line at the page's own scale, Choose your instrument. Every Neotone One is built to order, and the one thing to choose is the wood, so each wood is listed as a complete instrument, a potential object: the top view, the underside, and beside them the words, name, note, price and Add to Selection. Choosing means adding.
+
+**One muted line above the list** carries the destination country, and every price on the page follows it: elements carry `data-raw` (ex VAT) and `updatePrices()` rewrites them all, instruments, stock and accessories alike. Displayed prices are VAT inclusive; the breakdown appears at checkout. The artist referral code lives at checkout, where it applies as typed to every eligible item in the selection; the selection panel prices items from their own numbers, so a code applied there shows here too.
+
+**From stock** is the same species already realized, so it follows in its own block, separated by a hairline: one line, then rows from `STOCK` with thumbnail, serial, wood, note, price and their own Add to Selection. Three show and the rest sit behind All stock. Woods repeat and every thumbnail is the top view. B-stock carries a badge and is not referral eligible. When there is no stock the rows give way to one line; the notify row follows either way, as one more row in the list. The preview toggle beneath is a wireframe device.
 
 ### Accessories
 
-One `ACCESSORIES` array rendered into both panels with `createElement` and `addEventListener`, never inline `onclick`: a name containing quotes breaks attribute parsing, and that failure occurred in v1.
+One `ACCESSORIES` array rendered once, after stock, with `createElement` and `addEventListener`, never inline `onclick`: a name containing quotes breaks attribute parsing, and that failure occurred in v1.
 
 | Field | Meaning |
 |---|---|

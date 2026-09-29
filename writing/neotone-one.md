@@ -25,33 +25,23 @@ Included with every Neotone One. This is where you set the instrument's sound an
 - Scales (Walkthrough): Build your first scale.
 - The Harmony Wizard (Going deeper): Fine tune harmonics.
 
-## [Order]
+## [Selection]
 
-- Built to Order: Built to your specification. About sixty days.
-- From Stock: Finished instruments, ready to ship.
+Choose your instrument
 
-### [Built to Order]
+- Ash: Medium weight, open straight grain
+- Oak: Heaviest, bold straight grain
+- Mahogany: Medium weight, fine even grain
+- Cherry: Lightest, fine grain, darkens with age
+- Walnut: Medium weight, dark flowing grain
 
-Select your wood.
+### From stock
 
-- Ash: Pale, open grain
-- Oak: Straight grain, mid brown
-- Mahogany: Fine grain, reddish
-- Cherry: Warm and even, darkens with age
-- Walnut: Dark, rich grain
-
-### [From Stock]
-
-Select your instrument.
+Occasionally we have finished instruments ready to ship.
 
 No stock instruments available at this time.
 
-New stock is listed here as instruments become available.
-Built to order is always open.
-
-### Notify me when new stock becomes available
-
-We'll email you when a new instrument is listed.
+Get an email when a stock instrument is listed.
 
 ## What happens next
 

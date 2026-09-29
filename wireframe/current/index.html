@@ -183,8 +183,10 @@
       .opening { padding: 32px 0 40px; font-size: 19px; }
       .opening-name { font-size: 28px; }
       .specs-strip, .steps-strip, .stack { grid-template-columns: 1fr; }
-      .spec-cell, .step-cell { border-right: none; border-bottom: 1px solid var(--line); padding-left: 0; }
+      .spec-cell, .step-cell { border-right: none; border-bottom: 1px solid var(--line); }
+      .spec-cell:not(:first-child), .step-cell:not(:first-child) { padding-left: 0; }
       .spec-cell:last-child, .step-cell:last-child { border-bottom: none; }
+      .choose-head { font-size: 26px; }
     }
 
     /* ================================================================
@@ -212,94 +214,65 @@
       font-size: 13px; font-family: Arial, Helvetica, sans-serif;
     }
 
-    /* ---- Order fork ---- */
-    .instrument-preview {
-      position: relative; width: 100%; height: 300px; background: var(--line);
-      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+    /* ---- Selection: each wood a complete instrument, listed ---- */
+    .choose-head {
+      margin: 0 0 36px; text-align: center;
+      font-size: 30px; font-weight: 400; line-height: 1.2; letter-spacing: -0.01em;
     }
-    .instrument-preview-label {
-      font-size: 13px; font-weight: 700; font-family: Arial, Helvetica, sans-serif;
-      text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted);
+    .pricing { display: flex; justify-content: flex-end; align-items: center; gap: 6px; margin: 0 0 10px; font-size: 12px; color: var(--muted); }
+    .pricing select { border: 1px solid var(--line); padding: 3px 6px; font-size: 12px; font-family: Arial, Helvetica, sans-serif; background: #fff; color: var(--ink); }
+    .instruments { margin-bottom: 4px; }
+    .instrument {
+      display: grid; grid-template-columns: 1fr 1fr 240px; gap: 0 20px; align-items: start;
+      padding: 22px 0; border-top: 1px solid var(--line);
     }
-    .instrument-preview-caption { font-size: 12px; font-style: italic; color: var(--muted); font-family: Arial, Helvetica, sans-serif; }
-    .tabs {
-      display: flex;
-      border-left: 1px solid var(--line); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line);
-      margin-bottom: 14px;
-    }
-    .tab {
-      flex: 1; border: none; border-right: 1px solid var(--line);
-      background: #fff; padding: 18px 20px; text-align: left;
-      cursor: pointer; font-family: Arial, Helvetica, sans-serif;
-    }
-    .tab:last-child { border-right: none; }
-    .tab.active { background: #f7f7f7; box-shadow: inset 0 2px 0 var(--ink); }
-    .tab-title { display: block; font-size: 15px; font-weight: 700; margin-bottom: 4px; }
-    .tab-desc { display: block; font-size: 12px; color: var(--muted); line-height: 1.5; }
-    .panel { padding: 0; }
-    .panel-intro {
-      font-size: 16px; line-height: 1.7; text-align: center;
-      margin: 0 auto 24px; max-width: 620px; color: var(--ink);
-    }
+    .instrument:last-child { border-bottom: 1px solid var(--line); }
+    .instrument img { width: 100%; aspect-ratio: 6 / 5; object-fit: contain; display: block; background: #fff; }
+    .instrument-body { padding: 2px 0 0 12px; font-family: Arial, Helvetica, sans-serif; }
+    .instrument-kind { display: block; margin-bottom: 8px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+    .instrument-name { margin: 0 0 6px; font-size: 16px; font-family: inherit; }
+    .instrument-name .wood-name { font-weight: 700; }
+    .wood-note { margin: 0 0 14px; font-size: 12px; color: var(--muted); line-height: 1.5; }
+    .instrument-price { margin: 0 0 12px; font-size: 13px; }
 
-    /* ---- Material cards ---- */
-    .material-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 20px; }
-    .material-card { border: 1px solid var(--line); cursor: pointer; }
-    .material-card.active { border-color: var(--ink); }
-    .material-swatch { width: 100%; aspect-ratio: 1 / 1; background: #d4d4d4; }
-    .material-card.active .material-swatch { background: #b8b8b8; }
-    .material-card-body { padding: 8px 10px; }
-    .material-name { margin: 0 0 3px; font-size: 12px; font-weight: 700; font-family: Arial, Helvetica, sans-serif; }
-    .material-note { margin: 0; font-size: 10px; color: var(--muted); line-height: 1.4; font-family: Arial, Helvetica, sans-serif; }
-
-    /* ---- Stock cards ---- */
-    .stock-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 8px; }
-    .stock-card { border: 1px solid var(--line); cursor: pointer; }
-    .stock-card.selected { border-color: var(--ink); }
-    .stock-card img { width: 100%; height: 160px; object-fit: cover; display: block; }
-    .stock-card-body { padding: 10px 12px; }
-    .stock-card-serial {
-      display: block; font-size: 9px; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 4px;
+    /* ---- From stock: the same species, already realized; smaller and quieter ---- */
+    .stock-block { margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--line); }
+    .stock-label {
+      display: block; margin-bottom: 8px;
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.14em; color: var(--muted);
+    }
+    .stock-line { margin: 0 0 14px; max-width: 620px; font-size: 14px; line-height: 1.6; color: var(--muted); }
+    .stock-row {
+      display: grid; grid-template-columns: 96px 1fr auto auto; gap: 0 16px; align-items: center;
+      padding: 10px 0; border-top: 1px solid var(--line);
       font-family: Arial, Helvetica, sans-serif;
     }
-    .stock-card-wood { margin: 0 0 2px; font-size: 14px; }
-    .stock-card-price { display: block; font-size: 12px; color: var(--muted); margin-bottom: 8px; font-family: Arial, Helvetica, sans-serif; }
-    .stock-card-note { margin: 0; font-size: 11px; color: var(--muted); line-height: 1.5; font-style: italic; font-family: Arial, Helvetica, sans-serif; }
+    .stock-row:last-child { border-bottom: 1px solid var(--line); }
+    .stock-row.stock-extra { display: none; }
+    .stock-list.stock-expanded .stock-row.stock-extra { display: grid; }
+    .stock-row img { width: 96px; height: 64px; object-fit: cover; display: block; background: var(--line); }
+    .stock-row-body { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+    .stock-row-serial { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+    .stock-row-wood { font-size: 13px; font-weight: 700; }
+    .stock-row-note { font-size: 11px; color: var(--muted); line-height: 1.4; font-style: italic; }
+    .stock-row-price { font-size: 13px; text-align: right; white-space: nowrap; }
+    .stock-row .opt { font-size: 11px; padding: 5px 8px; }
     .bstock-badge {
-      display: inline-block; border: 1px solid #aaa; padding: 1px 6px;
-      font-size: 10px; color: #555; margin-left: 4px; vertical-align: middle;
+      display: inline-block; border: 1px solid #aaa; padding: 0 5px;
+      font-size: 9px; color: #555; margin-left: 4px; vertical-align: middle; letter-spacing: 0;
       font-family: Arial, Helvetica, sans-serif;
     }
-
-    /* ---- Empty stock state ---- */
-    .stock-empty {
-      border: 1px solid var(--line); min-height: 200px;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 8px; margin-bottom: 8px; padding: 32px;
+    .stock-empty-head { margin: 0 0 4px; font-size: 14px; font-style: italic; color: var(--muted); padding: 12px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .stock-notify {
+      display: grid; grid-template-columns: 1fr auto; gap: 0 24px; align-items: center;
+      padding: 12px 0; border-bottom: 1px solid var(--line);
+      font-family: Arial, Helvetica, sans-serif;
     }
-    .stock-empty-head { font-size: 16px; font-style: italic; color: var(--muted); margin: 0; }
-    .stock-empty-body { font-size: 12px; color: var(--muted); text-align: center; line-height: 1.6; margin: 0; font-family: Arial, Helvetica, sans-serif; }
-    .wf-toggle { font-size: 11px; font-style: italic; color: var(--muted); cursor: pointer; background: none; border: none; padding: 0; margin-bottom: 20px; font-family: Arial, Helvetica, sans-serif; }
+    .stock-notify .notify-desc { margin: 0; font-size: 12px; color: var(--muted); }
+    .stock-notify .email-row { margin: 0; }
+    .wf-toggle { font-size: 11px; font-style: italic; color: var(--muted); cursor: pointer; background: none; border: none; padding: 0; margin: 10px 0 0; font-family: Arial, Helvetica, sans-serif; }
     .wf-toggle:hover { text-decoration: underline; }
-
-    /* ---- Instrument summary ---- */
-    .summary-block { background: #f2f2f2; padding: 20px; margin-bottom: 14px; border: 1px solid var(--line); }
-    .summary-layout { display: grid; grid-template-columns: 1fr auto; grid-template-areas: "pre controls" "post controls"; gap: 0 24px; margin-top: 8px; align-items: start; }
-    .sum-pre { grid-area: pre; }
-    .sum-controls { grid-area: controls; border-left: 1px solid var(--line); padding-left: 16px; }
-    .sum-post { grid-area: post; }
-    .ctrl-row { display: flex; flex-direction: column; gap: 3px; margin-bottom: 10px; }
-    .ctrl-row:last-child { margin-bottom: 0; }
-    .ctrl-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); font-family: Arial, Helvetica, sans-serif; }
-    .ctrl-row select { width: 168px; border: 1px solid var(--line); padding: 5px 8px; font-size: 12px; font-family: Arial, Helvetica, sans-serif; background: #fff; cursor: pointer; }
-    .ctrl-input-row { display: flex; gap: 4px; width: 168px; }
-    .ctrl-input-row input { flex: 1; min-width: 0; border: 1px solid var(--line); padding: 5px 8px; font-size: 12px; font-family: Arial, Helvetica, sans-serif; }
-    .summary-total { font-size: 14px; color: var(--ink); font-family: Arial, Helvetica, sans-serif; margin: 6px 0 0; }
-    .summary-bookend-note {
-      display: block; font-size: 10px; font-style: italic; color: var(--muted);
-      font-family: Arial, Helvetica, sans-serif; margin-top: 10px;
-    }
 
     /* ---- Accessories ---- */
     .acc-section { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); }
@@ -331,12 +304,16 @@
     .talk-block { border: 1px dashed #aaa; padding: 14px; margin-bottom: 14px; }
 
     @media (max-width: 980px) {
-      .material-grid, .acc-grid { grid-template-columns: repeat(2, 1fr); }
+      .acc-grid { grid-template-columns: repeat(2, 1fr); }
+      .instrument { grid-template-columns: 1fr 1fr; gap: 12px 12px; }
+      .instrument-body { grid-column: 1 / -1; padding-left: 0; }
+      .pricing { justify-content: flex-start; flex-wrap: wrap; }
+      .stock-row { grid-template-columns: 64px 1fr; gap: 4px 12px; }
+      .stock-row img { width: 64px; height: 43px; }
+      .stock-row-price, .stock-row .opt { grid-column: 2; justify-self: start; text-align: left; }
+      .stock-notify { grid-template-columns: 1fr; gap: 8px 0; }
       .acc-card.acc-fifth { display: none; }
       .acc-grid.acc-expanded .acc-card.acc-fifth { display: flex; }
-      .stock-grid { grid-template-columns: 1fr 1fr; }
-      .summary-layout { grid-template-columns: 1fr; grid-template-areas: "pre" "controls" "post"; }
-      .sum-controls { border-left: none; padding-left: 0; border-top: 1px solid var(--line); padding-top: 12px; margin: 10px 0; }
       .sel-panel { width: 100%; }
     }
 
@@ -485,6 +462,7 @@
     }
     .sel-nav:hover { color: var(--ink); }
     .sel-nav.visible { opacity: 1; pointer-events: auto; }
+    @media (max-width: 980px) { .sel-nav { right: 24px; font-size: 11px; } }
     .sel-count { margin-left: 5px; }
     @media (max-width: 980px) { .instrument-row { padding: 20px 24px 0; } }
 
@@ -526,9 +504,6 @@
     .neos-title { margin: 0 0 16px; font-size: 21px; font-weight: 400; letter-spacing: -0.01em; }
     .neos-body { padding: 56px 0 32px; }
     .neos-links { margin-top: 20px; display: flex; gap: 28px; flex-wrap: wrap; }
-    .ref-note { margin: 8px 0 0; font-size: 12px; color: var(--muted); font-family: Arial, Helvetica, sans-serif; }
-    .ref-note a { border-bottom: 1px solid var(--line); }
-    .ref-note a:hover { color: var(--ink); border-bottom-color: var(--ink); }
     .network { margin-top: 44px; }
     .place-where {
       margin: 0 0 8px; font-size: 12px; line-height: 1.5;
@@ -618,6 +593,11 @@
     .door-kind { display: block; font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-family: Arial, Helvetica, sans-serif; margin-bottom: 7px; }
     .door-title { display: block; font-size: 13px; line-height: 1.45; margin-bottom: 4px; }
     .door-desc { display: block; font-size: 12px; color: var(--muted); font-family: Arial, Helvetica, sans-serif; line-height: 1.5; }
+    @media (max-width: 980px) {
+      .neos-doors { grid-template-columns: 1fr; padding-top: 0; }
+      .neos-door { padding: 14px 0; border-right: none; border-bottom: 1px solid var(--line); }
+      .neos-door:last-child { border-bottom: none; }
+    }
     .q-block { margin: 64px auto 0; padding-top: 34px; border-top: 1px solid var(--line); max-width: 620px; }
     .q-label {
       display: block; margin: 0 0 10px;
@@ -751,211 +731,116 @@
       </div>
     </section>
 
-    <!-- 4 · Order fork -->
-    <section class="block" style="padding: 0; overflow: hidden; margin-bottom: 14px;">
+    <!-- 4 · Selection. Each wood is a complete instrument, a potential object,
+         with its own image, price and Add to Selection: a selection among
+         finished things rather than a configuration of one abstract thing.
+         Stock follows as a separate block, the same species already realized.
+         The country and referral code are one line of apparatus above the
+         list, and every price on the page follows them; the breakdown appears
+         at checkout. -->
+    <section class="sec" id="selection">
+      <p class="choose-head">Choose your instrument</p>
 
-      <div class="tabs sans">
-        <button class="tab active" id="tab-build" onclick="switchFork('build')">
-          <span class="tab-title">Built to Order</span>
-          <span class="tab-desc">Built to your specification. About sixty days.</span>
-        </button>
-        <button class="tab" id="tab-stock" onclick="switchFork('stock')">
-          <span class="tab-title">From Stock</span>
-          <span class="tab-desc">Finished instruments, ready to ship.</span>
-        </button>
+      <p class="pricing sans">
+        <span id="vat-note">Prices include 27% VAT for</span>
+        <select id="vat-country" onchange="changeVATCountry(this.value)">
+          <option value="HU">Hungary</option>
+          <option value="DE">Germany</option>
+          <option value="FR">France</option>
+          <option value="US">United States</option>
+        </select><span id="vat-tail">.</span>
+      </p>
+
+      <div class="instruments">
+        <div class="instrument" id="wood-ash">
+          <img src="../../media/finish/neotone-ash-01.png" alt="Neotone One in ash" />
+          <img src="../../media/finish/neotone-ash-02.png" alt="Neotone One in ash, underside" />
+          <div class="instrument-body">
+            <span class="instrument-kind">Built to order</span>
+            <p class="instrument-name">Neotone One &middot; <span class="wood-name">Ash</span></p>
+            <p class="wood-note">Medium weight, open straight grain</p>
+            <p class="instrument-price" data-raw="3150">EUR 3,150</p>
+            <button class="opt" onclick="addWood('Ash', 0)">Add to Selection</button>
+          </div>
+        </div>
+        <div class="instrument" id="wood-oak">
+          <img src="../../media/finish/neotone-oak-01.png" alt="Neotone One in oak" />
+          <img src="../../media/finish/neotone-oak-02.png" alt="Neotone One in oak, underside" />
+          <div class="instrument-body">
+            <span class="instrument-kind">Built to order</span>
+            <p class="instrument-name">Neotone One &middot; <span class="wood-name">Oak</span></p>
+            <p class="wood-note">Heaviest, bold straight grain</p>
+            <p class="instrument-price" data-raw="3150">EUR 3,150</p>
+            <button class="opt" onclick="addWood('Oak', 0)">Add to Selection</button>
+          </div>
+        </div>
+        <div class="instrument" id="wood-mahogany">
+          <img src="../../media/finish/neotone-mahagony-01.png" alt="Neotone One in mahogany" />
+          <img src="../../media/finish/neotone-mahagony-02.png" alt="Neotone One in mahogany, underside" />
+          <div class="instrument-body">
+            <span class="instrument-kind">Built to order</span>
+            <p class="instrument-name">Neotone One &middot; <span class="wood-name">Mahogany</span></p>
+            <p class="wood-note">Medium weight, fine even grain</p>
+            <p class="instrument-price" data-raw="3240">EUR 3,240</p>
+            <button class="opt" onclick="addWood('Mahogany', 90)">Add to Selection</button>
+          </div>
+        </div>
+        <div class="instrument" id="wood-cherry">
+          <img src="../../media/finish/neotone-cherry-01.png" alt="Neotone One in cherry" />
+          <img src="../../media/finish/neotone-cherry-02.png" alt="Neotone One in cherry, underside" />
+          <div class="instrument-body">
+            <span class="instrument-kind">Built to order</span>
+            <p class="instrument-name">Neotone One &middot; <span class="wood-name">Cherry</span></p>
+            <p class="wood-note">Lightest, fine grain, darkens with age</p>
+            <p class="instrument-price" data-raw="3240">EUR 3,240</p>
+            <button class="opt" onclick="addWood('Cherry', 90)">Add to Selection</button>
+          </div>
+        </div>
+        <div class="instrument" id="wood-walnut">
+          <img src="../../media/finish/neotone-walnut-01.png" alt="Neotone One in walnut" />
+          <img src="../../media/finish/neotone-walnut-02.png" alt="Neotone One in walnut, underside" />
+          <div class="instrument-body">
+            <span class="instrument-kind">Built to order</span>
+            <p class="instrument-name">Neotone One &middot; <span class="wood-name">Walnut</span></p>
+            <p class="wood-note">Medium weight, dark flowing grain</p>
+            <p class="instrument-price" data-raw="3340">EUR 3,340</p>
+            <button class="opt" onclick="addWood('Walnut', 190)">Add to Selection</button>
+          </div>
+        </div>
       </div>
 
-      <div style="padding: 16px;">
+      <!-- 4b · From stock: instruments that already exist. Rows come from
+           STOCK in the script; three show, the rest behind a toggle, and the
+           empty state with its preview toggle is a wireframe device. -->
+      <div class="stock-block" id="from-stock">
+        <span class="stock-label">From stock</span>
+        <p class="stock-line">Occasionally we have finished instruments ready to ship.</p>
 
-        <!-- Built to Order -->
-        <div id="panel-build" class="panel">
-          <p class="panel-intro">Select your wood.</p>
-
-          <div class="material-grid">
-            <div class="material-card" id="wood-ash" onclick="selectWood('Ash',0)">
-              <div class="material-swatch"></div>
-              <div class="material-card-body">
-                <p class="material-name">Ash</p>
-                <p class="material-note">Pale, open grain</p>
-              </div>
-            </div>
-            <div class="material-card" id="wood-oak" onclick="selectWood('Oak',0)">
-              <div class="material-swatch"></div>
-              <div class="material-card-body">
-                <p class="material-name">Oak</p>
-                <p class="material-note">Straight grain, mid brown</p>
-              </div>
-            </div>
-            <div class="material-card active" id="wood-mahogany" onclick="selectWood('Mahogany',90)">
-              <div class="material-swatch"></div>
-              <div class="material-card-body">
-                <p class="material-name">Mahogany</p>
-                <p class="material-note">Fine grain, reddish</p>
-              </div>
-            </div>
-            <div class="material-card" id="wood-cherry" onclick="selectWood('Cherry',90)">
-              <div class="material-swatch"></div>
-              <div class="material-card-body">
-                <p class="material-name">Cherry</p>
-                <p class="material-note">Warm and even, darkens with age</p>
-              </div>
-            </div>
-            <div class="material-card" id="wood-walnut" onclick="selectWood('Walnut',190)">
-              <div class="material-swatch"></div>
-              <div class="material-card-body">
-                <p class="material-name">Walnut</p>
-                <p class="material-note">Dark, rich grain</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="summary-block sans">
-            <p class="block-label">Your instrument</p>
-            <div class="summary-layout">
-              <div class="sum-pre">
-                <p class="block-desc" id="sum-wood" style="margin-top:4px;">Wood: Mahogany</p>
-                <p class="block-desc" id="sum-base" style="margin-top:4px;">Base price: EUR 3,240</p>
-                <p class="block-desc" id="sum-disc" style="margin-top:4px;">Referral discount: 0%</p>
-              </div>
-              <div class="sum-controls">
-                <div class="ctrl-row">
-                  <label class="ctrl-label" for="vat-country-build">Destination Country</label>
-                  <select id="vat-country-build" onchange="changeVATCountry(this.value)">
-                    <option value="HU">Hungary</option>
-                    <option value="DE">Germany</option>
-                    <option value="FR">France</option>
-                    <option value="US">United States</option>
-                  </select>
-                  <p class="block-desc" style="font-size:11px; margin-top:3px;">Used to calculate VAT</p>
-                </div>
-                <div class="ctrl-row">
-                  <label class="ctrl-label" for="refcode">Artist Referral Code</label>
-                  <div class="ctrl-input-row">
-                    <input id="refcode" placeholder="Optional" />
-                    <button class="opt" onclick="applyCode()">Apply</button>
-                  </div>
-                  <p id="refmsg" class="block-desc" style="font-size:11px; margin-top:3px;">No code applied.</p>
-                  <p class="ref-note">Codes come from artist sessions.</p>
-                </div>
-              </div>
-              <div class="sum-post">
-                <p class="block-desc" id="sum-vat" style="margin-top:4px;"></p>
-                <p class="summary-total" id="sum-total" style="margin-top:4px;"></p>
-              </div>
-            </div>
-            <button class="opt" style="margin-top:14px;" onclick="addBuildToSelection()">Add to Selection</button>
-
-            <div class="acc-section">
-              <p class="block-label">Accessories</p>
-              <div class="acc-grid" id="acc-grid-build"></div>
-              <button class="acc-show-btn" onclick="toggleAccessories(this)">Show more accessories &darr;</button>
-            </div>
-          </div>
+        <div id="stock-available">
+          <div class="stock-list" id="stock-list"></div>
+          <button class="acc-show-btn" id="stock-more" onclick="toggleStock(this)"></button>
         </div>
+        <p class="stock-empty-head" id="stock-empty-state" hidden>No stock instruments available at this time.</p>
 
-        <!-- From Stock -->
-        <div id="panel-stock" class="panel hidden">
-          <p class="panel-intro">Select your instrument.</p>
-
-          <div id="stock-available">
-            <div class="stock-grid">
-              <div class="stock-card" id="stock-a" onclick="selectStock('Serial No. 821', false)">
-                <img src="../../media/finish/neotone-walnut-01.png" alt="Serial No. 821" />
-                <div class="stock-card-body">
-                  <span class="stock-card-serial">Serial No. 821</span>
-                  <p class="stock-card-wood">Walnut</p>
-                  <span class="stock-card-price">EUR 3,800</span>
-                  <p class="stock-card-note">Played in workshop sessions. No cosmetic marks. Full warranty.</p>
-                </div>
-              </div>
-              <div class="stock-card" id="stock-b" onclick="selectStock('Serial No. 873', false)">
-                <img src="../../media/finish/neotone-cherry-01.png" alt="Serial No. 873" />
-                <div class="stock-card-body">
-                  <span class="stock-card-serial">Serial No. 873</span>
-                  <p class="stock-card-wood">Cherry</p>
-                  <span class="stock-card-price">EUR 3,980</span>
-                  <p class="stock-card-note">Studio instrument. Light playing wear on upper rim. Full warranty.</p>
-                </div>
-              </div>
-              <div class="stock-card" id="stock-c" onclick="selectStock('Serial No. 907', true)">
-                <img src="../../media/finish/neotone-oak-01.png" alt="Serial No. 907" />
-                <div class="stock-card-body">
-                  <span class="stock-card-serial">Serial No. 907 <span class="bstock-badge">B-stock</span></span>
-                  <p class="stock-card-wood">Oak</p>
-                  <span class="stock-card-price">EUR 3,100</span>
-                  <p class="stock-card-note">Minor cosmetic marking on lower body. Fully functional. Same warranty applies.</p>
-                </div>
-              </div>
-            </div>
-            <button class="wf-toggle" onclick="toggleStockEmpty()">Preview: no stock available &uarr;</button>
-          </div>
-
-          <div id="stock-empty-state" class="hidden">
-            <div class="stock-empty">
-              <p class="stock-empty-head">No stock instruments available at this time.</p>
-              <p class="stock-empty-body">New stock is listed here as instruments become available.<br>Built to order is always open.</p>
-            </div>
-            <button class="wf-toggle" onclick="toggleStockEmpty()">Preview: show stock instruments &uarr;</button>
-          </div>
-
-          <div class="summary-block sans">
-            <p class="block-label">Your instrument</p>
-            <div class="summary-layout">
-              <div class="sum-pre">
-                <p class="block-desc" id="stock-sum-item" style="margin-top:4px;">Select an instrument above</p>
-                <p class="block-desc" id="stock-sum-base" style="margin-top:4px;">Base price: –</p>
-                <p class="block-desc" id="stock-sum-disc" style="margin-top:4px;">Referral discount: 0%</p>
-              </div>
-              <div class="sum-controls">
-                <div class="ctrl-row">
-                  <label class="ctrl-label" for="vat-country-stock">Destination Country</label>
-                  <select id="vat-country-stock" onchange="changeVATCountry(this.value)">
-                    <option value="HU">Hungary</option>
-                    <option value="DE">Germany</option>
-                    <option value="FR">France</option>
-                    <option value="US">United States</option>
-                  </select>
-                  <p class="block-desc" style="font-size:11px; margin-top:3px;">Used to calculate VAT</p>
-                </div>
-                <div class="ctrl-row">
-                  <label class="ctrl-label" for="stock-refcode">Artist Referral Code</label>
-                  <div class="ctrl-input-row">
-                    <input id="stock-refcode" placeholder="Optional" />
-                    <button class="opt" onclick="applyStockCode()">Apply</button>
-                  </div>
-                  <p id="stock-refmsg" class="block-desc" style="font-size:11px; margin-top:3px;">No code applied.</p>
-                  <p class="ref-note">Codes come from artist sessions.</p>
-                </div>
-              </div>
-              <div class="sum-post">
-                <p class="block-desc" id="stock-sum-vat" style="margin-top:4px;"></p>
-                <p class="summary-total" id="stock-sum-total" style="margin-top:4px;"><strong>Total: –</strong></p>
-              </div>
-            </div>
-            <button class="opt" style="margin-top:14px;" onclick="addStockToSelection()">Add to Selection</button>
-
-            <div class="acc-section">
-              <p class="block-label">Accessories</p>
-              <div class="acc-grid" id="acc-grid-stock"></div>
-              <button class="acc-show-btn" onclick="toggleAccessories(this)">Show more accessories &darr;</button>
-            </div>
-          </div>
-
-          <div class="block sans" style="margin-bottom: 14px;">
-            <p class="block-label">Notify me when new stock becomes available</p>
-            <p class="block-desc" style="margin-top:4px;">We'll email you when a new instrument is listed.</p>
-            <form class="email-row" onsubmit="handleNotify(event)">
-              <input type="email" placeholder="Email address" required />
-              <button class="subscribe-btn" type="submit">Notify me</button>
-              <span class="subscribe-confirm">You're on the list</span>
-            </form>
-          </div>
+        <div class="stock-notify" id="stock-notify">
+          <p class="notify-desc">Get an email when a stock instrument is listed.</p>
+          <form class="email-row" onsubmit="handleNotify(event)">
+            <input type="email" placeholder="Email address" required />
+            <button class="subscribe-btn" type="submit">Notify me</button>
+            <span class="subscribe-confirm">You're on the list</span>
+          </form>
         </div>
+        <button class="wf-toggle" id="stock-preview" onclick="toggleStockEmpty()">Preview: no stock available &uarr;</button>
+      </div>
 
+      <div class="acc-section">
+        <p class="block-label">Accessories</p>
+        <div class="acc-grid" id="acc-grid"></div>
+        <button class="acc-show-btn" onclick="toggleAccessories(this)">Show all accessories &darr;</button>
       </div>
     </section>
 
-    <!-- 5 · What happens next, with purchase terms. Beside the fork,
+    <!-- 5 · What happens next, with purchase terms. Beside the selection,
          because terms belong next to the ask. -->
     <section class="sec">
       <span class="sec-label">What happens next</span>
@@ -1336,18 +1221,26 @@
        Purchase machinery, ported from v1/one.html.
        ================================================================ */
 
-    var state = {
-      wood: "Mahogany", woodExtra: 90, discount: 0, orderMode: "build",
-      stockSelection: "", stockPrice: 0, stockIsBstock: false
-    };
     var BASE_PRICE = 3150;
     var stockEmptyVisible = false;
     var VAT_RATES = { HU: 0.27, DE: 0.19, FR: 0.20, US: null };
     var VAT_NAMES = { HU: "Hungary", DE: "Germany", FR: "France", US: "United States" };
     var vatCountry = localStorage.getItem('neotone_country') || 'HU';
 
-    /* Accessories are data rather than duplicated markup: the same list is
-       rendered into both panels, and cards are built with addEventListener
+    /* Stock is data. Each entry is an instrument that already exists. */
+    var STOCK = [
+      { serial: "Serial No. 821", wood: "Walnut",   img: "walnut",   price: 3800, bstock: false, note: "Played in workshop sessions. No cosmetic marks. Full warranty." },
+      { serial: "Serial No. 873", wood: "Cherry",   img: "cherry",   price: 3980, bstock: false, note: "Studio instrument. Light playing wear on upper rim. Full warranty." },
+      { serial: "Serial No. 907", wood: "Oak",      img: "oak",      price: 3100, bstock: true,  note: "Minor cosmetic marking on lower body. Fully functional. Same warranty applies." },
+      { serial: "Serial No. 912", wood: "Mahogany", img: "mahagony", price: 3800, bstock: false, note: "Returned within the two weeks, unplayed. Full warranty." },
+      { serial: "Serial No. 934", wood: "Mahogany", img: "mahagony", price: 3850, bstock: false, note: "Demonstration instrument from a partner location. Full warranty." },
+      { serial: "Serial No. 941", wood: "Walnut",   img: "walnut",   price: 3600, bstock: true,  note: "Small finish blemish on the underside. Fully functional. Same warranty applies." },
+      { serial: "Serial No. 955", wood: "Cherry",   img: "cherry",   price: 3960, bstock: false, note: "Played at one festival. No cosmetic marks. Full warranty." }
+    ];
+    var STOCK_SHOWN = 3;
+
+    /* Accessories are data rather than markup, rendered once beneath the
+       selection, and cards are built with addEventListener
        rather than inline onclick so names containing quotes cannot break
        attribute parsing. */
     const ACCESSORIES = [
@@ -1363,7 +1256,7 @@
     ];
 
     function renderAccessories() {
-      ['acc-grid-build', 'acc-grid-stock'].forEach(function(gridId) {
+      ['acc-grid'].forEach(function(gridId) {
         const grid = document.getElementById(gridId);
         if (!grid) return;
         grid.innerHTML = '';
@@ -1413,27 +1306,8 @@
       });
     }
 
-    function formatWithVat(rawBase) {
-      var rate = VAT_RATES[vatCountry];
-      var total = rate ? Math.round(rawBase * (1 + rate)) : rawBase;
-      return 'EUR ' + total.toLocaleString('en-US');
-    }
-    function updateAccPrices() {
-      document.querySelectorAll('[data-raw]').forEach(function(el) {
-        el.textContent = formatWithVat(parseFloat(el.getAttribute('data-raw')));
-      });
-    }
-    function changeVATCountry(val) {
-      vatCountry = val;
-      localStorage.setItem('neotone_country', val);
-      var d1 = document.getElementById("vat-country-build");
-      var d2 = document.getElementById("vat-country-stock");
-      if (d1) d1.value = val;
-      if (d2) d2.value = val;
-      updateBuildSummary();
-      updateStockSummary();
-      updateAccPrices();
-    }
+    /* Every displayed price follows the destination country. Elements carry
+       data-raw (ex VAT). Referral codes are entered at checkout. */
     function vatLine(subtotal) {
       var rate = VAT_RATES[vatCountry];
       if (rate === null) return { text: "No VAT (import duties may apply)", total: subtotal };
@@ -1443,128 +1317,85 @@
         total: subtotal + amount
       };
     }
-
-    function switchFork(which) {
-      state.orderMode = which;
-      document.getElementById("tab-build").classList.toggle("active", which === "build");
-      document.getElementById("tab-stock").classList.toggle("active", which === "stock");
-      document.getElementById("panel-build").classList.toggle("hidden", which !== "build");
-      document.getElementById("panel-stock").classList.toggle("hidden", which !== "stock");
-      updateCaption();
-    }
-
-    function selectWood(name, extra) {
-      state.wood = name; state.woodExtra = extra;
-      ["ash","oak","mahogany","cherry","walnut"].forEach(function(id) {
-        document.getElementById("wood-"+id).classList.remove("active");
+    function withVat(rawBase) { return 'EUR ' + vatLine(rawBase).total.toLocaleString('en-US'); }
+    function updatePrices() {
+      document.querySelectorAll('[data-raw]').forEach(function(el) {
+        el.textContent = withVat(parseFloat(el.getAttribute('data-raw')));
       });
-      document.getElementById("wood-"+name.toLowerCase()).classList.add("active");
-      updateCaption(); updateBuildSummary();
+      var rate = VAT_RATES[vatCountry];
+      document.getElementById('vat-note').textContent = rate === null ? 'No VAT for' : 'Prices include ' + Math.round(rate * 100) + '% VAT for';
+      document.getElementById('vat-tail').textContent = rate === null ? '. Import duties may apply.' : '.';
+    }
+    function changeVATCountry(val) {
+      vatCountry = val;
+      localStorage.setItem('neotone_country', val);
+      var d = document.getElementById("vat-country");
+      if (d) d.value = val;
+      updatePrices();
+      renderSelection();
     }
 
-    function selectStock(serialName, isBstock) {
-      state.stockSelection = serialName; state.stockIsBstock = isBstock;
-      var prices = {"Serial No. 821":3800,"Serial No. 873":3980,"Serial No. 907":3100};
-      state.stockPrice = prices[serialName] || 0;
-      ["stock-a","stock-b","stock-c"].forEach(function(id) { document.getElementById(id).classList.remove("selected"); });
-      var idMap = {"Serial No. 821":"stock-a","Serial No. 873":"stock-b","Serial No. 907":"stock-c"};
-      if (idMap[serialName]) document.getElementById(idMap[serialName]).classList.add("selected");
-      updateCaption(); updateStockSummary();
+    /* Each instrument adds itself. Built to order carries the wood; stock
+       carries the serial. Eligibility travels with the item so a referral
+       code at checkout knows what it may touch; B-stock is never eligible. */
+    function addWood(name, extra) {
+      var raw = BASE_PRICE + extra;
+      addToSelection('Neotone One', 'Built to Order \u00b7 ' + name, withVat(raw),
+        { rawBase: raw, discountPct: 0, discountEligible: true });
+    }
+    function addStock(item) {
+      addToSelection('Neotone One', 'From Stock \u00b7 ' + item.serial + ' \u00b7 ' + item.wood, withVat(item.price),
+        { rawBase: item.price, discountPct: 0, discountEligible: !item.bstock });
     }
 
-    function updateCaption() {
-      var el = document.getElementById("selection-caption");
-      if (!el) return;
-      if (state.orderMode === "stock") {
-        el.textContent = state.stockSelection ? "From Stock · " + state.stockSelection : "From Stock · Select an instrument below";
-      } else {
-        el.textContent = "Built to Order · " + state.wood;
-      }
+    function renderStock() {
+      var list = document.getElementById('stock-list');
+      list.innerHTML = '';
+      STOCK.forEach(function(item, i) {
+        var row = document.createElement('div');
+        row.className = 'stock-row' + (i >= STOCK_SHOWN ? ' stock-extra' : '');
+        var img = document.createElement('img');
+        img.src = '../../media/finish/neotone-' + item.img + '-01.png'; img.alt = item.serial;
+        row.appendChild(img);
+        var body = document.createElement('span'); body.className = 'stock-row-body';
+        var serial = document.createElement('span'); serial.className = 'stock-row-serial'; serial.textContent = item.serial;
+        if (item.bstock) { var badge = document.createElement('span'); badge.className = 'bstock-badge'; badge.textContent = 'B-stock'; serial.appendChild(badge); }
+        var wood = document.createElement('span'); wood.className = 'stock-row-wood'; wood.textContent = item.wood;
+        var note = document.createElement('span'); note.className = 'stock-row-note'; note.textContent = item.note;
+        body.appendChild(serial); body.appendChild(wood); body.appendChild(note);
+        row.appendChild(body);
+        var price = document.createElement('span'); price.className = 'stock-row-price';
+        price.setAttribute('data-raw', item.price);
+        row.appendChild(price);
+        var btn = document.createElement('button'); btn.className = 'opt'; btn.textContent = 'Add to Selection';
+        btn.addEventListener('click', function() { addStock(item); });
+        row.appendChild(btn);
+        list.appendChild(row);
+      });
+      var more = document.getElementById('stock-more');
+      more.style.display = STOCK.length > STOCK_SHOWN ? '' : 'none';
+      more.innerHTML = 'Show all stock (' + STOCK.length + ') &darr;';
     }
-
-    function applyCode() {
-      var code = document.getElementById("refcode").value.trim().toUpperCase();
-      var valid = ["DANNY10","LENA","SOFIA"];
-      state.discount = valid.indexOf(code) !== -1 ? 5 : 0;
-      document.getElementById("refmsg").textContent = valid.indexOf(code) !== -1
-        ? "Valid code. 5% discount applied." : (code.length > 0 ? "Code not recognised." : "No code applied.");
-      updateBuildSummary();
+    function toggleStock(btn) {
+      var expanded = document.getElementById('stock-list').classList.toggle('stock-expanded');
+      btn.innerHTML = expanded ? 'Show fewer &uarr;' : 'Show all stock (' + STOCK.length + ') &darr;';
     }
-
-    function applyStockCode() {
-      var code = document.getElementById("stock-refcode").value.trim().toUpperCase();
-      var valid = ["DANNY10","LENA","SOFIA"];
-      if (state.stockIsBstock) {
-        document.getElementById("stock-refmsg").textContent = "Referral codes do not apply to B-stock items.";
-        state.discount = 0;
-      } else {
-        state.discount = valid.indexOf(code) !== -1 ? 5 : 0;
-        document.getElementById("stock-refmsg").textContent = valid.indexOf(code) !== -1
-          ? "Valid code. 5% discount applied." : (code.length > 0 ? "Code not recognised." : "No code applied.");
-      }
-      updateStockSummary();
-    }
-
-    function updateBuildSummary() {
-      var rawBase = BASE_PRICE + state.woodExtra;
-      var subtotal = rawBase - Math.round(rawBase * state.discount / 100);
-      var vat = vatLine(subtotal);
-      document.getElementById("sum-wood").textContent = "Wood: " + state.wood;
-      document.getElementById("sum-base").textContent = "Base price: EUR " + rawBase.toLocaleString("en-US");
-      document.getElementById("sum-disc").textContent = "Referral discount: " + state.discount + "%";
-      document.getElementById("sum-vat").textContent = vat.text;
-      document.getElementById("sum-total").innerHTML = "<strong>Total: EUR " + vat.total.toLocaleString("en-US") + "</strong>";
-    }
-
-    function updateStockSummary() {
-      if (!state.stockSelection) return;
-      var rawBase = state.stockPrice;
-      var subtotal = state.stockIsBstock ? rawBase : rawBase - Math.round(rawBase * state.discount / 100);
-      var vat = vatLine(subtotal);
-      document.getElementById("stock-sum-item").textContent = state.stockSelection;
-      document.getElementById("stock-sum-base").textContent = "Base price: EUR " + rawBase.toLocaleString("en-US");
-      document.getElementById("stock-sum-disc").textContent = state.stockIsBstock
-        ? "Referral discount: not applicable (B-stock)" : "Referral discount: " + state.discount + "%";
-      document.getElementById("stock-sum-vat").textContent = vat.text;
-      document.getElementById("stock-sum-total").innerHTML = "<strong>Total: EUR " + vat.total.toLocaleString("en-US") + "</strong>";
-    }
-
     function toggleStockEmpty() {
       stockEmptyVisible = !stockEmptyVisible;
       document.getElementById("stock-available").classList.toggle("hidden", stockEmptyVisible);
-      document.getElementById("stock-empty-state").classList.toggle("hidden", !stockEmptyVisible);
+      document.getElementById("stock-empty-state").hidden = !stockEmptyVisible;
+      document.getElementById("stock-preview").innerHTML = stockEmptyVisible ? 'Preview: show stock instruments &uarr;' : 'Preview: no stock available &uarr;';
     }
 
     function toggleAccessories(btn) {
       var grid = btn.closest('.acc-section').querySelector('.acc-grid');
       var expanded = grid.classList.toggle('acc-expanded');
-      btn.innerHTML = expanded ? 'Show fewer accessories &uarr;' : 'Show more accessories &darr;';
+      btn.innerHTML = expanded ? 'Show fewer &uarr;' : 'Show all accessories &darr;';
     }
 
     function addAccToSelection(name, desc, rawBase) {
-      var vat = vatLine(rawBase);
-      addToSelection(name, desc, 'EUR ' + vat.total.toLocaleString('en-US'),
+      addToSelection(name, desc, withVat(rawBase),
         { rawBase: rawBase, discountPct: 0, discountEligible: false });
-    }
-
-    function addBuildToSelection() {
-      var rawBase = BASE_PRICE + state.woodExtra;
-      var subtotal = Math.round(rawBase * (1 - state.discount / 100));
-      var vat = vatLine(subtotal);
-      addToSelection('Neotone One', 'Built to Order · ' + state.wood, 'EUR ' + vat.total.toLocaleString("en-US"),
-        { rawBase: rawBase, discountPct: state.discount, discountEligible: true });
-    }
-
-    function addStockToSelection() {
-      if (!state.stockSelection) {
-        alert('No instrument selected. Please choose an instrument from the list above.');
-        return;
-      }
-      var rawBase = state.stockPrice;
-      var subtotal = state.stockIsBstock ? rawBase : Math.round(rawBase * (1 - state.discount / 100));
-      var vat = vatLine(subtotal);
-      addToSelection('Neotone One', 'From Stock · ' + state.stockSelection, 'EUR ' + vat.total.toLocaleString("en-US"),
-        { rawBase: rawBase, discountPct: state.stockIsBstock ? 0 : state.discount, discountEligible: !state.stockIsBstock });
     }
 
     function handleNotify(e) {
@@ -1609,6 +1440,11 @@
       saveSelItems(items);
       renderSelection();
     }
+    function itemPrice(item) {
+      if (!item.rawBase) return item.price;
+      var pct = item.discountEligible ? (item.discountPct || 0) : 0;
+      return withVat(item.rawBase - Math.round(item.rawBase * pct / 100));
+    }
     function renderSelection() {
       const items       = getSelItems();
       const body        = document.getElementById('sel-body');
@@ -1632,7 +1468,7 @@
             '<div class="sel-item-info">' +
               '<p class="sel-item-name">' + item.name + '</p>' +
               '<p class="sel-item-detail">' + item.detail + '</p>' +
-              '<p class="sel-item-price">' + item.price + '</p>' +
+              '<p class="sel-item-price">' + itemPrice(item) + '</p>' +
             '</div>' +
             '<button class="sel-remove" onclick="removeFromSelection(' + item.id + ')">Remove</button>' +
           '</div>'
@@ -1673,7 +1509,7 @@
     }
 
     /* ---- Init ----
-       Order matters: accessory cards must exist before updateAccPrices()
+       Order matters: accessory cards must exist before updatePrices()
        can find their [data-raw] elements, which changeVATCountry() triggers. */
     /* A fresh visitor arrives with a selection already made, so the Selection
        control in the bar is there to be found rather than hidden behind an
@@ -1701,8 +1537,8 @@
     }
 
     renderAccessories();
+    renderStock();
     changeVATCountry(vatCountry);
-    updateCaption();
     seedSelection();
     renderSelection();
 

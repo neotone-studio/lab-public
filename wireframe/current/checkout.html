@@ -261,6 +261,12 @@
         </div>
 
         <div class="block">
+          <p class="block-label">Artist Referral Code</p>
+          <input class="field" id="checkout-refcode" placeholder="Optional" oninput="applyReferral()" autocomplete="off" />
+          <p class="block-desc" id="checkout-refmsg" style="margin-top: 8px; font-size: 11px;">Codes come from artist sessions. Not applicable to accessories or B-stock.</p>
+        </div>
+
+        <div class="block">
           <p class="block-label">Delivery Details</p>
           <input class="field" placeholder="First and last name" />
           <input class="field" placeholder="Email address" />
@@ -582,6 +588,17 @@
         total: total,
         totalStr: 'EUR ' + total.toLocaleString('en-US')
       };
+    }
+
+    /* Applies as typed, to every eligible item in the selection. */
+    const REF_CODES = ["DANNY10", "LENA", "SOFIA"];
+    function applyReferral() {
+      const code = document.getElementById('checkout-refcode').value.trim().toUpperCase();
+      const pct  = REF_CODES.indexOf(code) !== -1 ? 5 : 0;
+      saveSelItems(getSelItems().map(i => i.discountEligible ? Object.assign({}, i, { discountPct: pct }) : i));
+      document.getElementById('checkout-refmsg').textContent = pct ? '5% applied.'
+        : (code.length >= 4 ? 'Code not recognised.' : 'Codes come from artist sessions. Not applicable to accessories or B-stock.');
+      renderCheckout();
     }
 
     function changeCheckoutCountry(val) {

@@ -178,10 +178,10 @@ SLOT = {
     'opening': cls('h1', 'opening'),
     'text1': cls('p', 'editorial-text'), 'pull': cls('p', 'editorial-pull'), 'text2': cls('p', 'editorial-text', 1),
     'neos-kicker': cls('span', 'neos-kicker'), 'neos-title': cls('h2', 'neos-title'), 'neos-text': cls('p', 'neos-text'),
-    'build-intro': cls('p', 'panel-intro'), 'stock-intro': cls('p', 'panel-intro', 1),
-    'empty-head': cls('p', 'stock-empty-head'), 'empty-body': cls('p', 'stock-empty-body'),
-    'notify-label': (r'<div class="block sans"[^>]*>\s*<p class="block-label">(.*?)</p>\s*<p class="block-desc"[^>]*>(.*?)</p>', 0, 1),
-    'notify-desc': (r'<div class="block sans"[^>]*>\s*<p class="block-label">(.*?)</p>\s*<p class="block-desc"[^>]*>(.*?)</p>', 0, 2),
+    'sel-line': cls('p', 'choose-head'),
+    'stock-label': cls('span', 'stock-label'), 'stock-line': cls('p', 'stock-line'),
+    'empty-head': cls('p', 'stock-empty-head'),
+    'notify-desc': cls('p', 'notify-desc'),
     'next-label': cls('span', 'sec-label'),
     'terms-q': cls('p', 'terms-q'), 'terms-a': cls('p', 'terms-a'), 'q-label': cls('span', 'q-label'), 'q-desc': cls('p', 'q-desc'),
     'play-label': cls('span', 'sec-label', 1), 'play-line': cls('p', 'sec-line'),
@@ -191,13 +191,11 @@ SLOT = {
 }
 for i in range(5):
     SLOT['spec%d' % i], SLOT['specv%d' % i] = cls('span', 'spec-label', i), cls('span', 'spec-value', i)
-    SLOT['wood%d' % i], SLOT['woodn%d' % i] = cls('p', 'material-name', i), cls('p', 'material-note', i)
+    SLOT['wood%d' % i], SLOT['woodn%d' % i] = cls('span', 'wood-name', i), cls('p', 'wood-note', i)
 for i in range(3):
     for part in ('kind', 'title', 'desc'):
         SLOT['door%d-%s' % (i, part)] = cls('span', 'door-' + part, i)
     SLOT['way%d' % i], SLOT['wayt%d' % i] = cls('h3', 'way-title', i), cls('p', 'way-text', i)
-for i in range(2):
-    SLOT['tab%d' % i], SLOT['tabd%d' % i] = cls('span', 'tab-title', i), cls('span', 'tab-desc', i)
 for i in range(4):
     SLOT['step%d' % i], SLOT['stepd%d' % i] = cls('p', 'step-title', i), cls('p', 'step-desc', i)
     SLOT['card%d' % i], SLOT['cardd%d' % i] = cls('p', 'stack-title', i), cls('p', 'stack-desc', i)
@@ -208,10 +206,8 @@ LAYOUT = [
     '## [Specs]', *[('item', ['spec%d' % i, 'specv%d' % i]) for i in range(5)],
     ('h2', ['neos-title']), ('kicker', ['neos-kicker']), ('p', ['neos-text']),
     *[('door', ['door%d-title' % i, 'door%d-kind' % i, 'door%d-desc' % i]) for i in range(3)],
-    '## [Order]', *[('item', ['tab%d' % i, 'tabd%d' % i]) for i in range(2)],
-    '### [Built to Order]', ('p', ['build-intro']), *[('item', ['wood%d' % i, 'woodn%d' % i]) for i in range(5)],
-    '### [From Stock]', ('p', ['stock-intro']), ('p', ['empty-head']), ('lines', ['empty-body']),
-    ('h3', ['notify-label']), ('p', ['notify-desc']),
+    '## [Selection]', ('p', ['sel-line']), *[('item', ['wood%d' % i, 'woodn%d' % i]) for i in range(5)],
+    ('h3', ['stock-label']), ('p', ['stock-line']), ('p', ['empty-head']), ('p', ['notify-desc']),
     ('h2', ['next-label']), *[('num', ['step%d' % i, 'stepd%d' % i]) for i in range(4)],
     ('h3', ['terms-q']), ('p', ['terms-a']), ('h3', ['q-label']), ('p', ['q-desc']),
     ('h2', ['play-label']), ('p', ['play-line']),
