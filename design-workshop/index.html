@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Design workshop · Neotone</title>
+  <style>
+    :root { --ink: #111; --line: #d9d9d9; --muted: #4f4f4f; --text: 680px; --wide: 960px; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #fff; color: var(--ink); font-family: Arial, Helvetica, sans-serif; -webkit-font-smoothing: antialiased; }
+    #doc { padding: 72px 48px 140px; }
+    #doc > * { max-width: var(--text); margin-left: auto; margin-right: auto; }
+
+    h1, h2, h3 { font-weight: 400; letter-spacing: -0.01em; }
+    h1 { margin-top: 0; margin-bottom: 28px; font-size: 30px; line-height: 1.2; }
+    #doc > h1:first-child { margin-bottom: 72px; font-size: 40px; line-height: 1.15; }
+    h2 { margin-top: 64px; margin-bottom: 16px; font-size: 22px; line-height: 1.3; }
+    h3 { margin-top: 52px; margin-bottom: 12px; font-size: 18px; line-height: 1.35; }
+    h1 + h2, h2 + h3 { margin-top: 0; }
+    p, li { font-size: 17px; line-height: 1.75; }
+    p { margin-top: 0; margin-bottom: 1.2em; }
+    ul { padding-left: 1.2em; margin-top: 0; margin-bottom: 1.2em; }
+    li, li > p { margin: 0; }
+    a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; }
+    a:hover { border-bottom-color: var(--ink); }
+    code { font-family: Menlo, Consolas, monospace; font-size: 14px; background: #f2f2f2; padding: 1px 5px; }
+    hr { border: none; border-top: 1px solid var(--line); margin-top: 96px; margin-bottom: 72px; }
+    #doc > hr { max-width: var(--wide); }
+
+    /* Images: every run of images is laid out in rows of one height (see layoutRun). */
+    img { display: block; cursor: zoom-in; }
+    #doc > .figs { max-width: var(--wide); margin-top: 32px; margin-bottom: 40px; display: flex; flex-direction: column; align-items: center; gap: 28px; }
+    .figs:not(.ready) { min-height: 300px; }
+    .figs .row { display: flex; justify-content: center; gap: 16px; max-width: 100%; }
+    .figs img { flex: none; max-width: 100%; height: auto; }
+    #doc > p.caption { margin-top: -24px; margin-bottom: 44px; font-size: 13px; color: var(--muted); text-align: center; }
+
+    .msg { color: var(--muted); font-size: 15px; }
+
+    @media (max-width: 700px) {
+      #doc { padding: 48px 20px 100px; }
+      #doc > h1:first-child { font-size: 30px; margin-bottom: 48px; }
+      h1 { font-size: 26px; }
+      p, li { font-size: 16px; }
+      hr { margin-top: 64px; margin-bottom: 52px; }
+      #doc > .figs { gap: 18px; }
+      .figs .row { gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <main id="doc"><p class="msg">Loading&hellip;</p></main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+  <script>
+    // The page is design-workshop.md, rendered as it loads. Edit the .md; this file only presents it.
+    var doc = document.getElementById('doc');
+
+    var ROW_MAX = 360;       // tallest a row of images gets
+    var PORTRAIT_MAX = 600;  // a lone tall image (a full-page screenshot) may go this tall
+    var STRIP_MAX = 560;     // widest a banner or wordmark strip gets
+    var SMALLER = { 'neotone-wireframe.png': 60, 'anima-sketch.jpg': 120, 'image_6.png': 240, 'ntv-reo-light.png': 260 };  // per-image height caps
+
+    function isFigure(el) {
+      return el.tagName === 'P' && el.querySelector('img') &&
+        Array.prototype.every.call(el.childNodes, function (n) {
+          return n.nodeName === 'IMG' || (n.nodeType === 3 && !n.textContent.trim());
+        });
+    }
+
+    // Consecutive image paragraphs become one .figs run; an italic line after a run is its caption.
+    function groupFigures() {
+      var kids = Array.prototype.slice.call(doc.children), run = null;
+      kids.forEach(function (el) {
+        if (!isFigure(el)) {
+          if (run && el.tagName === 'P' && el.children.length === 1 && el.firstElementChild.tagName === 'EM' &&
+              el.textContent.trim() === el.firstElementChild.textContent.trim()) el.className = 'caption';
+          run = null; return;
+        }
+        if (!run) { run = document.createElement('div'); run.className = 'figs'; doc.insertBefore(run, el); }
+        while (el.firstChild) run.appendChild(el.firstChild);
+        el.remove();
+      });
+    }
+
+    // Tallest this image may be shown: never past its own pixels, strips capped in width.
+    function capHeight(img, rowMax) {
+      var w = img.naturalWidth, h = img.naturalHeight, r = w / h, name = img.getAttribute('src').split('/').pop();
+      var cap = Math.min(rowMax, h);
+      if (r > 4) cap = Math.min(cap, STRIP_MAX / r);
+      if (SMALLER[name]) cap = Math.min(cap, SMALLER[name]);
+      return cap;
+    }
+
+    // Images fill rows left to right; each row is one height, as tall as fits up to the caps.
+    function layoutRun(run) {
+      var imgs = Array.prototype.slice.call(run.querySelectorAll('img'));
+      if (imgs.some(function (i) { return !i.naturalWidth; })) return;
+      var W = run.clientWidth, gap = W < 600 ? 10 : 16, minH = W < 600 ? 110 : 280;
+      var ratio = function (i) { return i.naturalWidth / i.naturalHeight; };
+      var fit = function (row) { return (W - gap * (row.length - 1)) / row.reduce(function (s, i) { return s + ratio(i); }, 0); };
+      var rows = [], row = [];
+      imgs.forEach(function (img) {
+        if (row.length && (fit(row.concat(img)) < minH || ratio(img) > 4 || ratio(row[0]) > 4)) { rows.push(row); row = []; }
+        row.push(img);
+      });
+      rows.push(row);
+      run.textContent = '';
+      rows.forEach(function (row) {
+        var rowMax = row.length === 1 && ratio(row[0]) < 0.8 ? PORTRAIT_MAX : ROW_MAX;
+        var h = Math.min.apply(null, [fit(row)].concat(row.map(function (i) { return capHeight(i, rowMax); })));
+        var line = document.createElement('div');
+        line.className = 'row';
+        row.forEach(function (img) { img.style.height = h + 'px'; img.style.width = h * ratio(img) + 'px'; line.appendChild(img); });
+        run.appendChild(line);
+      });
+      run.classList.add('ready');
+    }
+
+    function layoutAll() { doc.querySelectorAll('.figs').forEach(layoutRun); }
+
+    fetch('design-workshop.md', { cache: 'no-cache' })
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
+      .then(function (md) {
+        doc.innerHTML = marked.parse(md);
+        groupFigures();
+        doc.querySelectorAll('a[href^="http"]').forEach(function (a) { a.target = '_blank'; a.rel = 'noopener'; });
+        doc.querySelectorAll('img').forEach(function (img) {
+          img.loading = 'lazy';
+          img.addEventListener('click', function () { window.open(img.src, '_blank'); });
+          img.addEventListener('load', function () { var run = img.closest('.figs'); if (run) layoutRun(run); });
+          if (img.complete && img.naturalWidth) layoutRun(img.closest('.figs'));
+        });
+        var t;
+        window.addEventListener('resize', function () { clearTimeout(t); t = setTimeout(layoutAll, 120); });
+      })
+      .catch(function () {
+        doc.innerHTML = '<p class="msg">The document could not be loaded. Open this page from a web server, not as a local file.</p>';
+      });
+  </script>
+</body>
+</html>
